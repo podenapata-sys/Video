@@ -1,0 +1,14 @@
+{
+  "name": "Clinic C: offer",
+  "voice": "am_michael",
+  "speed": 1.08,
+  "website": "your-website.com",
+  "cta": { "title": "Free 15-minute clinic audit", "button": "Claim yours", "note": "Only 5 audits a week." },
+  "beats": [
+    { "line": "Clinic owners, I'll audit your patient booking for free.", "visual": "face" },
+    { "line": "In 15 minutes, I'll show you where patients drop off.", "visual": "screen:website.png" },
+    { "line": "Missed calls, slow replies, a website that doesn't book.", "visual": "screen:missed.png" },
+    { "line": "Then I'll show you the AI system that fixes it.", "visual": "screen:calendar.png" },
+    { "line": "I only take five audits a week. Tap below to claim yours.", "visual": "cta" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Clinic B: proof (NEEDS REAL CLIENT RESULT before rendering)",
+  "voice": "am_michael",
+  "speed": 1.08,
+  "website": "your-website.com",
+  "cta": { "title": "Free 15-minute clinic audit", "button": "Book now", "note": "See what we'd fix for your clinic." },
+  "beats": [
+    { "line": "This dental clinic was missing calls every single night.", "visual": "face" },
+    { "line": "We set up a website, an AI chatbot, and automatic booking.", "visual": "screen:website.png" },
+    { "line": "Now it replies to patients in seconds, even at midnight.", "visual": "screen:chat.png" },
+    { "line": "[CLIENT RESULT, e.g. In the first month, they got 23 extra bookings.]", "visual": "proof:[CLIENT QUOTE] — Dr. [Name], [Clinic]" },
+    { "line": "Want the same for your clinic? Book a free audit below.", "visual": "cta" }
+  ]
+}

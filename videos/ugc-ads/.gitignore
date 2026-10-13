@@ -1,0 +1,5 @@
+.hyperframes/
+node_modules/
+ads/*/vo/
+ads/*/renders/*.mp4
+!ads/*/renders/*-share.mp4

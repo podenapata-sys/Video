@@ -1,0 +1,15 @@
+{
+  "name": "Clinic A: problem / agitate",
+  "voice": "am_michael",
+  "speed": 1.08,
+  "website": "your-website.com",
+  "cta": { "title": "Free 15-minute clinic audit", "button": "Book now", "note": "No contract. See exactly where you lose patients." },
+  "beats": [
+    { "line": "Your clinic is losing patients while you sleep.", "visual": "face" },
+    { "line": "Every call you miss after 9 PM goes to the clinic down the road.", "visual": "screen:missed.png" },
+    { "line": "So we built an AI assistant that answers in seconds, 24/7.", "visual": "screen:chat.png" },
+    { "line": "It books the appointment straight into your calendar.", "visual": "screen:calendar.png" },
+    { "line": "No new staff. No missed patients.", "visual": "face" },
+    { "line": "Tap below and book a free 15-minute audit.", "visual": "cta" }
+  ]
+}

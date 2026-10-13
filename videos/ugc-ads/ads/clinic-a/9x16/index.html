@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Clinic A: problem / agitate</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0c1020; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", sans-serif;
+        background: radial-gradient(circle at 50% 30%, #1b2f6b 0%, #0c1020 62%); }
+      .beat { position: absolute; inset: 0; }
+      .face-big { position: absolute; left: 50%; top: 307px; width: 604px; height: 604px; margin-left: calc(604px / -2); }
+      .face-big img, .face-pip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 8px solid #ffffff; }
+      .ring { position: absolute; inset: -18px; border-radius: 50%; border: 8px solid #1e6bff; }
+      .screen-card { position: absolute; left: 7%; right: 7%; top: 192px; height: 998px; border-radius: 40px; overflow: hidden;
+        border: 6px solid #ffffff; box-shadow: 0 30px 70px rgba(0,0,0,0.5); background: #f2f5fb; }
+      .screen-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+      .face-pip { position: absolute; left: 6%; top: 978px; width: 259px; height: 259px; }
+      .proof { position: absolute; left: 8%; right: 8%; top: 192px; padding: 60px 56px; border-radius: 40px; background: #ffffff; }
+      .proof .stars { font-size: 64px; color: #f5a400; letter-spacing: 8px; }
+      .proof .quote { margin-top: 24px; font-size: 52px; font-weight: 800; line-height: 1.25; color: #15171c; }
+      .cap { position: absolute; left: 60px; right: 60px; top: 1267px; display: flex; justify-content: center; z-index: 10; }
+      .ct { max-width: 960px; text-align: center; font-size: 66px; font-weight: 900; line-height: 1.18; color: #fff;
+        text-shadow: 0 4px 0 #000, 0 0 14px rgba(0,0,0,0.9); }
+      .w { display: inline-block; }
+      .cta { background: #f2f5fb; }
+      .cta-inner { position: absolute; inset: 0; padding: 8% 8% 18%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px; text-align: center; }
+      .cta-inner .logo { width: 300px; height: 300px; border-radius: 40px; object-fit: cover; display: block; }
+      .cta-title { font-size: 76px; font-weight: 900; color: #15171c; line-height: 1.08; letter-spacing: -0.02em; }
+      .cta-btn { background: #0b3fd6; color: #fff; font-size: 60px; font-weight: 900; padding: 34px 90px; border-radius: 999px; }
+      .cta-note { font-size: 36px; font-weight: 700; color: #4a5160; }
+      .cta-site { font-size: 34px; font-weight: 800; color: #0b45d9; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="22.094" data-width="1080" data-height="1920">
+      <div id="b01" class="clip beat" data-start="0.000" data-duration="2.653" data-track-index="1">
+        <div class="face-big"><div class="ring"></div><img src="assets/face.png" alt="" /></div>
+      </div>
+      <div id="c01" class="clip cap" data-start="0.000" data-duration="2.653" data-track-index="3"><div class="ct"><span class="w" id="c01-w0">Your</span> <span class="w" id="c01-w1">clinic</span> <span class="w" id="c01-w2">is</span> <span class="w" id="c01-w3">losing</span> <span class="w" id="c01-w4">patients</span> <span class="w" id="c01-w5">while</span> <span class="w" id="c01-w6">you</span> <span class="w" id="c01-w7">sleep.</span></div></div>
+      <div id="b02" class="clip beat" data-start="2.653" data-duration="4.367" data-track-index="1">
+        <div class="screen-card"><img src="screens/missed.png" alt="" /></div>
+        <div class="face-pip"><div class="ring"></div><img src="assets/face.png" alt="" /></div>
+      </div>
+      <div id="c02" class="clip cap" data-start="2.653" data-duration="4.367" data-track-index="3"><div class="ct"><span class="w" id="c02-w0">Every</span> <span class="w" id="c02-w1">call</span> <span class="w" id="c02-w2">you</span> <span class="w" id="c02-w3">miss</span> <span class="w" id="c02-w4">after</span> <span class="w" id="c02-w5">9</span> <span class="w" id="c02-w6">PM</span> <span class="w" id="c02-w7">goes</span> <span class="w" id="c02-w8">to</span> <span class="w" id="c02-w9">the</span> <span class="w" id="c02-w10">clinic</span> <span class="w" id="c02-w11">down</span> <span class="w" id="c02-w12">the</span> <span class="w" id="c02-w13">road.</span></div></div>
+      <div id="b03" class="clip beat" data-start="7.020" data-duration="4.964" data-track-index="1">
+        <div class="screen-card"><img src="screens/chat.png" alt="" /></div>
+        <div class="face-pip"><div class="ring"></div><img src="assets/face.png" alt="" /></div>
+      </div>
+      <div id="c03" class="clip cap" data-start="7.020" data-duration="4.964" data-track-index="3"><div class="ct"><span class="w" id="c03-w0">So</span> <span class="w" id="c03-w1">we</span> <span class="w" id="c03-w2">built</span> <span class="w" id="c03-w3">an</span> <span class="w" id="c03-w4">AI</span> <span class="w" id="c03-w5">assistant</span> <span class="w" id="c03-w6">that</span> <span class="w" id="c03-w7">answers</span> <span class="w" id="c03-w8">in</span> <span class="w" id="c03-w9">seconds,</span> <span class="w" id="c03-w10">24/7.</span></div></div>
+      <div id="b04" class="clip beat" data-start="11.984" data-duration="2.596" data-track-index="1">
+        <div class="screen-card"><img src="screens/calendar.png" alt="" /></div>
+        <div class="face-pip"><div class="ring"></div><img src="assets/face.png" alt="" /></div>
+      </div>
+      <div id="c04" class="clip cap" data-start="11.984" data-duration="2.596" data-track-index="3"><div class="ct"><span class="w" id="c04-w0">It</span> <span class="w" id="c04-w1">books</span> <span class="w" id="c04-w2">the</span> <span class="w" id="c04-w3">appointment</span> <span class="w" id="c04-w4">straight</span> <span class="w" id="c04-w5">into</span> <span class="w" id="c04-w6">your</span> <span class="w" id="c04-w7">calendar.</span></div></div>
+      <div id="b05" class="clip beat" data-start="14.580" data-duration="2.255" data-track-index="1">
+        <div class="face-big"><div class="ring"></div><img src="assets/face.png" alt="" /></div>
+      </div>
+      <div id="c05" class="clip cap" data-start="14.580" data-duration="2.255" data-track-index="3"><div class="ct"><span class="w" id="c05-w0">No</span> <span class="w" id="c05-w1">new</span> <span class="w" id="c05-w2">staff.</span> <span class="w" id="c05-w3">No</span> <span class="w" id="c05-w4">missed</span> <span class="w" id="c05-w5">patients.</span></div></div>
+      <div id="b06" class="clip beat cta" data-start="16.835" data-duration="5.259" data-track-index="1">
+        <div class="cta-inner">
+          <img class="logo" src="assets/logo.jpg" alt="" />
+          <div class="cta-title">Free 15-minute clinic audit</div>
+          <div class="cta-btn">Book now</div>
+          <div class="cta-note">No contract. See exactly where you lose patients.</div>
+          <div class="cta-site">your-website.com</div>
+        </div>
+      </div>
+      <audio id="vo" src="voice.wav" data-start="0" data-duration="22.094" data-track-index="4" data-volume="1"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#b01 .face-big", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 0.000);
+      tl.fromTo("#b01 .face-big img", { scale: 1.0 }, { scale: 1.08, duration: 2.653, ease: "none" }, 0.000);
+      tl.fromTo("#b01 .ring", { scale: 1, opacity: 0.9 }, { scale: 1.12, opacity: 0.2, duration: 0.5, repeat: 4, ease: "sine.out" }, 0.000);
+      tl.fromTo("#c01 .ct", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 0.000);
+      tl.fromTo("#c01-w0", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 0.150);
+      tl.to("#c01-w0", { color: "#ffffff", scale: 1, duration: 0.1 }, 0.470);
+      tl.fromTo("#c01-w1", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 0.406);
+      tl.to("#c01-w1", { color: "#ffffff", scale: 1, duration: 0.1 }, 0.726);
+      tl.fromTo("#c01-w2", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 0.763);
+      tl.to("#c01-w2", { color: "#ffffff", scale: 1, duration: 0.1 }, 1.083);
+      tl.fromTo("#c01-w3", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 0.917);
+      tl.to("#c01-w3", { color: "#ffffff", scale: 1, duration: 0.1 }, 1.237);
+      tl.fromTo("#c01-w4", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 1.274);
+      tl.to("#c01-w4", { color: "#ffffff", scale: 1, duration: 0.1 }, 1.594);
+      tl.fromTo("#c01-w5", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 1.734);
+      tl.to("#c01-w5", { color: "#ffffff", scale: 1, duration: 0.1 }, 2.054);
+      tl.fromTo("#c01-w6", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 2.041);
+      tl.to("#c01-w6", { color: "#ffffff", scale: 1, duration: 0.1 }, 2.361);
+      tl.fromTo("#c01-w7", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 2.246);
+      tl.to("#c01-w7", { color: "#ffffff", scale: 1, duration: 0.1 }, 2.566);
+      tl.fromTo("#b02 .screen-card", { y: 120, opacity: 0, rotation: -2 }, { y: 0, opacity: 1, rotation: 0, duration: 0.4, ease: "expo.out" }, 2.653);
+      tl.fromTo("#b02 .screen-card img", { scale: 1.0 }, { scale: 1.1, duration: 4.367, ease: "none" }, 2.653);
+      tl.fromTo("#b02 .ring", { scale: 1, opacity: 0.9 }, { scale: 1.12, opacity: 0.2, duration: 0.5, repeat: 7, ease: "sine.out" }, 2.653);
+      tl.fromTo("#c02 .ct", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 2.653);
+      tl.fromTo("#c02-w0", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 2.703);
+      tl.to("#c02-w0", { color: "#ffffff", scale: 1, duration: 0.1 }, 3.023);
+      tl.fromTo("#c02-w1", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 3.097);
+      tl.to("#c02-w1", { color: "#ffffff", scale: 1, duration: 0.1 }, 3.417);
+      tl.fromTo("#c02-w2", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 3.425);
+      tl.to("#c02-w2", { color: "#ffffff", scale: 1, duration: 0.1 }, 3.745);
+      tl.fromTo("#c02-w3", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 3.688);
+      tl.to("#c02-w3", { color: "#ffffff", scale: 1, duration: 0.1 }, 4.008);
+      tl.fromTo("#c02-w4", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 4.016);
+      tl.to("#c02-w4", { color: "#ffffff", scale: 1, duration: 0.1 }, 4.336);
+      tl.fromTo("#c02-w5", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 4.410);
+      tl.to("#c02-w5", { color: "#ffffff", scale: 1, duration: 0.1 }, 4.730);
+      tl.fromTo("#c02-w6", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 4.541);
+      tl.to("#c02-w6", { color: "#ffffff", scale: 1, duration: 0.1 }, 4.861);
+      tl.fromTo("#c02-w7", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 4.738);
+      tl.to("#c02-w7", { color: "#ffffff", scale: 1, duration: 0.1 }, 5.058);
+      tl.fromTo("#c02-w8", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 5.066);
+      tl.to("#c02-w8", { color: "#ffffff", scale: 1, duration: 0.1 }, 5.386);
+      tl.fromTo("#c02-w9", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 5.263);
+      tl.to("#c02-w9", { color: "#ffffff", scale: 1, duration: 0.1 }, 5.583);
+      tl.fromTo("#c02-w10", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 5.526);
+      tl.to("#c02-w10", { color: "#ffffff", scale: 1, duration: 0.1 }, 5.846);
+      tl.fromTo("#c02-w11", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 5.985);
+      tl.to("#c02-w11", { color: "#ffffff", scale: 1, duration: 0.1 }, 6.305);
+      tl.fromTo("#c02-w12", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 6.314);
+      tl.to("#c02-w12", { color: "#ffffff", scale: 1, duration: 0.1 }, 6.634);
+      tl.fromTo("#c02-w13", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 6.576);
+      tl.to("#c02-w13", { color: "#ffffff", scale: 1, duration: 0.1 }, 6.896);
+      tl.fromTo("#b03 .screen-card", { y: 120, opacity: 0, rotation: -2 }, { y: 0, opacity: 1, rotation: 0, duration: 0.4, ease: "expo.out" }, 7.020);
+      tl.fromTo("#b03 .screen-card img", { scale: 1.0 }, { scale: 1.1, duration: 4.964, ease: "none" }, 7.020);
+      tl.fromTo("#b03 .ring", { scale: 1, opacity: 0.9 }, { scale: 1.12, opacity: 0.2, duration: 0.5, repeat: 8, ease: "sine.out" }, 7.020);
+      tl.fromTo("#c03 .ct", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 7.020);
+      tl.fromTo("#c03-w0", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 7.070);
+      tl.to("#c03-w0", { color: "#ffffff", scale: 1, duration: 0.1 }, 7.390);
+      tl.fromTo("#c03-w1", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 7.317);
+      tl.to("#c03-w1", { color: "#ffffff", scale: 1, duration: 0.1 }, 7.637);
+      tl.fromTo("#c03-w2", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 7.565);
+      tl.to("#c03-w2", { color: "#ffffff", scale: 1, duration: 0.1 }, 7.885);
+      tl.fromTo("#c03-w3", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 8.059);
+      tl.to("#c03-w3", { color: "#ffffff", scale: 1, duration: 0.1 }, 8.379);
+      tl.fromTo("#c03-w4", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 8.307);
+      tl.to("#c03-w4", { color: "#ffffff", scale: 1, duration: 0.1 }, 8.627);
+      tl.fromTo("#c03-w5", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 8.554);
+      tl.to("#c03-w5", { color: "#ffffff", scale: 1, duration: 0.1 }, 8.874);
+      tl.fromTo("#c03-w6", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 9.378);
+      tl.to("#c03-w6", { color: "#ffffff", scale: 1, duration: 0.1 }, 9.698);
+      tl.fromTo("#c03-w7", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 9.791);
+      tl.to("#c03-w7", { color: "#ffffff", scale: 1, duration: 0.1 }, 10.111);
+      tl.fromTo("#c03-w8", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 10.450);
+      tl.to("#c03-w8", { color: "#ffffff", scale: 1, duration: 0.1 }, 10.770);
+      tl.fromTo("#c03-w9", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 10.697);
+      tl.to("#c03-w9", { color: "#ffffff", scale: 1, duration: 0.1 }, 11.017);
+      tl.fromTo("#c03-w10", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 11.439);
+      tl.to("#c03-w10", { color: "#ffffff", scale: 1, duration: 0.1 }, 11.759);
+      tl.fromTo("#b04 .screen-card", { y: 120, opacity: 0, rotation: -2 }, { y: 0, opacity: 1, rotation: 0, duration: 0.4, ease: "expo.out" }, 11.984);
+      tl.fromTo("#b04 .screen-card img", { scale: 1.0 }, { scale: 1.1, duration: 2.596, ease: "none" }, 11.984);
+      tl.fromTo("#b04 .ring", { scale: 1, opacity: 0.9 }, { scale: 1.12, opacity: 0.2, duration: 0.5, repeat: 4, ease: "sine.out" }, 11.984);
+      tl.fromTo("#c04 .ct", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 11.984);
+      tl.fromTo("#c04-w0", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 12.034);
+      tl.to("#c04-w0", { color: "#ffffff", scale: 1, duration: 0.1 }, 12.354);
+      tl.fromTo("#c04-w1", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 12.173);
+      tl.to("#c04-w1", { color: "#ffffff", scale: 1, duration: 0.1 }, 12.493);
+      tl.fromTo("#c04-w2", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 12.450);
+      tl.to("#c04-w2", { color: "#ffffff", scale: 1, duration: 0.1 }, 12.770);
+      tl.fromTo("#c04-w3", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 12.635);
+      tl.to("#c04-w3", { color: "#ffffff", scale: 1, duration: 0.1 }, 12.955);
+      tl.fromTo("#c04-w4", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 13.190);
+      tl.to("#c04-w4", { color: "#ffffff", scale: 1, duration: 0.1 }, 13.510);
+      tl.fromTo("#c04-w5", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 13.606);
+      tl.to("#c04-w5", { color: "#ffffff", scale: 1, duration: 0.1 }, 13.926);
+      tl.fromTo("#c04-w6", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 13.837);
+      tl.to("#c04-w6", { color: "#ffffff", scale: 1, duration: 0.1 }, 14.157);
+      tl.fromTo("#c04-w7", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 14.068);
+      tl.to("#c04-w7", { color: "#ffffff", scale: 1, duration: 0.1 }, 14.388);
+      tl.fromTo("#b05 .face-big", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 14.580);
+      tl.fromTo("#b05 .face-big img", { scale: 1.0 }, { scale: 1.08, duration: 2.255, ease: "none" }, 14.580);
+      tl.fromTo("#b05 .ring", { scale: 1, opacity: 0.9 }, { scale: 1.12, opacity: 0.2, duration: 0.5, repeat: 3, ease: "sine.out" }, 14.580);
+      tl.fromTo("#c05 .ct", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 14.580);
+      tl.fromTo("#c05-w0", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 14.630);
+      tl.to("#c05-w0", { color: "#ffffff", scale: 1, duration: 0.1 }, 14.950);
+      tl.fromTo("#c05-w1", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 14.820);
+      tl.to("#c05-w1", { color: "#ffffff", scale: 1, duration: 0.1 }, 15.140);
+      tl.fromTo("#c05-w2", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 15.074);
+      tl.to("#c05-w2", { color: "#ffffff", scale: 1, duration: 0.1 }, 15.394);
+      tl.fromTo("#c05-w3", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 15.517);
+      tl.to("#c05-w3", { color: "#ffffff", scale: 1, duration: 0.1 }, 15.837);
+      tl.fromTo("#c05-w4", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 15.707);
+      tl.to("#c05-w4", { color: "#ffffff", scale: 1, duration: 0.1 }, 16.027);
+      tl.fromTo("#c05-w5", { color: "#ffffff", scale: 1 }, { color: "#ffd43b", scale: 1.08, duration: 0.08, immediateRender: false }, 16.151);
+      tl.to("#c05-w5", { color: "#ffffff", scale: 1, duration: 0.1 }, 16.471);
+      tl.fromTo("#b06 .cta-inner > *", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, stagger: 0.08, ease: "power3.out" }, 16.835);
+      tl.to("#b06 .cta-btn", { scale: 1.07, duration: 0.45, yoyo: true, repeat: 5, ease: "sine.inOut" }, 17.635);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
