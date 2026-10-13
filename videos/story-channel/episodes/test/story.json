@@ -1,0 +1,26 @@
+{
+  "title": "The Richest Bear in the Valley",
+  "channel": "Your Channel Name",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "shots": [
+    { "image": "01.png", "lines": ["Why is the richest bear in the valley", "eating dinner alone?"] },
+    { "image": "02.png", "lines": ["Barnaby had more gold than anyone.", "Three vaults. Forty servants."] },
+    { "image": "03.png", "lines": ["And every Sunday, he counted it.", "Coin by coin."] },
+    { "image": "04.png", "lines": ["His neighbor, Pip, had almost nothing.", "A small house. One bowler hat."] },
+    { "image": "05.png", "lines": ["But every Sunday, Pip's table was full."] },
+    { "image": "06.png", "lines": ["Friends. Laughter.", "Bread for everyone."] },
+    { "image": "07.png", "lines": ["One winter, Barnaby got sick."] },
+    { "image": "08.png", "lines": ["He rang the bell.", "Nobody came."] },
+    { "image": "09.png", "lines": ["His servants were paid to clean.", "Not to care."] },
+    { "image": "10.png", "lines": ["So he walked to Pip's house,", "through the snow."] },
+    { "image": "11.png", "lines": ["And Pip opened the door,", "like he'd been waiting for years."] },
+    { "image": "12.png", "lines": ["Why did you never come before?"] },
+    { "image": "13.png", "lines": ["Barnaby had no answer."] },
+    { "image": "14.png", "lines": ["Grey, the wolf, watched from the street.", "And smiled."] },
+    { "image": "15.png", "lines": ["Because he knew something Barnaby didn't."] },
+    { "image": "16.png", "lines": ["You can count your gold every Sunday."] },
+    { "image": "17.png", "lines": ["But at your funeral,", "nobody counts the gold."] },
+    { "image": "18.png", "lines": ["They count who showed up."] }
+  ]
+}

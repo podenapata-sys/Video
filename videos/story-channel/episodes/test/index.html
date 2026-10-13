@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>The Richest Bear in the Valley</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0d0b09; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0d0b09; font-family: "EB Garamond", serif; }
+      .shot { position: absolute; inset: 0; overflow: hidden; }
+      .kb { width: 100%; height: 100%; }
+      .kb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .cap { position: absolute; left: 90px; right: 90px; top: 1330px; display: flex; justify-content: center; z-index: 120; }
+      .ct {
+        display: block; max-width: 900px; text-align: center; color: #fbf6ec;
+        font-size: 58px; font-weight: 700; line-height: 1.18;
+        text-shadow: 0 0 18px rgba(0,0,0,0.95), 0 3px 6px rgba(0,0,0,0.95), 0 0 3px #000;
+      }
+      #endcard { position: absolute; inset: 0; background: #0d0b09; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 30px; z-index: 110; }
+      #endcard .sub { font-size: 110px; font-weight: 700; letter-spacing: 0.08em; color: #fbf6ec; }
+      #endcard .ch { font-size: 44px; color: #d8c7a4; letter-spacing: 0.04em; }
+      #endcard .rule { width: 420px; height: 4px; background: #d8c7a4; }
+      @keyframes hf-grain-noise {
+        0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-5%, -5%); }
+        20% { transform: translate(-10%, 5%); } 30% { transform: translate(5%, -10%); }
+        40% { transform: translate(-5%, 15%); } 50% { transform: translate(-10%, 5%); }
+        60% { transform: translate(15%, 0); } 70% { transform: translate(0, 10%); }
+        80% { transform: translate(-15%, 0); } 90% { transform: translate(10%, 5%); }
+      }
+      #grain-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 100; overflow: hidden; }
+      #grain-overlay .grain-texture {
+        position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.12; animation: hf-grain-noise 0.5s steps(1) infinite;
+      }
+      #hf-vignette { position: absolute; inset: 0; pointer-events: none; z-index: 90;
+        background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.62) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="62.968" data-width="1080" data-height="1920">
+      <div id="shot-01" class="clip shot" data-start="0.000" data-duration="4.382" data-track-index="1">
+        <div class="kb"><img src="images/01.png" alt="" /></div>
+      </div>
+      <div id="shot-02" class="clip shot" data-start="4.382" data-duration="4.665" data-track-index="1">
+        <div class="kb"><img src="images/02.png" alt="" /></div>
+      </div>
+      <div id="shot-03" class="clip shot" data-start="9.047" data-duration="3.834" data-track-index="1">
+        <div class="kb"><img src="images/03.png" alt="" /></div>
+      </div>
+      <div id="shot-04" class="clip shot" data-start="12.881" data-duration="5.412" data-track-index="1">
+        <div class="kb"><img src="images/04.png" alt="" /></div>
+      </div>
+      <div id="shot-05" class="clip shot" data-start="18.293" data-duration="2.903" data-track-index="1">
+        <div class="kb"><img src="images/05.png" alt="" /></div>
+      </div>
+      <div id="shot-06" class="clip shot" data-start="21.196" data-duration="3.214" data-track-index="1">
+        <div class="kb"><img src="images/06.png" alt="" /></div>
+      </div>
+      <div id="shot-07" class="clip shot" data-start="24.410" data-duration="2.519" data-track-index="1">
+        <div class="kb"><img src="images/07.png" alt="" /></div>
+      </div>
+      <div id="shot-08" class="clip shot" data-start="26.929" data-duration="3.002" data-track-index="1">
+        <div class="kb"><img src="images/08.png" alt="" /></div>
+      </div>
+      <div id="shot-09" class="clip shot" data-start="29.931" data-duration="3.471" data-track-index="1">
+        <div class="kb"><img src="images/09.png" alt="" /></div>
+      </div>
+      <div id="shot-10" class="clip shot" data-start="33.402" data-duration="3.386" data-track-index="1">
+        <div class="kb"><img src="images/10.png" alt="" /></div>
+      </div>
+      <div id="shot-11" class="clip shot" data-start="36.788" data-duration="4.196" data-track-index="1">
+        <div class="kb"><img src="images/11.png" alt="" /></div>
+      </div>
+      <div id="shot-12" class="clip shot" data-start="40.984" data-duration="2.369" data-track-index="1">
+        <div class="kb"><img src="images/12.png" alt="" /></div>
+      </div>
+      <div id="shot-13" class="clip shot" data-start="43.353" data-duration="1.921" data-track-index="1">
+        <div class="kb"><img src="images/13.png" alt="" /></div>
+      </div>
+      <div id="shot-14" class="clip shot" data-start="45.274" data-duration="4.153" data-track-index="1">
+        <div class="kb"><img src="images/14.png" alt="" /></div>
+      </div>
+      <div id="shot-15" class="clip shot" data-start="49.427" data-duration="2.625" data-track-index="1">
+        <div class="kb"><img src="images/15.png" alt="" /></div>
+      </div>
+      <div id="shot-16" class="clip shot" data-start="52.052" data-duration="2.732" data-track-index="1">
+        <div class="kb"><img src="images/16.png" alt="" /></div>
+      </div>
+      <div id="shot-17" class="clip shot" data-start="54.784" data-duration="3.620" data-track-index="1">
+        <div class="kb"><img src="images/17.png" alt="" /></div>
+      </div>
+      <div id="shot-18" class="clip shot" data-start="58.404" data-duration="1.964" data-track-index="1">
+        <div class="kb"><img src="images/18.png" alt="" /></div>
+      </div>
+      <div id="hf-vignette"></div>
+      <div id="grain-overlay"><div class="grain-texture"></div></div>
+      <div id="cap-001" class="clip cap" data-start="0.250" data-duration="2.256" data-track-index="3"><span class="ct">Why is the richest bear in the valley</span></div>
+      <div id="cap-002" class="clip cap" data-start="2.546" data-duration="1.796" data-track-index="3"><span class="ct">eating dinner alone?</span></div>
+      <div id="cap-003" class="clip cap" data-start="4.382" data-duration="2.469" data-track-index="3"><span class="ct">Barnaby had more gold than anyone.</span></div>
+      <div id="cap-004" class="clip cap" data-start="6.891" data-duration="2.116" data-track-index="3"><span class="ct">Three vaults. Forty servants.</span></div>
+      <div id="cap-005" class="clip cap" data-start="9.047" data-duration="2.171" data-track-index="3"><span class="ct">And every Sunday, he counted it.</span></div>
+      <div id="cap-006" class="clip cap" data-start="11.258" data-duration="1.583" data-track-index="3"><span class="ct">Coin by coin.</span></div>
+      <div id="cap-007" class="clip cap" data-start="12.881" data-duration="2.597" data-track-index="3"><span class="ct">His neighbor, Pip, had almost nothing.</span></div>
+      <div id="cap-008" class="clip cap" data-start="15.518" data-duration="2.735" data-track-index="3"><span class="ct">A small house. One bowler hat.</span></div>
+      <div id="cap-009" class="clip cap" data-start="18.293" data-duration="2.863" data-track-index="3"><span class="ct">But every Sunday, Pip&#x27;s table was full.</span></div>
+      <div id="cap-010" class="clip cap" data-start="21.196" data-duration="1.445" data-track-index="3"><span class="ct">Friends. Laughter.</span></div>
+      <div id="cap-011" class="clip cap" data-start="22.681" data-duration="1.689" data-track-index="3"><span class="ct">Bread for everyone.</span></div>
+      <div id="cap-012" class="clip cap" data-start="24.410" data-duration="2.479" data-track-index="3"><span class="ct">One winter, Barnaby got sick.</span></div>
+      <div id="cap-013" class="clip cap" data-start="26.929" data-duration="1.467" data-track-index="3"><span class="ct">He rang the bell.</span></div>
+      <div id="cap-014" class="clip cap" data-start="28.436" data-duration="1.455" data-track-index="3"><span class="ct">Nobody came.</span></div>
+      <div id="cap-015" class="clip cap" data-start="29.931" data-duration="1.936" data-track-index="3"><span class="ct">His servants were paid to clean.</span></div>
+      <div id="cap-016" class="clip cap" data-start="31.907" data-duration="1.455" data-track-index="3"><span class="ct">Not to care.</span></div>
+      <div id="cap-017" class="clip cap" data-start="33.402" data-duration="1.787" data-track-index="3"><span class="ct">So he walked to Pip&#x27;s house,</span></div>
+      <div id="cap-018" class="clip cap" data-start="35.229" data-duration="1.519" data-track-index="3"><span class="ct">through the snow.</span></div>
+      <div id="cap-019" class="clip cap" data-start="36.788" data-duration="1.851" data-track-index="3"><span class="ct">And Pip opened the door,</span></div>
+      <div id="cap-020" class="clip cap" data-start="38.679" data-duration="2.265" data-track-index="3"><span class="ct">like he&#x27;d been waiting for years.</span></div>
+      <div id="cap-021" class="clip cap" data-start="40.984" data-duration="2.329" data-track-index="3"><span class="ct">Why did you never come before?</span></div>
+      <div id="cap-022" class="clip cap" data-start="43.353" data-duration="1.881" data-track-index="3"><span class="ct">Barnaby had no answer.</span></div>
+      <div id="cap-023" class="clip cap" data-start="45.274" data-duration="2.533" data-track-index="3"><span class="ct">Grey, the wolf, watched from the street.</span></div>
+      <div id="cap-024" class="clip cap" data-start="47.847" data-duration="1.540" data-track-index="3"><span class="ct">And smiled.</span></div>
+      <div id="cap-025" class="clip cap" data-start="49.427" data-duration="2.585" data-track-index="3"><span class="ct">Because he knew something Barnaby didn&#x27;t.</span></div>
+      <div id="cap-026" class="clip cap" data-start="52.052" data-duration="2.692" data-track-index="3"><span class="ct">You can count your gold every Sunday.</span></div>
+      <div id="cap-027" class="clip cap" data-start="54.784" data-duration="1.595" data-track-index="3"><span class="ct">But at your funeral,</span></div>
+      <div id="cap-028" class="clip cap" data-start="56.419" data-duration="1.945" data-track-index="3"><span class="ct">nobody counts the gold.</span></div>
+      <div id="cap-029" class="clip cap" data-start="58.404" data-duration="1.924" data-track-index="3"><span class="ct">They count who showed up.</span></div>
+      <div id="endcard" class="clip" data-start="60.368" data-duration="2.600" data-track-index="2">
+        <div class="sub">SUBSCRIBE</div>
+        <div class="rule"></div>
+        <div class="ch">Your Channel Name</div>
+      </div>
+      <audio id="vo" src="voiceover.wav" data-start="0" data-duration="62.968" data-track-index="4" data-volume="1"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#shot-01 .kb", { scale: 1.0 }, { scale: 1.14, duration: 4.382, ease: "none" }, 0.000);
+      tl.fromTo("#shot-02 .kb", { scale: 1.14, xPercent: 3 }, { scale: 1.14, xPercent: -3, duration: 4.665, ease: "none" }, 4.382);
+      tl.fromTo("#shot-03 .kb", { scale: 1.16 }, { scale: 1.02, duration: 3.834, ease: "none" }, 9.047);
+      tl.fromTo("#shot-04 .kb", { scale: 1.14, yPercent: 2.5 }, { scale: 1.14, yPercent: -2.5, duration: 5.412, ease: "none" }, 12.881);
+      tl.fromTo("#shot-05 .kb", { scale: 1.14, xPercent: -3 }, { scale: 1.14, xPercent: 3, duration: 2.903, ease: "none" }, 18.293);
+      tl.fromTo("#shot-06 .kb", { scale: 1.0 }, { scale: 1.14, duration: 3.214, ease: "none" }, 21.196);
+      tl.fromTo("#shot-07 .kb", { scale: 1.0 }, { scale: 1.14, duration: 2.519, ease: "none" }, 24.410);
+      tl.fromTo("#shot-08 .kb", { scale: 1.14, xPercent: 3 }, { scale: 1.14, xPercent: -3, duration: 3.002, ease: "none" }, 26.929);
+      tl.fromTo("#shot-09 .kb", { scale: 1.16 }, { scale: 1.02, duration: 3.471, ease: "none" }, 29.931);
+      tl.fromTo("#shot-10 .kb", { scale: 1.14, yPercent: 2.5 }, { scale: 1.14, yPercent: -2.5, duration: 3.386, ease: "none" }, 33.402);
+      tl.fromTo("#shot-11 .kb", { scale: 1.14, xPercent: -3 }, { scale: 1.14, xPercent: 3, duration: 4.196, ease: "none" }, 36.788);
+      tl.fromTo("#shot-12 .kb", { scale: 1.0 }, { scale: 1.14, duration: 2.369, ease: "none" }, 40.984);
+      tl.fromTo("#shot-13 .kb", { scale: 1.0 }, { scale: 1.14, duration: 1.921, ease: "none" }, 43.353);
+      tl.fromTo("#shot-14 .kb", { scale: 1.14, xPercent: 3 }, { scale: 1.14, xPercent: -3, duration: 4.153, ease: "none" }, 45.274);
+      tl.fromTo("#shot-15 .kb", { scale: 1.16 }, { scale: 1.02, duration: 2.625, ease: "none" }, 49.427);
+      tl.fromTo("#shot-16 .kb", { scale: 1.14, yPercent: 2.5 }, { scale: 1.14, yPercent: -2.5, duration: 2.732, ease: "none" }, 52.052);
+      tl.fromTo("#shot-17 .kb", { scale: 1.14, xPercent: -3 }, { scale: 1.14, xPercent: 3, duration: 3.620, ease: "none" }, 54.784);
+      tl.fromTo("#shot-18 .kb", { scale: 1.0 }, { scale: 1.14, duration: 1.964, ease: "none" }, 58.404);
+      tl.fromTo("#cap-001 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 0.250);
+      tl.fromTo("#cap-002 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 2.546);
+      tl.fromTo("#cap-003 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 4.382);
+      tl.fromTo("#cap-004 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 6.891);
+      tl.fromTo("#cap-005 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 9.047);
+      tl.fromTo("#cap-006 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 11.258);
+      tl.fromTo("#cap-007 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 12.881);
+      tl.fromTo("#cap-008 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 15.518);
+      tl.fromTo("#cap-009 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 18.293);
+      tl.fromTo("#cap-010 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 21.196);
+      tl.fromTo("#cap-011 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 22.681);
+      tl.fromTo("#cap-012 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 24.410);
+      tl.fromTo("#cap-013 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 26.929);
+      tl.fromTo("#cap-014 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 28.436);
+      tl.fromTo("#cap-015 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 29.931);
+      tl.fromTo("#cap-016 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 31.907);
+      tl.fromTo("#cap-017 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 33.402);
+      tl.fromTo("#cap-018 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 35.229);
+      tl.fromTo("#cap-019 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 36.788);
+      tl.fromTo("#cap-020 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 38.679);
+      tl.fromTo("#cap-021 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 40.984);
+      tl.fromTo("#cap-022 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 43.353);
+      tl.fromTo("#cap-023 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 45.274);
+      tl.fromTo("#cap-024 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 47.847);
+      tl.fromTo("#cap-025 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 49.427);
+      tl.fromTo("#cap-026 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 52.052);
+      tl.fromTo("#cap-027 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 54.784);
+      tl.fromTo("#cap-028 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 56.419);
+      tl.fromTo("#cap-029 .ct", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 58.404);
+      tl.fromTo("#endcard .sub", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 60.368);
+      tl.fromTo("#endcard .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 60.368 + 0.25);
+      tl.fromTo("#endcard .ch", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 60.368 + 0.45);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
