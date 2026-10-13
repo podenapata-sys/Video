@@ -3,7 +3,7 @@
 Adapted from "The AI UGC Ad Workflow" playbook. Run the steps in order in **your OpenArt account**.
 Each grey block is one prompt; when a step has several blocks, paste them one after the other into a single prompt.
 
-> ⚠️ **Before Step 3:** replace every `৳[X]` with your real price. Search this file for `[X]`.
+> ⚠️ **Before Step 3:** price is set to ৳1099.
 
 ---
 
@@ -91,7 +91,7 @@ Beat 4 (12-17s). Cut back to the fixed framing of him at the desk, the clock now
 
 Beat 5 (17-21s). Cut to an insert shot of the clock on the desk, no hands in frame, nobody speaks. The camera moves in one slow gentle arc from the front-left to the front-right of the clock, a soft band of window light sliding across the glossy black glass, the 02:30 PM display staying sharp and readable the whole time.
 
-Beat 6 (21-27s). Cut back to the fixed framing of him. He leans slightly toward the lens, friendly and direct, and says: "দাম ৳[X], ঢাকায় ডেলিভারি ফ্রি। অর্ডার করতে ইনবক্স করুন।"
+Beat 6 (21-27s). Cut back to the fixed framing of him. He leans slightly toward the lens, friendly and direct, and says: "দাম ৳1099, ঢাকায় ডেলিভারি ফ্রি। অর্ডার করতে ইনবক্স করুন।"
 
 Beat 7 (27-30s). Same framing. He smiles, points down toward the bottom of the screen and says: "লিংক নিচে।" He reaches toward the phone as if to stop recording as the clip ends.
 

@@ -13,7 +13,7 @@ Look straight into the lens, eyebrows up, small open-hand gesture:
 
 ## clip5_close (7s): friendly, confident
 Smile, then point down toward the screen bottom on "ইনবক্স করুন":
-> দাম ৳[X], ঢাকায় ডেলিভারি ফ্রি। অর্ডার করতে ইনবক্স করুন।
+> দাম ৳1099, ঢাকায় ডেলিভারি ফ্রি। অর্ডার করতে ইনবক্স করুন।
 
 Send the files named `clip1_hook.mp4` and `clip5_close.mp4`, **plus the real price**.
 I'll trim them, add Bangla captions timed to your voice, and assemble the final 30s ad:

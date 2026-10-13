@@ -14,7 +14,7 @@ Same playbook, rebuilt for **Google Flow**. Key difference: Flow makes **8-secon
 
 You only generate **3 clips**. I don't generate the product close-ups at all, which saves credits and keeps the time exact.
 
-> ⚠️ Replace `৳[X]` with your real price before generating Shot C.
+> ⚠️ Price is set to ৳1099.
 
 ---
 
@@ -55,7 +55,7 @@ Medium shot, the clock standing on the desk in the lower part of the frame besid
 
 ### Shot C: price + CTA (8s)
 ```
-Medium close-up, the clock on the desk beside him at the edge of frame. He leans slightly toward the lens, friendly and direct, and says: "দাম ৳[X], ঢাকায় ডেলিভারি ফ্রি। অর্ডার করতে ইনবক্স করুন।" Then he smiles and points down toward the bottom of the screen.
+Medium close-up, the clock on the desk beside him at the edge of frame. He leans slightly toward the lens, friendly and direct, and says: "দাম ৳1099, ঢাকায় ডেলিভারি ফ্রি। অর্ডার করতে ইনবক্স করুন।" Then he smiles and points down toward the bottom of the screen.
 ```
 
 ## Step 4: Test before you spend credits
