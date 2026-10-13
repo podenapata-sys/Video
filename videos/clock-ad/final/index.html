@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LED Clock Ad — Final</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Hind Siliguri"; font-weight: 600; src: url("assets/fonts/hind-siliguri-bengali-600-normal.woff2") format("woff2");
+        unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0-1CF9, U+200C-200D, U+20B9, U+25CC, U+A8F1; }
+      @font-face { font-family: "Hind Siliguri"; font-weight: 700; src: url("assets/fonts/hind-siliguri-bengali-700-normal.woff2") format("woff2");
+        unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0-1CF9, U+200C-200D, U+20B9, U+25CC, U+A8F1; }
+      @font-face { font-family: "Hind Siliguri"; font-weight: 600; src: url("assets/fonts/hind-siliguri-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Hind Siliguri"; font-weight: 700; src: url("assets/fonts/hind-siliguri-latin-700-normal.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Hind Siliguri", sans-serif; }
+      video.clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+      /* subtitles */
+      .cap { position: absolute; left: 60px; right: 60px; top: 1190px; display: flex; justify-content: center; z-index: 20; }
+      .pill { display: block; max-width: 940px; text-align: center; background: rgba(16, 18, 24, 0.88); color: #fff;
+        font-size: 58px; font-weight: 700; line-height: 1.38; padding: 16px 40px 12px; border-radius: 30px; }
+      .pill b { color: #ffd43b; font-weight: 700; }
+
+      /* hook chip (first 2.5s, before he speaks) */
+      #hook { position: absolute; left: 70px; right: 70px; top: 300px; display: flex; justify-content: center; z-index: 20; }
+      #hook .t { background: #ffd43b; color: #15171c; font-size: 62px; font-weight: 700; line-height: 1.3; padding: 18px 44px 12px; border-radius: 24px; text-align: center; }
+
+      /* CTA overlays (clip C) */
+      #price { position: absolute; left: 0; right: 0; top: 205px; display: flex; flex-direction: column; align-items: center; gap: 12px; z-index: 20; }
+      #price .p { background: #ffffff; color: #15171c; font-size: 86px; font-weight: 700; line-height: 1.15; padding: 18px 54px 8px; border-radius: 34px;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
+      #price .p b { color: #d4380d; }
+      #price .d { background: #12924a; color: #fff; font-size: 44px; font-weight: 700; padding: 8px 36px 2px; border-radius: 999px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+      #cta { position: absolute; left: 0; right: 0; top: 1180px; display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 21; }
+      #cta .btn { background: #ffd43b; color: #15171c; font-size: 60px; font-weight: 700; padding: 22px 60px 14px; border-radius: 999px;
+        box-shadow: 0 16px 36px rgba(0,0,0,0.4); }
+      #cta .arrow { width: 70px; height: 70px; }
+      #cta .arrow svg { width: 70px; height: 70px; display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="27.7" data-width="1080" data-height="1920" data-fps="30">
+      <!-- footage: A hook (0-9.4), B features (9.4-17.8), C offer (17.8-27.7) -->
+      <video id="vA" class="clip" src="media/clipA.mp4" playsinline data-has-audio="true" data-start="0" data-media-start="0" data-duration="9.4" data-track-index="0" data-volume="1"></video>
+      <video id="vB" class="clip" src="media/clipB.mp4" playsinline data-has-audio="true" data-start="9.4" data-media-start="0.5" data-duration="8.4" data-track-index="0" data-volume="1"></video>
+      <video id="vC" class="clip" src="media/clipC.mp4" playsinline data-has-audio="true" data-start="17.8" data-media-start="0.1" data-duration="9.9" data-track-index="0" data-volume="1"></video>
+
+      <!-- hook chip during the silent opening -->
+      <div id="hook" class="clip" data-start="0.15" data-duration="2.35" data-track-index="2"><div class="t">সময় দেখতে এখনো ফোন খোঁজেন?</div></div>
+
+      <!-- subtitles -->
+      <div id="cap-01" class="cap clip" data-start="2.50" data-duration="1.25" data-track-index="3"><span class="pill">ঘরে <b>ঘড়ি</b> আছে,</span></div>
+      <div id="cap-02" class="cap clip" data-start="3.75" data-duration="2.05" data-track-index="3"><span class="pill">অথচ সময় দেখতে <b>ফোন খুঁজতে</b> হয়?</span></div>
+      <div id="cap-03" class="cap clip" data-start="7.35" data-duration="2.00" data-track-index="3"><span class="pill">এই সমস্যার <b>সমাধান</b> এইটা।</span></div>
+
+      <div id="cap-04" class="cap clip" data-start="9.50" data-duration="1.10" data-track-index="3"><span class="pill"><b>বড় ডিজিট,</b></span></div>
+      <div id="cap-05" class="cap clip" data-start="10.62" data-duration="1.55" data-track-index="3"><span class="pill">রুমের <b>যেকোনো জায়গা</b> থেকে</span></div>
+      <div id="cap-05b" class="cap clip" data-start="12.17" data-duration="1.40" data-track-index="3"><span class="pill"><b>পরিষ্কার</b> দেখা যায়।</span></div>
+      <div id="cap-06" class="cap clip" data-start="13.62" data-duration="1.94" data-track-index="3"><span class="pill"><b>সপ্তাহের দিনও</b> দেখায়,</span></div>
+      <div id="cap-07" class="cap clip" data-start="15.56" data-duration="2.20" data-track-index="3"><span class="pill">আর ডেস্কে রাখলে দেখতেও <b>দারুণ।</b></span></div>
+
+      <div id="cap-08" class="cap clip" data-start="17.95" data-duration="3.62" data-track-index="3"><span class="pill">দাম মাত্র <b>১০৯৯ টাকা।</b></span></div>
+      <div id="cap-09" class="cap clip" data-start="21.57" data-duration="2.80" data-track-index="3"><span class="pill">ঢাকার ভেতরে ডেলিভারি <b>একদম ফ্রি।</b></span></div>
+
+      <!-- CTA motion (offer clip) -->
+      <div id="price" class="clip" data-start="18.0" data-duration="9.7" data-track-index="4">
+        <div class="p">মাত্র <b>৳১০৯৯</b></div>
+        <div class="d">ঢাকায় ডেলিভারি ফ্রি</div>
+      </div>
+      <div id="cta" class="clip" data-start="24.4" data-duration="3.3" data-track-index="5">
+        <div class="btn">ইনবক্স করে অর্ডার করুন</div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#ffd43b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M5 12l7 7 7-7"/></svg></div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#hook .t", { opacity: 0, scale: 0.7, rotation: -3 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 0.15);
+      tl.to("#hook .t", { opacity: 0, y: -30, duration: 0.2, ease: "power2.in" }, 2.3);
+
+      document.querySelectorAll(".cap").forEach((c) => {
+        const s = parseFloat(c.dataset.start), d = parseFloat(c.dataset.duration);
+        const p = c.querySelector(".pill");
+        tl.fromTo(p, { opacity: 0, y: 20, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "back.out(2)" }, s);
+        tl.to(p, { opacity: 0, duration: 0.12, ease: "power1.in" }, s + d - 0.12);
+      });
+
+      // price pop + delivery badge
+      tl.fromTo("#price .p", { opacity: 0, scale: 0.4, rotation: -6 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 18.0);
+      tl.to("#price .p", { scale: 1.06, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut" }, 19.2);
+      tl.fromTo("#price .d", { opacity: 0, x: -400 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, 21.6);
+
+      // order button + bouncing arrow
+      tl.fromTo("#cta .btn", { opacity: 0, y: 80, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)" }, 24.4);
+      tl.to("#cta .btn", { scale: 1.07, duration: 0.35, yoyo: true, repeat: 5, ease: "sine.inOut" }, 24.9);
+      tl.fromTo("#cta .arrow", { opacity: 0, y: -10 }, { opacity: 1, y: 14, duration: 0.35, yoyo: true, repeat: 6, ease: "sine.inOut" }, 24.7);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
