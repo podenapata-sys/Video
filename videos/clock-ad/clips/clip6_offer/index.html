@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>clip6_offer</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #1a140f; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #1a140f; }
+      #backdrop { position: absolute; inset: -80px; }
+      #backdrop img { width: 100%; height: 100%; object-fit: cover; filter: blur(40px) brightness(0.62) saturate(1.1); display: block; }
+      #hero { position: absolute; left: 0; top: 593px; width: 1080px; height: 733px;
+        transform-origin: 596.1px 397.4px; }
+      #hero img, #hero2 img { width: 100%; height: 100%; display: block;
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+        mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%); }
+      #vignette { position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(20,12,4,0.55) 100%); }
+      #sweep { position: absolute; inset: 0; clip-path: polygon(15.1% 34.4%, 84.1% 33.4%, 84.3% 69.2%, 15.2% 77.4%); overflow: hidden; pointer-events: none; }
+      #band { position: absolute; top: -20%; left: 0; width: 22%; height: 140%;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0) 100%); }
+
+      @font-face { font-family: "Hind Siliguri"; font-weight: 600; src: url("assets/fonts/hind-siliguri-bengali-600-normal.woff2") format("woff2");
+        unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0-1CF9, U+200C-200D, U+20B9, U+25CC, U+A8F1; }
+      @font-face { font-family: "Hind Siliguri"; font-weight: 700; src: url("assets/fonts/hind-siliguri-bengali-700-normal.woff2") format("woff2");
+        unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0-1CF9, U+200C-200D, U+20B9, U+25CC, U+A8F1; }
+      @font-face { font-family: "Hind Siliguri"; font-weight: 600; src: url("assets/fonts/hind-siliguri-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Hind Siliguri"; font-weight: 700; src: url("assets/fonts/hind-siliguri-latin-700-normal.woff2") format("woff2"); }
+      #offer { position: absolute; left: 70px; right: 70px; top: 1206px; display: flex; flex-direction: column;
+        align-items: center; gap: 30px; text-align: center; font-family: "Hind Siliguri", sans-serif; }
+      #offer .price { font-size: 120px; font-weight: 700; color: #ffffff; line-height: 1.1; text-shadow: 0 6px 24px rgba(0,0,0,0.6); }
+      #offer .price b { color: #ffd43b; }
+      #offer .deliv { font-size: 54px; font-weight: 600; color: #ffffff; background: rgba(18, 140, 74, 0.92); border-radius: 999px; padding: 14px 44px; }
+      #offer .btn { margin-top: 20px; font-size: 56px; font-weight: 700; color: #15171c; background: #ffd43b; border-radius: 999px; padding: 28px 64px; }
+      #hero2 { position: absolute; left: 0; top: 293px; width: 1080px; height: 733px; border-radius: 0; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1080" data-height="1920" data-fps="30">
+      <div id="backdrop"><img src="assets/clock-bg.png" alt="" /></div>
+      <div id="hero2"><img src="assets/clock.png" alt="LED digital desk clock" /></div>
+      <div id="vignette"></div>
+      <div id="offer">
+        <div class="price">মাত্র <b>৳[X]</b></div>
+        <div class="deliv">ঢাকায় ডেলিভারি ফ্রি</div>
+        <div class="btn">ইনবক্স করে অর্ডার করুন</div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#hero2", { scale: 1.06, y: 0 }, { scale: 1, y: 0, duration: 5, ease: "sine.out" }, 0);
+      tl.fromTo("#offer .price", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 0.2);
+      tl.fromTo("#offer .deliv", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.6);
+      tl.fromTo("#offer .btn", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.9);
+      tl.to("#offer .btn", { scale: 1.07, duration: 0.45, yoyo: true, repeat: 7, ease: "sine.inOut" }, 1.4);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
