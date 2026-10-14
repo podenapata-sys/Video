@@ -100,7 +100,7 @@ PAGE = """<!doctype html>
       .say { position: absolute; transform: translate(-50%, -50%); max-width: 460px; text-align: center; white-space: normal;
         color: #ffd43b; font-size: 38px; font-weight: 800; line-height: 1.12; letter-spacing: 0.01em;
         text-shadow: 0 2px 0 #0b2a4a, 0 0 10px rgba(5, 25, 50, 0.55); }
-      .say.big { font-size: 64px; max-width: 900px; }
+      .say.big { font-size: 64px; max-width: 900px; padding: 14px 34px; border-radius: 18px; background: rgba(5, 25, 50, 0.78); white-space: nowrap; }
       #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 50; }
     </style>
   </head>
