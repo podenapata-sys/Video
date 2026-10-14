@@ -1,0 +1,21 @@
+{
+  "title": "Transformation Short",
+  "program": "[PROGRAM]",
+  "shots": [
+    { "image": "01.png", "hold": 1.7, "lines": [{ "text": "I love you", "x": 26, "y": 31 }] },
+    { "image": "02.png", "hold": 1.8, "lines": [{ "text": "Sorry, I like muscular men", "x": 72, "y": 29 }] },
+    { "image": "03.png", "hold": 1.4, "dark": true, "lines": [] },
+    { "image": "04.png", "hold": 2.0, "lines": [
+        { "text": "HAHA", "x": 18, "y": 33 }, { "text": "HAHA", "x": 42, "y": 30 },
+        { "text": "HAHA", "x": 64, "y": 32 }, { "text": "HAHA", "x": 84, "y": 30 }] },
+    { "image": "05.png", "hold": 1.6, "flash": true, "lines": [] },
+    { "image": "06.png", "hold": 1.9, "lines": [{ "text": "I want to build my body", "x": 30, "y": 40 }] },
+    { "image": "07.png", "hold": 1.6, "lines": [{ "text": "But I am lazy", "x": 30, "y": 43 }] },
+    { "image": "08.png", "hold": 1.9, "lines": [{ "text": "No problem. It's easy to follow", "x": 70, "y": 26 }] },
+    { "image": "09.png", "hold": 1.5, "lines": [{ "text": "SENT", "x": 70, "y": 36 }] },
+    { "image": "10.png", "hold": 1.4, "dark": true, "lines": [{ "text": "RECEIVED", "x": 34, "y": 36 }] },
+    { "image": "11.png", "hold": 2.0, "flash": true, "punch": true, "lines": [] },
+    { "image": "12.png", "hold": 1.8, "lines": [{ "text": "Thanks bro", "x": 32, "y": 27 }] },
+    { "image": "13.png", "hold": 2.6, "cta": true, "lines": [{ "text": "Try [PROGRAM]", "x": 68, "y": 22 }, { "text": "READ CAPTION", "x": 50, "y": 64 }] }
+  ]
+}
