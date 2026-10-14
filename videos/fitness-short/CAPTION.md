@@ -1,11 +1,11 @@
 # Post caption ("READ CAPTION" payoff)
 
-Fill in `[PROGRAM]`, `[PRICE]` and `[DAYS]`. The first line must hook, because only ~125 characters show before "…more".
+Fill in `Gen-Z Hyper`, `[PRICE]` and `[DAYS]`. The first line must hook, because only ~125 characters show before "…more".
 
 ```
 He got laughed at. [DAYS] days later, nobody's laughing. 💪
 
-[PROGRAM] is built for people who are "too lazy" to start:
+Gen-Z Hyper is built for people who are "too lazy" to start:
 ✅ 20-minute home workouts, no gym needed
 ✅ Simple meal plan with local Bangladeshi food
 ✅ Daily check-ins so you don't quit
@@ -20,7 +20,7 @@ Price: [PRICE] (one-time)
 ```
 সবাই হেসেছিল। [DAYS] দিন পর আর কেউ হাসে না। 💪
 
-[PROGRAM] — যারা "অলস" তাদের জন্য বানানো:
+Gen-Z Hyper — যারা "অলস" তাদের জন্য বানানো:
 ✅ ২০ মিনিটের হোম ওয়ার্কআউট, জিম লাগবে না
 ✅ দেশি খাবারে সহজ ডায়েট প্ল্যান
 ✅ প্রতিদিন চেক-ইন, যাতে মাঝপথে ছেড়ে না দেন
