@@ -1,6 +1,6 @@
 # Post caption ("READ CAPTION" payoff)
 
-Fill in `Gen-Z Hyper`, `[PRICE]` and `[DAYS]`. The first line must hook, because only ~125 characters show before "…more".
+Fill in `[DAYS]`. Price: ৳599 in Bangladesh, $4.99 for international viewers. The first line must hook, because only ~125 characters show before "…more".
 
 ```
 He got laughed at. [DAYS] days later, nobody's laughing. 💪
@@ -10,7 +10,7 @@ Gen-Z Hyper is built for people who are "too lazy" to start:
 ✅ Simple meal plan with local Bangladeshi food
 ✅ Daily check-ins so you don't quit
 
-Price: [PRICE] (one-time)
+Price: $4.99 (Bangladesh: ৳599), one-time
 👉 Comment "BODY" or DM me "PROGRAM" and I'll send you the details.
 
 #fitness #transformation #homeworkout #bangladesh #gymmotivation #calisthenics
@@ -25,7 +25,7 @@ Gen-Z Hyper — যারা "অলস" তাদের জন্য বান�
 ✅ দেশি খাবারে সহজ ডায়েট প্ল্যান
 ✅ প্রতিদিন চেক-ইন, যাতে মাঝপথে ছেড়ে না দেন
 
-দাম: [PRICE]
+দাম: মাত্র ৳৫৯৯ (একবারই পেমেন্ট)
 👉 কমেন্টে "BODY" লিখুন অথবা ইনবক্সে "PROGRAM" লিখুন।
 ```
 
