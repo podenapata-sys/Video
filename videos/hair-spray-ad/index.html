@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Rosemary Hair Spray UGC</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Hind Siliguri"; font-weight: 700; src: url("assets/fonts/hind-siliguri-bengali-700-normal.woff2") format("woff2");
+        unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0-1CF9, U+200C-200D, U+20B9, U+25CC, U+A8F1; }
+      @font-face { font-family: "Hind Siliguri"; font-weight: 700; src: url("assets/fonts/hind-siliguri-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: url("assets/fonts/NotoColorEmoji.ttf") format("truetype"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000;
+        font-family: "Hind Siliguri", "Noto Color Emoji", sans-serif; font-weight: 700; }
+      video.clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .beat { position: absolute; inset: 0; z-index: 5; }
+      .pos { position: absolute; transform: translate(-50%, -50%); }
+      .line { color: #fff; white-space: nowrap; line-height: 1.3; padding: 0.1em 0.42em 0.02em; border-radius: 0.32em;
+        background: rgba(8, 14, 10, 0.42); text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6); opacity: 0; }
+      .w { display: inline-block; margin: 0 0.12em; }
+      .k { color: #8fd889; }
+      .hook { background: rgba(8, 14, 10, 0.5); }
+      .bright .k { color: #a8f0a0; text-shadow: 0 0 18px rgba(143, 216, 137, 0.55), 0 3px 12px rgba(0, 0, 0, 0.6); }
+      .hl { position: relative; padding: 0 0.2em; }
+      .hl b { position: relative; }
+      .bar { position: absolute; inset: 0.1em 0 0.02em; background: #2f8a55; border-radius: 0.18em; transform-origin: left center; }
+      .price em { font-style: normal; color: #8fd889; }
+      .card { display: flex; align-items: center; gap: 18px; padding: 14px 34px; border-radius: 24px; white-space: nowrap;
+        background: rgba(18, 58, 36, 0.8); border: 2px solid rgba(143, 216, 137, 0.6); color: #fff; font-size: 50px;
+        line-height: 1.25; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); opacity: 0; }
+      .dot { width: 16px; height: 16px; border-radius: 50%; background: #8fd889; flex: none; }
+      .btn { padding: 16px 56px 10px; border-radius: 999px; background: #2f8a55; color: #fff; font-size: 52px; white-space: nowrap;
+        line-height: 1.3; box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.25); opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="28.85" data-width="1080" data-height="1920" data-fps="30">
+      <video id="ugc" class="clip" src="assets/ugc.mp4" data-start="0" data-duration="28.85" data-track-index="1" data-has-audio="true" playsinline></video>
+      <div id="b1" class="clip beat" data-start="0" data-duration="3.0" data-track-index="2"><div class="pos" style="left:50%;top:61%"><div class="line hook" id="l1a" style="font-size:150px"><span class="w" id="l1a-w0">চুল</span><span class="w k" id="l1a-w1">পড়ছে?</span></div></div><div class="pos" style="left:50%;top:70.5%"><div class="line " id="l1b" style="font-size:66px"><span class="w" id="l1b-w0">দিন</span><span class="w" id="l1b-w1">দিন</span><span class="w k" id="l1b-w2">পাতলা</span><span class="w" id="l1b-w3">লাগছে?</span></div></div></div>
+      <div id="b2" class="clip beat" data-start="3.0" data-duration="2.0" data-track-index="2"><div class="pos" style="left:50%;top:68%"><div class="line " id="l2" style="font-size:72px"><span class="w" id="l2-w0">আমিও</span><span class="w" id="l2-w1">ভাবতাম...</span></div></div></div>
+      <div id="b3" class="clip beat" data-start="5.0" data-duration="3.3" data-track-index="2"><div class="pos" style="left:50%;top:64%"><div class="line " id="l3a" style="font-size:78px"><span class="w" id="l3a-w0">শুধু</span><span class="w k" id="l3a-w1">Shampoo</span></div></div><div class="pos" style="left:50%;top:72%"><div class="line " id="l3b" style="font-size:72px"><span class="w" id="l3b-w0">বদলালেই</span><span class="w k" id="l3b-w1">হবে!?</span></div></div></div>
+      <div id="b4" class="clip beat" data-start="8.3" data-duration="1.7" data-track-index="2"><div class="pos" style="left:50%;top:68%"><div class="line " id="l4" style="font-size:72px"><span class="w" id="l4-w0">কিন্তু</span><span class="w k" id="l4-w1">আসলেই</span><span class="w" id="l4-w2">কি</span><span class="w" id="l4-w3">তাই?</span></div></div></div>
+      <div id="b5" class="clip beat" data-start="10.0" data-duration="3.33" data-track-index="2"><div class="pos" style="left:44%;top:13%"><div class="line " id="l5a" style="font-size:54px"><span class="w" id="l5a-w0">তাই</span><span class="w" id="l5a-w1">আমার</span></div></div><div class="pos" style="left:44%;top:17.8%"><div class="line " id="l5b" style="font-size:74px"><span class="w k" id="l5b-w0">Hair Care Routine</span><span class="w" id="l5b-w1">-এ...</span></div></div></div>
+      <div id="b6" class="clip beat" data-start="13.33" data-duration="3.22" data-track-index="2"><div class="pos" style="left:50%;top:57%"><div class="line " id="l6a" style="font-size:118px"><span class="w hl" id="l6a-w0"><i class="bar" id="l6bar"></i><b>Rosemary</b></span></div></div><div class="pos" style="left:50%;top:65%"><div class="line " id="l6b" style="font-size:64px"><span class="w" id="l6b-w0">Rice</span><span class="w" id="l6b-w1">Water</span><span class="w" id="l6b-w2">Hair</span><span class="w" id="l6b-w3">Spray</span><span class="w" id="l6b-w4">🌿</span></div></div></div>
+      <div id="b7" class="clip beat" data-start="16.55" data-duration="2.3" data-track-index="2"><div class="pos" style="left:50%;top:56.0%"><div class="card" id="c0"><i class="dot"></i>Rosemary Leaf Extract</div></div><div class="pos" style="left:50%;top:63.5%"><div class="card" id="c1"><i class="dot"></i>Panthenol</div></div><div class="pos" style="left:50%;top:71.0%"><div class="card" id="c2"><i class="dot"></i>Peppermint Oil</div></div></div>
+      <div id="b8" class="clip beat" data-start="18.85" data-duration="3.45" data-track-index="2"><div class="pos" style="left:50%;top:15%"><div class="line " id="l8" style="font-size:68px"><span class="w" id="l8-w0">Spray</span><span class="w" id="l8-w1">→</span><span class="w" id="l8-w2">Massage</span><span class="w" id="l8-w3">→</span><span class="w" id="l8-w4">Routine</span></div></div></div>
+      <div id="b9" class="clip beat" data-start="23.35" data-duration="1.65" data-track-index="2"><div class="pos" style="left:50%;top:62.5%"><div class="line " id="l9a" style="font-size:64px"><span class="w" id="l9a-w0">Hair</span><span class="w" id="l9a-w1">Care</span><span class="w" id="l9a-w2">এখন</span></div></div><div class="pos" style="left:50%;top:70%"><div class="line bright" id="l9b" style="font-size:100px"><span class="w k" id="l9b-w0">আরও সহজ</span><span class="w" id="l9b-w1">✨</span></div></div></div>
+      <div id="b10" class="clip beat" data-start="25.0" data-duration="1.85" data-track-index="2"><div class="pos" style="left:50%;top:56.5%"><div class="line " id="l10a" style="font-size:60px"><span class="w" id="l10a-w0">মাত্র</span></div></div><div class="pos" style="left:50%;top:64%"><div class="line price" id="l10b" style="font-size:150px"><span class="w" id="l10b-w0">1199 <em>BDT</em></span></div></div></div>
+      <div id="b11" class="clip beat" data-start="26.85" data-duration="2.0" data-track-index="2">
+        <div class="pos" style="left:50%;top:12.5%"><div class="line " id="l11" style="font-size:46px"><span class="w">আজ থেকেই</span><span class="w k">Hair Care Routine</span><span class="w">-এ যোগ করুন</span></div></div>
+        <div class="pos" style="left:50%;top:18.6%"><div class="btn" id="btn">আজই অর্ডার করুন</div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#b1", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 2.800);
+      tl.fromTo("#l1a", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 0.120);
+      tl.fromTo("#l1a .w", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(2.6)", stagger: 0.1 }, 0.12);
+      tl.fromTo("#l1b", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 2.070);
+      tl.fromTo("#l1b .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.07 }, 2.070);
+      tl.fromTo("#l1b-w2", { scale: 1 }, { scale: 1.14, duration: 0.18, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 2.45);
+      tl.fromTo("#b2", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 4.800);
+      tl.fromTo("#l2", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 3.1);
+      tl.fromTo("#b3", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 8.100);
+      tl.fromTo("#l3a", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 5.100);
+      tl.fromTo("#l3a .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.07 }, 5.100);
+      tl.fromTo("#l3b", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 6.400);
+      tl.fromTo("#l3b-w0", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 6.4);
+      tl.fromTo("#l3b-w1", { opacity: 0, y: -40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "bounce.out" }, 6.9);
+      tl.fromTo("#b4", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 9.800);
+      tl.fromTo("#l4", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 8.400);
+      tl.fromTo("#l4 .w", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", stagger: 0.16 }, 8.4);
+      tl.fromTo("#l4", { scale: 1 }, { scale: 1.07, duration: 1.5, ease: "none", immediateRender: false }, 8.4);
+      tl.fromTo("#b5", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 13.130);
+      tl.fromTo("#l5a", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 10.150);
+      tl.fromTo("#l5a .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.07 }, 10.150);
+      tl.fromTo("#l5b", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 10.600);
+      tl.fromTo("#l5b .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.15 }, 10.600);
+      tl.fromTo("#b6", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 16.350);
+      tl.fromTo("#l6a", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 13.450);
+      tl.fromTo("#l6a-w0", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 13.45);
+      tl.fromTo("#l6bar", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power3.inOut" }, 13.7);
+      tl.fromTo("#l6b", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 14.100);
+      tl.fromTo("#l6b .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.09 }, 14.100);
+      tl.fromTo("#b7", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 18.650);
+      tl.fromTo("#c0", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 16.650);
+      tl.fromTo("#c1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 17.200);
+      tl.fromTo("#c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 17.750);
+      tl.fromTo("#b8", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 22.100);
+      tl.fromTo("#l8", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 19.000);
+      tl.fromTo("#l8-w0", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 19.000);
+      tl.fromTo("#l8-w1", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 19.120);
+      tl.fromTo("#l8-w2", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 19.900);
+      tl.fromTo("#l8-w3", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 20.020);
+      tl.fromTo("#l8-w4", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 20.800);
+      tl.fromTo("#l8-w0", { color: "#ffffff" }, { color: "#8fd889", duration: 0.2, immediateRender: false }, 19.000);
+      tl.fromTo("#l8-w0", { color: "#8fd889" }, { color: "#ffffff", duration: 0.2, immediateRender: false }, 19.900);
+      tl.fromTo("#l8-w2", { color: "#ffffff" }, { color: "#8fd889", duration: 0.2, immediateRender: false }, 19.900);
+      tl.fromTo("#l8-w2", { color: "#8fd889" }, { color: "#ffffff", duration: 0.2, immediateRender: false }, 20.800);
+      tl.fromTo("#l8-w4", { color: "#ffffff" }, { color: "#8fd889", duration: 0.2, immediateRender: false }, 20.800);
+      tl.fromTo("#b9", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 24.800);
+      tl.fromTo("#l9a", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 23.450);
+      tl.fromTo("#l9a .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.07 }, 23.450);
+      tl.fromTo("#l9b", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 23.850);
+      tl.fromTo("#l9b .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.12 }, 23.850);
+      tl.fromTo("#b10", { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 26.650);
+      tl.fromTo("#l10a", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 25.050);
+      tl.fromTo("#l10a .w", { opacity: 0, scale: 0.85, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.07 }, 25.050);
+      tl.fromTo("#l10b", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 25.300);
+      tl.fromTo("#l10b-w0", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1.05, duration: 0.35, ease: "power2.out" }, 25.3);
+      tl.fromTo("#l10b-w0", { scale: 1.05 }, { scale: 1, duration: 0.3, ease: "power2.inOut", immediateRender: false }, 25.66);
+      tl.fromTo("#l11", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 26.9);
+      tl.fromTo("#btn", { opacity: 0, y: 50, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)" }, 27.25);
+      tl.fromTo("#btn", { scale: 1 }, { scale: 1.07, duration: 0.24, yoyo: true, repeat: 3, ease: "sine.inOut", immediateRender: false }, 27.850);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
