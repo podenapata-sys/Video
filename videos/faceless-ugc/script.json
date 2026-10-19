@@ -1,0 +1,16 @@
+{
+  "title": "This site pays you to post videos 👀",
+  "cta": "Comment LINK 👇",
+  "voice": "voice.wav",
+  "music": "music.mp3",
+  "lines": [
+    { "say": "This site pays you to post videos.", "key": ["pays"], "hold": 2.6, "clip": "screen.mp4", "start": 12.0, "pos": "45% 50%" },
+    { "say": "It's called Content Rewards.", "key": ["Content", "Rewards."], "hold": 2.2, "clip": "screen.mp4", "start": 9.0, "pos": "0% 50%" },
+    { "say": "Brands post campaigns, you make the clips,", "key": ["campaigns,"], "hold": 3.0, "clip": "screen.mp4", "start": 79.5, "pos": "40% 50%" },
+    { "say": "and you get paid for every thousand views.", "key": ["paid"], "hold": 3.0, "clip": "screen.mp4", "start": 85.0, "pos": "60% 50%" },
+    { "say": "This one pays two dollars per thousand views.", "key": ["two", "dollars"], "hold": 3.4, "clip": "results.png", "zoom": 1.35, "origin": "0% 30%" },
+    { "say": "Signing up is free. Just join a campaign,", "key": ["free."], "hold": 3.0, "clip": "screen.mp4", "start": 110.0, "pos": "100% 50%" },
+    { "say": "post your clip, and submit it.", "key": ["submit"], "hold": 2.6, "clip": "screen.mp4", "start": 113.0, "pos": "100% 50%" },
+    { "say": "Comment LINK and I'll send it to you.", "key": ["LINK"], "hold": 3.2, "clip": "screen.mp4", "start": 79.5, "pos": "40% 50%" }
+  ]
+}
