@@ -1,48 +1,69 @@
 {
   "hook": {
     "text": "Trying to make a doctor salary in 67 mins (watch me cook)",
-    "clip": "hook.mp4",
-    "hold": 5.0
+    "clip": "face.mp4",
+    "hold": 5.0,
+    "start": 0.0,
+    "under_band": true
   },
   "cta": "Comment LINK 👇",
-  "voice": true,
-  "face": "face.mp4",
+  "voice": false,
+  "face": {
+    "clip": "face.mp4",
+    "start": 4.5,
+    "pos": "50% 24%"
+  },
   "steps": [
     {
       "caption": "step 1: go to contentrewards.com",
-      "clip": "s1.mp4",
-      "hold": 3.0
+      "clip": "screen.mp4",
+      "start": 9.0,
+      "hold": 3.0,
+      "pos": "0% 50%"
     },
     {
       "caption": "step 2: sign up",
-      "clip": "s2.mp4",
-      "hold": 2.5
+      "clip": "screen.mp4",
+      "start": 14.5,
+      "hold": 2.5,
+      "pos": "50% 50%"
     },
     {
       "caption": "step 3: discover campaigns",
-      "clip": "s3.mp4",
-      "hold": 3.0
+      "clip": "screen.mp4",
+      "start": 79.5,
+      "hold": 3.0,
+      "pos": "35% 50%"
     },
     {
       "caption": "step 4: find one that pays",
-      "clip": "s4.mp4",
-      "hold": 3.0
+      "clip": "screen.mp4",
+      "start": 85.0,
+      "hold": 3.0,
+      "pos": "60% 50%"
     },
     {
       "caption": "step 5: join the campaign",
-      "clip": "s5.mp4",
-      "hold": 2.5
+      "clip": "screen.mp4",
+      "start": 110.0,
+      "hold": 3.0,
+      "pos": "100% 50%"
     },
     {
-      "caption": "step 6: make your video + submit",
-      "clip": "s6.mp4",
-      "hold": 3.5
+      "caption": "step 6: link your socials + submit",
+      "clip": "screen.mp4",
+      "start": 113.0,
+      "hold": 3.5,
+      "pos": "100% 50%"
     }
   ],
   "payout": {
-    "caption": "pays $1 per 1K views",
+    "caption": "this one pays $2 per 1K views",
     "image": "results.png",
-    "hold": 4.0
+    "hold": 3.4,
+    "split": true,
+    "zoom": 1.35,
+    "origin": "0% 30%"
   },
   "music": "music.mp3"
 }

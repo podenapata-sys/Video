@@ -37,9 +37,12 @@ def placeholder(label, w, h):
     return path.relative_to(ROOT).as_posix()
 
 
-def media(name, label, w, h, start, dur, cls, eid, offset=0.0, voice=False):
+def media(name, label, w, h, start, dur, cls, eid, offset=0.0, voice=False, pos=None, origin=None):
     """<video> for real footage (voice clips keep their audio), <img> stand-in otherwise."""
     attrs = f'id="{eid}" class="clip {cls}" data-start="{start:.3f}" data-duration="{dur:.3f}" data-track-index="1"'
+    style = (f"object-position:{pos};" if pos else "") + (f"transform-origin:{origin};" if origin else "")
+    if style:
+        attrs += f' style="{style}"'
     f = FOOT / name if name else None
     if f and f.exists() and f.suffix == ".mp4":
         trim = f' data-media-start="{offset:.3f}"' if offset else ""
@@ -56,34 +59,42 @@ def main():
     els, js, t = [], [], 0.0
     ctas = []  # (start, end, style) segments for the persistent comment-keyword CTA
 
+    face = cfg["face"] if isinstance(cfg["face"], dict) else {"clip": cfg["face"]}
     hook = cfg["hook"]
     d = hook["hold"]
-    els.append(media(hook["clip"], "HOOK: say the hook out loud", W, H, t, d, "full", "hook", voice=voice))
+    # under_band: the clip sits below the title band so the band never covers the head
+    els.append(media(hook["clip"], "HOOK: say the hook out loud", W, H, t, d, "hookv" if hook.get("under_band") else "full",
+                     "hook", offset=hook.get("start", 0.0), voice=voice, pos=hook.get("pos")))
     els.append(f'<div id="hooktxt" class="clip band" data-start="0" data-duration="{d:.3f}" data-track-index="3">'
                f'{html.escape(hook["text"])}</div>')
-    ctas.append((1.0, d, "left:50%;top:74%"))
+    ctas.append((1.0, d, "left:50%;top:82%"))  # below the chin when the face fills the hook
     t += d
 
     steps_start = t
-    for i, s in enumerate(cfg["steps"], 1):
+    p = cfg["payout"]
+    steps = cfg["steps"] + ([dict(p, clip=p.get("clip") or p["image"])] if p.get("split") else [])
+    for i, s in enumerate(steps, 1):
         d = s["hold"]
         sid = f"s{i}"
-        els.append(media(s["clip"], f"SCREEN: step {i}", W, H // 2, t, d, "bottom", sid))
+        els.append(media(s["clip"], f"SCREEN: step {i}", W, H // 2, t, d, "bottom", sid,
+                         offset=s.get("start", 0.0), pos=s.get("pos"), origin=s.get("origin")))
         els.append(f'<div id="{sid}cap" class="clip cap" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="3">'
                    f'{html.escape(s["caption"])}</div>')
-        js.append(f'tl.fromTo("#{sid}", {{ scale: 1 }}, {{ scale: 1.05, duration: {d:.3f}, ease: "none" }}, {t:.3f});')
+        zoom = s.get("zoom", 1.05)
+        js.append(f'tl.fromTo("#{sid}", {{ scale: 1 }}, {{ scale: {zoom}, duration: {d:.3f}, ease: "power1.inOut" }}, {t:.3f});')
         t += d
     # one continuous face-cam across all steps, so the stare never jumps
-    els.append(media(cfg["face"], "FACE CAM", W, H // 2, steps_start, t - steps_start, "top", "face", voice=voice))
+    els.append(media(face["clip"], "FACE CAM", W, H // 2, steps_start, t - steps_start, "top", "face",
+                     offset=face.get("start", 0.0), voice=voice, pos=face.get("pos")))
     ctas.append((steps_start, t, "right:36px;top:44.6%;transform:translate(0,-50%)"))
 
-    p = cfg["payout"]
-    d = p["hold"]
-    els.append(media(p["image"], "REAL results screenshot", W, H, t, d, "full", "payout"))
-    ctas.append((t, t + d, "left:50%;top:74%"))
-    els.append(f'<div id="paycap" class="clip cap" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="3" '
+    d = 0 if p.get("split") else p["hold"]
+    if d:
+      els.append(media(p["image"], "REAL results screenshot", W, H, t, d, "full", "payout"))
+      ctas.append((t, t + d, "left:50%;top:74%"))
+      els.append(f'<div id="paycap" class="clip cap" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="3" '
                f'style="top:64%">{html.escape(p["caption"])}</div>')
-    js.append(f'tl.fromTo("#payout", {{ scale: 1 }}, {{ scale: 1.12, duration: {d:.3f}, ease: "power1.inOut" }}, {t:.3f});')
+      js.append(f'tl.fromTo("#payout", {{ scale: 1 }}, {{ scale: 1.12, duration: {d:.3f}, ease: "power1.inOut" }}, {t:.3f});')
     t += d
 
     total = round(t, 3)
@@ -127,6 +138,7 @@ PAGE = """<!doctype html>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+      .hookv { position: absolute; left: 0; top: 420px; width: 100%; height: 1500px; object-fit: cover; object-position: 50% 0%; }
       .full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       .top { position: absolute; left: 0; top: 0; width: 100%; height: 50%; object-fit: cover; }
       .bottom { position: absolute; left: 0; top: 50%; width: 100%; height: 50%; object-fit: cover; transform-origin: 50% 0%; }

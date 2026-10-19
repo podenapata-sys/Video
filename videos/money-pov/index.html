@@ -10,6 +10,7 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+      .hookv { position: absolute; left: 0; top: 420px; width: 100%; height: 1500px; object-fit: cover; object-position: 50% 0%; }
       .full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       .top { position: absolute; left: 0; top: 0; width: 100%; height: 50%; object-fit: cover; }
       .bottom { position: absolute; left: 0; top: 50%; width: 100%; height: 50%; object-fit: cover; transform-origin: 50% 0%; }
@@ -25,46 +26,45 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="26.5" data-width="1080" data-height="1920" data-fps="30">
-      <img id="hook" class="clip full" data-start="0.000" data-duration="5.000" data-track-index="1" src="assets/placeholder-hook--say-the-hook-out-loud.png" alt="" />
+    <div id="root" data-composition-id="main" data-start="0" data-duration="26.4" data-width="1080" data-height="1920" data-fps="30">
+      <video id="hook" class="clip hookv" data-start="0.000" data-duration="5.000" data-track-index="1" src="assets/footage/face.mp4" muted playsinline></video>
       <div id="hooktxt" class="clip band" data-start="0" data-duration="5.000" data-track-index="3">Trying to make a doctor salary in 67 mins (watch me cook)</div>
-      <img id="s1" class="clip bottom" data-start="5.000" data-duration="3.000" data-track-index="1" src="assets/placeholder-screen--step-1.png" alt="" />
+      <video id="s1" class="clip bottom" data-start="5.000" data-duration="3.000" data-track-index="1" style="object-position:0% 50%;" src="assets/footage/screen.mp4" data-media-start="9.000" muted playsinline></video>
       <div id="s1cap" class="clip cap" data-start="5.000" data-duration="3.000" data-track-index="3">step 1: go to contentrewards.com</div>
-      <img id="s2" class="clip bottom" data-start="8.000" data-duration="2.500" data-track-index="1" src="assets/placeholder-screen--step-2.png" alt="" />
+      <video id="s2" class="clip bottom" data-start="8.000" data-duration="2.500" data-track-index="1" style="object-position:50% 50%;" src="assets/footage/screen.mp4" data-media-start="14.500" muted playsinline></video>
       <div id="s2cap" class="clip cap" data-start="8.000" data-duration="2.500" data-track-index="3">step 2: sign up</div>
-      <img id="s3" class="clip bottom" data-start="10.500" data-duration="3.000" data-track-index="1" src="assets/placeholder-screen--step-3.png" alt="" />
+      <video id="s3" class="clip bottom" data-start="10.500" data-duration="3.000" data-track-index="1" style="object-position:35% 50%;" src="assets/footage/screen.mp4" data-media-start="79.500" muted playsinline></video>
       <div id="s3cap" class="clip cap" data-start="10.500" data-duration="3.000" data-track-index="3">step 3: discover campaigns</div>
-      <img id="s4" class="clip bottom" data-start="13.500" data-duration="3.000" data-track-index="1" src="assets/placeholder-screen--step-4.png" alt="" />
+      <video id="s4" class="clip bottom" data-start="13.500" data-duration="3.000" data-track-index="1" style="object-position:60% 50%;" src="assets/footage/screen.mp4" data-media-start="85.000" muted playsinline></video>
       <div id="s4cap" class="clip cap" data-start="13.500" data-duration="3.000" data-track-index="3">step 4: find one that pays</div>
-      <img id="s5" class="clip bottom" data-start="16.500" data-duration="2.500" data-track-index="1" src="assets/placeholder-screen--step-5.png" alt="" />
-      <div id="s5cap" class="clip cap" data-start="16.500" data-duration="2.500" data-track-index="3">step 5: join the campaign</div>
-      <img id="s6" class="clip bottom" data-start="19.000" data-duration="3.500" data-track-index="1" src="assets/placeholder-screen--step-6.png" alt="" />
-      <div id="s6cap" class="clip cap" data-start="19.000" data-duration="3.500" data-track-index="3">step 6: make your video + submit</div>
-      <img id="face" class="clip top" data-start="5.000" data-duration="17.500" data-track-index="1" src="assets/placeholder-face-cam.png" alt="" />
-      <img id="payout" class="clip full" data-start="22.500" data-duration="4.000" data-track-index="1" src="assets/placeholder-real-results-screenshot.png" alt="" />
-      <div id="paycap" class="clip cap" data-start="22.500" data-duration="4.000" data-track-index="3" style="top:64%">pays $1 per 1K views</div>
-      <div id="cta0" class="clip cta" data-start="1.000" data-duration="4.000" data-track-index="5" style="left:50%;top:74%"><span class="pill">Comment LINK 👇</span></div>
-      <div id="cta1" class="clip cta" data-start="5.000" data-duration="17.500" data-track-index="5" style="right:36px;top:44.6%;transform:translate(0,-50%)"><span class="pill">Comment LINK 👇</span></div>
-      <div id="cta2" class="clip cta" data-start="22.500" data-duration="4.000" data-track-index="5" style="left:50%;top:74%"><span class="pill">Comment LINK 👇</span></div>
+      <video id="s5" class="clip bottom" data-start="16.500" data-duration="3.000" data-track-index="1" style="object-position:100% 50%;" src="assets/footage/screen.mp4" data-media-start="110.000" muted playsinline></video>
+      <div id="s5cap" class="clip cap" data-start="16.500" data-duration="3.000" data-track-index="3">step 5: join the campaign</div>
+      <video id="s6" class="clip bottom" data-start="19.500" data-duration="3.500" data-track-index="1" style="object-position:100% 50%;" src="assets/footage/screen.mp4" data-media-start="113.000" muted playsinline></video>
+      <div id="s6cap" class="clip cap" data-start="19.500" data-duration="3.500" data-track-index="3">step 6: link your socials + submit</div>
+      <img id="s7" class="clip bottom" data-start="23.000" data-duration="3.400" data-track-index="1" style="transform-origin:0% 30%;" src="assets/footage/results.png" alt="" />
+      <div id="s7cap" class="clip cap" data-start="23.000" data-duration="3.400" data-track-index="3">this one pays $2 per 1K views</div>
+      <video id="face" class="clip top" data-start="5.000" data-duration="21.400" data-track-index="1" style="object-position:50% 24%;" src="assets/footage/face.mp4" data-media-start="4.500" muted playsinline></video>
+      <div id="cta0" class="clip cta" data-start="1.000" data-duration="4.000" data-track-index="5" style="left:50%;top:82%"><span class="pill">Comment LINK 👇</span></div>
+      <div id="cta1" class="clip cta" data-start="5.000" data-duration="21.400" data-track-index="5" style="right:36px;top:44.6%;transform:translate(0,-50%)"><span class="pill">Comment LINK 👇</span></div>
     </div>
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#cta0 .pill", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)" }, 1.0);
-      tl.fromTo("#s1", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "none" }, 5.000);
-      tl.fromTo("#s2", { scale: 1 }, { scale: 1.05, duration: 2.500, ease: "none" }, 8.000);
-      tl.fromTo("#s3", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "none" }, 10.500);
-      tl.fromTo("#s4", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "none" }, 13.500);
-      tl.fromTo("#s5", { scale: 1 }, { scale: 1.05, duration: 2.500, ease: "none" }, 16.500);
-      tl.fromTo("#s6", { scale: 1 }, { scale: 1.05, duration: 3.500, ease: "none" }, 19.000);
-      tl.fromTo("#payout", { scale: 1 }, { scale: 1.12, duration: 4.000, ease: "power1.inOut" }, 22.500);
+      tl.fromTo("#s1", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "power1.inOut" }, 5.000);
+      tl.fromTo("#s2", { scale: 1 }, { scale: 1.05, duration: 2.500, ease: "power1.inOut" }, 8.000);
+      tl.fromTo("#s3", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "power1.inOut" }, 10.500);
+      tl.fromTo("#s4", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "power1.inOut" }, 13.500);
+      tl.fromTo("#s5", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "power1.inOut" }, 16.500);
+      tl.fromTo("#s6", { scale: 1 }, { scale: 1.05, duration: 3.500, ease: "power1.inOut" }, 19.500);
+      tl.fromTo("#s7", { scale: 1 }, { scale: 1.35, duration: 3.400, ease: "power1.inOut" }, 23.000);
       tl.fromTo("#cta0 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 1.600);
       tl.fromTo("#cta1 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 5.600);
       tl.fromTo("#cta1 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 9.600);
       tl.fromTo("#cta1 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 13.600);
       tl.fromTo("#cta1 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 17.600);
       tl.fromTo("#cta1 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 21.600);
-      tl.fromTo("#cta2 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 23.100);
+      tl.fromTo("#cta1 .pill", { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 25.600);
       window.__timelines["main"] = tl;
     </script>
   </body>
