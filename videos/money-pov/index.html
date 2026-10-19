@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Watch Me Cook</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Montserrat", sans-serif; }
+      .full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .top { position: absolute; left: 0; top: 0; width: 100%; height: 50%; object-fit: cover; }
+      .bottom { position: absolute; left: 0; top: 50%; width: 100%; height: 50%; object-fit: cover; transform-origin: 50% 0%; }
+      .band { position: absolute; left: 0; top: 0; width: 100%; height: 420px; background: #000; z-index: 10;
+        display: flex; align-items: flex-end; justify-content: center; padding: 0 70px 34px; text-align: center;
+        color: #fff; font-size: 46px; font-weight: 600; line-height: 1.22; }
+      .cap { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; white-space: nowrap;
+        color: #fff; font-size: 40px; font-weight: 600; letter-spacing: 0.005em;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 14px rgba(0, 0, 0, 0.7); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="25.5" data-width="1080" data-height="1920" data-fps="30">
+      <img id="hook" class="clip full" data-start="0.000" data-duration="6.000" data-track-index="1" src="assets/placeholder-hook--drink---snack.png" alt="" />
+      <div id="hooktxt" class="clip band" data-start="0" data-duration="6.000" data-track-index="3">Regular guy makes money from dental clinics with AI (watch me cook)</div>
+      <img id="s1" class="clip bottom" data-start="6.000" data-duration="3.000" data-track-index="1" src="assets/placeholder-screen--step-1.png" alt="" />
+      <div id="s1cap" class="clip cap" data-start="6.000" data-duration="3.000" data-track-index="3">step 1: find a clinic on google maps</div>
+      <img id="s2" class="clip bottom" data-start="9.000" data-duration="2.500" data-track-index="1" src="assets/placeholder-screen--step-2.png" alt="" />
+      <div id="s2cap" class="clip cap" data-start="9.000" data-duration="2.500" data-track-index="3">step 2: check if they have a chatbot</div>
+      <img id="s3" class="clip bottom" data-start="11.500" data-duration="4.000" data-track-index="1" src="assets/placeholder-screen--step-3.png" alt="" />
+      <div id="s3cap" class="clip cap" data-start="11.500" data-duration="4.000" data-track-index="3">step 3: build a demo in botpress</div>
+      <img id="s4" class="clip bottom" data-start="15.500" data-duration="3.000" data-track-index="1" src="assets/placeholder-screen--step-4.png" alt="" />
+      <div id="s4cap" class="clip cap" data-start="15.500" data-duration="3.000" data-track-index="3">step 4: send it on whatsapp</div>
+      <img id="s5" class="clip bottom" data-start="18.500" data-duration="3.000" data-track-index="1" src="assets/placeholder-screen--step-5.png" alt="" />
+      <div id="s5cap" class="clip cap" data-start="18.500" data-duration="3.000" data-track-index="3">step 5: book the call</div>
+      <img id="face" class="clip top" data-start="6.000" data-duration="15.500" data-track-index="1" src="assets/placeholder-face-cam.png" alt="" />
+      <img id="payout" class="clip full" data-start="21.500" data-duration="4.000" data-track-index="1" src="assets/placeholder-real-payout-screenshot.png" alt="" />
+      <div id="paycap" class="clip cap" data-start="21.500" data-duration="4.000" data-track-index="3" style="top:auto;bottom:22%">step 6: get paid</div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s1", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "none" }, 6.000);
+      tl.fromTo("#s2", { scale: 1 }, { scale: 1.05, duration: 2.500, ease: "none" }, 9.000);
+      tl.fromTo("#s3", { scale: 1 }, { scale: 1.05, duration: 4.000, ease: "none" }, 11.500);
+      tl.fromTo("#s4", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "none" }, 15.500);
+      tl.fromTo("#s5", { scale: 1 }, { scale: 1.05, duration: 3.000, ease: "none" }, 18.500);
+      tl.fromTo("#payout", { scale: 1 }, { scale: 1.12, duration: 4.000, ease: "power1.inOut" }, 21.500);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
