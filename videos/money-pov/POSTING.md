@@ -5,7 +5,7 @@
 2. YouTube Studio → Customization → **Links**: add the referral link (this is mandatory). Put it in the channel description too.
 3. **CommentShark** (commentshark.com): connect the channel.
    - Trigger keyword: `LINK` (case-insensitive)
-   - Reply: `Here you go 👉 [YOUR REFERRAL LINK] (start with any campaign, it's free)`
+   - Reply: `Here you go 👉 https://whop.com/start/?code=XTWQFG (start with any campaign, it's free)`
 4. Turn on monetization-friendly defaults: English, no "Made for kids", comments on.
 
 ## Every video
@@ -13,7 +13,7 @@
 - [ ] **Description:**
   ```
   Comment "LINK" and I'll send you the link 👇
-  [YOUR REFERRAL LINK]
+  https://whop.com/start/?code=XTWQFG
   #contentrewardspartner #sidehustle #makemoneyonline
   ```
 - [ ] **Pin a comment:** `Comment LINK for the link 👇 (or tap the link on my channel)`
