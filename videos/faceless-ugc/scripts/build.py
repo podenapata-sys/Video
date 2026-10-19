@@ -42,7 +42,14 @@ def main():
     cfg = json.loads((ROOT / "script.json").read_text())
     lines = cfg["lines"]
     voice = FOOT / cfg.get("voice", "")
-    if voice.is_file():
+    manual = all("at" in ln and "end" in ln for ln in lines)
+    if manual:  # measured speech spans in script.json win over auto-splitting
+        for i, ln in enumerate(lines):
+            start = 0.0 if i == 0 else ln["at"]  # first visual is up before the first word
+            nxt = lines[i + 1]["at"] if i + 1 < len(lines) else ln["end"] + 0.6
+            ln["hold"] = round(nxt - start, 3)
+        print("timed to voiceover (script.json at/end)")
+    elif voice.is_file():
         spans = speech_spans(voice, len(lines))
         if spans:  # each line holds from its sentence start to the next sentence start
             for i, ln in enumerate(lines):
@@ -53,8 +60,6 @@ def main():
             print(f"! voiceover pauses don't split into {len(lines)} sentences; using script.json holds")
 
     els, vis, js, t = [], [], [], 0.0
-    if lines and "at" in lines[0]:
-        t = 0.0
     for i, ln in enumerate(lines):
         d = ln["hold"]
         lid = f"l{i}"
@@ -70,8 +75,11 @@ def main():
         words = ln["say"].split()
         spans = "".join(f'<span class="w{" k" if w in ln.get("key", []) else ""}">{html.escape(w)}</span>' for w in words)
         els.append(f'<div id="{lid}s" class="clip sub" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="3">{spans}</div>')
-        per = min(0.32, (d - 0.4) / max(1, len(words)))  # words land across the sentence
-        js.append(f'tl.fromTo("#{lid}s .w", {{ opacity: 0.25, y: 10 }}, {{ opacity: 1, y: 0, duration: 0.18, ease: "power2.out", stagger: {per:.3f} }}, {t + 0.05:.3f});')
+        # words land across the spoken span when we know it, else across the hold
+        w0 = ln.get("at", t)
+        span = (ln["end"] - w0) if "end" in ln else (d - 0.4)
+        per = min(0.45, span / max(1, len(words)))
+        js.append(f'tl.fromTo("#{lid}s .w", {{ opacity: 0.25, y: 10 }}, {{ opacity: 1, y: 0, duration: 0.18, ease: "power2.out", stagger: {per:.3f} }}, {w0:.3f});')
         t += d
     total = round(t, 3)
     els.insert(0, '<div class="box">' + "".join(vis) + "</div>")
