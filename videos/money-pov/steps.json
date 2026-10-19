@@ -1,17 +1,48 @@
 {
   "hook": {
-    "text": "Regular guy makes money from dental clinics with AI (watch me cook)",
+    "text": "Trying to make a doctor salary in 67 mins (watch me cook)",
     "clip": "hook.mp4",
-    "hold": 6.0
+    "hold": 5.0
   },
+  "cta": "Comment LINK 👇",
+  "voice": true,
   "face": "face.mp4",
   "steps": [
-    { "caption": "step 1: find a clinic on google maps", "clip": "s1.mp4", "hold": 3.0 },
-    { "caption": "step 2: check if they have a chatbot", "clip": "s2.mp4", "hold": 2.5 },
-    { "caption": "step 3: build a demo in botpress", "clip": "s3.mp4", "hold": 4.0 },
-    { "caption": "step 4: send it on whatsapp", "clip": "s4.mp4", "hold": 3.0 },
-    { "caption": "step 5: book the call", "clip": "s5.mp4", "hold": 3.0 }
+    {
+      "caption": "step 1: go to contentrewards.com",
+      "clip": "s1.mp4",
+      "hold": 3.0
+    },
+    {
+      "caption": "step 2: sign up",
+      "clip": "s2.mp4",
+      "hold": 2.5
+    },
+    {
+      "caption": "step 3: discover campaigns",
+      "clip": "s3.mp4",
+      "hold": 3.0
+    },
+    {
+      "caption": "step 4: find one that pays",
+      "clip": "s4.mp4",
+      "hold": 3.0
+    },
+    {
+      "caption": "step 5: join the campaign",
+      "clip": "s5.mp4",
+      "hold": 2.5
+    },
+    {
+      "caption": "step 6: make your video + submit",
+      "clip": "s6.mp4",
+      "hold": 3.5
+    }
   ],
-  "payout": { "caption": "step 6: get paid", "image": "payout.png", "hold": 4.0 },
+  "payout": {
+    "caption": "pays $1 per 1K views",
+    "image": "results.png",
+    "hold": 4.0
+  },
   "music": "music.mp3"
 }

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Stacked "watch me cook" Reel: face-cam top, screen step bottom, seam captions.
 
-  python3 scripts/build.py [--render]
+  python3 scripts/build.py [--steps steps-agency.json] [--render]
 
-Reads steps.json. Footage lives in assets/footage/ (hook.mp4, face.mp4, s1.mp4 ...,
+Reads steps.json (Content Rewards) or the file given with --steps. Footage lives in assets/footage/ (hook.mp4, face.mp4, s1.mp4 ...,
 payout.png, optional music.mp3). Any missing file becomes a grey stand-in card so
 timing and captions can be previewed before filming.
 """
@@ -37,26 +37,31 @@ def placeholder(label, w, h):
     return path.relative_to(ROOT).as_posix()
 
 
-def media(name, label, w, h, start, dur, cls, eid, offset=0.0):
-    """<video> for real footage (muted: music carries the audio), <img> stand-in otherwise."""
+def media(name, label, w, h, start, dur, cls, eid, offset=0.0, voice=False):
+    """<video> for real footage (voice clips keep their audio), <img> stand-in otherwise."""
     attrs = f'id="{eid}" class="clip {cls}" data-start="{start:.3f}" data-duration="{dur:.3f}" data-track-index="1"'
     f = FOOT / name if name else None
     if f and f.exists() and f.suffix == ".mp4":
         trim = f' data-media-start="{offset:.3f}"' if offset else ""
-        return f'<video {attrs} src="assets/footage/{name}"{trim} muted playsinline></video>'
+        sound = ' data-has-audio="true"' if voice else " muted"
+        return f'<video {attrs} src="assets/footage/{name}"{trim}{sound} playsinline></video>'
     src = f"assets/footage/{name}" if f and f.exists() else placeholder(label, w, h)
     return f'<img {attrs} src="{src}" alt="" />'
 
 
 def main():
-    cfg = json.loads((ROOT / "steps.json").read_text())
+    steps_file = sys.argv[sys.argv.index("--steps") + 1] if "--steps" in sys.argv else "steps.json"
+    cfg = json.loads((ROOT / steps_file).read_text())
+    voice = cfg.get("voice", False)
     els, js, t = [], [], 0.0
+    ctas = []  # (start, end, style) segments for the persistent comment-keyword CTA
 
     hook = cfg["hook"]
     d = hook["hold"]
-    els.append(media(hook["clip"], "HOOK: drink / snack", W, H, t, d, "full", "hook"))
+    els.append(media(hook["clip"], "HOOK: say the hook out loud", W, H, t, d, "full", "hook", voice=voice))
     els.append(f'<div id="hooktxt" class="clip band" data-start="0" data-duration="{d:.3f}" data-track-index="3">'
                f'{html.escape(hook["text"])}</div>')
+    ctas.append((1.0, d, "left:50%;top:74%"))
     t += d
 
     steps_start = t
@@ -69,24 +74,37 @@ def main():
         js.append(f'tl.fromTo("#{sid}", {{ scale: 1 }}, {{ scale: 1.05, duration: {d:.3f}, ease: "none" }}, {t:.3f});')
         t += d
     # one continuous face-cam across all steps, so the stare never jumps
-    els.append(media(cfg["face"], "FACE CAM", W, H // 2, steps_start, t - steps_start, "top", "face"))
+    els.append(media(cfg["face"], "FACE CAM", W, H // 2, steps_start, t - steps_start, "top", "face", voice=voice))
+    ctas.append((steps_start, t, "right:36px;top:44.6%;transform:translate(0,-50%)"))
 
     p = cfg["payout"]
     d = p["hold"]
-    els.append(media(p["image"], "REAL payout screenshot", W, H, t, d, "full", "payout"))
+    els.append(media(p["image"], "REAL results screenshot", W, H, t, d, "full", "payout"))
+    ctas.append((t, t + d, "left:50%;top:74%"))
     els.append(f'<div id="paycap" class="clip cap" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="3" '
-               f'style="top:auto;bottom:22%">{html.escape(p["caption"])}</div>')
+               f'style="top:64%">{html.escape(p["caption"])}</div>')
     js.append(f'tl.fromTo("#payout", {{ scale: 1 }}, {{ scale: 1.12, duration: {d:.3f}, ease: "power1.inOut" }}, {t:.3f});')
     t += d
 
     total = round(t, 3)
+    if cfg.get("cta"):
+        for i, (a, b, style) in enumerate(ctas):
+            els.append(f'<div id="cta{i}" class="clip cta" data-start="{a:.3f}" data-duration="{b - a:.3f}" data-track-index="5" '
+                       f'style="{style}"><span class="pill">{html.escape(cfg["cta"])}</span></div>')
+            k = a + 0.6
+            while k < b - 0.6:  # gentle pulse every ~4s
+                js.append(f'tl.fromTo("#cta{i} .pill", {{ scale: 1 }}, {{ scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, '
+                          f'ease: "sine.inOut", immediateRender: false }}, {k:.3f});')
+                k += 4.0
+        js.insert(0, 'tl.fromTo("#cta0 .pill", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)" }, 1.0);')
     if (FOOT / cfg.get("music", "")).is_file():
+        vol = 0.25 if voice else 0.8  # sit under the spoken hook/CTA
         els.append(f'<audio id="music" src="assets/footage/{cfg["music"]}" data-start="0" data-duration="{total}" '
-                   f'data-track-index="4" data-volume="0.8"></audio>')
+                   f'data-track-index="4" data-volume="{vol}"></audio>')
     page = PAGE.replace("{{TOTAL}}", str(total)).replace("{{ELS}}", "\n      ".join(els)) \
                .replace("{{JS}}", "\n      ".join(js))
     (ROOT / "index.html").write_text(page)
-    print(f"built hook + {len(cfg['steps'])} steps + payout, {total}s")
+    print(f"built {steps_file}: hook + {len(cfg['steps'])} steps + results, {total}s")
     if "--render" in sys.argv:
         out = ROOT / "renders" / "money-pov.mp4"
         r = subprocess.run(CLI + ["render", str(ROOT), "-o", str(out), "-q", "delivery"], capture_output=True, text=True)
@@ -105,9 +123,10 @@ PAGE = """<!doctype html>
     <title>Watch Me Cook</title>
     <script src="assets/gsap.min.js"></script>
     <style>
+      @font-face { font-family: "Noto Color Emoji"; src: url("assets/fonts/NotoColorEmoji.ttf") format("truetype"); }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
-      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Montserrat", sans-serif; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
       .full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       .top { position: absolute; left: 0; top: 0; width: 100%; height: 50%; object-fit: cover; }
       .bottom { position: absolute; left: 0; top: 50%; width: 100%; height: 50%; object-fit: cover; transform-origin: 50% 0%; }
@@ -117,6 +136,9 @@ PAGE = """<!doctype html>
       .cap { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; white-space: nowrap;
         color: #fff; font-size: 40px; font-weight: 600; letter-spacing: 0.005em;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 14px rgba(0, 0, 0, 0.7); }
+      .cta { position: absolute; transform: translate(-50%, -50%); z-index: 11; }
+      .pill { display: inline-block; padding: 12px 30px 10px; border-radius: 999px; background: #e3242b; color: #fff;
+        font-size: 38px; font-weight: 700; white-space: nowrap; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45); }
     </style>
   </head>
   <body>
