@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" /><title>Thumbnail</title><style>
+@font-face { font-family: "Noto Color Emoji"; src: url("assets/fonts/NotoColorEmoji.ttf") format("truetype"); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#0b0b0d; }
+#root { position:relative; width:100%; height:100%; overflow:hidden; background:#0b0b0d; font-family:"Montserrat", "Noto Color Emoji", sans-serif; }
+.head { position:absolute; left:50px; right:50px; text-align:center; color:#fff; font-weight:900; line-height:1.04;
+  letter-spacing:-0.01em; text-shadow:0 6px 24px rgba(0,0,0,0.8); }
+.head b { color:#ffcc33; }
+.badge { position:absolute; background:#ffcc33; color:#111; font-weight:900; border-radius:22px; box-shadow:0 14px 34px rgba(0,0,0,0.5); }
+.pill { position:absolute; left:50%; transform:translateX(-50%); background:#e3242b; color:#fff; font-size:50px; font-weight:800;
+  padding:16px 44px 14px; border-radius:999px; white-space:nowrap; box-shadow:0 10px 26px rgba(0,0,0,0.5); }
+
+#face { position:absolute; left:0; top:340px; width:100%; height:620px; object-fit:cover; object-position:50% 30%; }
+#screen { position:absolute; left:0; top:960px; width:100%; height:960px; object-fit:cover; object-position:35% 50%; }
+#band { position:absolute; left:0; top:0; width:100%; height:340px; background:#000; padding:150px 30px 0;
+  text-align:center; color:#fff; font-size:54px; font-weight:900; line-height:1.12; white-space:nowrap; }
+#band b { color:#ffcc33; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="1" data-width="1080" data-height="1920">
+<img id="face" src="assets/face.jpg" alt="" />
+<img id="screen" src="assets/discover.jpg" alt="" />
+<div id="band">Trying to make a <b>doctor salary</b><br>in 67 mins 🧑‍🍳</div>
+<div class="badge" style="left:50%;top:880px;transform:translateX(-50%) rotate(-3deg);font-size:72px;padding:16px 36px 10px;white-space:nowrap">$2 / 1K VIEWS?</div>
+<div class="pill" style="top:1560px">Comment LINK 👇</div>
+</div>
+<script src="assets/gsap.min.js"></script>
+<script>window.__timelines = window.__timelines || {}; window.__timelines["main"] = gsap.timeline({ paused: true });</script>
+</body></html>
