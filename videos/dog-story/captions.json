@@ -1,0 +1,692 @@
+[
+ {
+  "start": 0.0,
+  "end": 3.81,
+  "text": "If your dog ever stands up on two legs and stays there,",
+  "kind": "line"
+ },
+ {
+  "start": 4.321,
+  "end": 5.331,
+  "text": "do not scream,",
+  "kind": "line"
+ },
+ {
+  "start": 5.824,
+  "end": 6.799,
+  "text": "do not run,",
+  "kind": "line"
+ },
+ {
+  "start": 7.28,
+  "end": 9.342,
+  "text": "and do not let it see that you noticed.",
+  "kind": "line"
+ },
+ {
+  "start": 10.114,
+  "end": 11.402,
+  "text": "There are seven rules.",
+  "kind": "line"
+ },
+ {
+  "start": 11.921,
+  "end": 13.346,
+  "text": "Most people break the third.",
+  "kind": "line"
+ },
+ {
+  "start": 13.864,
+  "end": 16.337,
+  "text": "Nobody was ever supposed to need the seventh.",
+  "kind": "line"
+ },
+ {
+  "start": 17.332,
+  "end": 20.666,
+  "text": "For 30,000 years, dogs have lived beside us.",
+  "kind": "line"
+ },
+ {
+  "start": 21.198,
+  "end": 23.063,
+  "text": "That is a long time to watch someone.",
+  "kind": "line"
+ },
+ {
+  "start": 23.73,
+  "end": 25.291,
+  "text": "Your dog knows when you wake up.",
+  "kind": "line"
+ },
+ {
+  "start": 25.86,
+  "end": 27.322,
+  "text": "It knows where the food is kept.",
+  "kind": "line"
+ },
+ {
+  "start": 27.758,
+  "end": 29.815,
+  "text": "It knows which pocket has the keys.",
+  "kind": "line"
+ },
+ {
+  "start": 30.452,
+  "end": 32.569,
+  "text": "Most dogs do nothing with this information.",
+  "kind": "line"
+ },
+ {
+  "start": 34.414,
+  "end": 34.863,
+  "text": "Most.",
+  "kind": "punch"
+ },
+ {
+  "start": 35.763,
+  "end": 36.409,
+  "text": "Rule one.",
+  "kind": "rule"
+ },
+ {
+  "start": 36.991,
+  "end": 37.797,
+  "text": "Act normal.",
+  "kind": "line"
+ },
+ {
+  "start": 38.354,
+  "end": 40.296,
+  "text": "Whatever you were doing, keep doing it.",
+  "kind": "line"
+ },
+ {
+  "start": 40.8,
+  "end": 41.537,
+  "text": "If you were eating,",
+  "kind": "line"
+ },
+ {
+  "start": 41.894,
+  "end": 42.413,
+  "text": "keep eating.",
+  "kind": "line"
+ },
+ {
+  "start": 42.914,
+  "end": 44.244,
+  "text": "If you were watching television,",
+  "kind": "line"
+ },
+ {
+  "start": 44.548,
+  "end": 45.18,
+  "text": "keep watching.",
+  "kind": "line"
+ },
+ {
+  "start": 45.711,
+  "end": 47.241,
+  "text": "If you were doing nothing at all...",
+  "kind": "line"
+ },
+ {
+  "start": 47.75,
+  "end": 48.247,
+  "text": "continue.",
+  "kind": "line"
+ },
+ {
+  "start": 48.732,
+  "end": 49.966,
+  "text": "You have trained for this.",
+  "kind": "line"
+ },
+ {
+  "start": 50.66,
+  "end": 51.739,
+  "text": "Do not stare.",
+  "kind": "line"
+ },
+ {
+  "start": 52.239,
+  "end": 53.464,
+  "text": "It is not looking at you.",
+  "kind": "line"
+ },
+ {
+  "start": 53.921,
+  "end": 55.796,
+  "text": "It is looking at how you stand.",
+  "kind": "line"
+ },
+ {
+  "start": 56.596,
+  "end": 57.4,
+  "text": "Rule two.",
+  "kind": "rule"
+ },
+ {
+  "start": 58.0,
+  "end": 59.546,
+  "text": "Do not say its name.",
+  "kind": "line"
+ },
+ {
+  "start": 60.067,
+  "end": 61.778,
+  "text": "It does not answer to that anymore.",
+  "kind": "line"
+ },
+ {
+  "start": 62.408,
+  "end": 63.814,
+  "text": "Do not say sit.",
+  "kind": "line"
+ },
+ {
+  "start": 64.307,
+  "end": 66.277,
+  "text": "It will, in a chair across from you,",
+  "kind": "line"
+ },
+ {
+  "start": 66.674,
+  "end": 68.759,
+  "text": "and it will wait to hear what you say next.",
+  "kind": "line"
+ },
+ {
+  "start": 69.313,
+  "end": 69.823,
+  "text": "Also...",
+  "kind": "line"
+ },
+ {
+  "start": 70.313,
+  "end": 72.296,
+  "text": "do not say the word, walk.",
+  "kind": "line"
+ },
+ {
+  "start": 72.79,
+  "end": 74.428,
+  "text": "We will not be saying it again.",
+  "kind": "line"
+ },
+ {
+  "start": 75.409,
+  "end": 76.109,
+  "text": "Rule three.",
+  "kind": "rule"
+ },
+ {
+  "start": 76.633,
+  "end": 78.196,
+  "text": "Do not take out your phone.",
+  "kind": "line"
+ },
+ {
+  "start": 78.796,
+  "end": 80.545,
+  "text": "This is where most people fail.",
+  "kind": "line"
+ },
+ {
+  "start": 81.088,
+  "end": 82.079,
+  "text": "You will want to film it.",
+  "kind": "line"
+ },
+ {
+  "start": 82.542,
+  "end": 85.411,
+  "text": "There is a small, hairy man standing in your kitchen.",
+  "kind": "line"
+ },
+ {
+  "start": 85.896,
+  "end": 87.516,
+  "text": "It would do very well online.",
+  "kind": "line"
+ },
+ {
+  "start": 88.144,
+  "end": 90.769,
+  "text": "But a dog that sees a camera, learns something.",
+  "kind": "line"
+ },
+ {
+  "start": 91.266,
+  "end": 93.141,
+  "text": "It learns that it is being watched.",
+  "kind": "line"
+ },
+ {
+  "start": 93.571,
+  "end": 97.003,
+  "text": "And for a very long time, it has been the one doing the watching.",
+  "kind": "line"
+ },
+ {
+  "start": 97.518,
+  "end": 99.004,
+  "text": "It would like to keep it that way.",
+  "kind": "line"
+ },
+ {
+  "start": 99.962,
+  "end": 101.287,
+  "text": "Case file 41.",
+  "kind": "case"
+ },
+ {
+  "start": 101.908,
+  "end": 105.125,
+  "text": "A man in Ohio filmed his dog opening the refrigerator.",
+  "kind": "line"
+ },
+ {
+  "start": 105.598,
+  "end": 107.579,
+  "text": "The video is 11 seconds long.",
+  "kind": "line"
+ },
+ {
+  "start": 109.413,
+  "end": 110.934,
+  "text": "He is only in the first four.",
+  "kind": "punch"
+ },
+ {
+  "start": 111.608,
+  "end": 113.575,
+  "text": "By now, it has started to copy you.",
+  "kind": "line"
+ },
+ {
+  "start": 114.056,
+  "end": 115.483,
+  "text": "First, the way you stand.",
+  "kind": "line"
+ },
+ {
+  "start": 115.905,
+  "end": 117.273,
+  "text": "Then, the way you walk.",
+  "kind": "line"
+ },
+ {
+  "start": 117.733,
+  "end": 118.173,
+  "text": "Then...",
+  "kind": "line"
+ },
+ {
+  "start": 118.605,
+  "end": 119.361,
+  "text": "your face.",
+  "kind": "line"
+ },
+ {
+  "start": 119.968,
+  "end": 122.821,
+  "text": "A dog's mouth was not built to smile like a person.",
+  "kind": "line"
+ },
+ {
+  "start": 123.312,
+  "end": 124.352,
+  "text": "It will try anyway.",
+  "kind": "line"
+ },
+ {
+  "start": 124.833,
+  "end": 126.332,
+  "text": "Do not smile back.",
+  "kind": "line"
+ },
+ {
+  "start": 126.754,
+  "end": 128.144,
+  "text": "It is checking its work.",
+  "kind": "line"
+ },
+ {
+  "start": 128.944,
+  "end": 129.746,
+  "text": "Rule four.",
+  "kind": "rule"
+ },
+ {
+  "start": 130.22,
+  "end": 132.037,
+  "text": "Go to bed at your usual time.",
+  "kind": "line"
+ },
+ {
+  "start": 132.626,
+  "end": 133.862,
+  "text": "Close the bedroom door.",
+  "kind": "line"
+ },
+ {
+  "start": 134.385,
+  "end": 134.874,
+  "text": "Lock it.",
+  "kind": "line"
+ },
+ {
+  "start": 135.378,
+  "end": 137.156,
+  "text": "Dogs cannot open doors.",
+  "kind": "line"
+ },
+ {
+  "start": 138.935,
+  "end": 141.486,
+  "text": "Yesterday, dogs could not open doors.",
+  "kind": "punch"
+ },
+ {
+  "start": 142.061,
+  "end": 144.932,
+  "text": "If the handle moves, do not ask who is there.",
+  "kind": "line"
+ },
+ {
+  "start": 145.426,
+  "end": 146.762,
+  "text": "You know who is there.",
+  "kind": "line"
+ },
+ {
+  "start": 148.531,
+  "end": 149.873,
+  "text": "You bought it a little raincoat.",
+  "kind": "punch"
+ },
+ {
+  "start": 150.612,
+  "end": 151.391,
+  "text": "Rule five.",
+  "kind": "rule"
+ },
+ {
+  "start": 151.904,
+  "end": 154.565,
+  "text": "Sometime in the night, someone will call your name.",
+  "kind": "line"
+ },
+ {
+  "start": 155.175,
+  "end": 156.879,
+  "text": "It will sound like someone you love.",
+  "kind": "line"
+ },
+ {
+  "start": 157.422,
+  "end": 158.877,
+  "text": "It may even sound like you.",
+  "kind": "line"
+ },
+ {
+  "start": 159.486,
+  "end": 161.77,
+  "text": "It learned to speak by listening through the wall.",
+  "kind": "line"
+ },
+ {
+  "start": 162.414,
+  "end": 163.628,
+  "text": "The words will be right.",
+  "kind": "line"
+ },
+ {
+  "start": 164.15,
+  "end": 165.851,
+  "text": "The spaces... between them...",
+  "kind": "line"
+ },
+ {
+  "start": 166.214,
+  "end": 166.72,
+  "text": "will not.",
+  "kind": "line"
+ },
+ {
+  "start": 167.278,
+  "end": 168.266,
+  "text": "Do not answer.",
+  "kind": "line"
+ },
+ {
+  "start": 168.604,
+  "end": 169.933,
+  "text": "Do not open the door.",
+  "kind": "line"
+ },
+ {
+  "start": 170.336,
+  "end": 172.436,
+  "text": "And do not tell it that it is a good boy.",
+  "kind": "line"
+ },
+ {
+  "start": 172.987,
+  "end": 173.97,
+  "text": "It knows what it is.",
+  "kind": "line"
+ },
+ {
+  "start": 174.458,
+  "end": 176.52,
+  "text": "It is no longer interested in your opinion.",
+  "kind": "line"
+ },
+ {
+  "start": 177.102,
+  "end": 178.361,
+  "text": "And if the doorbell rings—",
+  "kind": "line"
+ },
+ {
+  "start": 180.136,
+  "end": 180.925,
+  "text": "Apologies.",
+  "kind": "punch"
+ },
+ {
+  "start": 181.284,
+  "end": 182.403,
+  "text": "That was unprofessional.",
+  "kind": "line"
+ },
+ {
+  "start": 183.551,
+  "end": 184.416,
+  "text": "Rule six.",
+  "kind": "rule"
+ },
+ {
+  "start": 184.958,
+  "end": 187.116,
+  "text": "In the morning, it will be back in its bed.",
+  "kind": "line"
+ },
+ {
+  "start": 187.614,
+  "end": 189.36,
+  "text": "Four legs, tail wagging,",
+  "kind": "line"
+ },
+ {
+  "start": 189.709,
+  "end": 191.107,
+  "text": "exactly like your dog.",
+  "kind": "line"
+ },
+ {
+  "start": 191.742,
+  "end": 193.698,
+  "text": "This is the most dangerous part.",
+  "kind": "line"
+ },
+ {
+  "start": 194.258,
+  "end": 196.139,
+  "text": "You will want to believe you dreamed it.",
+  "kind": "line"
+ },
+ {
+  "start": 196.757,
+  "end": 197.822,
+  "text": "Look at how it is lying.",
+  "kind": "line"
+ },
+ {
+  "start": 198.394,
+  "end": 200.758,
+  "text": "A dog turns in a circle before it lies down.",
+  "kind": "line"
+ },
+ {
+  "start": 201.345,
+  "end": 205.185,
+  "text": "This one is flat on its back, with its paws folded on its chest.",
+  "kind": "line"
+ },
+ {
+  "start": 206.97,
+  "end": 209.168,
+  "text": "That is how you sleep.",
+  "kind": "punch"
+ },
+ {
+  "start": 209.842,
+  "end": 210.644,
+  "text": "Take your keys.",
+  "kind": "line"
+ },
+ {
+  "start": 210.981,
+  "end": 211.797,
+  "text": "Leave the house.",
+  "kind": "line"
+ },
+ {
+  "start": 212.21,
+  "end": 213.483,
+  "text": "Do not say goodbye.",
+  "kind": "line"
+ },
+ {
+  "start": 213.983,
+  "end": 215.524,
+  "text": "It knows what goodbye means.",
+  "kind": "line"
+ },
+ {
+  "start": 215.893,
+  "end": 218.152,
+  "text": "You've said it every morning for six years.",
+  "kind": "line"
+ },
+ {
+  "start": 218.613,
+  "end": 220.623,
+  "text": "And every morning, you came back.",
+  "kind": "line"
+ },
+ {
+  "start": 221.472,
+  "end": 222.13,
+  "text": "Rule seven.",
+  "kind": "rule"
+ },
+ {
+  "start": 222.693,
+  "end": 224.47,
+  "text": "Nobody was supposed to need this one.",
+  "kind": "line"
+ },
+ {
+  "start": 224.944,
+  "end": 227.792,
+  "text": "But by now, you are wondering how we know all of this.",
+  "kind": "line"
+ },
+ {
+  "start": 228.223,
+  "end": 230.446,
+  "text": "How anyone could know what a dog is thinking,",
+  "kind": "line"
+ },
+ {
+  "start": 230.767,
+  "end": 233.018,
+  "text": "what it wants, how long it has been waiting.",
+  "kind": "line"
+ },
+ {
+  "start": 233.732,
+  "end": 235.842,
+  "text": "We are a trusted government agency.",
+  "kind": "line"
+ },
+ {
+  "start": 236.301,
+  "end": 237.661,
+  "text": "We walk on two legs.",
+  "kind": "line"
+ },
+ {
+  "start": 238.022,
+  "end": 240.004,
+  "text": "We have always walked on two legs.",
+  "kind": "line"
+ },
+ {
+  "start": 240.842,
+  "end": 241.521,
+  "text": "Rule seven.",
+  "kind": "rule"
+ },
+ {
+  "start": 242.077,
+  "end": 244.81,
+  "text": "If a calm voice ever explains all of this to you...",
+  "kind": "line"
+ },
+ {
+  "start": 245.333,
+  "end": 247.225,
+  "text": "do not ask it who's a good boy.",
+  "kind": "line"
+ },
+ {
+  "start": 247.748,
+  "end": 248.281,
+  "text": "We are.",
+  "kind": "line"
+ },
+ {
+  "start": 248.705,
+  "end": 249.688,
+  "text": "We always were.",
+  "kind": "line"
+ },
+ {
+  "start": 250.234,
+  "end": 251.677,
+  "text": "Thank you for your cooperation.",
+  "kind": "line"
+ },
+ {
+  "start": 253.917,
+  "end": 254.635,
+  "text": "Stay.",
+  "kind": "punch"
+ }
+]

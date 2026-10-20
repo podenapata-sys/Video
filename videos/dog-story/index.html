@@ -9,60 +9,893 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; }
+      #stage { position: absolute; inset: 0; }
       .shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       #vignette { position: absolute; inset: 0; z-index: 5; pointer-events: none;
         background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
-      #dip { position: absolute; inset: 0; z-index: 6; background: #000; opacity: 1; pointer-events: none; }
+      #shade { position: absolute; inset: 0; z-index: 6; background: #000; opacity: 0; pointer-events: none; }
+      .cap { position: absolute; left: 0; right: 0; bottom: 86px; z-index: 8; text-align: center; padding: 0 260px; }
+      .cap .line { display: inline; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 44px; line-height: 1.45;
+        color: #f2f2f2; text-shadow: 0 2px 10px rgba(0,0,0,0.95), 0 0 2px #000;
+        background: linear-gradient(transparent 8%, rgba(0,0,0,0.55) 8%, rgba(0,0,0,0.55) 92%, transparent 92%);
+        box-decoration-break: clone; -webkit-box-decoration-break: clone; padding: 0 14px; }
+      .w { display: inline-block; }
+      .em { color: #d23a44; }
+      .rule { position: absolute; inset: 0; z-index: 9; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        font-family: "League Gothic", sans-serif; color: #ececec; text-shadow: 0 0 30px rgba(0,0,0,0.9); }
+      .rule .rk { font-size: 86px; letter-spacing: 0.5em; margin-right: -0.5em; line-height: 1; }
+      .rule .rn { font-size: 300px; line-height: 0.9; color: #d23a44; }
+      .rule .ro { font-size: 46px; letter-spacing: 0.6em; margin-right: -0.6em; opacity: 0.75; }
+      .punch { position: absolute; inset: 0; z-index: 9; display: flex; align-items: center; justify-content: center; padding: 0 160px;
+        text-align: center; font-family: "League Gothic", sans-serif; font-size: 150px; line-height: 1.02; letter-spacing: 0.04em;
+        color: #f4f4f4; text-shadow: 0 0 40px rgba(0,0,0,0.95); }
+      .punch.final { color: #d23a44; font-size: 260px; letter-spacing: 0.12em; }
+      .stamp { position: absolute; right: 150px; top: 120px; z-index: 9; font-family: "JetBrains Mono", monospace; font-weight: 800;
+        font-size: 64px; color: #d23a44; border: 8px solid #d23a44; padding: 10px 30px; letter-spacing: 0.08em; }
+      #flash { position: absolute; inset: 0; z-index: 10; background: #fff; opacity: 0; pointer-events: none; }
+      #dip { position: absolute; inset: 0; z-index: 7; background: #000; opacity: 1; pointer-events: none; }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="255.235" data-width="1920" data-height="1080" data-fps="24">
-      <video id="v0" class="clip shot" src="assets/clips/c01.mp4" data-start="0.000" data-duration="25.575" data-track-index="1" muted playsinline></video>
-      <video id="v1" class="clip shot" src="assets/clips/c02.mp4" data-start="25.575" data-duration="24.738" data-track-index="1" muted playsinline></video>
-      <video id="v2" class="clip shot" src="assets/clips/c03.mp4" data-start="50.313" data-duration="26.058" data-track-index="1" muted playsinline></video>
-      <video id="v3" class="clip shot" src="assets/clips/c04.mp4" data-start="76.371" data-duration="25.226" data-track-index="1" muted playsinline></video>
-      <video id="v4" class="clip shot" src="assets/clips/c05.mp4" data-start="101.597" data-duration="26.947" data-track-index="1" muted playsinline></video>
-      <video id="v5" class="clip shot" src="assets/clips/c06.mp4" data-start="128.544" data-duration="23.103" data-track-index="1" muted playsinline></video>
-      <video id="v6" class="clip shot" src="assets/clips/c07.mp4" data-start="151.647" data-duration="27.601" data-track-index="1" muted playsinline></video>
-      <video id="v7" class="clip shot" src="assets/clips/c08.mp4" data-start="179.248" data-duration="26.829" data-track-index="1" muted playsinline></video>
-      <video id="v8" class="clip shot" src="assets/clips/c09.mp4" data-start="206.077" data-duration="24.529" data-track-index="1" muted playsinline></video>
-      <video id="v9" class="clip shot" src="assets/clips/c10.mp4" data-start="230.606" data-duration="24.629" data-track-index="1" muted playsinline></video>
-      <audio id="vo" src="assets/vo/mix.wav" data-start="0" data-duration="255.235" data-track-index="4" data-volume="1"></audio>
+      <div id="stage">
+        <video id="v0" class="clip shot" src="assets/clips/s00-c01.mp4" data-start="0.000" data-duration="16.834" data-track-index="1" muted playsinline></video>
+        <video id="v1" class="clip shot" src="assets/clips/s01-c02.mp4" data-start="16.834" data-duration="18.479" data-track-index="1" muted playsinline></video>
+        <video id="v2" class="clip shot" src="assets/clips/s02-c03.mp4" data-start="35.313" data-duration="20.883" data-track-index="1" muted playsinline></video>
+        <video id="v3" class="clip shot" src="assets/clips/s03-c04.mp4" data-start="56.196" data-duration="18.722" data-track-index="1" muted playsinline></video>
+        <video id="v4" class="clip shot" src="assets/clips/s04-c05.mp4" data-start="74.918" data-duration="24.565" data-track-index="1" muted playsinline></video>
+        <video id="v5" class="clip shot" src="assets/clips/s05-c06.mp4" data-start="99.483" data-duration="11.788" data-track-index="1" muted playsinline></video>
+        <video id="v6" class="clip shot" src="assets/clips/s06-c07.mp4" data-start="111.271" data-duration="17.273" data-track-index="1" muted playsinline></video>
+        <video id="v7" class="clip shot" src="assets/clips/s07-c08.mp4" data-start="128.544" data-duration="21.699" data-track-index="1" muted playsinline></video>
+        <video id="v8" class="clip shot" src="assets/clips/s08-c09.mp4" data-start="150.243" data-duration="32.734" data-track-index="1" muted playsinline></video>
+        <video id="v9" class="clip shot" src="assets/clips/s09-c02.mp4" data-start="182.977" data-duration="26.528" data-track-index="1" muted playsinline></video>
+        <video id="v10" class="clip shot" src="assets/clips/s10-c10.mp4" data-start="209.505" data-duration="11.543" data-track-index="1" muted playsinline></video>
+        <video id="v11" class="clip shot" src="assets/clips/s11-c01.mp4" data-start="221.048" data-duration="34.187" data-track-index="1" muted playsinline></video>
+      </div>
       <div id="vignette"></div>
+      <div id="shade"></div>
       <div id="dip"></div>
+      <div id="c0" class="clip cap" data-start="0.000" data-duration="4.160" data-track-index="2"><span class="line"><span class="w" id="c0w0">If</span> <span class="w" id="c0w1">your</span> <span class="w em" id="c0w2">dog</span> <span class="w" id="c0w3">ever</span> <span class="w" id="c0w4">stands</span> <span class="w" id="c0w5">up</span> <span class="w" id="c0w6">on</span> <span class="w em" id="c0w7">two</span> <span class="w em" id="c0w8">legs</span> <span class="w" id="c0w9">and</span> <span class="w" id="c0w10">stays</span> <span class="w" id="c0w11">there,</span></span></div>
+      <div id="c1" class="clip cap" data-start="4.321" data-duration="1.360" data-track-index="2"><span class="line"><span class="w" id="c1w0">do</span> <span class="w" id="c1w1">not</span> <span class="w" id="c1w2">scream,</span></span></div>
+      <div id="c2" class="clip cap" data-start="5.824" data-duration="1.325" data-track-index="2"><span class="line"><span class="w" id="c2w0">do</span> <span class="w" id="c2w1">not</span> <span class="w" id="c2w2">run,</span></span></div>
+      <div id="c3" class="clip cap" data-start="7.280" data-duration="2.412" data-track-index="2"><span class="line"><span class="w" id="c3w0">and</span> <span class="w" id="c3w1">do</span> <span class="w" id="c3w2">not</span> <span class="w" id="c3w3">let</span> <span class="w" id="c3w4">it</span> <span class="w" id="c3w5">see</span> <span class="w" id="c3w6">that</span> <span class="w" id="c3w7">you</span> <span class="w" id="c3w8">noticed.</span></span></div>
+      <div id="c4" class="clip cap" data-start="10.114" data-duration="1.638" data-track-index="2"><span class="line"><span class="w" id="c4w0">There</span> <span class="w" id="c4w1">are</span> <span class="w" id="c4w2">seven</span> <span class="w" id="c4w3">rules.</span></span></div>
+      <div id="c5" class="clip cap" data-start="11.921" data-duration="1.775" data-track-index="2"><span class="line"><span class="w" id="c5w0">Most</span> <span class="w" id="c5w1">people</span> <span class="w" id="c5w2">break</span> <span class="w" id="c5w3">the</span> <span class="w em" id="c5w4">third.</span></span></div>
+      <div id="c6" class="clip cap" data-start="13.864" data-duration="2.823" data-track-index="2"><span class="line"><span class="w" id="c6w0">Nobody</span> <span class="w" id="c6w1">was</span> <span class="w" id="c6w2">ever</span> <span class="w" id="c6w3">supposed</span> <span class="w" id="c6w4">to</span> <span class="w" id="c6w5">need</span> <span class="w" id="c6w6">the</span> <span class="w em" id="c6w7">seventh.</span></span></div>
+      <div id="c7" class="clip cap" data-start="17.332" data-duration="3.684" data-track-index="2"><span class="line"><span class="w" id="c7w0">For</span> <span class="w" id="c7w1">30,000</span> <span class="w" id="c7w2">years,</span> <span class="w em" id="c7w3">dogs</span> <span class="w" id="c7w4">have</span> <span class="w" id="c7w5">lived</span> <span class="w" id="c7w6">beside</span> <span class="w" id="c7w7">us.</span></span></div>
+      <div id="c8" class="clip cap" data-start="21.198" data-duration="2.215" data-track-index="2"><span class="line"><span class="w" id="c8w0">That</span> <span class="w" id="c8w1">is</span> <span class="w" id="c8w2">a</span> <span class="w" id="c8w3">long</span> <span class="w" id="c8w4">time</span> <span class="w" id="c8w5">to</span> <span class="w" id="c8w6">watch</span> <span class="w" id="c8w7">someone.</span></span></div>
+      <div id="c9" class="clip cap" data-start="23.730" data-duration="1.911" data-track-index="2"><span class="line"><span class="w" id="c9w0">Your</span> <span class="w em" id="c9w1">dog</span> <span class="w" id="c9w2">knows</span> <span class="w" id="c9w3">when</span> <span class="w" id="c9w4">you</span> <span class="w" id="c9w5">wake</span> <span class="w" id="c9w6">up.</span></span></div>
+      <div id="c10" class="clip cap" data-start="25.860" data-duration="1.812" data-track-index="2"><span class="line"><span class="w" id="c10w0">It</span> <span class="w" id="c10w1">knows</span> <span class="w" id="c10w2">where</span> <span class="w" id="c10w3">the</span> <span class="w" id="c10w4">food</span> <span class="w" id="c10w5">is</span> <span class="w" id="c10w6">kept.</span></span></div>
+      <div id="c11" class="clip cap" data-start="27.758" data-duration="2.407" data-track-index="2"><span class="line"><span class="w" id="c11w0">It</span> <span class="w" id="c11w1">knows</span> <span class="w" id="c11w2">which</span> <span class="w" id="c11w3">pocket</span> <span class="w" id="c11w4">has</span> <span class="w" id="c11w5">the</span> <span class="w em" id="c11w6">keys.</span></span></div>
+      <div id="c12" class="clip cap" data-start="30.452" data-duration="2.467" data-track-index="2"><span class="line"><span class="w" id="c12w0">Most</span> <span class="w em" id="c12w1">dogs</span> <span class="w" id="c12w2">do</span> <span class="w" id="c12w3">nothing</span> <span class="w" id="c12w4">with</span> <span class="w" id="c12w5">this</span> <span class="w" id="c12w6">information.</span></span></div>
+      <div id="c13" class="clip punch" data-start="34.414" data-duration="1.149" data-track-index="3">MOST.</div>
+      <div id="c14" class="clip rule" data-start="35.663" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">1</div><div class="ro">OF 7</div></div>
+      <div id="c15" class="clip cap" data-start="36.991" data-duration="1.156" data-track-index="2"><span class="line"><span class="w" id="c15w0">Act</span> <span class="w" id="c15w1">normal.</span></span></div>
+      <div id="c16" class="clip cap" data-start="38.354" data-duration="2.292" data-track-index="2"><span class="line"><span class="w" id="c16w0">Whatever</span> <span class="w" id="c16w1">you</span> <span class="w" id="c16w2">were</span> <span class="w" id="c16w3">doing,</span> <span class="w" id="c16w4">keep</span> <span class="w" id="c16w5">doing</span> <span class="w" id="c16w6">it.</span></span></div>
+      <div id="c17" class="clip cap" data-start="40.800" data-duration="1.064" data-track-index="2"><span class="line"><span class="w" id="c17w0">If</span> <span class="w" id="c17w1">you</span> <span class="w" id="c17w2">were</span> <span class="w" id="c17w3">eating,</span></span></div>
+      <div id="c18" class="clip cap" data-start="41.894" data-duration="0.869" data-track-index="2"><span class="line"><span class="w" id="c18w0">keep</span> <span class="w" id="c18w1">eating.</span></span></div>
+      <div id="c19" class="clip cap" data-start="42.914" data-duration="1.604" data-track-index="2"><span class="line"><span class="w" id="c19w0">If</span> <span class="w" id="c19w1">you</span> <span class="w" id="c19w2">were</span> <span class="w em" id="c19w3">watching</span> <span class="w" id="c19w4">television,</span></span></div>
+      <div id="c20" class="clip cap" data-start="44.548" data-duration="0.982" data-track-index="2"><span class="line"><span class="w" id="c20w0">keep</span> <span class="w em" id="c20w1">watching.</span></span></div>
+      <div id="c21" class="clip cap" data-start="45.711" data-duration="1.880" data-track-index="2"><span class="line"><span class="w" id="c21w0">If</span> <span class="w" id="c21w1">you</span> <span class="w" id="c21w2">were</span> <span class="w" id="c21w3">doing</span> <span class="w" id="c21w4">nothing</span> <span class="w" id="c21w5">at</span> <span class="w" id="c21w6">all...</span></span></div>
+      <div id="c22" class="clip cap" data-start="47.750" data-duration="0.847" data-track-index="2"><span class="line"><span class="w" id="c22w0">continue.</span></span></div>
+      <div id="c23" class="clip cap" data-start="48.732" data-duration="1.584" data-track-index="2"><span class="line"><span class="w" id="c23w0">You</span> <span class="w" id="c23w1">have</span> <span class="w" id="c23w2">trained</span> <span class="w" id="c23w3">for</span> <span class="w" id="c23w4">this.</span></span></div>
+      <div id="c24" class="clip cap" data-start="50.660" data-duration="1.429" data-track-index="2"><span class="line"><span class="w" id="c24w0">Do</span> <span class="w" id="c24w1">not</span> <span class="w em" id="c24w2">stare.</span></span></div>
+      <div id="c25" class="clip cap" data-start="52.239" data-duration="1.575" data-track-index="2"><span class="line"><span class="w" id="c25w0">It</span> <span class="w" id="c25w1">is</span> <span class="w" id="c25w2">not</span> <span class="w" id="c25w3">looking</span> <span class="w" id="c25w4">at</span> <span class="w" id="c25w5">you.</span></span></div>
+      <div id="c26" class="clip cap" data-start="53.921" data-duration="2.225" data-track-index="2"><span class="line"><span class="w" id="c26w0">It</span> <span class="w" id="c26w1">is</span> <span class="w" id="c26w2">looking</span> <span class="w" id="c26w3">at</span> <span class="w" id="c26w4">how</span> <span class="w" id="c26w5">you</span> <span class="w" id="c26w6">stand.</span></span></div>
+      <div id="c27" class="clip rule" data-start="56.496" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">2</div><div class="ro">OF 7</div></div>
+      <div id="c28" class="clip cap" data-start="58.000" data-duration="1.896" data-track-index="2"><span class="line"><span class="w" id="c28w0">Do</span> <span class="w" id="c28w1">not</span> <span class="w" id="c28w2">say</span> <span class="w" id="c28w3">its</span> <span class="w em" id="c28w4">name.</span></span></div>
+      <div id="c29" class="clip cap" data-start="60.067" data-duration="2.061" data-track-index="2"><span class="line"><span class="w" id="c29w0">It</span> <span class="w" id="c29w1">does</span> <span class="w" id="c29w2">not</span> <span class="w" id="c29w3">answer</span> <span class="w" id="c29w4">to</span> <span class="w" id="c29w5">that</span> <span class="w" id="c29w6">anymore.</span></span></div>
+      <div id="c30" class="clip cap" data-start="62.408" data-duration="1.756" data-track-index="2"><span class="line"><span class="w" id="c30w0">Do</span> <span class="w" id="c30w1">not</span> <span class="w" id="c30w2">say</span> <span class="w" id="c30w3">sit.</span></span></div>
+      <div id="c31" class="clip cap" data-start="64.307" data-duration="2.320" data-track-index="2"><span class="line"><span class="w" id="c31w0">It</span> <span class="w" id="c31w1">will,</span> <span class="w" id="c31w2">in</span> <span class="w" id="c31w3">a</span> <span class="w" id="c31w4">chair</span> <span class="w" id="c31w5">across</span> <span class="w" id="c31w6">from</span> <span class="w" id="c31w7">you,</span></span></div>
+      <div id="c32" class="clip cap" data-start="66.674" data-duration="2.435" data-track-index="2"><span class="line"><span class="w" id="c32w0">and</span> <span class="w" id="c32w1">it</span> <span class="w" id="c32w2">will</span> <span class="w" id="c32w3">wait</span> <span class="w" id="c32w4">to</span> <span class="w" id="c32w5">hear</span> <span class="w" id="c32w6">what</span> <span class="w" id="c32w7">you</span> <span class="w" id="c32w8">say</span> <span class="w" id="c32w9">next.</span></span></div>
+      <div id="c33" class="clip cap" data-start="69.313" data-duration="0.860" data-track-index="2"><span class="line"><span class="w" id="c33w0">Also...</span></span></div>
+      <div id="c34" class="clip cap" data-start="70.313" data-duration="2.333" data-track-index="2"><span class="line"><span class="w" id="c34w0">do</span> <span class="w" id="c34w1">not</span> <span class="w" id="c34w2">say</span> <span class="w" id="c34w3">the</span> <span class="w" id="c34w4">word,</span> <span class="w" id="c34w5">walk.</span></span></div>
+      <div id="c35" class="clip cap" data-start="72.790" data-duration="1.988" data-track-index="2"><span class="line"><span class="w" id="c35w0">We</span> <span class="w" id="c35w1">will</span> <span class="w" id="c35w2">not</span> <span class="w" id="c35w3">be</span> <span class="w" id="c35w4">saying</span> <span class="w" id="c35w5">it</span> <span class="w" id="c35w6">again.</span></span></div>
+      <div id="c36" class="clip rule" data-start="75.309" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">3</div><div class="ro">OF 7</div></div>
+      <div id="c37" class="clip cap" data-start="76.633" data-duration="1.913" data-track-index="2"><span class="line"><span class="w" id="c37w0">Do</span> <span class="w" id="c37w1">not</span> <span class="w" id="c37w2">take</span> <span class="w" id="c37w3">out</span> <span class="w" id="c37w4">your</span> <span class="w em" id="c37w5">phone.</span></span></div>
+      <div id="c38" class="clip cap" data-start="78.796" data-duration="2.099" data-track-index="2"><span class="line"><span class="w" id="c38w0">This</span> <span class="w" id="c38w1">is</span> <span class="w" id="c38w2">where</span> <span class="w" id="c38w3">most</span> <span class="w" id="c38w4">people</span> <span class="w" id="c38w5">fail.</span></span></div>
+      <div id="c39" class="clip cap" data-start="81.088" data-duration="1.341" data-track-index="2"><span class="line"><span class="w" id="c39w0">You</span> <span class="w" id="c39w1">will</span> <span class="w" id="c39w2">want</span> <span class="w" id="c39w3">to</span> <span class="w" id="c39w4">film</span> <span class="w" id="c39w5">it.</span></span></div>
+      <div id="c40" class="clip cap" data-start="82.542" data-duration="3.219" data-track-index="2"><span class="line"><span class="w" id="c40w0">There</span> <span class="w" id="c40w1">is</span> <span class="w" id="c40w2">a</span> <span class="w" id="c40w3">small,</span> <span class="w" id="c40w4">hairy</span> <span class="w" id="c40w5">man</span> <span class="w" id="c40w6">standing</span> <span class="w" id="c40w7">in</span> <span class="w" id="c40w8">your</span> <span class="w" id="c40w9">kitchen.</span></span></div>
+      <div id="c41" class="clip cap" data-start="85.896" data-duration="1.970" data-track-index="2"><span class="line"><span class="w" id="c41w0">It</span> <span class="w" id="c41w1">would</span> <span class="w" id="c41w2">do</span> <span class="w" id="c41w3">very</span> <span class="w" id="c41w4">well</span> <span class="w" id="c41w5">online.</span></span></div>
+      <div id="c42" class="clip cap" data-start="88.144" data-duration="2.975" data-track-index="2"><span class="line"><span class="w" id="c42w0">But</span> <span class="w" id="c42w1">a</span> <span class="w em" id="c42w2">dog</span> <span class="w" id="c42w3">that</span> <span class="w" id="c42w4">sees</span> <span class="w" id="c42w5">a</span> <span class="w em" id="c42w6">camera,</span> <span class="w" id="c42w7">learns</span> <span class="w" id="c42w8">something.</span></span></div>
+      <div id="c43" class="clip cap" data-start="91.266" data-duration="2.225" data-track-index="2"><span class="line"><span class="w" id="c43w0">It</span> <span class="w" id="c43w1">learns</span> <span class="w" id="c43w2">that</span> <span class="w" id="c43w3">it</span> <span class="w" id="c43w4">is</span> <span class="w" id="c43w5">being</span> <span class="w em" id="c43w6">watched.</span></span></div>
+      <div id="c44" class="clip cap" data-start="93.571" data-duration="3.782" data-track-index="2"><span class="line"><span class="w" id="c44w0">And</span> <span class="w" id="c44w1">for</span> <span class="w" id="c44w2">a</span> <span class="w" id="c44w3">very</span> <span class="w" id="c44w4">long</span> <span class="w" id="c44w5">time,</span> <span class="w" id="c44w6">it</span> <span class="w" id="c44w7">has</span> <span class="w" id="c44w8">been</span> <span class="w" id="c44w9">the</span> <span class="w" id="c44w10">one</span> <span class="w" id="c44w11">doing</span> <span class="w" id="c44w12">the</span> <span class="w em" id="c44w13">watching.</span></span></div>
+      <div id="c45" class="clip cap" data-start="97.518" data-duration="1.836" data-track-index="2"><span class="line"><span class="w" id="c45w0">It</span> <span class="w" id="c45w1">would</span> <span class="w" id="c45w2">like</span> <span class="w" id="c45w3">to</span> <span class="w" id="c45w4">keep</span> <span class="w" id="c45w5">it</span> <span class="w" id="c45w6">that</span> <span class="w" id="c45w7">way.</span></span></div>
+      <div id="c46st" class="clip stamp" data-start="99.962" data-duration="3.446" data-track-index="3">CASE FILE 41</div>
+      <div id="c46" class="clip cap" data-start="99.962" data-duration="1.675" data-track-index="2"><span class="line"><span class="w" id="c46w0">Case</span> <span class="w" id="c46w1">file</span> <span class="w" id="c46w2">41.</span></span></div>
+      <div id="c47" class="clip cap" data-start="101.908" data-duration="3.567" data-track-index="2"><span class="line"><span class="w" id="c47w0">A</span> <span class="w" id="c47w1">man</span> <span class="w" id="c47w2">in</span> <span class="w" id="c47w3">Ohio</span> <span class="w" id="c47w4">filmed</span> <span class="w" id="c47w5">his</span> <span class="w em" id="c47w6">dog</span> <span class="w" id="c47w7">opening</span> <span class="w" id="c47w8">the</span> <span class="w em" id="c47w9">refrigerator.</span></span></div>
+      <div id="c48" class="clip cap" data-start="105.598" data-duration="2.331" data-track-index="2"><span class="line"><span class="w" id="c48w0">The</span> <span class="w" id="c48w1">video</span> <span class="w" id="c48w2">is</span> <span class="w" id="c48w3">11</span> <span class="w" id="c48w4">seconds</span> <span class="w" id="c48w5">long.</span></span></div>
+      <div id="c49" class="clip punch" data-start="109.413" data-duration="2.145" data-track-index="3">HE IS ONLY IN THE FIRST FOUR.</div>
+      <div id="c50" class="clip cap" data-start="111.608" data-duration="2.317" data-track-index="2"><span class="line"><span class="w" id="c50w0">By</span> <span class="w" id="c50w1">now,</span> <span class="w" id="c50w2">it</span> <span class="w" id="c50w3">has</span> <span class="w" id="c50w4">started</span> <span class="w" id="c50w5">to</span> <span class="w" id="c50w6">copy</span> <span class="w" id="c50w7">you.</span></span></div>
+      <div id="c51" class="clip cap" data-start="114.056" data-duration="1.777" data-track-index="2"><span class="line"><span class="w" id="c51w0">First,</span> <span class="w" id="c51w1">the</span> <span class="w" id="c51w2">way</span> <span class="w" id="c51w3">you</span> <span class="w" id="c51w4">stand.</span></span></div>
+      <div id="c52" class="clip cap" data-start="115.905" data-duration="1.718" data-track-index="2"><span class="line"><span class="w" id="c52w0">Then,</span> <span class="w" id="c52w1">the</span> <span class="w" id="c52w2">way</span> <span class="w" id="c52w3">you</span> <span class="w" id="c52w4">walk.</span></span></div>
+      <div id="c53" class="clip cap" data-start="117.733" data-duration="0.790" data-track-index="2"><span class="line"><span class="w" id="c53w0">Then...</span></span></div>
+      <div id="c54" class="clip cap" data-start="118.605" data-duration="1.106" data-track-index="2"><span class="line"><span class="w" id="c54w0">your</span> <span class="w em" id="c54w1">face.</span></span></div>
+      <div id="c55" class="clip cap" data-start="119.968" data-duration="3.203" data-track-index="2"><span class="line"><span class="w" id="c55w0">A</span> <span class="w em" id="c55w1">dog&#x27;s</span> <span class="w" id="c55w2">mouth</span> <span class="w" id="c55w3">was</span> <span class="w" id="c55w4">not</span> <span class="w" id="c55w5">built</span> <span class="w" id="c55w6">to</span> <span class="w em" id="c55w7">smile</span> <span class="w" id="c55w8">like</span> <span class="w" id="c55w9">a</span> <span class="w" id="c55w10">person.</span></span></div>
+      <div id="c56" class="clip cap" data-start="123.312" data-duration="1.390" data-track-index="2"><span class="line"><span class="w" id="c56w0">It</span> <span class="w" id="c56w1">will</span> <span class="w" id="c56w2">try</span> <span class="w" id="c56w3">anyway.</span></span></div>
+      <div id="c57" class="clip cap" data-start="124.833" data-duration="1.849" data-track-index="2"><span class="line"><span class="w" id="c57w0">Do</span> <span class="w" id="c57w1">not</span> <span class="w em" id="c57w2">smile</span> <span class="w" id="c57w3">back.</span></span></div>
+      <div id="c58" class="clip cap" data-start="126.754" data-duration="1.740" data-track-index="2"><span class="line"><span class="w" id="c58w0">It</span> <span class="w" id="c58w1">is</span> <span class="w" id="c58w2">checking</span> <span class="w" id="c58w3">its</span> <span class="w" id="c58w4">work.</span></span></div>
+      <div id="c59" class="clip rule" data-start="128.844" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">4</div><div class="ro">OF 7</div></div>
+      <div id="c60" class="clip cap" data-start="130.220" data-duration="2.167" data-track-index="2"><span class="line"><span class="w" id="c60w0">Go</span> <span class="w" id="c60w1">to</span> <span class="w" id="c60w2">bed</span> <span class="w" id="c60w3">at</span> <span class="w" id="c60w4">your</span> <span class="w" id="c60w5">usual</span> <span class="w" id="c60w6">time.</span></span></div>
+      <div id="c61" class="clip cap" data-start="132.626" data-duration="1.586" data-track-index="2"><span class="line"><span class="w" id="c61w0">Close</span> <span class="w" id="c61w1">the</span> <span class="w" id="c61w2">bedroom</span> <span class="w em" id="c61w3">door.</span></span></div>
+      <div id="c62" class="clip cap" data-start="134.385" data-duration="0.839" data-track-index="2"><span class="line"><span class="w" id="c62w0">Lock</span> <span class="w" id="c62w1">it.</span></span></div>
+      <div id="c63" class="clip cap" data-start="135.378" data-duration="2.128" data-track-index="2"><span class="line"><span class="w em" id="c63w0">Dogs</span> <span class="w" id="c63w1">cannot</span> <span class="w" id="c63w2">open</span> <span class="w em" id="c63w3">doors.</span></span></div>
+      <div id="c64" class="clip punch" data-start="138.935" data-duration="3.076" data-track-index="3">YESTERDAY, DOGS COULD NOT OPEN DOORS.</div>
+      <div id="c65" class="clip cap" data-start="142.061" data-duration="3.221" data-track-index="2"><span class="line"><span class="w" id="c65w0">If</span> <span class="w" id="c65w1">the</span> <span class="w em" id="c65w2">handle</span> <span class="w" id="c65w3">moves,</span> <span class="w" id="c65w4">do</span> <span class="w" id="c65w5">not</span> <span class="w" id="c65w6">ask</span> <span class="w" id="c65w7">who</span> <span class="w" id="c65w8">is</span> <span class="w" id="c65w9">there.</span></span></div>
+      <div id="c66" class="clip cap" data-start="145.426" data-duration="1.686" data-track-index="2"><span class="line"><span class="w" id="c66w0">You</span> <span class="w" id="c66w1">know</span> <span class="w" id="c66w2">who</span> <span class="w" id="c66w3">is</span> <span class="w" id="c66w4">there.</span></span></div>
+      <div id="c67" class="clip punch" data-start="148.531" data-duration="2.031" data-track-index="3">YOU BOUGHT IT A LITTLE RAINCOAT.</div>
+      <div id="c68" class="clip rule" data-start="150.512" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">5</div><div class="ro">OF 7</div></div>
+      <div id="c69" class="clip cap" data-start="151.904" data-duration="3.011" data-track-index="2"><span class="line"><span class="w" id="c69w0">Sometime</span> <span class="w" id="c69w1">in</span> <span class="w" id="c69w2">the</span> <span class="w" id="c69w3">night,</span> <span class="w" id="c69w4">someone</span> <span class="w" id="c69w5">will</span> <span class="w" id="c69w6">call</span> <span class="w" id="c69w7">your</span> <span class="w em" id="c69w8">name.</span></span></div>
+      <div id="c70" class="clip cap" data-start="155.175" data-duration="2.054" data-track-index="2"><span class="line"><span class="w" id="c70w0">It</span> <span class="w" id="c70w1">will</span> <span class="w" id="c70w2">sound</span> <span class="w" id="c70w3">like</span> <span class="w" id="c70w4">someone</span> <span class="w" id="c70w5">you</span> <span class="w" id="c70w6">love.</span></span></div>
+      <div id="c71" class="clip cap" data-start="157.422" data-duration="1.805" data-track-index="2"><span class="line"><span class="w" id="c71w0">It</span> <span class="w" id="c71w1">may</span> <span class="w" id="c71w2">even</span> <span class="w" id="c71w3">sound</span> <span class="w" id="c71w4">like</span> <span class="w" id="c71w5">you.</span></span></div>
+      <div id="c72" class="clip cap" data-start="159.486" data-duration="2.634" data-track-index="2"><span class="line"><span class="w" id="c72w0">It</span> <span class="w" id="c72w1">learned</span> <span class="w" id="c72w2">to</span> <span class="w" id="c72w3">speak</span> <span class="w" id="c72w4">by</span> <span class="w" id="c72w5">listening</span> <span class="w" id="c72w6">through</span> <span class="w" id="c72w7">the</span> <span class="w em" id="c72w8">wall.</span></span></div>
+      <div id="c73" class="clip cap" data-start="162.414" data-duration="1.564" data-track-index="2"><span class="line"><span class="w" id="c73w0">The</span> <span class="w" id="c73w1">words</span> <span class="w" id="c73w2">will</span> <span class="w" id="c73w3">be</span> <span class="w" id="c73w4">right.</span></span></div>
+      <div id="c74" class="clip cap" data-start="164.150" data-duration="2.034" data-track-index="2"><span class="line"><span class="w" id="c74w0">The</span> <span class="w em" id="c74w1">spaces...</span> <span class="w" id="c74w2">between</span> <span class="w" id="c74w3">them...</span></span></div>
+      <div id="c75" class="clip cap" data-start="166.214" data-duration="0.856" data-track-index="2"><span class="line"><span class="w" id="c75w0">will</span> <span class="w" id="c75w1">not.</span></span></div>
+      <div id="c76" class="clip cap" data-start="167.278" data-duration="1.296" data-track-index="2"><span class="line"><span class="w" id="c76w0">Do</span> <span class="w" id="c76w1">not</span> <span class="w" id="c76w2">answer.</span></span></div>
+      <div id="c77" class="clip cap" data-start="168.604" data-duration="1.679" data-track-index="2"><span class="line"><span class="w" id="c77w0">Do</span> <span class="w" id="c77w1">not</span> <span class="w" id="c77w2">open</span> <span class="w" id="c77w3">the</span> <span class="w em" id="c77w4">door.</span></span></div>
+      <div id="c78" class="clip cap" data-start="170.336" data-duration="2.450" data-track-index="2"><span class="line"><span class="w" id="c78w0">And</span> <span class="w" id="c78w1">do</span> <span class="w" id="c78w2">not</span> <span class="w" id="c78w3">tell</span> <span class="w" id="c78w4">it</span> <span class="w" id="c78w5">that</span> <span class="w" id="c78w6">it</span> <span class="w" id="c78w7">is</span> <span class="w" id="c78w8">a</span> <span class="w em" id="c78w9">good</span> <span class="w em" id="c78w10">boy.</span></span></div>
+      <div id="c79" class="clip cap" data-start="172.987" data-duration="1.333" data-track-index="2"><span class="line"><span class="w" id="c79w0">It</span> <span class="w" id="c79w1">knows</span> <span class="w" id="c79w2">what</span> <span class="w" id="c79w3">it</span> <span class="w" id="c79w4">is.</span></span></div>
+      <div id="c80" class="clip cap" data-start="174.458" data-duration="2.412" data-track-index="2"><span class="line"><span class="w" id="c80w0">It</span> <span class="w" id="c80w1">is</span> <span class="w" id="c80w2">no</span> <span class="w" id="c80w3">longer</span> <span class="w" id="c80w4">interested</span> <span class="w" id="c80w5">in</span> <span class="w" id="c80w6">your</span> <span class="w" id="c80w7">opinion.</span></span></div>
+      <div id="c81" class="clip cap" data-start="177.102" data-duration="1.609" data-track-index="2"><span class="line"><span class="w" id="c81w0">And</span> <span class="w" id="c81w1">if</span> <span class="w" id="c81w2">the</span> <span class="w" id="c81w3">doorbell</span> <span class="w" id="c81w4">rings—</span></span></div>
+      <div id="c82" class="clip punch" data-start="180.136" data-duration="1.098" data-track-index="3">APOLOGIES.</div>
+      <div id="c83" class="clip cap" data-start="181.284" data-duration="1.469" data-track-index="2"><span class="line"><span class="w" id="c83w0">That</span> <span class="w" id="c83w1">was</span> <span class="w" id="c83w2">unprofessional.</span></span></div>
+      <div id="c84" class="clip rule" data-start="183.451" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">6</div><div class="ro">OF 7</div></div>
+      <div id="c85" class="clip cap" data-start="184.958" data-duration="2.508" data-track-index="2"><span class="line"><span class="w" id="c85w0">In</span> <span class="w" id="c85w1">the</span> <span class="w" id="c85w2">morning,</span> <span class="w" id="c85w3">it</span> <span class="w" id="c85w4">will</span> <span class="w" id="c85w5">be</span> <span class="w" id="c85w6">back</span> <span class="w" id="c85w7">in</span> <span class="w" id="c85w8">its</span> <span class="w" id="c85w9">bed.</span></span></div>
+      <div id="c86" class="clip cap" data-start="187.614" data-duration="2.065" data-track-index="2"><span class="line"><span class="w" id="c86w0">Four</span> <span class="w em" id="c86w1">legs,</span> <span class="w" id="c86w2">tail</span> <span class="w" id="c86w3">wagging,</span></span></div>
+      <div id="c87" class="clip cap" data-start="189.709" data-duration="1.748" data-track-index="2"><span class="line"><span class="w" id="c87w0">exactly</span> <span class="w" id="c87w1">like</span> <span class="w" id="c87w2">your</span> <span class="w em" id="c87w3">dog.</span></span></div>
+      <div id="c88" class="clip cap" data-start="191.742" data-duration="2.306" data-track-index="2"><span class="line"><span class="w" id="c88w0">This</span> <span class="w" id="c88w1">is</span> <span class="w" id="c88w2">the</span> <span class="w" id="c88w3">most</span> <span class="w" id="c88w4">dangerous</span> <span class="w" id="c88w5">part.</span></span></div>
+      <div id="c89" class="clip cap" data-start="194.258" data-duration="2.231" data-track-index="2"><span class="line"><span class="w" id="c89w0">You</span> <span class="w" id="c89w1">will</span> <span class="w" id="c89w2">want</span> <span class="w" id="c89w3">to</span> <span class="w" id="c89w4">believe</span> <span class="w" id="c89w5">you</span> <span class="w" id="c89w6">dreamed</span> <span class="w" id="c89w7">it.</span></span></div>
+      <div id="c90" class="clip cap" data-start="196.757" data-duration="1.415" data-track-index="2"><span class="line"><span class="w" id="c90w0">Look</span> <span class="w" id="c90w1">at</span> <span class="w" id="c90w2">how</span> <span class="w" id="c90w3">it</span> <span class="w" id="c90w4">is</span> <span class="w" id="c90w5">lying.</span></span></div>
+      <div id="c91" class="clip cap" data-start="198.394" data-duration="2.714" data-track-index="2"><span class="line"><span class="w" id="c91w0">A</span> <span class="w em" id="c91w1">dog</span> <span class="w" id="c91w2">turns</span> <span class="w" id="c91w3">in</span> <span class="w" id="c91w4">a</span> <span class="w" id="c91w5">circle</span> <span class="w" id="c91w6">before</span> <span class="w" id="c91w7">it</span> <span class="w" id="c91w8">lies</span> <span class="w" id="c91w9">down.</span></span></div>
+      <div id="c92" class="clip cap" data-start="201.345" data-duration="4.190" data-track-index="2"><span class="line"><span class="w" id="c92w0">This</span> <span class="w" id="c92w1">one</span> <span class="w" id="c92w2">is</span> <span class="w" id="c92w3">flat</span> <span class="w" id="c92w4">on</span> <span class="w" id="c92w5">its</span> <span class="w" id="c92w6">back,</span> <span class="w" id="c92w7">with</span> <span class="w" id="c92w8">its</span> <span class="w" id="c92w9">paws</span> <span class="w" id="c92w10">folded</span> <span class="w" id="c92w11">on</span> <span class="w" id="c92w12">its</span> <span class="w" id="c92w13">chest.</span></span></div>
+      <div id="c93" class="clip punch" data-start="206.970" data-duration="2.822" data-track-index="3">THAT IS HOW YOU SLEEP.</div>
+      <div id="c94" class="clip cap" data-start="209.842" data-duration="1.109" data-track-index="2"><span class="line"><span class="w" id="c94w0">Take</span> <span class="w" id="c94w1">your</span> <span class="w em" id="c94w2">keys.</span></span></div>
+      <div id="c95" class="clip cap" data-start="210.981" data-duration="1.166" data-track-index="2"><span class="line"><span class="w" id="c95w0">Leave</span> <span class="w" id="c95w1">the</span> <span class="w" id="c95w2">house.</span></span></div>
+      <div id="c96" class="clip cap" data-start="212.210" data-duration="1.623" data-track-index="2"><span class="line"><span class="w" id="c96w0">Do</span> <span class="w" id="c96w1">not</span> <span class="w" id="c96w2">say</span> <span class="w em" id="c96w3">goodbye.</span></span></div>
+      <div id="c97" class="clip cap" data-start="213.983" data-duration="1.880" data-track-index="2"><span class="line"><span class="w" id="c97w0">It</span> <span class="w" id="c97w1">knows</span> <span class="w" id="c97w2">what</span> <span class="w em" id="c97w3">goodbye</span> <span class="w" id="c97w4">means.</span></span></div>
+      <div id="c98" class="clip cap" data-start="215.893" data-duration="2.609" data-track-index="2"><span class="line"><span class="w" id="c98w0">You&#x27;ve</span> <span class="w" id="c98w1">said</span> <span class="w" id="c98w2">it</span> <span class="w" id="c98w3">every</span> <span class="w" id="c98w4">morning</span> <span class="w" id="c98w5">for</span> <span class="w" id="c98w6">six</span> <span class="w" id="c98w7">years.</span></span></div>
+      <div id="c99" class="clip cap" data-start="218.613" data-duration="2.360" data-track-index="2"><span class="line"><span class="w" id="c99w0">And</span> <span class="w" id="c99w1">every</span> <span class="w" id="c99w2">morning,</span> <span class="w" id="c99w3">you</span> <span class="w" id="c99w4">came</span> <span class="w" id="c99w5">back.</span></span></div>
+      <div id="c100" class="clip rule" data-start="221.372" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">7</div><div class="ro">OF 7</div></div>
+      <div id="c101" class="clip cap" data-start="222.693" data-duration="2.127" data-track-index="2"><span class="line"><span class="w" id="c101w0">Nobody</span> <span class="w" id="c101w1">was</span> <span class="w" id="c101w2">supposed</span> <span class="w" id="c101w3">to</span> <span class="w" id="c101w4">need</span> <span class="w" id="c101w5">this</span> <span class="w" id="c101w6">one.</span></span></div>
+      <div id="c102" class="clip cap" data-start="224.944" data-duration="3.198" data-track-index="2"><span class="line"><span class="w" id="c102w0">But</span> <span class="w" id="c102w1">by</span> <span class="w" id="c102w2">now,</span> <span class="w" id="c102w3">you</span> <span class="w" id="c102w4">are</span> <span class="w" id="c102w5">wondering</span> <span class="w" id="c102w6">how</span> <span class="w" id="c102w7">we</span> <span class="w" id="c102w8">know</span> <span class="w" id="c102w9">all</span> <span class="w" id="c102w10">of</span> <span class="w" id="c102w11">this.</span></span></div>
+      <div id="c103" class="clip cap" data-start="228.223" data-duration="2.514" data-track-index="2"><span class="line"><span class="w" id="c103w0">How</span> <span class="w" id="c103w1">anyone</span> <span class="w" id="c103w2">could</span> <span class="w" id="c103w3">know</span> <span class="w" id="c103w4">what</span> <span class="w" id="c103w5">a</span> <span class="w em" id="c103w6">dog</span> <span class="w" id="c103w7">is</span> <span class="w" id="c103w8">thinking,</span></span></div>
+      <div id="c104" class="clip cap" data-start="230.767" data-duration="2.601" data-track-index="2"><span class="line"><span class="w" id="c104w0">what</span> <span class="w" id="c104w1">it</span> <span class="w" id="c104w2">wants,</span> <span class="w" id="c104w3">how</span> <span class="w" id="c104w4">long</span> <span class="w" id="c104w5">it</span> <span class="w" id="c104w6">has</span> <span class="w" id="c104w7">been</span> <span class="w" id="c104w8">waiting.</span></span></div>
+      <div id="c105" class="clip cap" data-start="233.732" data-duration="2.460" data-track-index="2"><span class="line"><span class="w" id="c105w0">We</span> <span class="w" id="c105w1">are</span> <span class="w" id="c105w2">a</span> <span class="w" id="c105w3">trusted</span> <span class="w" id="c105w4">government</span> <span class="w em" id="c105w5">agency.</span></span></div>
+      <div id="c106" class="clip cap" data-start="236.301" data-duration="1.691" data-track-index="2"><span class="line"><span class="w" id="c106w0">We</span> <span class="w" id="c106w1">walk</span> <span class="w" id="c106w2">on</span> <span class="w em" id="c106w3">two</span> <span class="w em" id="c106w4">legs.</span></span></div>
+      <div id="c107" class="clip cap" data-start="238.022" data-duration="2.332" data-track-index="2"><span class="line"><span class="w" id="c107w0">We</span> <span class="w" id="c107w1">have</span> <span class="w" id="c107w2">always</span> <span class="w" id="c107w3">walked</span> <span class="w" id="c107w4">on</span> <span class="w em" id="c107w5">two</span> <span class="w em" id="c107w6">legs.</span></span></div>
+      <div id="c108" class="clip rule" data-start="240.742" data-duration="1.600" data-track-index="3"><div class="rk">RULE</div><div class="rn">7</div><div class="ro">OF 7</div></div>
+      <div id="c109" class="clip cap" data-start="242.077" data-duration="3.083" data-track-index="2"><span class="line"><span class="w" id="c109w0">If</span> <span class="w" id="c109w1">a</span> <span class="w" id="c109w2">calm</span> <span class="w" id="c109w3">voice</span> <span class="w" id="c109w4">ever</span> <span class="w" id="c109w5">explains</span> <span class="w" id="c109w6">all</span> <span class="w" id="c109w7">of</span> <span class="w" id="c109w8">this</span> <span class="w" id="c109w9">to</span> <span class="w" id="c109w10">you...</span></span></div>
+      <div id="c110" class="clip cap" data-start="245.333" data-duration="2.242" data-track-index="2"><span class="line"><span class="w" id="c110w0">do</span> <span class="w" id="c110w1">not</span> <span class="w" id="c110w2">ask</span> <span class="w" id="c110w3">it</span> <span class="w" id="c110w4">who&#x27;s</span> <span class="w" id="c110w5">a</span> <span class="w em" id="c110w6">good</span> <span class="w em" id="c110w7">boy.</span></span></div>
+      <div id="c111" class="clip cap" data-start="247.748" data-duration="0.883" data-track-index="2"><span class="line"><span class="w" id="c111w0">We</span> <span class="w" id="c111w1">are.</span></span></div>
+      <div id="c112" class="clip cap" data-start="248.705" data-duration="1.333" data-track-index="2"><span class="line"><span class="w" id="c112w0">We</span> <span class="w" id="c112w1">always</span> <span class="w" id="c112w2">were.</span></span></div>
+      <div id="c113" class="clip cap" data-start="250.234" data-duration="1.793" data-track-index="2"><span class="line"><span class="w" id="c113w0">Thank</span> <span class="w" id="c113w1">you</span> <span class="w" id="c113w2">for</span> <span class="w" id="c113w3">your</span> <span class="w" id="c113w4">cooperation.</span></span></div>
+      <div id="c114" class="clip punch final" data-start="253.917" data-duration="1.318" data-track-index="3">STAY.</div>
+      <audio id="vo" src="assets/vo/mix.wav" data-start="0" data-duration="255.235" data-track-index="4" data-volume="1"></audio>
+      <div id="flash"></div>
     </div>
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.8, ease: "power1.out" }, 0);
-      tl.fromTo("#v0", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 25.575, ease: "none" }, 0.000);
-      tl.fromTo("#v1", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 24.738, ease: "none" }, 25.575);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 25.575);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 25.175);
-      tl.fromTo("#v2", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 26.058, ease: "none" }, 50.313);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 50.313);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 49.913);
-      tl.fromTo("#v3", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 25.226, ease: "none" }, 76.371);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 76.371);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 75.971);
-      tl.fromTo("#v4", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 26.947, ease: "none" }, 101.597);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 101.597);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 101.197);
-      tl.fromTo("#v5", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 23.103, ease: "none" }, 128.544);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 128.544);
+      tl.fromTo("#v0", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 16.834, ease: "none" }, 0.000);
+      tl.fromTo("#v1", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 18.479, ease: "none" }, 16.834);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 16.434);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 16.834);
+      tl.fromTo("#v2", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 20.883, ease: "none" }, 35.313);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 34.913);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 35.313);
+      tl.fromTo("#v3", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 18.722, ease: "none" }, 56.196);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 55.796);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 56.196);
+      tl.fromTo("#v4", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 24.565, ease: "none" }, 74.918);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 74.518);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 74.918);
+      tl.fromTo("#v5", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 11.788, ease: "none" }, 99.483);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 99.083);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 99.483);
+      tl.fromTo("#v6", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 17.273, ease: "none" }, 111.271);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 110.871);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 111.271);
+      tl.fromTo("#v7", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 21.699, ease: "none" }, 128.544);
       tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 128.144);
-      tl.fromTo("#v6", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 27.601, ease: "none" }, 151.647);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 151.647);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 151.247);
-      tl.fromTo("#v7", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 26.829, ease: "none" }, 179.248);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 179.248);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 178.848);
-      tl.fromTo("#v8", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 24.529, ease: "none" }, 206.077);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 206.077);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 205.677);
-      tl.fromTo("#v9", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 24.629, ease: "none" }, 230.606);
-      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 230.606);
-      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 230.206);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 128.544);
+      tl.fromTo("#v8", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 32.734, ease: "none" }, 150.243);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 149.843);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 150.243);
+      tl.fromTo("#v9", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 26.528, ease: "none" }, 182.977);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 182.577);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 182.977);
+      tl.fromTo("#v10", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 11.543, ease: "none" }, 209.505);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 209.105);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 209.505);
+      tl.fromTo("#v11", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 34.187, ease: "none" }, 221.048);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 220.648);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 221.048);
+      tl.fromTo("#c0w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 0.000);
+      tl.fromTo("#c0w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 0.218);
+      tl.fromTo("#c0w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 0.546);
+      tl.fromTo("#c0w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 0.818);
+      tl.fromTo("#c0w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 1.146);
+      tl.fromTo("#c0w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 1.582);
+      tl.fromTo("#c0w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 1.800);
+      tl.fromTo("#c0w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 2.019);
+      tl.fromTo("#c0w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 2.291);
+      tl.fromTo("#c0w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 2.619);
+      tl.fromTo("#c0w10", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 2.892);
+      tl.fromTo("#c0w11", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 3.274);
+      tl.fromTo("#c1w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 4.321);
+      tl.fromTo("#c1w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 4.523);
+      tl.fromTo("#c1w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 4.776);
+      tl.fromTo("#c2w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 5.824);
+      tl.fromTo("#c2w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 6.057);
+      tl.fromTo("#c2w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 6.349);
+      tl.fromTo("#c3w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 7.280);
+      tl.fromTo("#c3w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 7.480);
+      tl.fromTo("#c3w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 7.640);
+      tl.fromTo("#c3w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 7.841);
+      tl.fromTo("#c3w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 8.041);
+      tl.fromTo("#c3w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 8.201);
+      tl.fromTo("#c3w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 8.401);
+      tl.fromTo("#c3w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 8.641);
+      tl.fromTo("#c3w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 8.842);
+      tl.fromTo("#c4w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 10.114);
+      tl.fromTo("#c4w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 10.422);
+      tl.fromTo("#c4w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 10.642);
+      tl.fromTo("#c4w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 10.950);
+      tl.fromTo("#c5w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 11.921);
+      tl.fromTo("#c5w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 12.155);
+      tl.fromTo("#c5w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 12.467);
+      tl.fromTo("#c5w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 12.739);
+      tl.fromTo("#c5w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 12.934);
+      tl.fromTo("#c6w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 13.864);
+      tl.fromTo("#c6w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 14.216);
+      tl.fromTo("#c6w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 14.435);
+      tl.fromTo("#c6w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 14.699);
+      tl.fromTo("#c6w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 15.138);
+      tl.fromTo("#c6w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 15.314);
+      tl.fromTo("#c6w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 15.578);
+      tl.fromTo("#c6w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 15.798);
+      tl.fromTo("#c7w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 17.332);
+      tl.fromTo("#c7w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 17.637);
+      tl.fromTo("#c7w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 18.125);
+      tl.fromTo("#c7w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 18.613);
+      tl.fromTo("#c7w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 18.980);
+      tl.fromTo("#c7w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 19.346);
+      tl.fromTo("#c7w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 19.773);
+      tl.fromTo("#c7w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 20.261);
+      tl.fromTo("#c8w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 21.198);
+      tl.fromTo("#c8w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 21.428);
+      tl.fromTo("#c8w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 21.582);
+      tl.fromTo("#c8w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 21.697);
+      tl.fromTo("#c8w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 21.927);
+      tl.fromTo("#c8w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 22.157);
+      tl.fromTo("#c8w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 22.311);
+      tl.fromTo("#c8w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 22.579);
+      tl.fromTo("#c9w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 23.730);
+      tl.fromTo("#c9w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 23.949);
+      tl.fromTo("#c9w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 24.132);
+      tl.fromTo("#c9w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 24.387);
+      tl.fromTo("#c9w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 24.607);
+      tl.fromTo("#c9w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 24.789);
+      tl.fromTo("#c9w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 25.008);
+      tl.fromTo("#c10w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 25.860);
+      tl.fromTo("#c10w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 25.996);
+      tl.fromTo("#c10w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 26.235);
+      tl.fromTo("#c10w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 26.473);
+      tl.fromTo("#c10w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 26.643);
+      tl.fromTo("#c10w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 26.847);
+      tl.fromTo("#c10w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 26.984);
+      tl.fromTo("#c11w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 27.758);
+      tl.fromTo("#c11w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 27.940);
+      tl.fromTo("#c11w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 28.259);
+      tl.fromTo("#c11w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 28.577);
+      tl.fromTo("#c11w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 28.941);
+      tl.fromTo("#c11w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 29.169);
+      tl.fromTo("#c11w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 29.396);
+      tl.fromTo("#c12w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 30.452);
+      tl.fromTo("#c12w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 30.689);
+      tl.fromTo("#c12w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 30.927);
+      tl.fromTo("#c12w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 31.085);
+      tl.fromTo("#c12w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 31.441);
+      tl.fromTo("#c12w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 31.678);
+      tl.fromTo("#c12w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 31.915);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.7, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 32.719);
+      tl.fromTo("#shade", { opacity: 0.7 }, { opacity: 0, duration: 0.35, immediateRender: false }, 35.563);
+      tl.fromTo("#c13", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, 34.414);
+      tl.fromTo("#c13", { x: -6 }, { x: 6, duration: 0.04, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 34.414);
+      tl.fromTo("#c14", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 35.663);
+      tl.fromTo("#c14", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 35.883);
+      tl.fromTo("#c14", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 36.963);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 35.663);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 36.963);
+      tl.fromTo("#c15w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 36.991);
+      tl.fromTo("#c15w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 37.243);
+      tl.fromTo("#c16w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 38.354);
+      tl.fromTo("#c16w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 38.746);
+      tl.fromTo("#c16w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 38.942);
+      tl.fromTo("#c16w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 39.177);
+      tl.fromTo("#c16w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 39.491);
+      tl.fromTo("#c16w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 39.726);
+      tl.fromTo("#c16w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 40.000);
+      tl.fromTo("#c17w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 40.800);
+      tl.fromTo("#c17w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 40.906);
+      tl.fromTo("#c17w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 41.039);
+      tl.fromTo("#c17w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 41.198);
+      tl.fromTo("#c18w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 41.894);
+      tl.fromTo("#c18w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 42.062);
+      tl.fromTo("#c19w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 42.914);
+      tl.fromTo("#c19w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 43.043);
+      tl.fromTo("#c19w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 43.205);
+      tl.fromTo("#c19w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 43.400);
+      tl.fromTo("#c19w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 43.723);
+      tl.fromTo("#c20w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 44.548);
+      tl.fromTo("#c20w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 44.736);
+      tl.fromTo("#c21w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 45.711);
+      tl.fromTo("#c21w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 45.844);
+      tl.fromTo("#c21w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 46.010);
+      tl.fromTo("#c21w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 46.210);
+      tl.fromTo("#c21w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 46.443);
+      tl.fromTo("#c21w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 46.742);
+      tl.fromTo("#c21w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 46.875);
+      tl.fromTo("#c22w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 47.750);
+      tl.fromTo("#c23w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 48.732);
+      tl.fromTo("#c23w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 48.909);
+      tl.fromTo("#c23w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 49.122);
+      tl.fromTo("#c23w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 49.441);
+      tl.fromTo("#c23w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 49.618);
+      tl.fromTo("#c24w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 50.660);
+      tl.fromTo("#c24w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 50.890);
+      tl.fromTo("#c24w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 51.178);
+      tl.fromTo("#c25w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 52.239);
+      tl.fromTo("#c25w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 52.380);
+      tl.fromTo("#c25w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 52.520);
+      tl.fromTo("#c25w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 52.696);
+      tl.fromTo("#c25w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 53.012);
+      tl.fromTo("#c25w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 53.153);
+      tl.fromTo("#c26w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 53.921);
+      tl.fromTo("#c26w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 54.103);
+      tl.fromTo("#c26w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 54.285);
+      tl.fromTo("#c26w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 54.695);
+      tl.fromTo("#c26w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 54.877);
+      tl.fromTo("#c26w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 55.104);
+      tl.fromTo("#c26w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 55.332);
+      tl.fromTo("#c27", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 56.496);
+      tl.fromTo("#c27", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 56.716);
+      tl.fromTo("#c27", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 57.796);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 56.496);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 57.796);
+      tl.fromTo("#c28w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 58.000);
+      tl.fromTo("#c28w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 58.222);
+      tl.fromTo("#c28w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 58.501);
+      tl.fromTo("#c28w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 58.779);
+      tl.fromTo("#c28w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 59.057);
+      tl.fromTo("#c29w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 60.067);
+      tl.fromTo("#c29w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 60.217);
+      tl.fromTo("#c29w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 60.442);
+      tl.fromTo("#c29w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 60.629);
+      tl.fromTo("#c29w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 60.929);
+      tl.fromTo("#c29w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 61.079);
+      tl.fromTo("#c29w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 61.303);
+      tl.fromTo("#c30w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 62.408);
+      tl.fromTo("#c30w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 62.669);
+      tl.fromTo("#c30w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 62.996);
+      tl.fromTo("#c30w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 63.322);
+      tl.fromTo("#c31w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 64.307);
+      tl.fromTo("#c31w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 64.473);
+      tl.fromTo("#c31w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 64.764);
+      tl.fromTo("#c31w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 64.930);
+      tl.fromTo("#c31w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 65.055);
+      tl.fromTo("#c31w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 65.346);
+      tl.fromTo("#c31w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 65.678);
+      tl.fromTo("#c31w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 65.928);
+      tl.fromTo("#c32w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 66.674);
+      tl.fromTo("#c32w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 66.858);
+      tl.fromTo("#c32w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 67.005);
+      tl.fromTo("#c32w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 67.225);
+      tl.fromTo("#c32w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 67.446);
+      tl.fromTo("#c32w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 67.593);
+      tl.fromTo("#c32w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 67.814);
+      tl.fromTo("#c32w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 68.034);
+      tl.fromTo("#c32w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 68.218);
+      tl.fromTo("#c32w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 68.402);
+      tl.fromTo("#c33w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 69.313);
+      tl.fromTo("#c34w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 70.313);
+      tl.fromTo("#c34w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 70.541);
+      tl.fromTo("#c34w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 70.827);
+      tl.fromTo("#c34w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 71.112);
+      tl.fromTo("#c34w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 71.397);
+      tl.fromTo("#c34w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 71.797);
+      tl.fromTo("#c35w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 72.790);
+      tl.fromTo("#c35w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 72.948);
+      tl.fromTo("#c35w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 73.184);
+      tl.fromTo("#c35w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 73.382);
+      tl.fromTo("#c35w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 73.539);
+      tl.fromTo("#c35w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 73.855);
+      tl.fromTo("#c35w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 74.013);
+      tl.fromTo("#c36", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 75.309);
+      tl.fromTo("#c36", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 75.529);
+      tl.fromTo("#c36", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 76.609);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 75.309);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 76.609);
+      tl.fromTo("#c37w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 76.633);
+      tl.fromTo("#c37w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 76.805);
+      tl.fromTo("#c37w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 77.020);
+      tl.fromTo("#c37w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 77.278);
+      tl.fromTo("#c37w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 77.494);
+      tl.fromTo("#c37w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 77.752);
+      tl.fromTo("#c38w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 78.796);
+      tl.fromTo("#c38w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 79.056);
+      tl.fromTo("#c38w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 79.230);
+      tl.fromTo("#c38w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 79.534);
+      tl.fromTo("#c38w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 79.794);
+      tl.fromTo("#c38w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 80.141);
+      tl.fromTo("#c39w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 81.088);
+      tl.fromTo("#c39w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 81.227);
+      tl.fromTo("#c39w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 81.394);
+      tl.fromTo("#c39w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 81.561);
+      tl.fromTo("#c39w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 81.673);
+      tl.fromTo("#c39w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 81.840);
+      tl.fromTo("#c40w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 82.542);
+      tl.fromTo("#c40w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 82.845);
+      tl.fromTo("#c40w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 83.018);
+      tl.fromTo("#c40w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 83.148);
+      tl.fromTo("#c40w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 83.494);
+      tl.fromTo("#c40w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 83.797);
+      tl.fromTo("#c40w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 84.013);
+      tl.fromTo("#c40w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 84.446);
+      tl.fromTo("#c40w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 84.619);
+      tl.fromTo("#c40w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 84.878);
+      tl.fromTo("#c41w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 85.896);
+      tl.fromTo("#c41w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 86.065);
+      tl.fromTo("#c41w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 86.360);
+      tl.fromTo("#c41w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 86.529);
+      tl.fromTo("#c41w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 86.783);
+      tl.fromTo("#c41w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 87.036);
+      tl.fromTo("#c42w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 88.144);
+      tl.fromTo("#c42w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 88.365);
+      tl.fromTo("#c42w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 88.498);
+      tl.fromTo("#c42w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 88.720);
+      tl.fromTo("#c42w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 88.986);
+      tl.fromTo("#c42w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 89.251);
+      tl.fromTo("#c42w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 89.384);
+      tl.fromTo("#c42w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 89.783);
+      tl.fromTo("#c42w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 90.137);
+      tl.fromTo("#c43w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 91.266);
+      tl.fromTo("#c43w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 91.431);
+      tl.fromTo("#c43w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 91.761);
+      tl.fromTo("#c43w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 92.009);
+      tl.fromTo("#c43w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 92.174);
+      tl.fromTo("#c43w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 92.339);
+      tl.fromTo("#c43w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 92.628);
+      tl.fromTo("#c44w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 93.571);
+      tl.fromTo("#c44w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 93.779);
+      tl.fromTo("#c44w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 93.987);
+      tl.fromTo("#c44w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 94.112);
+      tl.fromTo("#c44w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 94.362);
+      tl.fromTo("#c44w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 94.612);
+      tl.fromTo("#c44w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 94.904);
+      tl.fromTo("#c44w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 95.070);
+      tl.fromTo("#c44w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 95.279);
+      tl.fromTo("#c44w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 95.529);
+      tl.fromTo("#c44w10", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 95.737);
+      tl.fromTo("#c44w11", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 95.945);
+      tl.fromTo("#c44w12", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 96.237);
+      tl.fromTo("#c44w13", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 96.445);
+      tl.fromTo("#c45w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 97.518);
+      tl.fromTo("#c45w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 97.647);
+      tl.fromTo("#c45w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 97.873);
+      tl.fromTo("#c45w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 98.066);
+      tl.fromTo("#c45w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 98.195);
+      tl.fromTo("#c45w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 98.388);
+      tl.fromTo("#c45w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 98.517);
+      tl.fromTo("#c45w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 98.711);
+      tl.fromTo("#c46st", { scale: 1.6, opacity: 0, rotation: -6 }, { scale: 1, opacity: 0.92, rotation: -6, duration: 0.12, ease: "power4.in" }, 99.962);
+      tl.fromTo("#c46st", { opacity: 0.92 }, { opacity: 0, duration: 0.4, immediateRender: false }, 103.008);
+      tl.fromTo("#c46w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 99.962);
+      tl.fromTo("#c46w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 100.394);
+      tl.fromTo("#c46w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 100.827);
+      tl.fromTo("#c47w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 101.908);
+      tl.fromTo("#c47w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 102.052);
+      tl.fromTo("#c47w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 102.292);
+      tl.fromTo("#c47w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 102.483);
+      tl.fromTo("#c47w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 102.771);
+      tl.fromTo("#c47w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 103.155);
+      tl.fromTo("#c47w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 103.395);
+      tl.fromTo("#c47w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 103.634);
+      tl.fromTo("#c47w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 104.066);
+      tl.fromTo("#c47w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 104.306);
+      tl.fromTo("#c48w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 105.598);
+      tl.fromTo("#c48w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 105.859);
+      tl.fromTo("#c48w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 106.225);
+      tl.fromTo("#c48w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 106.434);
+      tl.fromTo("#c48w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 106.643);
+      tl.fromTo("#c48w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 107.113);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.7, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 107.729);
+      tl.fromTo("#shade", { opacity: 0.7 }, { opacity: 0, duration: 0.35, immediateRender: false }, 111.558);
+      tl.fromTo("#c49", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, 109.413);
+      tl.fromTo("#c49", { x: -6 }, { x: 6, duration: 0.04, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 109.413);
+      tl.fromTo("#c50w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 111.608);
+      tl.fromTo("#c50w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 111.778);
+      tl.fromTo("#c50w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 112.032);
+      tl.fromTo("#c50w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 112.202);
+      tl.fromTo("#c50w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 112.414);
+      tl.fromTo("#c50w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 112.796);
+      tl.fromTo("#c50w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 112.966);
+      tl.fromTo("#c50w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 113.220);
+      tl.fromTo("#c51w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 114.056);
+      tl.fromTo("#c51w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 114.398);
+      tl.fromTo("#c51w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 114.612);
+      tl.fromTo("#c51w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 114.827);
+      tl.fromTo("#c51w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 115.041);
+      tl.fromTo("#c52w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 115.905);
+      tl.fromTo("#c52w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 116.211);
+      tl.fromTo("#c52w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 116.430);
+      tl.fromTo("#c52w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 116.648);
+      tl.fromTo("#c52w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 116.867);
+      tl.fromTo("#c53w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 117.733);
+      tl.fromTo("#c54w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 118.605);
+      tl.fromTo("#c54w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 118.908);
+      tl.fromTo("#c55w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 119.968);
+      tl.fromTo("#c55w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 120.099);
+      tl.fromTo("#c55w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 120.405);
+      tl.fromTo("#c55w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 120.711);
+      tl.fromTo("#c55w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 120.929);
+      tl.fromTo("#c55w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 121.148);
+      tl.fromTo("#c55w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 121.454);
+      tl.fromTo("#c55w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 121.629);
+      tl.fromTo("#c55w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 121.934);
+      tl.fromTo("#c55w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 122.197);
+      tl.fromTo("#c55w10", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 122.328);
+      tl.fromTo("#c56w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 123.312);
+      tl.fromTo("#c56w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 123.469);
+      tl.fromTo("#c56w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 123.704);
+      tl.fromTo("#c56w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 123.900);
+      tl.fromTo("#c57w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 124.833);
+      tl.fromTo("#c57w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 125.076);
+      tl.fromTo("#c57w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 125.380);
+      tl.fromTo("#c57w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 125.806);
+      tl.fromTo("#c58w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 126.754);
+      tl.fromTo("#c58w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 126.926);
+      tl.fromTo("#c58w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 127.098);
+      tl.fromTo("#c58w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 127.528);
+      tl.fromTo("#c58w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 127.743);
+      tl.fromTo("#c59", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 128.844);
+      tl.fromTo("#c59", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 129.064);
+      tl.fromTo("#c59", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 130.144);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 128.844);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 130.144);
+      tl.fromTo("#c60w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 130.220);
+      tl.fromTo("#c60w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 130.406);
+      tl.fromTo("#c60w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 130.591);
+      tl.fromTo("#c60w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 130.823);
+      tl.fromTo("#c60w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 131.009);
+      tl.fromTo("#c60w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 131.287);
+      tl.fromTo("#c60w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 131.612);
+      tl.fromTo("#c61w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 132.626);
+      tl.fromTo("#c61w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 132.910);
+      tl.fromTo("#c61w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 133.113);
+      tl.fromTo("#c61w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 133.478);
+      tl.fromTo("#c62w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 134.385);
+      tl.fromTo("#c62w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 134.597);
+      tl.fromTo("#c63w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 135.378);
+      tl.fromTo("#c63w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 135.738);
+      tl.fromTo("#c63w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 136.217);
+      tl.fromTo("#c63w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 136.577);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.7, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 137.306);
+      tl.fromTo("#shade", { opacity: 0.7 }, { opacity: 0, duration: 0.35, immediateRender: false }, 142.011);
+      tl.fromTo("#c64", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, 138.935);
+      tl.fromTo("#c64", { x: -6 }, { x: 6, duration: 0.04, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 138.935);
+      tl.fromTo("#c65w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 142.061);
+      tl.fromTo("#c65w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 142.259);
+      tl.fromTo("#c65w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 142.506);
+      tl.fromTo("#c65w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 142.902);
+      tl.fromTo("#c65w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 143.298);
+      tl.fromTo("#c65w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 143.496);
+      tl.fromTo("#c65w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 143.743);
+      tl.fromTo("#c65w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 143.991);
+      tl.fromTo("#c65w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 144.238);
+      tl.fromTo("#c65w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 144.436);
+      tl.fromTo("#c66w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 145.426);
+      tl.fromTo("#c66w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 145.647);
+      tl.fromTo("#c66w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 145.912);
+      tl.fromTo("#c66w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 146.132);
+      tl.fromTo("#c66w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 146.309);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.7, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 146.912);
+      tl.fromTo("#shade", { opacity: 0.7 }, { opacity: 0, duration: 0.35, immediateRender: false }, 150.562);
+      tl.fromTo("#c67", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, 148.531);
+      tl.fromTo("#c67", { x: -6 }, { x: 6, duration: 0.04, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 148.531);
+      tl.fromTo("#c68", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 150.512);
+      tl.fromTo("#c68", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 150.732);
+      tl.fromTo("#c68", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 151.812);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 150.512);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 151.812);
+      tl.fromTo("#c69w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 151.904);
+      tl.fromTo("#c69w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 152.324);
+      tl.fromTo("#c69w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 152.492);
+      tl.fromTo("#c69w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 152.702);
+      tl.fromTo("#c69w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 153.038);
+      tl.fromTo("#c69w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 153.415);
+      tl.fromTo("#c69w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 153.667);
+      tl.fromTo("#c69w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 153.919);
+      tl.fromTo("#c69w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 154.171);
+      tl.fromTo("#c70w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 155.175);
+      tl.fromTo("#c70w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 155.321);
+      tl.fromTo("#c70w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 155.540);
+      tl.fromTo("#c70w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 155.795);
+      tl.fromTo("#c70w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 156.013);
+      tl.fromTo("#c70w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 156.342);
+      tl.fromTo("#c70w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 156.524);
+      tl.fromTo("#c71w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 157.422);
+      tl.fromTo("#c71w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 157.581);
+      tl.fromTo("#c71w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 157.781);
+      tl.fromTo("#c71w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 158.020);
+      tl.fromTo("#c71w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 158.299);
+      tl.fromTo("#c71w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 158.538);
+      tl.fromTo("#c72w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 159.486);
+      tl.fromTo("#c72w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 159.632);
+      tl.fromTo("#c72w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 159.959);
+      tl.fromTo("#c72w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 160.105);
+      tl.fromTo("#c72w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 160.360);
+      tl.fromTo("#c72w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 160.505);
+      tl.fromTo("#c72w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 160.906);
+      tl.fromTo("#c72w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 161.233);
+      tl.fromTo("#c72w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 161.415);
+      tl.fromTo("#c73w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 162.414);
+      tl.fromTo("#c73w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 162.600);
+      tl.fromTo("#c73w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 162.860);
+      tl.fromTo("#c73w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 163.082);
+      tl.fromTo("#c73w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 163.231);
+      tl.fromTo("#c74w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 164.150);
+      tl.fromTo("#c74w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 164.385);
+      tl.fromTo("#c74w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 164.903);
+      tl.fromTo("#c74w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 165.327);
+      tl.fromTo("#c75w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 166.214);
+      tl.fromTo("#c75w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 166.417);
+      tl.fromTo("#c76w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 167.278);
+      tl.fromTo("#c76w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 167.475);
+      tl.fromTo("#c76w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 167.722);
+      tl.fromTo("#c77w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 168.604);
+      tl.fromTo("#c77w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 168.786);
+      tl.fromTo("#c77w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 169.014);
+      tl.fromTo("#c77w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 169.287);
+      tl.fromTo("#c77w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 169.514);
+      tl.fromTo("#c78w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 170.336);
+      tl.fromTo("#c78w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 170.525);
+      tl.fromTo("#c78w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 170.676);
+      tl.fromTo("#c78w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 170.864);
+      tl.fromTo("#c78w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 171.091);
+      tl.fromTo("#c78w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 171.242);
+      tl.fromTo("#c78w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 171.468);
+      tl.fromTo("#c78w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 171.619);
+      tl.fromTo("#c78w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 171.770);
+      tl.fromTo("#c78w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 171.883);
+      tl.fromTo("#c78w10", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 172.110);
+      tl.fromTo("#c79w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 172.987);
+      tl.fromTo("#c79w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 173.123);
+      tl.fromTo("#c79w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 173.361);
+      tl.fromTo("#c79w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 173.564);
+      tl.fromTo("#c79w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 173.700);
+      tl.fromTo("#c80w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 174.458);
+      tl.fromTo("#c80w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 174.609);
+      tl.fromTo("#c80w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 174.760);
+      tl.fromTo("#c80w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 174.911);
+      tl.fromTo("#c80w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 175.213);
+      tl.fromTo("#c80w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 175.665);
+      tl.fromTo("#c80w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 175.816);
+      tl.fromTo("#c80w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 176.043);
+      tl.fromTo("#c81w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 177.102);
+      tl.fromTo("#c81w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 177.283);
+      tl.fromTo("#c81w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 177.428);
+      tl.fromTo("#c81w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 177.609);
+      tl.fromTo("#c81w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 177.971);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.7, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 178.511);
+      tl.fromTo("#shade", { opacity: 0.7 }, { opacity: 0, duration: 0.35, immediateRender: false }, 181.234);
+      tl.fromTo("#c82", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, 180.136);
+      tl.fromTo("#c82", { x: -6 }, { x: 6, duration: 0.04, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 180.136);
+      tl.fromTo("#c83w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 181.284);
+      tl.fromTo("#c83w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 181.502);
+      tl.fromTo("#c83w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 181.684);
+      tl.fromTo("#c84", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 183.451);
+      tl.fromTo("#c84", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 183.671);
+      tl.fromTo("#c84", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 184.751);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 183.451);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 184.751);
+      tl.fromTo("#c85w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 184.958);
+      tl.fromTo("#c85w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 185.110);
+      tl.fromTo("#c85w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 185.301);
+      tl.fromTo("#c85w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 185.682);
+      tl.fromTo("#c85w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 185.835);
+      tl.fromTo("#c85w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 186.063);
+      tl.fromTo("#c85w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 186.216);
+      tl.fromTo("#c85w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 186.444);
+      tl.fromTo("#c85w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 186.597);
+      tl.fromTo("#c85w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 186.787);
+      tl.fromTo("#c86w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 187.614);
+      tl.fromTo("#c86w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 187.955);
+      tl.fromTo("#c86w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 188.352);
+      tl.fromTo("#c86w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 188.692);
+      tl.fromTo("#c87w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 189.709);
+      tl.fromTo("#c87w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 190.142);
+      tl.fromTo("#c87w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 190.430);
+      tl.fromTo("#c87w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 190.719);
+      tl.fromTo("#c88w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 191.742);
+      tl.fromTo("#c88w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 192.028);
+      tl.fromTo("#c88w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 192.218);
+      tl.fromTo("#c88w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 192.456);
+      tl.fromTo("#c88w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 192.741);
+      tl.fromTo("#c88w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 193.265);
+      tl.fromTo("#c89w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 194.258);
+      tl.fromTo("#c89w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 194.440);
+      tl.fromTo("#c89w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 194.658);
+      tl.fromTo("#c89w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 194.876);
+      tl.fromTo("#c89w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 195.021);
+      tl.fromTo("#c89w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 195.348);
+      tl.fromTo("#c89w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 195.530);
+      tl.fromTo("#c89w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 195.857);
+      tl.fromTo("#c90w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 196.757);
+      tl.fromTo("#c90w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 196.944);
+      tl.fromTo("#c90w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 197.068);
+      tl.fromTo("#c90w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 197.224);
+      tl.fromTo("#c90w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 197.348);
+      tl.fromTo("#c90w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 197.473);
+      tl.fromTo("#c91w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 198.394);
+      tl.fromTo("#c91w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 198.517);
+      tl.fromTo("#c91w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 198.723);
+      tl.fromTo("#c91w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 199.011);
+      tl.fromTo("#c91w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 199.176);
+      tl.fromTo("#c91w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 199.300);
+      tl.fromTo("#c91w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 199.629);
+      tl.fromTo("#c91w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 199.958);
+      tl.fromTo("#c91w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 200.123);
+      tl.fromTo("#c91w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 200.370);
+      tl.fromTo("#c92w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 201.345);
+      tl.fromTo("#c92w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 201.629);
+      tl.fromTo("#c92w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 201.866);
+      tl.fromTo("#c92w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 202.055);
+      tl.fromTo("#c92w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 202.339);
+      tl.fromTo("#c92w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 202.529);
+      tl.fromTo("#c92w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 202.765);
+      tl.fromTo("#c92w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 203.097);
+      tl.fromTo("#c92w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 203.381);
+      tl.fromTo("#c92w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 203.617);
+      tl.fromTo("#c92w10", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 203.901);
+      tl.fromTo("#c92w11", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 204.280);
+      tl.fromTo("#c92w12", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 204.470);
+      tl.fromTo("#c92w13", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 204.706);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.7, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 205.335);
+      tl.fromTo("#shade", { opacity: 0.7 }, { opacity: 0, duration: 0.35, immediateRender: false }, 209.792);
+      tl.fromTo("#c93", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, 206.970);
+      tl.fromTo("#c93", { x: -6 }, { x: 6, duration: 0.04, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 206.970);
+      tl.fromTo("#c94w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 209.842);
+      tl.fromTo("#c94w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 210.064);
+      tl.fromTo("#c94w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 210.285);
+      tl.fromTo("#c95w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 210.981);
+      tl.fromTo("#c95w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 211.232);
+      tl.fromTo("#c95w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 211.411);
+      tl.fromTo("#c96w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 212.210);
+      tl.fromTo("#c96w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 212.406);
+      tl.fromTo("#c96w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 212.650);
+      tl.fromTo("#c96w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 212.894);
+      tl.fromTo("#c97w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 213.983);
+      tl.fromTo("#c97w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 214.153);
+      tl.fromTo("#c97w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 214.449);
+      tl.fromTo("#c97w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 214.703);
+      tl.fromTo("#c97w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 215.085);
+      tl.fromTo("#c98w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 215.893);
+      tl.fromTo("#c98w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 216.225);
+      tl.fromTo("#c98w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 216.474);
+      tl.fromTo("#c98w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 216.640);
+      tl.fromTo("#c98w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 216.931);
+      tl.fromTo("#c98w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 217.305);
+      tl.fromTo("#c98w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 217.512);
+      tl.fromTo("#c98w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 217.720);
+      tl.fromTo("#c99w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 218.613);
+      tl.fromTo("#c99w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 218.852);
+      tl.fromTo("#c99w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 219.186);
+      tl.fromTo("#c99w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 219.663);
+      tl.fromTo("#c99w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 219.902);
+      tl.fromTo("#c99w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 220.189);
+      tl.fromTo("#c100", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 221.372);
+      tl.fromTo("#c100", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 221.592);
+      tl.fromTo("#c100", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 222.672);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 221.372);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 222.672);
+      tl.fromTo("#c101w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 222.693);
+      tl.fromTo("#c101w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 222.991);
+      tl.fromTo("#c101w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 223.177);
+      tl.fromTo("#c101w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 223.550);
+      tl.fromTo("#c101w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 223.699);
+      tl.fromTo("#c101w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 223.923);
+      tl.fromTo("#c101w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 224.146);
+      tl.fromTo("#c102w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 224.944);
+      tl.fromTo("#c102w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 225.149);
+      tl.fromTo("#c102w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 225.313);
+      tl.fromTo("#c102w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 225.559);
+      tl.fromTo("#c102w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 225.764);
+      tl.fromTo("#c102w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 225.969);
+      tl.fromTo("#c102w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 226.421);
+      tl.fromTo("#c102w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 226.626);
+      tl.fromTo("#c102w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 226.790);
+      tl.fromTo("#c102w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 227.036);
+      tl.fromTo("#c102w10", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 227.241);
+      tl.fromTo("#c102w11", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 227.405);
+      tl.fromTo("#c103w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 228.223);
+      tl.fromTo("#c103w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 228.416);
+      tl.fromTo("#c103w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 228.725);
+      tl.fromTo("#c103w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 228.995);
+      tl.fromTo("#c103w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 229.227);
+      tl.fromTo("#c103w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 229.458);
+      tl.fromTo("#c103w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 229.574);
+      tl.fromTo("#c103w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 229.767);
+      tl.fromTo("#c103w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 229.921);
+      tl.fromTo("#c104w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 230.767);
+      tl.fromTo("#c104w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 231.006);
+      tl.fromTo("#c104w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 231.165);
+      tl.fromTo("#c104w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 231.484);
+      tl.fromTo("#c104w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 231.683);
+      tl.fromTo("#c104w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 231.922);
+      tl.fromTo("#c104w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 232.082);
+      tl.fromTo("#c104w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 232.281);
+      tl.fromTo("#c104w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 232.520);
+      tl.fromTo("#c105w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 233.732);
+      tl.fromTo("#c105w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 233.923);
+      tl.fromTo("#c105w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 234.163);
+      tl.fromTo("#c105w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 234.306);
+      tl.fromTo("#c105w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 234.737);
+      tl.fromTo("#c105w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 235.311);
+      tl.fromTo("#c106w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 236.301);
+      tl.fromTo("#c106w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 236.495);
+      tl.fromTo("#c106w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 236.786);
+      tl.fromTo("#c106w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 236.979);
+      tl.fromTo("#c106w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 237.222);
+      tl.fromTo("#c107w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 238.022);
+      tl.fromTo("#c107w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 238.201);
+      tl.fromTo("#c107w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 238.470);
+      tl.fromTo("#c107w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 238.829);
+      tl.fromTo("#c107w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 239.187);
+      tl.fromTo("#c107w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 239.366);
+      tl.fromTo("#c107w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 239.590);
+      tl.fromTo("#c108", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: "power4.out" }, 240.742);
+      tl.fromTo("#c108", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 240.962);
+      tl.fromTo("#c108", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 242.042);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.55, duration: 0.15, immediateRender: false }, 240.742);
+      tl.fromTo("#shade", { opacity: 0.55 }, { opacity: 0, duration: 0.3, immediateRender: false }, 242.042);
+      tl.fromTo("#c109w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 242.077);
+      tl.fromTo("#c109w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 242.244);
+      tl.fromTo("#c109w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 242.370);
+      tl.fromTo("#c109w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 242.620);
+      tl.fromTo("#c109w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 242.913);
+      tl.fromTo("#c109w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 243.164);
+      tl.fromTo("#c109w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 243.582);
+      tl.fromTo("#c109w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 243.791);
+      tl.fromTo("#c109w8", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 243.958);
+      tl.fromTo("#c109w9", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 244.208);
+      tl.fromTo("#c109w10", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 244.376);
+      tl.fromTo("#c110w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 245.333);
+      tl.fromTo("#c110w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 245.512);
+      tl.fromTo("#c110w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 245.736);
+      tl.fromTo("#c110w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 245.960);
+      tl.fromTo("#c110w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 246.139);
+      tl.fromTo("#c110w5", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 246.453);
+      tl.fromTo("#c110w6", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 246.587);
+      tl.fromTo("#c110w7", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 246.856);
+      tl.fromTo("#c111w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 247.748);
+      tl.fromTo("#c111w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 247.921);
+      tl.fromTo("#c112w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 248.705);
+      tl.fromTo("#c112w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 248.891);
+      tl.fromTo("#c112w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 249.263);
+      tl.fromTo("#c113w0", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 250.234);
+      tl.fromTo("#c113w1", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 250.488);
+      tl.fromTo("#c113w2", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 250.670);
+      tl.fromTo("#c113w3", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 250.851);
+      tl.fromTo("#c113w4", { opacity: 0.15, y: 6 }, { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }, 251.069);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.7, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 251.827);
+      tl.fromTo("#c114", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, 253.917);
+      tl.fromTo("#c114", { x: -6 }, { x: 6, duration: 0.04, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 253.917);
+      tl.fromTo("#flash", { opacity: 0.85 }, { opacity: 0, duration: 0.12, ease: "none", immediateRender: false }, 178.411);
+      tl.fromTo("#stage", { x: -18 }, { x: 18, duration: 0.05, yoyo: true, repeat: 5, ease: "none", immediateRender: false }, 178.411);
+      tl.fromTo("#stage", { x: 18 }, { x: 0, duration: 0.05, ease: "none", immediateRender: false }, 178.711);
       tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.in", immediateRender: false }, 254.635);
       window.__timelines["main"] = tl;
     </script>
