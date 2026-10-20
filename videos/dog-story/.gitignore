@@ -7,3 +7,5 @@ assets/clips/
 assets/vo/voice.wav
 assets/placeholder-*
 assets/vo/mix.wav
+renders/.*.hf-transaction-*/
+renders/work-*/
