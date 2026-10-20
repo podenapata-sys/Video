@@ -82,7 +82,7 @@ def main():
         r = subprocess.run(CLI + ["render", str(ROOT), "-o", str(out), "-q", "delivery"], capture_output=True, text=True)
         print("\n".join(l for l in r.stdout.splitlines() if "MB" in l or "rror" in l))
         share = out.with_name("dog-story-share.mp4")
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(out), "-c:v", "libx264", "-crf", "20", "-preset", "slow",
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(out), "-c:v", "libx264", "-crf", "26", "-preset", "slow",
                         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(share)], check=True)
         print("share:", share)
 
