@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Dog Story</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; }
+      .shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #vignette { position: absolute; inset: 0; z-index: 5; pointer-events: none;
+        background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+      #dip { position: absolute; inset: 0; z-index: 6; background: #000; opacity: 1; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="246.435" data-width="1920" data-height="1080" data-fps="24">
+      <video id="v0" class="clip shot" src="assets/clips/c01.mp4" data-start="0.000" data-duration="25.575" data-track-index="1" muted playsinline></video>
+      <video id="v1" class="clip shot" src="assets/clips/c02.mp4" data-start="25.575" data-duration="23.538" data-track-index="1" muted playsinline></video>
+      <video id="v2" class="clip shot" src="assets/clips/c03.mp4" data-start="49.113" data-duration="24.606" data-track-index="1" muted playsinline></video>
+      <video id="v3" class="clip shot" src="assets/clips/c04.mp4" data-start="73.719" data-duration="24.564" data-track-index="1" muted playsinline></video>
+      <video id="v4" class="clip shot" src="assets/clips/c05.mp4" data-start="98.283" data-duration="25.860" data-track-index="1" muted playsinline></video>
+      <video id="v5" class="clip shot" src="assets/clips/c06.mp4" data-start="124.143" data-duration="22.705" data-track-index="1" muted playsinline></video>
+      <video id="v6" class="clip shot" src="assets/clips/c07.mp4" data-start="146.848" data-duration="25.163" data-track-index="1" muted playsinline></video>
+      <video id="v7" class="clip shot" src="assets/clips/c08.mp4" data-start="172.011" data-duration="23.041" data-track-index="1" muted playsinline></video>
+      <video id="v8" class="clip shot" src="assets/clips/c09.mp4" data-start="195.052" data-duration="25.756" data-track-index="1" muted playsinline></video>
+      <video id="v9" class="clip shot" src="assets/clips/c10.mp4" data-start="220.808" data-duration="25.627" data-track-index="1" muted playsinline></video>
+      <audio id="vo" src="assets/vo/voice.wav" data-start="0" data-duration="246.435" data-track-index="4" data-volume="1"></audio>
+      <div id="vignette"></div>
+      <div id="dip"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.8, ease: "power1.out" }, 0);
+      tl.fromTo("#v0", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 25.575, ease: "none" }, 0.000);
+      tl.fromTo("#v1", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 23.538, ease: "none" }, 25.575);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 25.575);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 25.175);
+      tl.fromTo("#v2", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 24.606, ease: "none" }, 49.113);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 49.113);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 48.713);
+      tl.fromTo("#v3", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 24.564, ease: "none" }, 73.719);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 73.719);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 73.319);
+      tl.fromTo("#v4", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 25.860, ease: "none" }, 98.283);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 98.283);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 97.883);
+      tl.fromTo("#v5", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 22.705, ease: "none" }, 124.143);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 124.143);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 123.743);
+      tl.fromTo("#v6", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 25.163, ease: "none" }, 146.848);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 146.848);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 146.448);
+      tl.fromTo("#v7", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 23.041, ease: "none" }, 172.011);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 172.011);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 171.611);
+      tl.fromTo("#v8", { scale: 1.0, xPercent: -1.0 }, { scale: 1.08, xPercent: 1.0, duration: 25.756, ease: "none" }, 195.052);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 195.052);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 194.652);
+      tl.fromTo("#v9", { scale: 1.0, xPercent: 1.0 }, { scale: 1.08, xPercent: -1.0, duration: 25.627, ease: "none" }, 220.808);
+      tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 220.808);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.in", immediateRender: false }, 220.408);
+      tl.fromTo("#dip", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.in", immediateRender: false }, 245.835);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
