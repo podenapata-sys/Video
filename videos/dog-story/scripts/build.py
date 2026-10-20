@@ -40,7 +40,7 @@ def stretch(i, seg):
     out = CLIPS / f"c{i + 1:02d}.mp4"
     src_len = min(CLIP_LEN, duration(SRC) - i * CLIP_LEN) - 0.05  # stay clear of the next clip's first frame
     k = seg / src_len
-    if out.exists() and abs(duration(out) - seg) < 0.1:
+    if out.exists() and abs(duration(out) - seg) < 0.25:  # blend output can run ~0.15s short
         return out
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{i * CLIP_LEN:.3f}", "-t", f"{src_len:.3f}", "-i", str(SRC),
                     "-map", "0:v:0", "-an", "-vf",
@@ -70,7 +70,9 @@ def main():
         print(f"clip {i + 1:2d}: {a:7.2f} -> {b:7.2f}  ({seg:5.2f}s, x{seg / CLIP_LEN:.2f} slow)")
     js.insert(0, 'tl.fromTo("#dip", { opacity: 1 }, { opacity: 0, duration: 0.8, ease: "power1.out" }, 0);')
     js.append(f'tl.fromTo("#dip", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.6, ease: "power1.in", immediateRender: false }}, {total - 0.6:.3f});')
-    els.append(f'<audio id="vo" src="assets/vo/voice.wav" data-start="0" data-duration="{total}" data-track-index="4" data-volume="1"></audio>')
+    # final mix (voice + drone + SFX) from scripts/mix.py when present, else the dry voice
+    track = "mix.wav" if (ROOT / "assets" / "vo" / "mix.wav").exists() else "voice.wav"
+    els.append(f'<audio id="vo" src="assets/vo/{track}" data-start="0" data-duration="{total}" data-track-index="4" data-volume="1"></audio>')
     (ROOT / "index.html").write_text(PAGE.replace("{{TOTAL}}", str(total)).replace("{{ELS}}", "\n      ".join(els))
                                      .replace("{{JS}}", "\n      ".join(js)))
     (ROOT / "segments.json").write_text(json.dumps([{"clip": i + 1, "start": cuts[i], "end": cuts[i + 1]} for i in range(N)], indent=1))
