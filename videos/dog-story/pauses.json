@@ -1,1 +1,9 @@
-[]
+[
+  {"chunk": 1, "sentence": 13, "extra": 1.2, "line": "... Most."},
+  {"chunk": 2, "sentence": 22, "extra": 1.2, "line": "... He is only in the first four."},
+  {"chunk": 3, "sentence": 5,  "extra": 1.2, "line": "... Yesterday, dogs could not open doors."},
+  {"chunk": 3, "sentence": 8,  "extra": 1.2, "line": "... You bought it a little raincoat."},
+  {"chunk": 3, "sentence": 23, "extra": 1.2, "line": "... Apologies. That was unprofessional."},
+  {"chunk": 4, "sentence": 9,  "extra": 1.2, "line": "... That is how you sleep."},
+  {"chunk": 4, "sentence": 30, "extra": 1.6, "line": "... Stay."}
+]
