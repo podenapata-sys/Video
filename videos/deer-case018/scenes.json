@@ -1,0 +1,477 @@
+[
+ {
+  "scene": 1,
+  "text": "If you ever wake up at 3:00 a.m.…",
+  "kind": "line"
+ },
+ {
+  "scene": 2,
+  "text": "…and there is a deer standing in your yard,",
+  "kind": "line"
+ },
+ {
+  "scene": 3,
+  "text": "leave the house.",
+  "kind": "line"
+ },
+ {
+  "scene": 4,
+  "text": "Do not turn on the lights.",
+  "kind": "line"
+ },
+ {
+  "scene": 5,
+  "text": "Do not wake anyone.",
+  "kind": "line"
+ },
+ {
+  "scene": 6,
+  "text": "Do not wait for sunrise.",
+  "kind": "line"
+ },
+ {
+  "scene": 7,
+  "text": "We do not mean a deer that walks. Or one that eats.",
+  "kind": "line"
+ },
+ {
+  "scene": 8,
+  "text": "We mean one that stands completely still.",
+  "kind": "line"
+ },
+ {
+  "scene": 9,
+  "text": "Head raised. Ears forward.",
+  "kind": "line"
+ },
+ {
+  "scene": 10,
+  "text": "Facing your house.",
+  "kind": "line"
+ },
+ {
+  "scene": 11,
+  "text": "You will think it is looking at you.",
+  "kind": "line"
+ },
+ {
+  "scene": 12,
+  "text": "It is not looking at your window.",
+  "kind": "line"
+ },
+ {
+  "scene": 13,
+  "text": "It is looking at what is behind you.",
+  "kind": "line"
+ },
+ {
+  "scene": 14,
+  "text": "Count to ten. If it has not moved,",
+  "kind": "line"
+ },
+ {
+  "scene": 15,
+  "text": "there are seven rules.",
+  "kind": "line"
+ },
+ {
+  "scene": 16,
+  "text": "Rule one. Do not turn on the lights.",
+  "kind": "rule"
+ },
+ {
+  "scene": 17,
+  "text": "You will want a better look. Don't.",
+  "kind": "line"
+ },
+ {
+  "scene": 18,
+  "text": "What it is watching does not know you are awake.",
+  "kind": "line"
+ },
+ {
+  "scene": 19,
+  "text": "Turn on the light, and it will.",
+  "kind": "line"
+ },
+ {
+  "scene": 20,
+  "text": "Deer are prey animals.",
+  "kind": "line"
+ },
+ {
+  "scene": 21,
+  "text": "When they sense danger, they freeze and stare at it.",
+  "kind": "line"
+ },
+ {
+  "scene": 22,
+  "text": "Then they run.",
+  "kind": "line"
+ },
+ {
+  "scene": 23,
+  "text": "This one will not.",
+  "kind": "line"
+ },
+ {
+  "scene": 24,
+  "text": "Not for a car. Not for a falling branch. Not for your knock on the glass.",
+  "kind": "line"
+ },
+ {
+  "scene": 25,
+  "text": "Whatever it is watching is closer than any of those.",
+  "kind": "line"
+ },
+ {
+  "scene": 26,
+  "text": "Rule two. Watch the head.",
+  "kind": "rule"
+ },
+ {
+  "scene": 27,
+  "text": "Not the eyes. The head.",
+  "kind": "line"
+ },
+ {
+  "scene": 28,
+  "text": "If it points at the kitchen, stay out of the kitchen.",
+  "kind": "line"
+ },
+ {
+  "scene": 29,
+  "text": "If it turns to the hallway, do not enter the hallway.",
+  "kind": "line"
+ },
+ {
+  "scene": 30,
+  "text": "If it rises toward your window, step away from the glass.",
+  "kind": "line"
+ },
+ {
+  "scene": 31,
+  "text": "It is not following you. It is following something inside.",
+  "kind": "line"
+ },
+ {
+  "scene": 32,
+  "text": "Do not be standing where it stops.",
+  "kind": "line"
+ },
+ {
+  "scene": 33,
+  "text": "Rule three. If it stamps, freeze.",
+  "kind": "rule"
+ },
+ {
+  "scene": 34,
+  "text": "One strike. Hard. Against the ground.",
+  "kind": "line"
+ },
+ {
+  "scene": 35,
+  "text": "Stop. Do not move. Do not speak.",
+  "kind": "line"
+ },
+ {
+  "scene": 36,
+  "text": "Do not turn around.",
+  "kind": "line"
+ },
+ {
+  "scene": 37,
+  "text": "The stamp means something is close enough to react to.",
+  "kind": "line"
+ },
+ {
+  "scene": 38,
+  "text": "You may hear breathing. The floor may creak.",
+  "kind": "line"
+ },
+ {
+  "scene": 39,
+  "text": "You may feel something close enough to touch your shoulder.",
+  "kind": "line"
+ },
+ {
+  "scene": 40,
+  "text": "Ignore it.",
+  "kind": "line"
+ },
+ {
+  "scene": 41,
+  "text": "At the second strike, walk to the nearest exit.",
+  "kind": "line"
+ },
+ {
+  "scene": 42,
+  "text": "If the second strike comes from inside the house, you waited too long.",
+  "kind": "line"
+ },
+ {
+  "scene": 43,
+  "text": "Rule four. If someone calls your name, do not answer.",
+  "kind": "rule"
+ },
+ {
+  "scene": 44,
+  "text": "This is the rule most people break.",
+  "kind": "line"
+ },
+ {
+  "scene": 45,
+  "text": "It will sound like your mother. From the kitchen.",
+  "kind": "line"
+ },
+ {
+  "scene": 46,
+  "text": "Or your brother. Asking why you are awake.",
+  "kind": "line"
+ },
+ {
+  "scene": 47,
+  "text": "The voice will be normal. Listen to the words.",
+  "kind": "line"
+ },
+ {
+  "scene": 48,
+  "text": "It will not tell you to come down. It will tell you to stay.",
+  "kind": "line"
+ },
+ {
+  "scene": 49,
+  "text": "\"It's cold outside.\" \"Go back to bed.\"",
+  "kind": "line"
+ },
+ {
+  "scene": 50,
+  "text": "Ignore it, and it gets angry. Then scared. Then it cries.",
+  "kind": "line"
+ },
+ {
+  "scene": 51,
+  "text": "Do not answer.",
+  "kind": "line"
+ },
+ {
+  "scene": 52,
+  "text": "It knows you are leaving. It is running out of ways to stop you.",
+  "kind": "line"
+ },
+ {
+  "scene": 53,
+  "text": "Rule five. If the deer walks toward the house, you have one minute.",
+  "kind": "rule"
+ },
+ {
+  "scene": 54,
+  "text": "It does not walk like a deer.",
+  "kind": "line"
+ },
+ {
+  "scene": 55,
+  "text": "The legs move slowly. The body does not move at all.",
+  "kind": "line"
+ },
+ {
+  "scene": 56,
+  "text": "The head does not bob. The eyes do not blink. The hooves make no sound.",
+  "kind": "line"
+ },
+ {
+  "scene": 57,
+  "text": "One woman saw it from her bedroom window.",
+  "kind": "line"
+ },
+ {
+  "scene": 58,
+  "text": "It stood under the same tree for almost an hour.",
+  "kind": "line"
+ },
+ {
+  "scene": 59,
+  "text": "At exactly 3:17, it took one step.",
+  "kind": "line"
+ },
+ {
+  "scene": 60,
+  "text": "Her husband laughed. He went downstairs to scare it off.",
+  "kind": "line"
+ },
+ {
+  "scene": 61,
+  "text": "He reached the bottom step. Then he stopped.",
+  "kind": "line"
+ },
+ {
+  "scene": 62,
+  "text": "She called his name. He did not answer.",
+  "kind": "line"
+ },
+ {
+  "scene": 63,
+  "text": "Then his voice came from the kitchen. And from the stairs. At the same time.",
+  "kind": "line"
+ },
+ {
+  "scene": 64,
+  "text": "She left through the window.",
+  "kind": "line"
+ },
+ {
+  "scene": 65,
+  "text": "The police found every light in the house on. They did not find her husband.",
+  "kind": "line"
+ },
+ {
+  "scene": 66,
+  "text": "Something upstairs was still calling her name.",
+  "kind": "line"
+ },
+ {
+  "scene": 67,
+  "text": "Rule six. If the deer is facing the front door, do not use it.",
+  "kind": "rule"
+ },
+ {
+  "scene": 68,
+  "text": "Back door. Garage. Window.",
+  "kind": "line"
+ },
+ {
+  "scene": 69,
+  "text": "Never walk into what the deer is watching.",
+  "kind": "line"
+ },
+ {
+  "scene": 70,
+  "text": "Listen before you open anything. Scratching means find another way.",
+  "kind": "line"
+ },
+ {
+  "scene": 71,
+  "text": "Knocking means do not answer.",
+  "kind": "line"
+ },
+ {
+  "scene": 72,
+  "text": "Your own voice asking to be let in means get away from the door.",
+  "kind": "line"
+ },
+ {
+  "scene": 73,
+  "text": "By now, it has heard you talk. It has heard you walk.",
+  "kind": "line"
+ },
+ {
+  "scene": 74,
+  "text": "It has learned your breathing. It is getting better at it.",
+  "kind": "line"
+ },
+ {
+  "scene": 75,
+  "text": "Rule seven. Once you are outside, do not look back.",
+  "kind": "rule"
+ },
+ {
+  "scene": 76,
+  "text": "Keep walking. Past the driveway. Past the car.",
+  "kind": "line"
+ },
+ {
+  "scene": 77,
+  "text": "If the front door opens behind you, keep walking.",
+  "kind": "line"
+ },
+ {
+  "scene": 78,
+  "text": "There may be footsteps. Someone may shout that you forgot something.",
+  "kind": "line"
+ },
+ {
+  "scene": 79,
+  "text": "Only at the road do you look at the deer.",
+  "kind": "line"
+ },
+ {
+  "scene": 80,
+  "text": "If it is still in the yard, you are too close. Keep going.",
+  "kind": "line"
+ },
+ {
+  "scene": 81,
+  "text": "If it is gone, you are not safe.",
+  "kind": "line"
+ },
+ {
+  "scene": 82,
+  "text": "Check the windows. Briefly. Look for someone standing behind the glass.",
+  "kind": "line"
+ },
+ {
+  "scene": 83,
+  "text": "We left one thing out of this file.",
+  "kind": "line"
+ },
+ {
+  "scene": 84,
+  "text": "Survivors check their cameras the next morning.",
+  "kind": "line"
+ },
+ {
+  "scene": 85,
+  "text": "Every recording shows the same thing.",
+  "kind": "line"
+ },
+ {
+  "scene": 86,
+  "text": "The deer was facing one window before anyone had walked into that room.",
+  "kind": "line"
+ },
+ {
+  "scene": 87,
+  "text": "Look closer.",
+  "kind": "line"
+ },
+ {
+  "scene": 88,
+  "text": "Something was already standing behind the glass. Watching the deer.",
+  "kind": "line"
+ },
+ {
+  "scene": 89,
+  "text": "Same height as you. Same clothes.",
+  "kind": "line"
+ },
+ {
+  "scene": 90,
+  "text": "When you walked to the window, it stepped back into the dark.",
+  "kind": "line"
+ },
+ {
+  "scene": 91,
+  "text": "That is why the deer never moved.",
+  "kind": "line"
+ },
+ {
+  "scene": 92,
+  "text": "It had been standing in your house for hours.",
+  "kind": "line"
+ },
+ {
+  "scene": 93,
+  "text": "Practicing being you.",
+  "kind": "line"
+ },
+ {
+  "scene": 94,
+  "text": "So if you see a deer in your yard at 3:00 a.m., leave.",
+  "kind": "line"
+ },
+ {
+  "scene": 95,
+  "text": "And if your own voice calls you back inside, keep walking.",
+  "kind": "line"
+ }
+]
