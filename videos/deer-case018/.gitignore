@@ -2,3 +2,6 @@
 node_modules/
 renders/*.mp4
 !renders/*-share.mp4
+assets/vo/mix.wav
+renders/.*.hf-transaction-*/
+renders/work-*/

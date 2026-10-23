@@ -1,0 +1,1298 @@
+[
+ {
+  "chunk": 1,
+  "start": 0,
+  "end": 2.56,
+  "text": "If you ever wake up at 3:00 in the morning",
+  "scene": 1,
+  "asr": "if you ever wake up at three o'clock in the morning and see it you're standing in your yard"
+ },
+ {
+  "chunk": 1,
+  "start": 2.58,
+  "end": 4.413,
+  "text": "and see a deer standing in your yard,",
+  "scene": 2,
+  "asr": "if you ever wake up at three o'clock in the morning and see it you're standing in your yard"
+ },
+ {
+  "chunk": 1,
+  "start": 4.89,
+  "end": 5.773,
+  "text": "Leave your house.",
+  "scene": 3,
+  "asr": "leave your house"
+ },
+ {
+  "chunk": 1,
+  "start": 6.304,
+  "end": 7.359,
+  "text": "Don't turn on the lights.",
+  "scene": 4,
+  "asr": "don't trim on the lights"
+ },
+ {
+  "chunk": 1,
+  "start": 7.78,
+  "end": 10.371,
+  "text": "Don't wake up anyone. And whatever you do,",
+  "scene": 5,
+  "asr": "don't wake up anyone in whatever you do"
+ },
+ {
+  "chunk": 1,
+  "start": 10.697,
+  "end": 12.286,
+  "text": "do not wait till sunrise.",
+  "scene": 6,
+  "asr": "do not wait to summarize"
+ },
+ {
+  "chunk": 1,
+  "start": 12.746,
+  "end": 16.418,
+  "text": "I'm not talking about a deer walking across your lawn or eating your plants.",
+  "scene": 7,
+  "asr": "i'm not talking about it you're walking across your lawyer reading your plans"
+ },
+ {
+  "chunk": 1,
+  "start": 16.897,
+  "end": 19.497,
+  "text": "I'm talking about one standing completely still.",
+  "scene": 8,
+  "asr": "i'm talking about one standing completely still"
+ },
+ {
+  "chunk": 1,
+  "start": 20.114,
+  "end": 21.254,
+  "text": "Its head is raised,",
+  "scene": 9,
+  "asr": "it has raised"
+ },
+ {
+  "chunk": 1,
+  "start": 21.613,
+  "end": 23.082,
+  "text": "its ears are pointed forward,",
+  "scene": 9,
+  "asr": "it's yours reported forward"
+ },
+ {
+  "chunk": 1,
+  "start": 23.469,
+  "end": 25.401,
+  "text": "and it's staring directly at your house.",
+  "scene": 10,
+  "asr": "it's staring directly at your house"
+ },
+ {
+  "chunk": 1,
+  "start": 26.077,
+  "end": 27.39,
+  "text": "You might think it's watching you,",
+  "scene": 11,
+  "asr": "you might think it's watching you"
+ },
+ {
+  "chunk": 1,
+  "start": 27.798,
+  "end": 28.576,
+  "text": "but look carefully.",
+  "scene": 12,
+  "asr": "but look carefully"
+ },
+ {
+  "chunk": 1,
+  "start": 29.216,
+  "end": 30.696,
+  "text": "It's not looking at your window,",
+  "scene": 12,
+  "asr": "it's not looking at your window"
+ },
+ {
+  "chunk": 1,
+  "start": 31.138,
+  "end": 32.672,
+  "text": "it's looking at something behind it.",
+  "scene": 13,
+  "asr": "it's looking at something behind it"
+ },
+ {
+  "chunk": 1,
+  "start": 33.331,
+  "end": 35.967,
+  "text": "And if the deer hasn't moved by the time you count to ten,",
+  "scene": 14,
+  "asr": "and if the dealer has a move by the time you come to ten"
+ },
+ {
+  "chunk": 1,
+  "start": 36.482,
+  "end": 38.426,
+  "text": "you need to follow these seven rules.",
+  "scene": 15,
+  "asr": "you follow the seven rules"
+ },
+ {
+  "chunk": 2,
+  "start": 0,
+  "end": 0.969,
+  "text": "Rule number one.",
+  "scene": 16,
+  "asr": "the humble one"
+ },
+ {
+  "chunk": 2,
+  "start": 1.458,
+  "end": 2.951,
+  "text": "Do not turn on the lights.",
+  "scene": 16,
+  "asr": "do not turn on lights"
+ },
+ {
+  "chunk": 2,
+  "start": 3.527,
+  "end": 5.171,
+  "text": "I know you'll want to get a better look.",
+  "scene": 17,
+  "asr": "i know you want to get a better look"
+ },
+ {
+  "chunk": 2,
+  "start": 5.701,
+  "end": 6.128,
+  "text": "Don't.",
+  "scene": 17,
+  "asr": "don't"
+ },
+ {
+  "chunk": 2,
+  "start": 6.706,
+  "end": 9.413,
+  "text": "Whatever the deer is watching doesn't know you're awake yet.",
+  "scene": 18,
+  "asr": "whatever the deal is watching doesn't know you're awake yet"
+ },
+ {
+  "chunk": 2,
+  "start": 9.965,
+  "end": 12.255,
+  "text": "The moment you turn your light on, it will.",
+  "scene": 19,
+  "asr": "the moment you turn your live on it well"
+ },
+ {
+  "chunk": 2,
+  "start": 12.897,
+  "end": 14.655,
+  "text": "And here's something you need to understand.",
+  "scene": 20,
+  "asr": "and you're something you need to understand"
+ },
+ {
+  "chunk": 2,
+  "start": 15.188,
+  "end": 16.689,
+  "text": "Deer are prey animals.",
+  "scene": 20,
+  "asr": "dealer or prey animals"
+ },
+ {
+  "chunk": 2,
+  "start": 17.119,
+  "end": 20.466,
+  "text": "When they sense danger, they sometimes freeze and stare at it.",
+  "scene": 21,
+  "asr": "when they sense danger is sometimes freeze and spirit"
+ },
+ {
+  "chunk": 2,
+  "start": 21.15,
+  "end": 23.12,
+  "text": "But a normal deer eventually runs.",
+  "scene": 22,
+  "asr": "what a normal day or potentially roms"
+ },
+ {
+  "chunk": 2,
+  "start": 23.552,
+  "end": 24.386,
+  "text": "This one won't.",
+  "scene": 23,
+  "asr": "this one won't"
+ },
+ {
+  "chunk": 2,
+  "start": 24.923,
+  "end": 26.133,
+  "text": "Not when a car passes.",
+  "scene": 24,
+  "asr": "not on the carcasses"
+ },
+ {
+  "chunk": 2,
+  "start": 26.478,
+  "end": 27.655,
+  "text": "Not when a branch falls.",
+  "scene": 24,
+  "asr": "not on the bridge falls"
+ },
+ {
+  "chunk": 2,
+  "start": 28.123,
+  "end": 29.871,
+  "text": "Not even when you knock on the glass.",
+  "scene": 24,
+  "asr": "not even when you knock on the glass"
+ },
+ {
+  "chunk": 2,
+  "start": 30.383,
+  "end": 33.45,
+  "text": "Because whatever it's watching is much closer than you think.",
+  "scene": 25,
+  "asr": "because whatever its watching is much closer than you think"
+ },
+ {
+  "chunk": 2,
+  "start": 34.169,
+  "end": 35.012,
+  "text": "Rule number two.",
+  "scene": 26,
+  "asr": "rule number two"
+ },
+ {
+  "chunk": 2,
+  "start": 35.507,
+  "end": 36.647,
+  "text": "Watch the deer's head.",
+  "scene": 26,
+  "asr": "watch the gears head"
+ },
+ {
+  "chunk": 2,
+  "start": 37.185,
+  "end": 38.488,
+  "text": "Don't focus on its eyes.",
+  "scene": 27,
+  "asr": "don't focus on that size"
+ },
+ {
+  "chunk": 2,
+  "start": 38.953,
+  "end": 41.03,
+  "text": "Watch which direction its head is pointing.",
+  "scene": 27,
+  "asr": "watch which direction it had this point in"
+ },
+ {
+  "chunk": 2,
+  "start": 41.673,
+  "end": 44.529,
+  "text": "If it's staring at your kitchen, stay away from the kitchen.",
+  "scene": 28,
+  "asr": "if it's staring at your kitchen stay away from the kitchen"
+ },
+ {
+  "chunk": 2,
+  "start": 45.093,
+  "end": 46.537,
+  "text": "If it turns toward the hallway,",
+  "scene": 29,
+  "asr": "if it turns toward always"
+ },
+ {
+  "chunk": 2,
+  "start": 46.916,
+  "end": 49.072,
+  "text": "do not even think about entering the hallway.",
+  "scene": 29,
+  "asr": "do not even think about entering the hallway"
+ },
+ {
+  "chunk": 2,
+  "start": 49.672,
+  "end": 52.565,
+  "text": "And if its head slowly rises toward your bedroom window,",
+  "scene": 30,
+  "asr": "and if it's head slowly rises toward your bedroom window"
+ },
+ {
+  "chunk": 2,
+  "start": 53.093,
+  "end": 55.052,
+  "text": "move away from the glass immediately.",
+  "scene": 30,
+  "asr": "move away from the glass immediately"
+ },
+ {
+  "chunk": 2,
+  "start": 55.694,
+  "end": 57.51,
+  "text": "Because the deer isn't following you.",
+  "scene": 31,
+  "asr": "because the gear isn't following you"
+ },
+ {
+  "chunk": 2,
+  "start": 57.922,
+  "end": 60.071,
+  "text": "It's following something moving through your house.",
+  "scene": 31,
+  "asr": "it's following something moving to your house"
+ },
+ {
+  "chunk": 2,
+  "start": 60.568,
+  "end": 62.851,
+  "text": "You don't want to be standing where it stops.",
+  "scene": 32,
+  "asr": "you don't wanna be standing word stops"
+ },
+ {
+  "chunk": 3,
+  "start": 0,
+  "end": 0.965,
+  "text": "Rule number three.",
+  "scene": 33,
+  "asr": "rule number three"
+ },
+ {
+  "chunk": 3,
+  "start": 1.537,
+  "end": 2.991,
+  "text": "If the deer stamps its hoof,",
+  "scene": 33,
+  "asr": "if that your stance of hope"
+ },
+ {
+  "chunk": 3,
+  "start": 3.298,
+  "end": 3.987,
+  "text": "freeze.",
+  "scene": 33,
+  "asr": "freeze"
+ },
+ {
+  "chunk": 3,
+  "start": 4.718,
+  "end": 6.378,
+  "text": "You'll hear a sharp sound outside.",
+  "scene": 34,
+  "asr": "you're you're sharp sound outside"
+ },
+ {
+  "chunk": 3,
+  "start": 6.813,
+  "end": 8.605,
+  "text": "One hard strike against the ground.",
+  "scene": 34,
+  "asr": "no one had the strike against the ground"
+ },
+ {
+  "chunk": 3,
+  "start": 9.229,
+  "end": 11.413,
+  "text": "When that happens, stop whatever you're doing.",
+  "scene": 35,
+  "asr": "when that happens stop whatever you're doing"
+ },
+ {
+  "chunk": 3,
+  "start": 11.905,
+  "end": 12.575,
+  "text": "Don't move.",
+  "scene": 35,
+  "asr": "don't move"
+ },
+ {
+  "chunk": 3,
+  "start": 12.911,
+  "end": 13.588,
+  "text": "Don't speak.",
+  "scene": 35,
+  "asr": "don't speak"
+ },
+ {
+  "chunk": 3,
+  "start": 13.977,
+  "end": 15.079,
+  "text": "And most importantly,",
+  "scene": 36,
+  "asr": "in most importantly"
+ },
+ {
+  "chunk": 3,
+  "start": 15.379,
+  "end": 16.548,
+  "text": "do not turn around.",
+  "scene": 36,
+  "asr": "do not turn around"
+ },
+ {
+  "chunk": 3,
+  "start": 17.234,
+  "end": 20.73,
+  "text": "The hoof stamp means something has gotten close enough for it to react.",
+  "scene": 37,
+  "asr": "the host am mean something has gotten close enough for that you'd react"
+ },
+ {
+  "chunk": 3,
+  "start": 21.377,
+  "end": 24.047,
+  "text": "You might hear breathing behind you, or the floor creaking.",
+  "scene": 38,
+  "asr": "you might your breathing behind you or the floor creaking"
+ },
+ {
+  "chunk": 3,
+  "start": 24.662,
+  "end": 27.636,
+  "text": "You might even feel someone standing close enough to touch your shoulder.",
+  "scene": 39,
+  "asr": "you might even feel someone standing close enough to torture shoulder"
+ },
+ {
+  "chunk": 3,
+  "start": 28.204,
+  "end": 29.392,
+  "text": "But you have to ignore it.",
+  "scene": 40,
+  "asr": "but you have to ignore it"
+ },
+ {
+  "chunk": 3,
+  "start": 30.091,
+  "end": 32.037,
+  "text": "Wait until you hear another hoof strike.",
+  "scene": 41,
+  "asr": "wait until you hear another hoax strike"
+ },
+ {
+  "chunk": 3,
+  "start": 32.494,
+  "end": 34.313,
+  "text": "Then keep moving toward the nearest exit.",
+  "scene": 41,
+  "asr": "then keep moving toward the nearest exit"
+ },
+ {
+  "chunk": 3,
+  "start": 35.008,
+  "end": 37.481,
+  "text": "But if the second sound comes from inside the house,",
+  "scene": 42,
+  "asr": "but the second sound comes from inside the house"
+ },
+ {
+  "chunk": 3,
+  "start": 37.932,
+  "end": 39.408,
+  "text": "you've already waited too long.",
+  "scene": 42,
+  "asr": "you've already waited too long"
+ },
+ {
+  "chunk": 3,
+  "start": 40.01,
+  "end": 40.889,
+  "text": "Rule number four.",
+  "scene": 43,
+  "asr": "the number four"
+ },
+ {
+  "chunk": 3,
+  "start": 41.374,
+  "end": 42.701,
+  "text": "If someone calls your name,",
+  "scene": 43,
+  "asr": "if someone call your name"
+ },
+ {
+  "chunk": 3,
+  "start": 43.069,
+  "end": 43.748,
+  "text": "don't answer it.",
+  "scene": 43,
+  "asr": "don't answer it"
+ },
+ {
+  "chunk": 3,
+  "start": 44.521,
+  "end": 46.373,
+  "text": "This is where most people make a mistake.",
+  "scene": 44,
+  "asr": "this is where most people make a mistake"
+ },
+ {
+  "chunk": 3,
+  "start": 46.955,
+  "end": 50.509,
+  "text": "You'll hear someone you recognize. Maybe your mother, calling from the kitchen.",
+  "scene": 45,
+  "asr": "you'll hear someone you recognize maybe your mother calling from the kitchen"
+ },
+ {
+  "chunk": 3,
+  "start": 51.062,
+  "end": 52.986,
+  "text": "Maybe your brother, asking why you're awake.",
+  "scene": 46,
+  "asr": "maybe your brother asking why your wake"
+ },
+ {
+  "chunk": 3,
+  "start": 53.703,
+  "end": 55.571,
+  "text": "The voice will sound completely normal.",
+  "scene": 47,
+  "asr": "the boys will sound completely normal"
+ },
+ {
+  "chunk": 3,
+  "start": 56.114,
+  "end": 57.535,
+  "text": "But listen to what it says.",
+  "scene": 47,
+  "asr": "but listen to what it says"
+ },
+ {
+  "chunk": 3,
+  "start": 58.131,
+  "end": 60.031,
+  "text": "It won't ask you to come downstairs.",
+  "scene": 48,
+  "asr": "it will ask you to come downstairs"
+ },
+ {
+  "chunk": 3,
+  "start": 60.469,
+  "end": 61.599,
+  "text": "It'll ask you to stay.",
+  "scene": 48,
+  "asr": "the last tuesday"
+ },
+ {
+  "chunk": 3,
+  "start": 62.259,
+  "end": 65.255,
+  "text": "It might say, \"It's cold outside,\" or \"Just go back to bed.\"",
+  "scene": 49,
+  "asr": "it might say it's cold outside or just go back to bed"
+ },
+ {
+  "chunk": 3,
+  "start": 65.856,
+  "end": 66.8,
+  "text": "And if you ignore it,",
+  "scene": 50,
+  "asr": "and if you ignore it"
+ },
+ {
+  "chunk": 3,
+  "start": 67.13,
+  "end": 68.575,
+  "text": "the voice will become angry.",
+  "scene": 50,
+  "asr": "the boys will become angry"
+ },
+ {
+  "chunk": 3,
+  "start": 68.888,
+  "end": 69.681,
+  "text": "Then frightened.",
+  "scene": 50,
+  "asr": "then frightened"
+ },
+ {
+  "chunk": 3,
+  "start": 70.247,
+  "end": 71.356,
+  "text": "Then it'll start crying.",
+  "scene": 50,
+  "asr": "then it'll start crying"
+ },
+ {
+  "chunk": 3,
+  "start": 72.081,
+  "end": 72.906,
+  "text": "Don't answer.",
+  "scene": 51,
+  "asr": "don't answer"
+ },
+ {
+  "chunk": 3,
+  "start": 73.513,
+  "end": 75.549,
+  "text": "Whatever is speaking knows you need to leave.",
+  "scene": 52,
+  "asr": "whatever is speaking know you need to leave"
+ },
+ {
+  "chunk": 3,
+  "start": 75.975,
+  "end": 78.289,
+  "text": "And it's running out of ways to keep you inside.",
+  "scene": 52,
+  "asr": "and it's running out of ways to keep you inside"
+ },
+ {
+  "chunk": 4,
+  "start": 0,
+  "end": 1.07,
+  "text": "Rule number five.",
+  "scene": 53,
+  "asr": "rule number five"
+ },
+ {
+  "chunk": 4,
+  "start": 1.654,
+  "end": 3.815,
+  "text": "If the deer starts walking toward the house,",
+  "scene": 53,
+  "asr": "if the gear start walking toward the house"
+ },
+ {
+  "chunk": 4,
+  "start": 4.157,
+  "end": 5.639,
+  "text": "you have one minute to get out.",
+  "scene": 53,
+  "asr": "you have one minute to get out"
+ },
+ {
+  "chunk": 4,
+  "start": 6.319,
+  "end": 7.942,
+  "text": "It won't walk like a normal deer.",
+  "scene": 54,
+  "asr": "it can walk like a normal day or"
+ },
+ {
+  "chunk": 4,
+  "start": 8.478,
+  "end": 9.951,
+  "text": "Its legs will move slowly",
+  "scene": 55,
+  "asr": "it's legs will move slowly"
+ },
+ {
+  "chunk": 4,
+  "start": 10.285,
+  "end": 11.214,
+  "text": "and almost carefully,",
+  "scene": 55,
+  "asr": "and most carefully"
+ },
+ {
+  "chunk": 4,
+  "start": 11.794,
+  "end": 14.173,
+  "text": "but its body will remain completely still.",
+  "scene": 55,
+  "asr": "but it's body warming completely stuff"
+ },
+ {
+  "chunk": 4,
+  "start": 14.768,
+  "end": 15.882,
+  "text": "Its head won't bob.",
+  "scene": 56,
+  "asr": "its head then bob"
+ },
+ {
+  "chunk": 4,
+  "start": 16.262,
+  "end": 17.431,
+  "text": "Its eyes won't blink.",
+  "scene": 56,
+  "asr": "it's ours when going"
+ },
+ {
+  "chunk": 4,
+  "start": 17.911,
+  "end": 20.319,
+  "text": "And its hooves might not even make any sound at all.",
+  "scene": 56,
+  "asr": "and it's close might not even make any sound all"
+ },
+ {
+  "chunk": 4,
+  "start": 21.302,
+  "end": 25.146,
+  "text": "One woman once described seeing a deer like this outside her bedroom window.",
+  "scene": 57,
+  "asr": "that woman once described seeing that you're like this outside the bedroom window"
+ },
+ {
+  "chunk": 4,
+  "start": 25.841,
+  "end": 28.797,
+  "text": "She said it stood beneath the same tree for almost an hour.",
+  "scene": 58,
+  "asr": "she said it stood beneath the same shreveport almost an hour"
+ },
+ {
+  "chunk": 4,
+  "start": 29.375,
+  "end": 31.845,
+  "text": "Then, at exactly 3:17,",
+  "scene": 59,
+  "asr": "then at exactly three seventeen"
+ },
+ {
+  "chunk": 4,
+  "start": 32.337,
+  "end": 34.151,
+  "text": "it took one step toward the house.",
+  "scene": 59,
+  "asr": "it took one step toward the house"
+ },
+ {
+  "chunk": 4,
+  "start": 34.778,
+  "end": 37.739,
+  "text": "Her husband laughed and went downstairs to try to scare it away.",
+  "scene": 60,
+  "asr": "her husband laughed and went downstairs to try to scare away"
+ },
+ {
+  "chunk": 4,
+  "start": 38.434,
+  "end": 40.254,
+  "text": "She watched him from the bedroom doorway.",
+  "scene": 61,
+  "asr": "she watched him to the bedroom doorway"
+ },
+ {
+  "chunk": 4,
+  "start": 40.703,
+  "end": 41.821,
+  "text": "He reached the bottom step.",
+  "scene": 61,
+  "asr": "he reached the bottom step"
+ },
+ {
+  "chunk": 4,
+  "start": 42.311,
+  "end": 42.96,
+  "text": "Then stopped.",
+  "scene": 61,
+  "asr": "then stopped"
+ },
+ {
+  "chunk": 4,
+  "start": 43.572,
+  "end": 46.1,
+  "text": "She called his name. Her husband didn't answer.",
+  "scene": 62,
+  "asr": "she called his name or husband didn't answer"
+ },
+ {
+  "chunk": 4,
+  "start": 46.783,
+  "end": 49.458,
+  "text": "A few seconds later, she heard him speaking from the kitchen.",
+  "scene": 63,
+  "asr": "a few seconds later she heard i'm speaking from the kitchen"
+ },
+ {
+  "chunk": 4,
+  "start": 49.967,
+  "end": 52.778,
+  "text": "Except his voice was still coming from the staircase too.",
+  "scene": 63,
+  "asr": "except his voice was still coming from the staircase to"
+ },
+ {
+  "chunk": 4,
+  "start": 53.513,
+  "end": 55.086,
+  "text": "She ran out through the bedroom window.",
+  "scene": 64,
+  "asr": "she ran out to the bedroom window"
+ },
+ {
+  "chunk": 4,
+  "start": 55.782,
+  "end": 58.105,
+  "text": "When the police arrived, her husband was gone.",
+  "scene": 65,
+  "asr": "when the police arrived her husband was gone"
+ },
+ {
+  "chunk": 4,
+  "start": 58.66,
+  "end": 60.462,
+  "text": "But every light in the house was on.",
+  "scene": 65,
+  "asr": "but every light in the house was on"
+ },
+ {
+  "chunk": 4,
+  "start": 60.88,
+  "end": 63.399,
+  "text": "And something upstairs kept calling her name.",
+  "scene": 66,
+  "asr": "and something upstairs kept calling her name"
+ },
+ {
+  "chunk": 5,
+  "start": 0,
+  "end": 1.115,
+  "text": "Rule number six.",
+  "scene": 67,
+  "asr": "rule number six"
+ },
+ {
+  "chunk": 5,
+  "start": 1.58,
+  "end": 4.147,
+  "text": "Do not use the front door if the deer is facing it.",
+  "scene": 67,
+  "asr": "do not use the front door to dealers facing a"
+ },
+ {
+  "chunk": 5,
+  "start": 4.702,
+  "end": 5.737,
+  "text": "Find another exit.",
+  "scene": 68,
+  "asr": "find another exit"
+ },
+ {
+  "chunk": 5,
+  "start": 6.118,
+  "end": 7.844,
+  "text": "The back door. The garage.",
+  "scene": 68,
+  "asr": "backdoor the garage"
+ },
+ {
+  "chunk": 5,
+  "start": 8.196,
+  "end": 8.885,
+  "text": "Even a window.",
+  "scene": 68,
+  "asr": "the little window"
+ },
+ {
+  "chunk": 5,
+  "start": 9.448,
+  "end": 11.839,
+  "text": "Just don't walk into the place the deer is watching.",
+  "scene": 69,
+  "asr": "just don't walk into the place figure is watching"
+ },
+ {
+  "chunk": 5,
+  "start": 12.445,
+  "end": 14.674,
+  "text": "And before you open anything, listen.",
+  "scene": 70,
+  "asr": "and before you open anything less than"
+ },
+ {
+  "chunk": 5,
+  "start": 15.247,
+  "end": 17.213,
+  "text": "Do you hear scratching on the other side?",
+  "scene": 70,
+  "asr": "did you hear scratching on the other side"
+ },
+ {
+  "chunk": 5,
+  "start": 17.602,
+  "end": 18.529,
+  "text": "Choose another way.",
+  "scene": 70,
+  "asr": "choose another way"
+ },
+ {
+  "chunk": 5,
+  "start": 19.134,
+  "end": 20.539,
+  "text": "Do you hear someone knocking?",
+  "scene": 71,
+  "asr": "did you hear someone knocking"
+ },
+ {
+  "chunk": 5,
+  "start": 20.947,
+  "end": 21.613,
+  "text": "Don't answer.",
+  "scene": 71,
+  "asr": "don't answer"
+ },
+ {
+  "chunk": 5,
+  "start": 22.211,
+  "end": 24.826,
+  "text": "If you hear your own voice asking to be let in,",
+  "scene": 72,
+  "asr": "if you hear your own voice asking to be let in"
+ },
+ {
+  "chunk": 5,
+  "start": 25.377,
+  "end": 27.947,
+  "text": "get away from the door. Immediately.",
+  "scene": 72,
+  "asr": "get away from the door a s eighty"
+ },
+ {
+  "chunk": 5,
+  "start": 28.531,
+  "end": 32.191,
+  "text": "Because by now, whatever is inside your house has heard you speak.",
+  "scene": 73,
+  "asr": "because by now whatever is inside your house has heard you speak"
+ },
+ {
+  "chunk": 5,
+  "start": 32.727,
+  "end": 33.718,
+  "text": "It's heard you walk.",
+  "scene": 73,
+  "asr": "it hurt you walk"
+ },
+ {
+  "chunk": 5,
+  "start": 34.229,
+  "end": 35.865,
+  "text": "It's learned the sound of your breathing.",
+  "scene": 74,
+  "asr": "it's learn the sound of your breathing"
+ },
+ {
+  "chunk": 5,
+  "start": 36.309,
+  "end": 38.099,
+  "text": "And it's getting better at sounding like you.",
+  "scene": 74,
+  "asr": "and it's getting better at something like you"
+ },
+ {
+  "chunk": 5,
+  "start": 38.783,
+  "end": 39.72,
+  "text": "Rule number seven.",
+  "scene": 75,
+  "asr": "rule number seven"
+ },
+ {
+  "chunk": 5,
+  "start": 40.21,
+  "end": 43.191,
+  "text": "Once you're outside, do not look back at your house.",
+  "scene": 75,
+  "asr": "once you're outside do not look back at your house"
+ },
+ {
+  "chunk": 5,
+  "start": 43.605,
+  "end": 44.372,
+  "text": "Keep walking.",
+  "scene": 76,
+  "asr": "keep walking"
+ },
+ {
+  "chunk": 5,
+  "start": 44.945,
+  "end": 46.226,
+  "text": "Don't stop at the driveway.",
+  "scene": 76,
+  "asr": "don't stop with the driveway"
+ },
+ {
+  "chunk": 5,
+  "start": 46.593,
+  "end": 47.613,
+  "text": "Don't get in your car.",
+  "scene": 76,
+  "asr": "don't get your car"
+ },
+ {
+  "chunk": 5,
+  "start": 47.964,
+  "end": 50.469,
+  "text": "And don't turn around if you hear your front door open.",
+  "scene": 77,
+  "asr": "and don't come around if you kill your front door open"
+ },
+ {
+  "chunk": 5,
+  "start": 51.136,
+  "end": 52.889,
+  "text": "You might hear footsteps following you.",
+  "scene": 78,
+  "asr": "you might hear footsteps following you"
+ },
+ {
+  "chunk": 5,
+  "start": 53.431,
+  "end": 55.906,
+  "text": "You might hear someone shouting that you forgot something.",
+  "scene": 78,
+  "asr": "you might hear someone shouting that you forgot something"
+ },
+ {
+  "chunk": 5,
+  "start": 56.511,
+  "end": 58.71,
+  "text": "But keep walking until you reach the road.",
+  "scene": 79,
+  "asr": "but keep walking until you reach for road"
+ },
+ {
+  "chunk": 5,
+  "start": 59.374,
+  "end": 61.07,
+  "text": "Only then should you look at the deer.",
+  "scene": 79,
+  "asr": "only then should you look good year"
+ },
+ {
+  "chunk": 5,
+  "start": 61.697,
+  "end": 65.079,
+  "text": "If it's still standing in the yard, you're not far enough from it.",
+  "scene": 80,
+  "asr": "if it's still standing in the yard you're not form of weird from it"
+ },
+ {
+  "chunk": 5,
+  "start": 65.633,
+  "end": 66.304,
+  "text": "Keep going.",
+  "scene": 80,
+  "asr": "keep going"
+ },
+ {
+  "chunk": 5,
+  "start": 66.943,
+  "end": 68.501,
+  "text": "If the deer has disappeared,",
+  "scene": 81,
+  "asr": "one of the deer has disappeared"
+ },
+ {
+  "chunk": 5,
+  "start": 68.924,
+  "end": 70.055,
+  "text": "don't assume you're safe.",
+  "scene": 81,
+  "asr": "don't assume you're safe"
+ },
+ {
+  "chunk": 5,
+  "start": 70.661,
+  "end": 72.111,
+  "text": "Look at the windows of your house.",
+  "scene": 82,
+  "asr": "look at the windows of your house"
+ },
+ {
+  "chunk": 5,
+  "start": 72.536,
+  "end": 73.361,
+  "text": "Not for long.",
+  "scene": 82,
+  "asr": "not for long"
+ },
+ {
+  "chunk": 5,
+  "start": 73.806,
+  "end": 77.166,
+  "text": "Just long enough to check whether someone is standing behind the glass.",
+  "scene": 82,
+  "asr": "just long enough to check whether someone is standing behind the glass"
+ },
+ {
+  "chunk": 6,
+  "start": 0,
+  "end": 2.246,
+  "text": "Because there is one thing I haven't told you yet.",
+  "scene": 83,
+  "asr": "because there is one thing i haven't told you yet"
+ },
+ {
+  "chunk": 6,
+  "start": 2.998,
+  "end": 7.501,
+  "text": "People who survive these encounters sometimes check their security cameras the next morning.",
+  "scene": 84,
+  "asr": "people who survive these encounters sometimes checker shuttered cameras the next morning"
+ },
+ {
+  "chunk": 6,
+  "start": 8.078,
+  "end": 10.034,
+  "text": "And they all noticed something strange.",
+  "scene": 85,
+  "asr": "in the all noticed something strange"
+ },
+ {
+  "chunk": 6,
+  "start": 10.728,
+  "end": 13.415,
+  "text": "The deer wasn't just staring at the house when they first woke up.",
+  "scene": 86,
+  "asr": "the deal was in staring at the house when they first woke up"
+ },
+ {
+  "chunk": 6,
+  "start": 14.095,
+  "end": 18.818,
+  "text": "It was staring at one particular window, even before anyone had walked into the room.",
+  "scene": 86,
+  "asr": "it was staring at one particular window even before anyone had walked into the room"
+ },
+ {
+  "chunk": 6,
+  "start": 19.577,
+  "end": 21.433,
+  "text": "When they watch the recording closely,",
+  "scene": 87,
+  "asr": "when they watch the recording closely"
+ },
+ {
+  "chunk": 6,
+  "start": 21.763,
+  "end": 22.488,
+  "text": "they see why.",
+  "scene": 87,
+  "asr": "they see why"
+ },
+ {
+  "chunk": 6,
+  "start": 23.262,
+  "end": 25.783,
+  "text": "A figure was already standing behind the glass.",
+  "scene": 88,
+  "asr": "the figure was standing already behind the glass"
+ },
+ {
+  "chunk": 6,
+  "start": 26.137,
+  "end": 27.413,
+  "text": "Completely motionless.",
+  "scene": 88,
+  "asr": "completely motionless"
+ },
+ {
+  "chunk": 6,
+  "start": 27.762,
+  "end": 28.542,
+  "text": "Watching the deer.",
+  "scene": 88,
+  "asr": "watching the deer"
+ },
+ {
+  "chunk": 6,
+  "start": 29.256,
+  "end": 30.811,
+  "text": "The figure looks almost human.",
+  "scene": 89,
+  "asr": "the figure looks almost human"
+ },
+ {
+  "chunk": 6,
+  "start": 31.213,
+  "end": 31.842,
+  "text": "Same height.",
+  "scene": 89,
+  "asr": "same height"
+ },
+ {
+  "chunk": 6,
+  "start": 32.163,
+  "end": 33.02,
+  "text": "Same clothes.",
+  "scene": 89,
+  "asr": "same clothes"
+ },
+ {
+  "chunk": 6,
+  "start": 33.573,
+  "end": 36.743,
+  "text": "And when the person inside finally woke up and approached the window,",
+  "scene": 90,
+  "asr": "and when the person inside finally woke up and approached window"
+ },
+ {
+  "chunk": 6,
+  "start": 37.29,
+  "end": 39.413,
+  "text": "the figure stepped backward into the darkness.",
+  "scene": 90,
+  "asr": "the figure step backward into the darkness"
+ },
+ {
+  "chunk": 6,
+  "start": 40.129,
+  "end": 41.553,
+  "text": "That's why the deer never moved.",
+  "scene": 91,
+  "asr": "that's why the deer never moved"
+ },
+ {
+  "chunk": 6,
+  "start": 42.051,
+  "end": 44.333,
+  "text": "It wasn't waiting for something to enter your house.",
+  "scene": 92,
+  "asr": "it wasn't waiting for something to enter your house"
+ },
+ {
+  "chunk": 6,
+  "start": 44.836,
+  "end": 47.375,
+  "text": "Something had already been standing there for hours.",
+  "scene": 92,
+  "asr": "something had ordered them standing there for hours"
+ },
+ {
+  "chunk": 6,
+  "start": 48.256,
+  "end": 49.925,
+  "text": "Practicing how to look like you.",
+  "scene": 93,
+  "asr": "practicing how to look like you"
+ },
+ {
+  "chunk": 6,
+  "start": 50.671,
+  "end": 54.431,
+  "text": "So if you ever see a deer standing in your yard at 3:00 in the morning,",
+  "scene": 94,
+  "asr": "so would you ever see that you're standing in your yard at three o'clock in the morning"
+ },
+ {
+  "chunk": 6,
+  "start": 54.975,
+  "end": 56.569,
+  "text": "leave your house immediately.",
+  "scene": 94,
+  "asr": "leave your house immediately"
+ },
+ {
+  "chunk": 6,
+  "start": 57.173,
+  "end": 59.842,
+  "text": "If you hear your own voice calling you back inside,",
+  "scene": 95,
+  "asr": "if you kill your own voice calling you back inside"
+ },
+ {
+  "chunk": 6,
+  "start": 60.322,
+  "end": 61.388,
+  "text": "keep walking.",
+  "scene": 95,
+  "asr": "keep walking"
+ }
+]

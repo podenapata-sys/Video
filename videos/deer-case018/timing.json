@@ -1,0 +1,857 @@
+[
+ {
+  "scene": 1,
+  "chunk": 1,
+  "start": 0.0,
+  "end": 4.422,
+  "spans": 1,
+  "expected": 1.93,
+  "text": "If you ever wake up at 3:00 a.m.…"
+ },
+ {
+  "scene": 2,
+  "chunk": 1,
+  "start": 4.888,
+  "end": 5.774,
+  "spans": 1,
+  "expected": 2.74,
+  "text": "…and there is a deer standing in your yard,"
+ },
+ {
+  "scene": 3,
+  "chunk": 1,
+  "start": 6.303,
+  "end": 7.365,
+  "spans": 1,
+  "expected": 1.26,
+  "text": "leave the house."
+ },
+ {
+  "scene": 4,
+  "chunk": 1,
+  "start": 7.779,
+  "end": 9.023,
+  "spans": 1,
+  "expected": 1.78,
+  "text": "Do not turn on the lights."
+ },
+ {
+  "scene": 5,
+  "chunk": 1,
+  "start": 9.281,
+  "end": 10.371,
+  "spans": 1,
+  "expected": 1.41,
+  "text": "Do not wake anyone."
+ },
+ {
+  "scene": 6,
+  "chunk": 1,
+  "start": 10.689,
+  "end": 12.289,
+  "spans": 1,
+  "expected": 1.71,
+  "text": "Do not wait for sunrise."
+ },
+ {
+  "scene": 7,
+  "chunk": 1,
+  "start": 12.745,
+  "end": 16.423,
+  "spans": 1,
+  "expected": 3.11,
+  "text": "We do not mean a deer that walks. Or one that eats."
+ },
+ {
+  "scene": 8,
+  "chunk": 1,
+  "start": 16.795,
+  "end": 19.5,
+  "spans": 1,
+  "expected": 2.82,
+  "text": "We mean one that stands completely still."
+ },
+ {
+  "scene": 9,
+  "chunk": 1,
+  "start": 20.114,
+  "end": 23.088,
+  "spans": 2,
+  "expected": 1.85,
+  "text": "Head raised. Ears forward."
+ },
+ {
+  "scene": 10,
+  "chunk": 1,
+  "start": 23.467,
+  "end": 25.409,
+  "spans": 1,
+  "expected": 1.41,
+  "text": "Facing your house."
+ },
+ {
+  "scene": 11,
+  "chunk": 1,
+  "start": 26.076,
+  "end": 28.608,
+  "spans": 2,
+  "expected": 2.37,
+  "text": "You will think it is looking at you."
+ },
+ {
+  "scene": 12,
+  "chunk": 1,
+  "start": 29.215,
+  "end": 30.704,
+  "spans": 1,
+  "expected": 2.22,
+  "text": "It is not looking at your window."
+ },
+ {
+  "scene": 13,
+  "chunk": 1,
+  "start": 31.136,
+  "end": 32.674,
+  "spans": 1,
+  "expected": 2.37,
+  "text": "It is looking at what is behind you."
+ },
+ {
+  "scene": 14,
+  "chunk": 1,
+  "start": 33.331,
+  "end": 35.974,
+  "spans": 1,
+  "expected": 2.15,
+  "text": "Count to ten. If it has not moved,"
+ },
+ {
+  "scene": 15,
+  "chunk": 1,
+  "start": 36.482,
+  "end": 38.193,
+  "spans": 1,
+  "expected": 1.63,
+  "text": "there are seven rules."
+ },
+ {
+  "scene": 16,
+  "chunk": 2,
+  "start": 0.0,
+  "end": 2.951,
+  "spans": 2,
+  "expected": 2.5,
+  "text": "Rule one. Do not turn on the lights."
+ },
+ {
+  "scene": 17,
+  "chunk": 2,
+  "start": 3.425,
+  "end": 6.13,
+  "spans": 2,
+  "expected": 2.42,
+  "text": "You will want a better look. Don't."
+ },
+ {
+  "scene": 18,
+  "chunk": 2,
+  "start": 6.706,
+  "end": 9.414,
+  "spans": 1,
+  "expected": 3.39,
+  "text": "What it is watching does not know you are awake."
+ },
+ {
+  "scene": 19,
+  "chunk": 2,
+  "start": 9.965,
+  "end": 12.258,
+  "spans": 2,
+  "expected": 2.18,
+  "text": "Turn on the light, and it will."
+ },
+ {
+  "scene": 20,
+  "chunk": 2,
+  "start": 12.897,
+  "end": 14.658,
+  "spans": 1,
+  "expected": 1.77,
+  "text": "Deer are prey animals."
+ },
+ {
+  "scene": 21,
+  "chunk": 2,
+  "start": 15.185,
+  "end": 16.696,
+  "spans": 1,
+  "expected": 3.63,
+  "text": "When they sense danger, they freeze and stare at it."
+ },
+ {
+  "scene": 22,
+  "chunk": 2,
+  "start": 17.119,
+  "end": 18.273,
+  "spans": 1,
+  "expected": 1.21,
+  "text": "Then they run."
+ },
+ {
+  "scene": 23,
+  "chunk": 2,
+  "start": 18.49,
+  "end": 20.466,
+  "spans": 1,
+  "expected": 1.45,
+  "text": "This one will not."
+ },
+ {
+  "scene": 24,
+  "chunk": 2,
+  "start": 21.15,
+  "end": 24.397,
+  "spans": 2,
+  "expected": 4.76,
+  "text": "Not for a car. Not for a falling branch. Not for your knock on the glass."
+ },
+ {
+  "scene": 25,
+  "chunk": 2,
+  "start": 24.922,
+  "end": 29.878,
+  "spans": 3,
+  "expected": 3.71,
+  "text": "Whatever it is watching is closer than any of those."
+ },
+ {
+  "scene": 26,
+  "chunk": 2,
+  "start": 30.383,
+  "end": 33.452,
+  "spans": 1,
+  "expected": 1.85,
+  "text": "Rule two. Watch the head."
+ },
+ {
+  "scene": 27,
+  "chunk": 2,
+  "start": 34.169,
+  "end": 35.031,
+  "spans": 1,
+  "expected": 1.69,
+  "text": "Not the eyes. The head."
+ },
+ {
+  "scene": 28,
+  "chunk": 2,
+  "start": 35.506,
+  "end": 38.494,
+  "spans": 2,
+  "expected": 3.63,
+  "text": "If it points at the kitchen, stay out of the kitchen."
+ },
+ {
+  "scene": 29,
+  "chunk": 2,
+  "start": 38.953,
+  "end": 44.53,
+  "spans": 3,
+  "expected": 3.63,
+  "text": "If it turns to the hallway, do not enter the hallway."
+ },
+ {
+  "scene": 30,
+  "chunk": 2,
+  "start": 45.088,
+  "end": 49.082,
+  "spans": 2,
+  "expected": 3.95,
+  "text": "If it rises toward your window, step away from the glass."
+ },
+ {
+  "scene": 31,
+  "chunk": 2,
+  "start": 49.671,
+  "end": 55.06,
+  "spans": 2,
+  "expected": 4.11,
+  "text": "It is not following you. It is following something inside."
+ },
+ {
+  "scene": 32,
+  "chunk": 2,
+  "start": 55.694,
+  "end": 62.641,
+  "spans": 3,
+  "expected": 2.5,
+  "text": "Do not be standing where it stops."
+ },
+ {
+  "scene": 33,
+  "chunk": 3,
+  "start": 0.0,
+  "end": 4.004,
+  "spans": 3,
+  "expected": 2.26,
+  "text": "Rule three. If it stamps, freeze."
+ },
+ {
+  "scene": 34,
+  "chunk": 3,
+  "start": 4.718,
+  "end": 8.607,
+  "spans": 2,
+  "expected": 2.58,
+  "text": "One strike. Hard. Against the ground."
+ },
+ {
+  "scene": 35,
+  "chunk": 3,
+  "start": 9.229,
+  "end": 13.596,
+  "spans": 4,
+  "expected": 2.11,
+  "text": "Stop. Do not move. Do not speak."
+ },
+ {
+  "scene": 36,
+  "chunk": 3,
+  "start": 13.977,
+  "end": 16.548,
+  "spans": 2,
+  "expected": 1.48,
+  "text": "Do not turn around."
+ },
+ {
+  "scene": 37,
+  "chunk": 3,
+  "start": 17.234,
+  "end": 20.735,
+  "spans": 1,
+  "expected": 3.75,
+  "text": "The stamp means something is close enough to react to."
+ },
+ {
+  "scene": 38,
+  "chunk": 3,
+  "start": 21.376,
+  "end": 24.048,
+  "spans": 2,
+  "expected": 3.05,
+  "text": "You may hear breathing. The floor may creak."
+ },
+ {
+  "scene": 39,
+  "chunk": 3,
+  "start": 24.661,
+  "end": 27.636,
+  "spans": 1,
+  "expected": 4.14,
+  "text": "You may feel something close enough to touch your shoulder."
+ },
+ {
+  "scene": 40,
+  "chunk": 3,
+  "start": 28.204,
+  "end": 29.393,
+  "spans": 1,
+  "expected": 0.94,
+  "text": "Ignore it."
+ },
+ {
+  "scene": 41,
+  "chunk": 3,
+  "start": 30.09,
+  "end": 34.313,
+  "spans": 2,
+  "expected": 3.2,
+  "text": "At the second strike, walk to the nearest exit."
+ },
+ {
+  "scene": 42,
+  "chunk": 3,
+  "start": 35.007,
+  "end": 39.414,
+  "spans": 2,
+  "expected": 4.69,
+  "text": "If the second strike comes from inside the house, you waited too long."
+ },
+ {
+  "scene": 43,
+  "chunk": 3,
+  "start": 40.01,
+  "end": 43.75,
+  "spans": 3,
+  "expected": 3.51,
+  "text": "Rule four. If someone calls your name, do not answer."
+ },
+ {
+  "scene": 44,
+  "chunk": 3,
+  "start": 44.521,
+  "end": 46.373,
+  "spans": 1,
+  "expected": 2.5,
+  "text": "This is the rule most people break."
+ },
+ {
+  "scene": 45,
+  "chunk": 3,
+  "start": 46.953,
+  "end": 50.51,
+  "spans": 2,
+  "expected": 3.36,
+  "text": "It will sound like your mother. From the kitchen."
+ },
+ {
+  "scene": 46,
+  "chunk": 3,
+  "start": 51.062,
+  "end": 53.017,
+  "spans": 1,
+  "expected": 2.89,
+  "text": "Or your brother. Asking why you are awake."
+ },
+ {
+  "scene": 47,
+  "chunk": 3,
+  "start": 53.703,
+  "end": 57.542,
+  "spans": 2,
+  "expected": 3.12,
+  "text": "The voice will be normal. Listen to the words."
+ },
+ {
+  "scene": 48,
+  "chunk": 3,
+  "start": 58.131,
+  "end": 61.601,
+  "spans": 2,
+  "expected": 3.83,
+  "text": "It will not tell you to come down. It will tell you to stay."
+ },
+ {
+  "scene": 49,
+  "chunk": 3,
+  "start": 62.257,
+  "end": 65.266,
+  "spans": 2,
+  "expected": 2.26,
+  "text": "\"It's cold outside.\" \"Go back to bed.\""
+ },
+ {
+  "scene": 50,
+  "chunk": 3,
+  "start": 65.856,
+  "end": 71.364,
+  "spans": 4,
+  "expected": 3.67,
+  "text": "Ignore it, and it gets angry. Then scared. Then it cries."
+ },
+ {
+  "scene": 51,
+  "chunk": 3,
+  "start": 72.081,
+  "end": 72.906,
+  "spans": 1,
+  "expected": 1.17,
+  "text": "Do not answer."
+ },
+ {
+  "scene": 52,
+  "chunk": 3,
+  "start": 73.513,
+  "end": 78.079,
+  "spans": 2,
+  "expected": 4.14,
+  "text": "It knows you are leaving. It is running out of ways to stop you."
+ },
+ {
+  "scene": 53,
+  "chunk": 4,
+  "start": 0.0,
+  "end": 5.64,
+  "spans": 3,
+  "expected": 4.5,
+  "text": "Rule five. If the deer walks toward the house, you have one minute."
+ },
+ {
+  "scene": 54,
+  "chunk": 4,
+  "start": 6.319,
+  "end": 7.956,
+  "spans": 1,
+  "expected": 2.09,
+  "text": "It does not walk like a deer."
+ },
+ {
+  "scene": 55,
+  "chunk": 4,
+  "start": 8.467,
+  "end": 14.178,
+  "spans": 3,
+  "expected": 3.54,
+  "text": "The legs move slowly. The body does not move at all."
+ },
+ {
+  "scene": 56,
+  "chunk": 4,
+  "start": 14.768,
+  "end": 20.328,
+  "spans": 3,
+  "expected": 4.66,
+  "text": "The head does not bob. The eyes do not blink. The hooves make no sound."
+ },
+ {
+  "scene": 57,
+  "chunk": 4,
+  "start": 21.302,
+  "end": 25.174,
+  "spans": 1,
+  "expected": 2.97,
+  "text": "One woman saw it from her bedroom window."
+ },
+ {
+  "scene": 58,
+  "chunk": 4,
+  "start": 25.839,
+  "end": 28.797,
+  "spans": 1,
+  "expected": 3.38,
+  "text": "It stood under the same tree for almost an hour."
+ },
+ {
+  "scene": 59,
+  "chunk": 4,
+  "start": 29.371,
+  "end": 34.154,
+  "spans": 3,
+  "expected": 2.33,
+  "text": "At exactly 3:17, it took one step."
+ },
+ {
+  "scene": 60,
+  "chunk": 4,
+  "start": 34.777,
+  "end": 37.744,
+  "spans": 1,
+  "expected": 3.94,
+  "text": "Her husband laughed. He went downstairs to scare it off."
+ },
+ {
+  "scene": 61,
+  "chunk": 4,
+  "start": 38.434,
+  "end": 42.966,
+  "spans": 3,
+  "expected": 3.14,
+  "text": "He reached the bottom step. Then he stopped."
+ },
+ {
+  "scene": 62,
+  "chunk": 4,
+  "start": 43.572,
+  "end": 46.109,
+  "spans": 2,
+  "expected": 2.73,
+  "text": "She called his name. He did not answer."
+ },
+ {
+  "scene": 63,
+  "chunk": 4,
+  "start": 46.783,
+  "end": 52.791,
+  "spans": 2,
+  "expected": 5.06,
+  "text": "Then his voice came from the kitchen. And from the stairs. At the same time."
+ },
+ {
+  "scene": 64,
+  "chunk": 4,
+  "start": 53.509,
+  "end": 55.106,
+  "spans": 1,
+  "expected": 2.17,
+  "text": "She left through the window."
+ },
+ {
+  "scene": 65,
+  "chunk": 4,
+  "start": 55.781,
+  "end": 60.464,
+  "spans": 3,
+  "expected": 5.14,
+  "text": "The police found every light in the house on. They did not find her husband."
+ },
+ {
+  "scene": 66,
+  "chunk": 4,
+  "start": 60.88,
+  "end": 63.141,
+  "spans": 1,
+  "expected": 3.46,
+  "text": "Something upstairs was still calling her name."
+ },
+ {
+  "scene": 67,
+  "chunk": 5,
+  "start": 0.0,
+  "end": 5.739,
+  "spans": 3,
+  "expected": 4.19,
+  "text": "Rule six. If the deer is facing the front door, do not use it."
+ },
+ {
+  "scene": 68,
+  "chunk": 5,
+  "start": 6.118,
+  "end": 8.885,
+  "spans": 3,
+  "expected": 2.01,
+  "text": "Back door. Garage. Window."
+ },
+ {
+  "scene": 69,
+  "chunk": 5,
+  "start": 9.445,
+  "end": 11.84,
+  "spans": 1,
+  "expected": 3.18,
+  "text": "Never walk into what the deer is watching."
+ },
+ {
+  "scene": 70,
+  "chunk": 5,
+  "start": 12.445,
+  "end": 18.529,
+  "spans": 4,
+  "expected": 5.03,
+  "text": "Listen before you open anything. Scratching means find another way."
+ },
+ {
+  "scene": 71,
+  "chunk": 5,
+  "start": 19.133,
+  "end": 21.619,
+  "spans": 2,
+  "expected": 2.35,
+  "text": "Knocking means do not answer."
+ },
+ {
+  "scene": 72,
+  "chunk": 5,
+  "start": 22.211,
+  "end": 27.962,
+  "spans": 3,
+  "expected": 4.53,
+  "text": "Your own voice asking to be let in means get away from the door."
+ },
+ {
+  "scene": 73,
+  "chunk": 5,
+  "start": 28.53,
+  "end": 32.193,
+  "spans": 1,
+  "expected": 3.6,
+  "text": "By now, it has heard you talk. It has heard you walk."
+ },
+ {
+  "scene": 74,
+  "chunk": 5,
+  "start": 32.727,
+  "end": 38.116,
+  "spans": 3,
+  "expected": 4.19,
+  "text": "It has learned your breathing. It is getting better at it."
+ },
+ {
+  "scene": 75,
+  "chunk": 5,
+  "start": 38.783,
+  "end": 43.196,
+  "spans": 3,
+  "expected": 3.6,
+  "text": "Rule seven. Once you are outside, do not look back."
+ },
+ {
+  "scene": 76,
+  "chunk": 5,
+  "start": 43.605,
+  "end": 47.618,
+  "spans": 3,
+  "expected": 3.35,
+  "text": "Keep walking. Past the driveway. Past the car."
+ },
+ {
+  "scene": 77,
+  "chunk": 5,
+  "start": 47.964,
+  "end": 50.481,
+  "spans": 1,
+  "expected": 3.6,
+  "text": "If the front door opens behind you, keep walking."
+ },
+ {
+  "scene": 78,
+  "chunk": 5,
+  "start": 51.134,
+  "end": 55.912,
+  "spans": 2,
+  "expected": 5.03,
+  "text": "There may be footsteps. Someone may shout that you forgot something."
+ },
+ {
+  "scene": 79,
+  "chunk": 5,
+  "start": 56.511,
+  "end": 61.07,
+  "spans": 2,
+  "expected": 2.93,
+  "text": "Only at the road do you look at the deer."
+ },
+ {
+  "scene": 80,
+  "chunk": 5,
+  "start": 61.697,
+  "end": 66.323,
+  "spans": 3,
+  "expected": 3.94,
+  "text": "If it is still in the yard, you are too close. Keep going."
+ },
+ {
+  "scene": 81,
+  "chunk": 5,
+  "start": 66.943,
+  "end": 70.055,
+  "spans": 2,
+  "expected": 2.26,
+  "text": "If it is gone, you are not safe."
+ },
+ {
+  "scene": 82,
+  "chunk": 5,
+  "start": 70.66,
+  "end": 76.999,
+  "spans": 3,
+  "expected": 5.2,
+  "text": "Check the windows. Briefly. Look for someone standing behind the glass."
+ },
+ {
+  "scene": 83,
+  "chunk": 6,
+  "start": 0.0,
+  "end": 2.248,
+  "spans": 1,
+  "expected": 2.92,
+  "text": "We left one thing out of this file."
+ },
+ {
+  "scene": 84,
+  "chunk": 6,
+  "start": 2.992,
+  "end": 7.502,
+  "spans": 1,
+  "expected": 4.15,
+  "text": "Survivors check their cameras the next morning."
+ },
+ {
+  "scene": 85,
+  "chunk": 6,
+  "start": 8.078,
+  "end": 10.046,
+  "spans": 2,
+  "expected": 3.3,
+  "text": "Every recording shows the same thing."
+ },
+ {
+  "scene": 86,
+  "chunk": 6,
+  "start": 10.728,
+  "end": 16.428,
+  "spans": 2,
+  "expected": 5.84,
+  "text": "The deer was facing one window before anyone had walked into that room."
+ },
+ {
+  "scene": 87,
+  "chunk": 6,
+  "start": 16.568,
+  "end": 17.218,
+  "spans": 1,
+  "expected": 1.32,
+  "text": "Look closer."
+ },
+ {
+  "scene": 88,
+  "chunk": 6,
+  "start": 17.341,
+  "end": 22.493,
+  "spans": 3,
+  "expected": 5.66,
+  "text": "Something was already standing behind the glass. Watching the deer."
+ },
+ {
+  "scene": 89,
+  "chunk": 6,
+  "start": 23.261,
+  "end": 25.791,
+  "spans": 1,
+  "expected": 2.83,
+  "text": "Same height as you. Same clothes."
+ },
+ {
+  "scene": 90,
+  "chunk": 6,
+  "start": 26.129,
+  "end": 33.031,
+  "spans": 5,
+  "expected": 4.9,
+  "text": "When you walked to the window, it stepped back into the dark."
+ },
+ {
+  "scene": 91,
+  "chunk": 6,
+  "start": 33.572,
+  "end": 36.745,
+  "spans": 1,
+  "expected": 2.83,
+  "text": "That is why the deer never moved."
+ },
+ {
+  "scene": 92,
+  "chunk": 6,
+  "start": 37.29,
+  "end": 41.563,
+  "spans": 2,
+  "expected": 3.77,
+  "text": "It had been standing in your house for hours."
+ },
+ {
+  "scene": 93,
+  "chunk": 6,
+  "start": 42.051,
+  "end": 44.338,
+  "spans": 1,
+  "expected": 2.07,
+  "text": "Practicing being you."
+ },
+ {
+  "scene": 94,
+  "chunk": 6,
+  "start": 44.834,
+  "end": 47.38,
+  "spans": 1,
+  "expected": 3.86,
+  "text": "So if you see a deer in your yard at 3:00 a.m., leave."
+ },
+ {
+  "scene": 95,
+  "chunk": 6,
+  "start": 48.256,
+  "end": 61.126,
+  "spans": 5,
+  "expected": 4.71,
+  "text": "And if your own voice calls you back inside, keep walking."
+ }
+]
