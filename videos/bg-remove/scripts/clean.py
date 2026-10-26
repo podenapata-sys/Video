@@ -21,7 +21,6 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
 W, H = 1080, 1920
-DONOR_STEPS = [12, 24, 40, 60, 80, 100, 120, 140, 160, 180, 200, 230, 260, 300, 340, 380, 420]
 MIN_INLIERS = 40
 MIN_LOCAL = 25
 LOCAL_MARGIN = 260  # px around the hole whose features drive the local fit
@@ -30,7 +29,9 @@ SPLIT_SEARCH = (430, 540)  # columns to look for the gap between them in those f
 HIDDEN_FROM = 385          # from here he is hidden behind her; mattes only add false positives
 LATE = (448, 500)          # he reappears small at the right edge, which no matte catches
 LATE_DONORS = range(386, 446, 5)  # frames where that spot is empty
-MAX_DONORS = 15
+MAX_DONORS = 25
+BG_PERCENTILE = 80
+DEBUG = [int(x) for x in sys.argv[sys.argv.index('--debug') + 1].split(',')] if '--debug' in sys.argv else []
 SHADOW_DROP = 12           # this much darker than the clean background, near him, is his shadow
 MAX_ERR = 14               # mean abs error on the surroundings above which a donor is misaligned  # a pixel this much darker than the clean wall, left of the man, is shadow
 
@@ -210,6 +211,33 @@ def find_shadows(frames, man, people):
     return sh
 
 
+def lift_shadow(img, zone):
+    """Brighten what is still shadowed inside zone (he stands there in nearly every frame, so even the donors have it).
+
+    The lit level is the brightest smoothed luminance along the same row nearby; the gain is computed on
+    smoothed luminance, so the wall texture survives. Only applied inside the (feathered) shadow zone.
+    """
+    if not zone.any():
+        return img
+    lum = cv2.GaussianBlur(cv2.cvtColor(img, cv2.COLOR_RGB2GRAY).astype(np.float32), (0, 0), 1.2)
+    lit = cv2.GaussianBlur(cv2.dilate(lum, np.ones((1, 201), np.uint8)), (0, 0), 15)
+    gain = cv2.GaussianBlur(np.clip(lit / np.maximum(lum, 1), 1, 1.8), (0, 0), 1.5)
+    zone = cv2.dilate(zone.astype(np.uint8), np.ones((21, 21), np.uint8))  # cover the whole soft edge
+    m = cv2.GaussianBlur(zone.astype(np.float32), (0, 0), 8)
+    gain = 1 + (gain - 1) * m
+    return np.clip(img * gain[..., None], 0, 255).astype(np.uint8)
+
+
+def nan_percentile(stack, q):
+    """np.nanpercentile(stack, q, axis=0) without its slowness: NaNs sort last, index by each pixel's valid count."""
+    srt = np.sort(stack, axis=0)
+    cnt = np.count_nonzero(~np.isnan(stack), axis=0)
+    idx = np.clip(np.round((cnt - 1) * q / 100).astype(np.int64), 0, None)
+    out = np.take_along_axis(srt, idx[None], axis=0)[0]
+    out[cnt == 0] = np.nan
+    return out
+
+
 def background(t, box, donors, frames, excl, al, tgt, ring, hole):
     """Median of the MAX_DONORS aligned donor frames that see most of the hole (NaN where none sees it)."""
     y0, y1, x0, x1 = box
@@ -220,6 +248,8 @@ def background(t, box, donors, frames, excl, al, tgt, ring, hole):
             continue
         hm = al.h(s, t, box)
         if hm is None:
+            if t in DEBUG:
+                print(f"  t{t} s{s}: no homography")
             continue
         shift = np.array([[1, 0, -x0], [0, 1, -y0], [0, 0, 1]], np.float64) @ hm
         img = cv2.warpPerspective(frames[s], shift, (rw, rh), flags=cv2.INTER_LINEAR).astype(np.float32)
@@ -230,7 +260,10 @@ def background(t, box, donors, frames, excl, al, tgt, ring, hole):
             continue
         gain = np.median(tgt[both] + 1, axis=0) / np.median(img[both] + 1, axis=0)
         img *= np.clip(gain, 0.85, 1.18)
-        if np.abs(img[both] - tgt[both]).mean() > MAX_ERR:
+        err = np.abs(img[both] - tgt[both]).mean()
+        if t in DEBUG:
+            print(f"  t{t} s{s}: err {err:.1f} gain {np.round(gain, 2)} covers {np.count_nonzero(hole & ~bad)} of {hole.sum()}")
+        if err > MAX_ERR:
             continue
         img[bad] = np.nan
         samples.append((np.count_nonzero(hole & ~bad), img))
@@ -238,7 +271,7 @@ def background(t, box, donors, frames, excl, al, tgt, ring, hole):
     if not samples:
         return np.full_like(tgt, np.nan), 0
     # shadows (his and hers) only ever darken a donor, so take a bright-leaning percentile, not the median
-    return np.nanpercentile(np.stack(samples), 75, axis=0), len(samples)
+    return nan_percentile(np.stack(samples), BG_PERCENTILE), len(samples)
 
 
 def main():
@@ -275,12 +308,16 @@ def main():
     shadow = find_shadows(frames, man, people)
     for t in range(n):
         excl[t] = (cv2.dilate(woman[t].astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
-                   | cv2.dilate(grow(man[t]).astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool) | shadow[t])
+                   | cv2.dilate(grow(man[t]).astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
+                   # only the core of his modelled shadow: the bright percentile rejects the rest
+                   | cv2.erode(shadow[t].astype(np.uint8), np.ones((21, 21), np.uint8)).astype(bool))
 
     patches = {}  # t -> (y0, x0, patch): only the edited regions, the frames stay untouched as donors
     stats = []
     preview = "--preview" in sys.argv
     todo = list(range(0, n, 24)) + [460, 470, 480, 490] if preview else range(n)
+    if DEBUG:
+        todo = DEBUG
     for t in todo:
         mdil = grow(man[t])
         hole = (mdil | shadow[t]) & ~woman[t]
@@ -294,7 +331,8 @@ def main():
         box = (y0, y1, x0, x1)
         tgt = frames[t, y0:y1, x0:x1].astype(np.float32)
         ring = ~excl[t][y0:y1, x0:x1]
-        donors = list(LATE_DONORS) if LATE[0] <= t < LATE[1] else [t + sg * d for d in DONOR_STEPS for sg in (-1, 1)]
+        # every 4th frame of the clip, nearest first; background() keeps the ones that see most of the hole
+        donors = list(LATE_DONORS) if LATE[0] <= t < LATE[1] else sorted(range(t % 4 + 2, n, 4), key=lambda s: abs(s - t))
         hole = hole[y0:y1, x0:x1]
         bg, k = background(t, box, donors, frames, excl, al, tgt, ring, hole)
         have = ~np.isnan(bg[..., 0])
@@ -313,10 +351,18 @@ def main():
         left = hole & ~have
         if left.any():
             fill8 = cv2.inpaint(fill8, left.astype(np.uint8), 9, cv2.INPAINT_TELEA)
+        fill8 = lift_shadow(fill8, shadow[t][y0:y1, x0:x1] & hole)
         a = cv2.GaussianBlur(hole.astype(np.float32), (0, 0), 4)
         a *= ~cv2.dilate(woman[t][y0:y1, x0:x1].astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
         a = a[..., None]
         patches[t] = (y0, x0, np.clip(fill8 * a + tgt * (1 - a), 0, 255).astype(np.uint8))
+        if DEBUG and t in DEBUG:
+            vis = [tgt.astype(np.uint8), np.nan_to_num(bg).astype(np.uint8), patches[t][2]]
+            masks = np.zeros_like(tgt, dtype=np.uint8)
+            masks[..., 0] = hole * 255
+            masks[..., 1] = have * 255
+            masks[..., 2] = np.isin(lab, keep) * 255
+            cv2.imwrite(str(ROOT / f"work_dbg_{t:03d}.jpg"), cv2.cvtColor(np.hstack(vis + [masks]), cv2.COLOR_RGB2BGR))
         stats.append((t, k, int(hole.sum()), int(left.sum())))
         if t % 50 == 0 or preview:
             print(f"frame {t}: {k} donors, hole {hole.sum()} px, inpainted {left.sum()} px")
