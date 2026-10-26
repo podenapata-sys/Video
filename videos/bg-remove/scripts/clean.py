@@ -27,8 +27,12 @@ LOCAL_MARGIN = 260  # px around the hole whose features drive the local fit
 MERGED_UNTIL = 32          # frames where the man and the woman are one blob in the full matte
 SPLIT_SEARCH = (430, 540)  # columns to look for the gap between them in those frames
 HIDDEN_FROM = 386          # from here he is hidden behind her; mattes only add false positives
-LATE = (448, 500)          # he reappears small at the right edge, which no matte catches
-LATE_DONORS = range(392, 446, 4)  # frames where that spot is empty
+# frame: (x0, x1, y0, y1) of him at the right edge, read off a grid; interpolated between keys
+LATE_KEYS = {446: (830, 870, 610, 740), 448: (830, 875, 610, 760), 454: (845, 905, 615, 780),
+             460: (860, 935, 620, 880), 466: (875, 960, 610, 910), 472: (890, 995, 595, 910),
+             478: (925, 1040, 580, 915), 484: (975, 1080, 565, 915), 490: (1020, 1080, 595, 915),
+             495: (1050, 1080, 600, 915)}
+LATE_PAD = 22
 MAX_DONORS = 25
 BG_PERCENTILE = 80
 DEBUG = [int(x) for x in sys.argv[sys.argv.index('--debug') + 1].split(',')] if '--debug' in sys.argv else []
@@ -206,6 +210,18 @@ class Aligner:
         return None
 
 
+def late_box(t):
+    """His box at frame t from LATE_KEYS (linear between keys), or None outside them."""
+    keys = sorted(LATE_KEYS)
+    if not keys[0] <= t <= keys[-1]:
+        return None
+    k1 = next(k for k in keys if k >= t)
+    k0 = max(k for k in keys if k <= t)
+    f = 0 if k1 == k0 else (t - k0) / (k1 - k0)
+    x0, x1, y0, y1 = (int(round(a + (b - a) * f)) for a, b in zip(LATE_KEYS[k0], LATE_KEYS[k1]))
+    return max(0, x0 - LATE_PAD), min(W, x1 + LATE_PAD), max(0, y0 - LATE_PAD), min(H, y1 + LATE_PAD)  # arms, blur
+
+
 def grow(m):
     """His mask grown 12px all round and 70px further down: the matte misses dark feet and floor shadow."""
     g = cv2.dilate(m.astype(np.uint8), np.ones((25, 25), np.uint8))
@@ -231,7 +247,7 @@ def find_shadows(frames, man, people):
     n, q = len(frames), 4
     offs = [None] * n
     for t in range(n):
-        if man[t].sum() < 3000:
+        if man[t].sum() < 3000 or t >= HIDDEN_FROM:
             continue
         mq = cv2.resize(man[t].astype(np.uint8), (W // q, H // q), interpolation=cv2.INTER_NEAREST).astype(bool)
         pq = cv2.resize(cv2.dilate(people[t].astype(np.uint8), np.ones((9, 9), np.uint8)), (W // q, H // q),
@@ -348,20 +364,14 @@ def main():
     for t in range(n):
         excl[t] = cv2.dilate(people[t].astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
 
-    # he reappears at the right edge: whatever differs from the aligned empty frames, right of her, is him
-    for t in range(*LATE):
-        wx = np.nonzero(woman[t].any(0))[0]
-        box = (350, 1400, max(600, (wx[-1] if wx.size else 600) + 10), W)
-        y0, y1, x0, x1 = box
-        tgt = frames[t, y0:y1, x0:x1].astype(np.float32)
-        ring = ~excl[t][y0:y1, x0:x1]
-        bg, k = background(t, box, LATE_DONORS, frames, excl, al, tgt, ring, np.ones(tgt.shape[:2], bool))
-        diff = (np.abs(tgt - bg).max(2) > 38) & ~np.isnan(bg[..., 0]) & ring
-        diff = cv2.morphologyEx(diff.astype(np.uint8), cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
-        diff = cv2.morphologyEx(diff, cv2.MORPH_CLOSE, np.ones((25, 25), np.uint8))
-        kk, lab, st, _ = cv2.connectedComponentsWithStats(diff, 8)
-        sel = np.isin(lab, [i for i in range(1, kk) if st[i, cv2.CC_STAT_AREA] > 1200])
-        man[t, y0:y1, x0:x1] = sel
+    # he reappears small and blurred at the right edge, which no matte catches: boxes keyed by eye, minus her
+    for t in range(n):
+        box = late_box(t)
+        if box:
+            x0, x1, y0, y1 = box
+            m = np.zeros((H, W), bool)
+            m[y0:y1, x0:x1] = True
+            man[t] = m & ~cv2.dilate(woman[t].astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool)
     people = woman | man
     shadow = find_shadows(frames, man, people)
     for t in range(n):
@@ -373,7 +383,7 @@ def main():
     patches = {}  # t -> (y0, x0, patch): only the edited regions, the frames stay untouched as donors
     stats = []
     preview = "--preview" in sys.argv
-    todo = list(range(0, n, 24)) + [460, 470, 480, 490] if preview else range(n)
+    todo = list(range(0, n, 24)) + [454, 466, 478, 490] if preview else range(n)
     if DEBUG:
         todo = DEBUG
     for t in todo:
@@ -390,7 +400,7 @@ def main():
         tgt = frames[t, y0:y1, x0:x1].astype(np.float32)
         ring = ~excl[t][y0:y1, x0:x1]
         # every 4th frame of the clip, nearest first; background() keeps the ones that see most of the hole
-        donors = list(LATE_DONORS) if LATE[0] <= t < LATE[1] else sorted(range(t % 4 + 2, n, 4), key=lambda s: abs(s - t))
+        donors = sorted(range(t % 4 + 2, n, 4), key=lambda s: abs(s - t))
         hole = hole[y0:y1, x0:x1]
         bg, k = background(t, box, donors, frames, excl, al, tgt, ring, hole)
         have = ~np.isnan(bg[..., 0])
