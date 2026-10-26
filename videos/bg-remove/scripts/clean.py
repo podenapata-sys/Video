@@ -21,11 +21,17 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
 W, H = 1080, 1920
-DONOR_STEPS = [20, 40, 60, 90, 120, 160, 200, 250, 300, 360]
+DONOR_STEPS = [12, 24, 40, 60, 80, 100, 120, 140, 160, 180, 200, 230, 260, 300, 340, 380, 420]
 MIN_INLIERS = 40
-SHADOW_DROP = 14
+MIN_LOCAL = 25
+LOCAL_MARGIN = 260  # px around the hole whose features drive the local fit
 MERGED_UNTIL = 32          # frames where the man and the woman are one blob in the full matte
-SPLIT_SEARCH = (430, 540)  # columns to look for the gap between them in those frames  # a pixel this much darker than the clean wall, left of the man, is shadow
+SPLIT_SEARCH = (430, 540)  # columns to look for the gap between them in those frames
+HIDDEN_FROM = 385          # from here he is hidden behind her; mattes only add false positives
+LATE = (448, 500)          # he reappears small at the right edge, which no matte catches
+LATE_DONORS = range(386, 446, 5)  # frames where that spot is empty
+MAX_DONORS = 15
+MAX_ERR = 14               # mean abs error on the surroundings above which a donor is misaligned  # a pixel this much darker than the clean wall, left of the man, is shadow
 
 
 def read_raw(path, vf, pix, ch, w=W):
@@ -45,6 +51,7 @@ def split_people(alpha, alpha_l, alpha_r):
     """
     n = len(alpha)
     woman, man = np.zeros((n, H, W), bool), np.zeros((n, H, W), bool)
+    last = None  # (right edge, bottom row) of the man in the previous frame, to follow him into her blob
     for t in range(n):
         b = (alpha[t] > 100).astype(np.uint8)
         k, lab, stats, _ = cv2.connectedComponentsWithStats(b, 8)
@@ -56,13 +63,37 @@ def split_people(alpha, alpha_l, alpha_r):
             cols = w[:, SPLIT_SEARCH[0]:SPLIT_SEARCH[1]].sum(0)
             cut = SPLIT_SEARCH[0] + int(np.argmin(cols))
             w[:, :cut] = False
+        elif t < HIDDEN_FROM and last and sum(stats[i, cv2.CC_STAT_AREA] > 2500 for i in comps) == 1:
+            # he walked into her blob (frames ~304-384): cut him off at the thinnest column near where he just was,
+            # and only above his feet (he is further back, so higher in the frame than her hem)
+            a0, a1 = max(0, last[0] - 50), min(W, last[0] + 60)
+            cols = w[: last[1] + 30, a0:a1].sum(0)
+            cut = a0 + int(np.argmin(cols))
+            part = w.copy()
+            part[:, cut:] = False
+            part[last[1] + 30:] = False
+            w &= ~part
         crop = np.zeros((H, W), bool)
         crop[:, : W // 2] = alpha_l[t] > 100
         crop[:, W // 2:] = alpha_r[t] > 100
         m = ((b > 0) | crop) & ~cv2.dilate(w.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
-        k, lab, stats, _ = cv2.connectedComponentsWithStats(m.astype(np.uint8), 8)
-        keep = [i for i in range(1, k) if stats[i, cv2.CC_STAT_AREA] > 2500]
+        if t >= HIDDEN_FROM:  # he is behind her, then only at the right edge (found by find_late_man)
+            woman[t] = w
+            continue
+        k, lab, stats, cen = cv2.connectedComponentsWithStats(m.astype(np.uint8), 8)
+        near = cv2.dilate(w.astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
+        wy = np.nonzero(w.any(1))[0]
+        keep = []
+        for i in range(1, k):
+            if stats[i, cv2.CC_STAT_AREA] <= 2500:
+                continue
+            # a blob stuck to her lower body is her shoe / scarf / hem that her matte missed, not him
+            if wy.size and (near & (lab == i)).any() and cen[i][1] > wy[0] + 0.6 * (wy[-1] - wy[0]):
+                continue
+            keep.append(i)
         woman[t], man[t] = w, np.isin(lab, keep)
+        mx, my = np.nonzero(man[t].any(0))[0], np.nonzero(man[t].any(1))[0]
+        last = (int(mx[-1]), int(my[-1])) if mx.size else last
     return woman, man
 
 
@@ -82,31 +113,131 @@ class Aligner:
             self.des.append(des)
         self.cache = {}
 
-    def h(self, s, t):
-        """Homography mapping frame s pixels onto frame t (full resolution), or None."""
-        if (s, t) in self.cache:
-            return self.cache[(s, t)]
-        out = None
-        if self.des[s] is not None and self.des[t] is not None and len(self.des[s]) > 10 and len(self.des[t]) > 10:
-            pairs = self.bf.knnMatch(self.des[s], self.des[t], k=2)
-            good = [m for m, n2 in (p for p in pairs if len(p) == 2) if m.distance < 0.75 * n2.distance]
-            if len(good) >= MIN_INLIERS:
+    def matches(self, s, t):
+        """Ratio-tested ORB matches s -> t as two (k, 2) point arrays at half resolution."""
+        if (s, t) not in self.cache:
+            a = b = np.zeros((0, 2), np.float32)
+            if self.des[s] is not None and self.des[t] is not None and len(self.des[s]) > 10 and len(self.des[t]) > 10:
+                pairs = self.bf.knnMatch(self.des[s], self.des[t], k=2)
+                good = [m for m, n2 in (p for p in pairs if len(p) == 2) if m.distance < 0.75 * n2.distance]
                 a = self.kp[s][[m.queryIdx for m in good]]
                 b = self.kp[t][[m.trainIdx for m in good]]
-                hm, inl = cv2.findHomography(a, b, cv2.RANSAC, 2.0)
-                if hm is not None and inl.sum() >= MIN_INLIERS:
-                    sc = np.diag([2.0, 2.0, 1.0])
-                    out = sc @ hm @ np.linalg.inv(sc)
-        self.cache[(s, t)] = out
-        return out
+            self.cache[(s, t)] = (a, b)
+        return self.cache[(s, t)]
+
+    def h(self, s, t, box=None):
+        """Homography mapping frame s onto frame t (full resolution), or None.
+
+        With box (y0, y1, x0, x1 in frame t) only features near it are used, so the fit follows the
+        wall / floor right around the hole instead of the whole room; falls back to all features.
+        """
+        a, b = self.matches(s, t)
+        sc = np.diag([2.0, 2.0, 1.0])
+        for local in ((True, False) if box else (False,)):
+            sel = np.ones(len(a), bool)
+            if local:
+                y0, y1, x0, x1 = (v / 2 for v in box)
+                m = LOCAL_MARGIN / 2
+                sel = (b[:, 0] > x0 - m) & (b[:, 0] < x1 + m) & (b[:, 1] > y0 - m) & (b[:, 1] < y1 + m)
+            need = MIN_LOCAL if local else MIN_INLIERS
+            if sel.sum() < need:
+                continue
+            hm, inl = cv2.findHomography(a[sel], b[sel], cv2.RANSAC, 2.0)
+            if hm is not None and inl.sum() >= need:
+                return sc @ hm @ np.linalg.inv(sc)
+        return None
 
 
-def shadow_zone(man, hgt):
-    """Where his shadow can fall: the man's mask smeared to the left (light comes from the right)."""
-    reach = max(3, int(0.35 * hgt))
-    kern = np.ones((9, reach + 1), np.uint8)
-    # dst(x) = max src(x + dx), dx in [0, reach]: a pixel joins the zone if the man is up to `reach` px to its right
-    return cv2.dilate(man.astype(np.uint8), kern, anchor=(0, 4)).astype(bool)
+def grow(m):
+    """His mask grown 12px all round and 70px further down: the matte misses dark feet and floor shadow."""
+    g = cv2.dilate(m.astype(np.uint8), np.ones((25, 25), np.uint8))
+    return cv2.dilate(g, np.ones((71, 9), np.uint8), anchor=(4, 70)).astype(bool)  # src(y - d): extends DOWN
+
+
+def shifted(m, dx, dy):
+    """m moved by (dx, dy) pixels, without wrap-around."""
+    out = np.zeros_like(m)
+    h, w = m.shape
+    ys, yd = (slice(0, h - dy), slice(dy, h)) if dy >= 0 else (slice(-dy, h), slice(0, h + dy))
+    xs, xd = (slice(0, w - dx), slice(dx, w)) if dx >= 0 else (slice(-dx, w), slice(0, w + dx))
+    out[yd, xd] = m[ys, xs]
+    return out
+
+
+def find_shadows(frames, man, people):
+    """His wall shadow is his own silhouette moved left (the light is to the right of him).
+
+    For each frame the darkest left shift of his mask (vs. its surroundings) is searched at quarter
+    resolution, the offsets are smoothed over time, and the shifted, grown silhouette is the shadow.
+    """
+    n, q = len(frames), 4
+    offs = [None] * n
+    for t in range(n):
+        if man[t].sum() < 3000:
+            continue
+        mq = cv2.resize(man[t].astype(np.uint8), (W // q, H // q), interpolation=cv2.INTER_NEAREST).astype(bool)
+        pq = cv2.resize(cv2.dilate(people[t].astype(np.uint8), np.ones((9, 9), np.uint8)), (W // q, H // q),
+                        interpolation=cv2.INTER_NEAREST).astype(bool)
+        lum = cv2.resize(cv2.cvtColor(frames[t], cv2.COLOR_RGB2GRAY), (W // q, H // q)).astype(np.float32)
+        xs = np.nonzero(mq.any(0))[0]
+        best = (0.0, None)
+        for dx in range(4, int(1.6 * (xs[-1] - xs[0])) + 10, 2):
+            for dy in (-8, -4, 0, 4, 8):
+                sm = shifted(mq, -dx, dy) & ~pq
+                if sm.sum() < 0.35 * mq.sum():
+                    continue
+                ring = cv2.dilate(sm.astype(np.uint8), np.ones((15, 15), np.uint8)).astype(bool)
+                ring &= ~cv2.dilate(sm.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool) & ~pq
+                if ring.sum() < 50:
+                    continue
+                score = lum[sm].mean() - lum[ring].mean()
+                if score < best[0]:
+                    best = (score, (dx * q, dy * q))
+        if best[0] < -8:
+            offs[t] = best[1]
+    # smooth the offsets over time (median of the 9 neighbours that have one)
+    sh = np.zeros((n, H, W), bool)
+    for t in range(n):
+        if offs[t] is None:
+            continue
+        nb = [offs[k] for k in range(max(0, t - 4), min(n, t + 5)) if offs[k] is not None]
+        dx, dy = int(np.median([o[0] for o in nb])), int(np.median([o[1] for o in nb]))
+        g = cv2.dilate(shifted(man[t], -dx, dy).astype(np.uint8), np.ones((41, 41), np.uint8)).astype(bool)
+        sh[t] = g & ~people[t]
+    found = sum(o is not None for o in offs)
+    print(f"shadow found in {found} frames")
+    return sh
+
+
+def background(t, box, donors, frames, excl, al, tgt, ring, hole):
+    """Median of the MAX_DONORS aligned donor frames that see most of the hole (NaN where none sees it)."""
+    y0, y1, x0, x1 = box
+    rh, rw = y1 - y0, x1 - x0
+    samples = []
+    for s in donors:
+        if not 0 <= s < len(frames) or s == t:
+            continue
+        hm = al.h(s, t, box)
+        if hm is None:
+            continue
+        shift = np.array([[1, 0, -x0], [0, 1, -y0], [0, 0, 1]], np.float64) @ hm
+        img = cv2.warpPerspective(frames[s], shift, (rw, rh), flags=cv2.INTER_LINEAR).astype(np.float32)
+        bad = cv2.warpPerspective(excl[s].astype(np.uint8), shift, (rw, rh), flags=cv2.INTER_NEAREST,
+                                  borderMode=cv2.BORDER_CONSTANT, borderValue=1).astype(bool)
+        both = ring & ~bad
+        if both.sum() < 500:
+            continue
+        gain = np.median(tgt[both] + 1, axis=0) / np.median(img[both] + 1, axis=0)
+        img *= np.clip(gain, 0.85, 1.18)
+        if np.abs(img[both] - tgt[both]).mean() > MAX_ERR:
+            continue
+        img[bad] = np.nan
+        samples.append((np.count_nonzero(hole & ~bad), img))
+    samples = [img for cov, img in sorted(samples, key=lambda x: -x[0])[:MAX_DONORS] if cov > 0]
+    if not samples:
+        return np.full_like(tgt, np.nan), 0
+    # shadows (his and hers) only ever darken a donor, so take a bright-leaning percentile, not the median
+    return np.nanpercentile(np.stack(samples), 75, axis=0), len(samples)
 
 
 def main():
@@ -121,75 +252,61 @@ def main():
     people = woman | man
     al = Aligner(frames, people)
     print("features done")
-
-    hgt = np.zeros(n)
-    excl = np.zeros((n, H, W), bool)  # donor pixels never to borrow: anyone, the man's shadow zone, edges of masks
+    excl = np.zeros((n, H, W), bool)  # donor pixels never to borrow: anyone (grown) and his shadow
     for t in range(n):
-        ys = np.nonzero(man[t].any(1))[0]
-        hgt[t] = ys[-1] - ys[0] if len(ys) else 0
-        e = cv2.dilate(people[t].astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
-        if hgt[t]:
-            e |= shadow_zone(cv2.dilate(man[t].astype(np.uint8), np.ones((31, 31), np.uint8)), hgt[t])
-        excl[t] = e
+        excl[t] = cv2.dilate(people[t].astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
+
+    # he reappears at the right edge: whatever differs from the aligned empty frames, right of her, is him
+    for t in range(*LATE):
+        wx = np.nonzero(woman[t].any(0))[0]
+        box = (350, 1400, max(600, (wx[-1] if wx.size else 600) + 10), W)
+        y0, y1, x0, x1 = box
+        tgt = frames[t, y0:y1, x0:x1].astype(np.float32)
+        ring = ~excl[t][y0:y1, x0:x1]
+        bg, k = background(t, box, LATE_DONORS, frames, excl, al, tgt, ring, np.ones(tgt.shape[:2], bool))
+        diff = (np.abs(tgt - bg).max(2) > 38) & ~np.isnan(bg[..., 0]) & ring
+        diff = cv2.morphologyEx(diff.astype(np.uint8), cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
+        diff = cv2.morphologyEx(diff, cv2.MORPH_CLOSE, np.ones((25, 25), np.uint8))
+        kk, lab, st, _ = cv2.connectedComponentsWithStats(diff, 8)
+        sel = np.isin(lab, [i for i in range(1, kk) if st[i, cv2.CC_STAT_AREA] > 1200])
+        man[t, y0:y1, x0:x1] = sel
+    people = woman | man
+    shadow = find_shadows(frames, man, people)
+    for t in range(n):
+        excl[t] = (cv2.dilate(woman[t].astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
+                   | cv2.dilate(grow(man[t]).astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool) | shadow[t])
 
     patches = {}  # t -> (y0, x0, patch): only the edited regions, the frames stay untouched as donors
     stats = []
     preview = "--preview" in sys.argv
-    todo = range(0, n, 32) if preview else range(n)
+    todo = list(range(0, n, 24)) + [460, 470, 480, 490] if preview else range(n)
     for t in todo:
-        if hgt[t] < 40:
+        mdil = grow(man[t])
+        hole = (mdil | shadow[t]) & ~woman[t]
+        if hole.sum() < 400:
             continue
-        mdil = cv2.dilate(man[t].astype(np.uint8), np.ones((25, 25), np.uint8)).astype(bool)
-        zone = shadow_zone(mdil, hgt[t])
-        ys, xs = np.nonzero(zone)
-        y0, y1 = max(0, ys.min() - 40), min(H, ys.max() + 40)
-        x0, x1 = max(0, xs.min() - 40), min(W, xs.max() + 40)
-        rh, rw = y1 - y0, x1 - x0
+        ys, xs = np.nonzero(hole)
+        y0, y1 = max(0, ys.min() - 60), min(H, ys.max() + 60)
+        x0, x1 = max(0, xs.min() - 60), min(W, xs.max() + 60)
+        box = (y0, y1, x0, x1)
         tgt = frames[t, y0:y1, x0:x1].astype(np.float32)
         ring = ~excl[t][y0:y1, x0:x1]
-        samples = []
-        for d in DONOR_STEPS:
-            for s in (t - d, t + d):
-                if not 0 <= s < n:
-                    continue
-                hm = al.h(s, t)
-                if hm is None:
-                    continue
-                shift = np.array([[1, 0, -x0], [0, 1, -y0], [0, 0, 1]], np.float64) @ hm
-                img = cv2.warpPerspective(frames[s], shift, (rw, rh), flags=cv2.INTER_LINEAR).astype(np.float32)
-                bad = cv2.warpPerspective(excl[s].astype(np.uint8), shift, (rw, rh), flags=cv2.INTER_NEAREST,
-                                          borderMode=cv2.BORDER_CONSTANT, borderValue=1).astype(bool)
-                both = ring & ~bad
-                if both.sum() < 500:
-                    continue
-                gain = np.median(tgt[both] + 1, axis=0) / np.median(img[both] + 1, axis=0)
-                img *= np.clip(gain, 0.8, 1.25)
-                img[bad] = np.nan
-                samples.append(img)
-        if samples:
-            bg = np.nanmedian(np.stack(samples), axis=0)
-        else:
-            bg = np.full_like(tgt, np.nan)
+        donors = list(LATE_DONORS) if LATE[0] <= t < LATE[1] else [t + sg * d for d in DONOR_STEPS for sg in (-1, 1)]
+        hole = hole[y0:y1, x0:x1]
+        bg, k = background(t, box, donors, frames, excl, al, tgt, ring, hole)
         have = ~np.isnan(bg[..., 0])
-        # his shadow: clearly darker than the clean wall, inside the shadow zone, not on the woman
-        lum_t = tgt @ np.float32([0.3, 0.59, 0.11])
-        lum_b = np.nan_to_num(bg) @ np.float32([0.3, 0.59, 0.11])
-        shadow = zone[y0:y1, x0:x1] & have & (lum_b - lum_t > SHADOW_DROP) & ~woman[t][y0:y1, x0:x1]
-        shadow = cv2.morphologyEx(shadow.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((21, 21), np.uint8))
-        hole = (mdil[y0:y1, x0:x1] | shadow.astype(bool)) & ~woman[t][y0:y1, x0:x1]
         hole = cv2.dilate(hole.astype(np.uint8), np.ones((7, 7), np.uint8)).astype(bool) & ~woman[t][y0:y1, x0:x1]
-        fill = np.where(have[..., None], bg, tgt)
+        fill8 = np.clip(np.where(have[..., None], bg, tgt), 0, 255).astype(np.uint8)
         left = hole & ~have
-        fill8 = np.clip(fill, 0, 255).astype(np.uint8)
         if left.any():
             fill8 = cv2.inpaint(fill8, left.astype(np.uint8), 9, cv2.INPAINT_TELEA)
         a = cv2.GaussianBlur(hole.astype(np.float32), (0, 0), 4)
         a *= ~cv2.dilate(woman[t][y0:y1, x0:x1].astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
         a = a[..., None]
         patches[t] = (y0, x0, np.clip(fill8 * a + tgt * (1 - a), 0, 255).astype(np.uint8))
-        stats.append((t, len(samples), int(hole.sum()), int(left.sum())))
-        if t % 50 == 0:
-            print(f"frame {t}: {len(samples)} donors, hole {hole.sum()} px, inpainted {left.sum()} px")
+        stats.append((t, k, int(hole.sum()), int(left.sum())))
+        if t % 50 == 0 or preview:
+            print(f"frame {t}: {k} donors, hole {hole.sum()} px, inpainted {left.sum()} px")
 
     uncovered = sum(s[3] for s in stats) / max(1, sum(s[2] for s in stats))
     print(f"processed {len(stats)} frames, {uncovered:.1%} of hole pixels inpainted (no donor)")
