@@ -26,9 +26,9 @@ MIN_LOCAL = 25
 LOCAL_MARGIN = 260  # px around the hole whose features drive the local fit
 MERGED_UNTIL = 32          # frames where the man and the woman are one blob in the full matte
 SPLIT_SEARCH = (430, 540)  # columns to look for the gap between them in those frames
-HIDDEN_FROM = 385          # from here he is hidden behind her; mattes only add false positives
+HIDDEN_FROM = 386          # from here he is hidden behind her; mattes only add false positives
 LATE = (448, 500)          # he reappears small at the right edge, which no matte catches
-LATE_DONORS = range(386, 446, 5)  # frames where that spot is empty
+LATE_DONORS = range(392, 446, 4)  # frames where that spot is empty
 MAX_DONORS = 25
 BG_PERCENTILE = 80
 DEBUG = [int(x) for x in sys.argv[sys.argv.index('--debug') + 1].split(',')] if '--debug' in sys.argv else []
@@ -43,7 +43,27 @@ def read_raw(path, vf, pix, ch, w=W):
     return np.frombuffer(raw, np.uint8).reshape(shape)
 
 
-def split_people(alpha, alpha_l, alpha_r):
+def track_shift(prev, cur, mask):
+    """(dx, dy) that best moves the masked region of prev onto cur (mean abs difference, half resolution)."""
+    if not mask.any():
+        return 0, 0
+    p, c = prev[::2, ::2].astype(np.float32), cur[::2, ::2].astype(np.float32)
+    m = mask[::2, ::2]
+    ys, xs = np.nonzero(m)
+    y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    tpl, msk = p[y0:y1, x0:x1], m[y0:y1, x0:x1]
+    best = (np.inf, 0, 0)
+    for dy in range(-1, 2):  # he walks sideways; vertical search only absorbs jitter (more drifts upward)
+        for dx in range(-9, 10):
+            if y0 + dy < 0 or x0 + dx < 0 or y1 + dy > c.shape[0] or x1 + dx > c.shape[1]:
+                continue
+            err = np.abs(c[y0 + dy:y1 + dy, x0 + dx:x1 + dx] - tpl)[msk].mean()
+            if err < best[0]:
+                best = (err, dx, dy)
+    return best[1] * 2, best[2] * 2
+
+
+def split_people(alpha, alpha_l, alpha_r, frames_gray):
     """Per frame: (woman mask, man mask).
 
     The full-frame matte always finds the woman (the main subject) but often drops the man, so the
@@ -53,35 +73,11 @@ def split_people(alpha, alpha_l, alpha_r):
     """
     n = len(alpha)
     woman, man = np.zeros((n, H, W), bool), np.zeros((n, H, W), bool)
-    last = None  # (right edge, bottom row) of the man in the previous frame, to follow him into her blob
-    for t in range(n):
-        b = (alpha[t] > 100).astype(np.uint8)
-        k, lab, stats, _ = cv2.connectedComponentsWithStats(b, 8)
-        comps = [i for i in range(1, k) if stats[i, cv2.CC_STAT_AREA] > 1500]
-        w = np.zeros((H, W), bool)
-        if comps:
-            w = lab == max(comps, key=lambda i: stats[i, cv2.CC_STAT_AREA])
-        if t < MERGED_UNTIL:  # one blob: man on the left, her on the right
-            cols = w[:, SPLIT_SEARCH[0]:SPLIT_SEARCH[1]].sum(0)
-            cut = SPLIT_SEARCH[0] + int(np.argmin(cols))
-            w[:, :cut] = False
-        elif t < HIDDEN_FROM and last and sum(stats[i, cv2.CC_STAT_AREA] > 2500 for i in comps) == 1:
-            # he walked into her blob (frames ~304-384): cut him off at the thinnest column near where he just was,
-            # and only above his feet (he is further back, so higher in the frame than her hem)
-            a0, a1 = max(0, last[0] - 50), min(W, last[0] + 60)
-            cols = w[: last[1] + 30, a0:a1].sum(0)
-            cut = a0 + int(np.argmin(cols))
-            part = w.copy()
-            part[:, cut:] = False
-            part[last[1] + 30:] = False
-            w &= ~part
-        crop = np.zeros((H, W), bool)
-        crop[:, : W // 2] = alpha_l[t] > 100
-        crop[:, W // 2:] = alpha_r[t] > 100
-        m = ((b > 0) | crop) & ~cv2.dilate(w.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
-        if t >= HIDDEN_FROM:  # he is behind her, then only at the right edge (found by find_late_man)
-            woman[t] = w
-            continue
+    last = None  # (right edge, bottom row) of the man when last seen, to follow him into her blob
+    cut_prev = None
+    tmpl, off = None, (0, 0)  # his silhouette from the last frame he stood apart, and how far he has moved since
+
+    def his_parts(m, w, part):
         k, lab, stats, cen = cv2.connectedComponentsWithStats(m.astype(np.uint8), 8)
         near = cv2.dilate(w.astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
         wy = np.nonzero(w.any(1))[0]
@@ -89,13 +85,73 @@ def split_people(alpha, alpha_l, alpha_r):
         for i in range(1, k):
             if stats[i, cv2.CC_STAT_AREA] <= 2500:
                 continue
+            if part is not None and (part & (lab == i)).any():
+                keep.append(i)  # cut off her blob above his feet: him, whatever its centroid
+                continue
             # a blob stuck to her lower body is her shoe / scarf / hem that her matte missed, not him
             if wy.size and (near & (lab == i)).any() and cen[i][1] > wy[0] + 0.6 * (wy[-1] - wy[0]):
                 continue
             keep.append(i)
-        woman[t], man[t] = w, np.isin(lab, keep)
-        mx, my = np.nonzero(man[t].any(0))[0], np.nonzero(man[t].any(1))[0]
-        last = (int(mx[-1]), int(my[-1])) if mx.size else last
+        return np.isin(lab, keep)
+
+    for t in range(n):
+        b = alpha[t] > 100
+        k, lab, stats, _ = cv2.connectedComponentsWithStats(b.astype(np.uint8), 8)
+        comps = [i for i in range(1, k) if stats[i, cv2.CC_STAT_AREA] > 1500]
+        w = lab == max(comps, key=lambda i: stats[i, cv2.CC_STAT_AREA]) if comps else np.zeros((H, W), bool)
+        if t < MERGED_UNTIL:  # one blob: man on the left, her on the right
+            cols = w[:, SPLIT_SEARCH[0]:SPLIT_SEARCH[1]].sum(0)
+            w[:, : SPLIT_SEARCH[0] + int(np.argmin(cols))] = False
+        if t >= HIDDEN_FROM:  # he is behind her, then only at the right edge (found separately)
+            woman[t] = w
+            continue
+        anyone = b.copy()
+        anyone[:, : W // 2] |= alpha_l[t] > 100
+        anyone[:, W // 2:] |= alpha_r[t] > 100
+
+        def others(wm):
+            return anyone & ~cv2.dilate(wm.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
+
+        mm = his_parts(others(w), w, None)
+        cut = None
+        cols_m = np.nonzero(mm.any(0))[0]
+        near_last = (cols_m > last[0] - 200) & (cols_m < last[0] + 40) if last else np.zeros(0, bool)
+        apart = near_last.any() and mm[:, cols_m[near_last]].sum() > (0.5 * tmpl.sum() if tmpl is not None else 2500)
+        if t >= MERGED_UNTIL and last and not apart:
+            # no separate him where he just was: he walked into her blob (frames ~312-384). Use his exact
+            # silhouette from the last frame he stood apart, moved by his own motion (appearance match), and
+            # give her everything right of the thinnest column near his right edge (she is in front of him)
+            if tmpl is None:
+                tmpl, off = man[t - 1].copy(), (0, 0)
+            visible = shifted(tmpl, *off)
+            if cut_prev is not None:
+                visible[:, cut_prev - 10:] = False  # only his own pixels, not hers in front of him
+            dx, dy = track_shift(frames_gray[t - 1], frames_gray[t], visible)
+            off = (off[0] + dx, off[1] + dy)
+            cur = cv2.dilate(shifted(tmpl, *off).astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
+            ys, xs = np.nonzero(cur)
+            if xs.size:
+                a0, a1 = max(0, xs.max() - 90), min(W, xs.max() + 20)
+                cols = w[ys.min():ys.max() + 1, a0:a1].sum(0)
+                cut = a0 + int(np.nonzero(cols <= cols.min() + 3)[0][-1])
+                if cut_prev is not None:
+                    cut = int(np.clip(cut, cut_prev - 15, cut_prev + 15))  # her edge moves smoothly
+                part = cur & anyone
+                part[:, cut:] = False
+                if part.sum() > 2500:
+                    w = w & ~part
+                    mm = his_parts(others(w), w, part) | part
+                else:
+                    cut = None
+        else:
+            tmpl = None
+        cut_prev = cut
+        woman[t], man[t] = w, mm
+        mx, my = np.nonzero(mm.any(0))[0], np.nonzero(mm.any(1))[0]
+        if cut is not None:
+            last = (cut, last[1])  # follow the cut; keep his foot line from when he stood apart
+        elif mx.size:
+            last = (int(mx[-1]), int(my[-1]))
     return woman, man
 
 
@@ -281,7 +337,9 @@ def main():
     n = min(len(frames), len(alpha), *(len(x) for x in half))
     frames = frames[:n]
     print(f"{n} frames")
-    woman, man = split_people(alpha[:n], half[0][:n], half[1][:n])
+    gray = np.stack([cv2.cvtColor(f, cv2.COLOR_RGB2GRAY) for f in frames])
+    woman, man = split_people(alpha[:n], half[0][:n], half[1][:n], gray)
+    del gray
     del alpha, half
     people = woman | man
     al = Aligner(frames, people)
