@@ -31,6 +31,7 @@ HIDDEN_FROM = 385          # from here he is hidden behind her; mattes only add 
 LATE = (448, 500)          # he reappears small at the right edge, which no matte catches
 LATE_DONORS = range(386, 446, 5)  # frames where that spot is empty
 MAX_DONORS = 15
+SHADOW_DROP = 12           # this much darker than the clean background, near him, is his shadow
 MAX_ERR = 14               # mean abs error on the surroundings above which a donor is misaligned  # a pixel this much darker than the clean wall, left of the man, is shadow
 
 
@@ -286,8 +287,10 @@ def main():
         if hole.sum() < 400:
             continue
         ys, xs = np.nonzero(hole)
-        y0, y1 = max(0, ys.min() - 60), min(H, ys.max() + 60)
-        x0, x1 = max(0, xs.min() - 60), min(W, xs.max() + 60)
+        mh = ys.max() - ys.min()
+        # the box also covers where any of his shadow can fall (left of him, light from the right)
+        y0, y1 = max(0, ys.min() - 60), min(H, ys.max() + 140)
+        x0, x1 = max(0, xs.min() - int(0.9 * mh) - 60), min(W, xs.max() + 60)
         box = (y0, y1, x0, x1)
         tgt = frames[t, y0:y1, x0:x1].astype(np.float32)
         ring = ~excl[t][y0:y1, x0:x1]
@@ -295,7 +298,17 @@ def main():
         hole = hole[y0:y1, x0:x1]
         bg, k = background(t, box, donors, frames, excl, al, tgt, ring, hole)
         have = ~np.isnan(bg[..., 0])
-        hole = cv2.dilate(hole.astype(np.uint8), np.ones((7, 7), np.uint8)).astype(bool) & ~woman[t][y0:y1, x0:x1]
+        # whatever of his shadow the silhouette model missed: clearly darker than the clean background
+        wnear = cv2.dilate(woman[t][y0:y1, x0:x1].astype(np.uint8), np.ones((41, 41), np.uint8)).astype(bool)
+        lum = np.float32([0.3, 0.59, 0.11])
+        dark = have & ~wnear & (np.nan_to_num(bg) @ lum - tgt @ lum > SHADOW_DROP)
+        dark = cv2.morphologyEx(dark.astype(np.uint8), cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
+        dark = cv2.morphologyEx(dark, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8))
+        kk, lab, st, _ = cv2.connectedComponentsWithStats(dark, 8)
+        touch = cv2.dilate(hole.astype(np.uint8), np.ones((61, 61), np.uint8)).astype(bool)
+        keep = [i for i in range(1, kk) if st[i, cv2.CC_STAT_AREA] > 800 and (touch & (lab == i)).any()]
+        hole |= np.isin(lab, keep)
+        hole = cv2.dilate(hole.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool) & ~woman[t][y0:y1, x0:x1]
         fill8 = np.clip(np.where(have[..., None], bg, tgt), 0, 255).astype(np.uint8)
         left = hole & ~have
         if left.any():
