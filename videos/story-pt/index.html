@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>The 2:14 Text</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; }
+      #stage { position: absolute; inset: 0; }
+      .shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #vignette { position: absolute; inset: 0; z-index: 4; pointer-events: none;
+        background: radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%); }
+      #shade { position: absolute; inset: 0; z-index: 6; background: #000; opacity: 0; pointer-events: none; }
+      #flash { position: absolute; inset: 0; z-index: 12; background: #fff; opacity: 0; pointer-events: none; }
+      #rflash { position: absolute; inset: 0; z-index: 12; background: #e3242b; opacity: 0; pointer-events: none; mix-blend-mode: screen; }
+      #barbox { position: absolute; left: 0; top: 0; width: 100%; height: 10px; z-index: 11; background: rgba(255,255,255,0.12); }
+      #bar { width: 100%; height: 100%; background: #e3242b; transform-origin: 0 50%; }
+      #hook { position: absolute; left: 0; right: 0; top: 1010px; z-index: 7; text-align: center; font-family: "JetBrains Mono", monospace;
+        font-weight: 800; color: #ff3b3b; text-shadow: 0 0 40px rgba(255,40,40,0.75), 0 6px 20px #000; }
+      #hook .hk { font-size: 230px; letter-spacing: -0.02em; }
+      #hook .am { font-size: 90px; margin-left: 20px; }
+      #floor { position: absolute; left: 70px; top: 1060px; z-index: 7; display: flex; align-items: center; gap: 18px;
+        padding: 14px 34px; background: #ffd23f; color: #111; border-radius: 18px; font-family: "Montserrat", sans-serif;
+        font-weight: 900; box-shadow: 0 14px 40px rgba(0,0,0,0.6); }
+      #floor .fl { font-size: 46px; letter-spacing: 0.06em; }
+      #floor .fn { font-size: 84px; line-height: 1; }
+      #floor .arr { width: 0; height: 0; border-left: 26px solid transparent; border-right: 26px solid transparent; border-top: 34px solid #111; }
+      .cnt { position: absolute; left: 0; right: 0; top: 940px; z-index: 7; text-align: center; font-family: "JetBrains Mono", monospace;
+        font-weight: 800; font-size: 210px; color: #c8f560; text-shadow: 0 0 36px rgba(200,245,96,0.55), 0 6px 20px #000; }
+      .cnt.bad { color: #ff3b3b; text-shadow: 0 0 46px rgba(255,40,40,0.85), 0 6px 20px #000; }
+      #clab { position: absolute; left: 0; right: 0; top: 890px; z-index: 7; text-align: center; font-family: "Montserrat", sans-serif;
+        font-weight: 900; font-size: 48px; letter-spacing: 0.4em; margin-right: -0.4em; color: #fff; text-shadow: 0 4px 14px #000; }
+      .cap { position: absolute; left: 70px; right: 70px; top: 1300px; z-index: 9; text-align: center; font-family: "Montserrat", sans-serif;
+        font-weight: 900; font-size: 84px; line-height: 1.12; color: #fff; -webkit-text-stroke: 12px #000; paint-order: stroke fill;
+        text-shadow: 0 8px 26px rgba(0,0,0,0.85); }
+      .cap .w { display: inline-block; opacity: 0; }
+      .cap .em { color: #ffd23f; }
+      #end { position: absolute; left: 0; right: 0; top: 1240px; z-index: 10; text-align: center; font-family: "Montserrat", sans-serif; font-weight: 900; }
+      #end .btns { display: flex; justify-content: center; gap: 60px; }
+      #end .btns span { display: inline-block; min-width: 330px; padding: 26px 0 22px; border-radius: 26px; font-size: 100px; color: #111;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.6); }
+      #end .yes { background: #c8f560; }
+      #end .no { background: #ff3b3b; color: #fff; }
+      #end .cmt { margin-top: 70px; font-size: 54px; color: #ffd23f; letter-spacing: 0.08em; text-shadow: 0 6px 20px #000; }
+      #end .tri { display: inline-block; width: 0; height: 0; margin-left: 16px; border-left: 22px solid transparent;
+        border-right: 22px solid transparent; border-top: 30px solid #ffd23f; vertical-align: middle; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="44.386" data-width="1080" data-height="1920" data-fps="30">
+      <div id="stage">
+        <video id="v0" class="clip shot" src="assets/seg/s00.mp4" data-start="0.000" data-duration="2.673" data-track-index="1" muted playsinline></video>
+        <video id="v1" class="clip shot" src="assets/seg/s01.mp4" data-start="2.673" data-duration="1.584" data-track-index="1" muted playsinline></video>
+        <video id="v2" class="clip shot" src="assets/seg/s02.mp4" data-start="4.257" data-duration="1.719" data-track-index="1" muted playsinline></video>
+        <video id="v3" class="clip shot" src="assets/seg/s03.mp4" data-start="5.976" data-duration="2.529" data-track-index="1" muted playsinline></video>
+        <video id="v4" class="clip shot" src="assets/seg/s04.mp4" data-start="8.505" data-duration="4.358" data-track-index="1" muted playsinline></video>
+        <video id="v5" class="clip shot" src="assets/seg/s05.mp4" data-start="12.863" data-duration="3.430" data-track-index="1" muted playsinline></video>
+        <video id="v6" class="clip shot" src="assets/seg/s06.mp4" data-start="16.293" data-duration="1.428" data-track-index="1" muted playsinline></video>
+        <video id="v7" class="clip shot" src="assets/seg/s07.mp4" data-start="17.721" data-duration="2.431" data-track-index="1" muted playsinline></video>
+        <video id="v8" class="clip shot" src="assets/seg/s08.mp4" data-start="20.152" data-duration="1.731" data-track-index="1" muted playsinline></video>
+        <video id="v9" class="clip shot" src="assets/seg/s09.mp4" data-start="21.883" data-duration="2.286" data-track-index="1" muted playsinline></video>
+        <video id="v10" class="clip shot" src="assets/seg/s10.mp4" data-start="24.169" data-duration="2.607" data-track-index="1" muted playsinline></video>
+        <video id="v11" class="clip shot" src="assets/seg/s11.mp4" data-start="26.776" data-duration="2.664" data-track-index="1" muted playsinline></video>
+        <video id="v12" class="clip shot" src="assets/seg/s12.mp4" data-start="29.440" data-duration="2.309" data-track-index="1" muted playsinline></video>
+        <video id="v13" class="clip shot" src="assets/seg/s13.mp4" data-start="31.749" data-duration="3.442" data-track-index="1" muted playsinline></video>
+        <video id="v14" class="clip shot" src="assets/seg/s14.mp4" data-start="35.191" data-duration="4.583" data-track-index="1" muted playsinline></video>
+        <video id="v15" class="clip shot" src="assets/seg/s15.mp4" data-start="39.774" data-duration="4.612" data-track-index="1" muted playsinline></video>
+      </div>
+      <div id="vignette"></div>
+      <div id="shade"></div>
+      <div id="barbox"><div id="bar"></div></div>
+      <div id="hook" class="clip" data-start="0" data-duration="2.703" data-track-index="5"><span class="hk">2:14</span><span class="am">AM</span></div>
+      <div id="floor" class="clip" data-start="8.525" data-duration="4.368" data-track-index="5"><span class="fl">FLOOR</span><span class="fn">09</span><span class="arr"></span></div>
+      <div class="clip cnt" data-start="20.222" data-duration="0.106" data-track-index="6">41</div>
+      <div class="clip cnt" data-start="20.328" data-duration="0.106" data-track-index="6">42</div>
+      <div class="clip cnt" data-start="20.434" data-duration="0.106" data-track-index="6">43</div>
+      <div class="clip cnt" data-start="20.540" data-duration="0.106" data-track-index="6">44</div>
+      <div class="clip cnt" data-start="20.646" data-duration="0.106" data-track-index="6">45</div>
+      <div class="clip cnt" data-start="20.752" data-duration="0.106" data-track-index="6">46</div>
+      <div class="clip cnt" data-start="20.858" data-duration="0.106" data-track-index="6">47</div>
+      <div class="clip cnt" data-start="20.964" data-duration="0.106" data-track-index="6">48</div>
+      <div class="clip cnt" data-start="21.071" data-duration="0.106" data-track-index="6">49</div>
+      <div class="clip cnt" data-start="21.177" data-duration="0.106" data-track-index="6">50</div>
+      <div class="clip cnt" data-start="21.283" data-duration="0.106" data-track-index="6">51</div>
+      <div class="clip cnt" data-start="21.389" data-duration="0.106" data-track-index="6">52</div>
+      <div class="clip cnt" data-start="21.495" data-duration="0.106" data-track-index="6">53</div>
+      <div class="clip cnt" data-start="21.601" data-duration="0.106" data-track-index="6">54</div>
+      <div class="clip cnt" data-start="21.707" data-duration="0.546" data-track-index="6">55</div>
+      <div id="c56" class="clip cnt bad" data-start="22.253" data-duration="1.946" data-track-index="6">56?</div>
+      <div id="clab" class="clip" data-start="20.222" data-duration="2.031" data-track-index="5">STEP</div>
+      <div id="end" class="clip" data-start="41.306" data-duration="3.080" data-track-index="7"><div class="btns"><span class="yes">YES</span><span class="no">NO</span></div><div class="cmt">COMMENT BELOW <span class="tri"></span></div></div>
+      <div class="clip cap" data-start="0.110" data-duration="0.880" data-track-index="8"><span id="w0_0" class="w">THE</span> <span id="w0_1" class="w">TEXT</span> <span id="w0_2" class="w">CAME</span></div>
+      <div class="clip cap" data-start="0.990" data-duration="0.980" data-track-index="8"><span id="w1_0" class="w">AT</span> <span id="w1_1" class="w em">TWO</span> <span id="w1_2" class="w em">FOURTEEN</span></div>
+      <div class="clip cap" data-start="1.970" data-duration="0.803" data-track-index="8"><span id="w2_0" class="w em">A.M.</span></div>
+      <div class="clip cap" data-start="2.773" data-duration="0.720" data-track-index="8"><span id="w3_0" class="w">IT</span> <span id="w3_1" class="w">WAS</span> <span id="w3_2" class="w">FROM</span></div>
+      <div class="clip cap" data-start="3.493" data-duration="0.794" data-track-index="8"><span id="w4_0" class="w em">NO</span> <span id="w4_1" class="w em">NAME.</span></div>
+      <div class="clip cap" data-start="4.287" data-duration="0.800" data-track-index="8"><span id="w5_0" class="w">THEN</span> <span id="w5_1" class="w">THE</span> <span id="w5_2" class="w">PHONE</span></div>
+      <div class="clip cap" data-start="5.087" data-duration="0.919" data-track-index="8"><span id="w6_0" class="w">BUZZED</span> <span id="w6_1" class="w em">AGAIN.</span></div>
+      <div class="clip cap" data-start="6.006" data-duration="1.110" data-track-index="8"><span id="w7_0" class="w">STAY</span> <span id="w7_1" class="w em">INDOORS.</span></div>
+      <div class="clip cap" data-start="7.116" data-duration="1.419" data-track-index="8"><span id="w8_0" class="w">DO</span> <span id="w8_1" class="w">NOT</span> <span id="w8_2" class="w">ANSWER.</span></div>
+      <div class="clip cap" data-start="8.535" data-duration="0.950" data-track-index="8"><span id="w9_0" class="w">HER</span> <span id="w9_1" class="w">APARTMENT</span> <span id="w9_2" class="w">IS</span></div>
+      <div class="clip cap" data-start="9.485" data-duration="1.079" data-track-index="8"><span id="w10_0" class="w">ON</span> <span id="w10_1" class="w">FLOOR</span> <span id="w10_2" class="w em">NINE.</span></div>
+      <div class="clip cap" data-start="10.564" data-duration="0.890" data-track-index="8"><span id="w11_0" class="w">THE</span> <span id="w11_1" class="w">STAIRS</span> <span id="w11_2" class="w">ARE</span></div>
+      <div class="clip cap" data-start="11.454" data-duration="0.810" data-track-index="8"><span id="w12_0" class="w">THE</span> <span id="w12_1" class="w em">ONLY</span> <span id="w12_2" class="w">WAY</span></div>
+      <div class="clip cap" data-start="12.264" data-duration="0.729" data-track-index="8"><span id="w13_0" class="w">DOWN.</span></div>
+      <div class="clip cap" data-start="12.993" data-duration="0.300" data-track-index="8"><span id="w14_0" class="w">RULE</span></div>
+      <div class="clip cap" data-start="13.293" data-duration="0.880" data-track-index="8"><span id="w15_0" class="w">NUMBER</span> <span id="w15_1" class="w em">ONE.</span></div>
+      <div class="clip cap" data-start="14.173" data-duration="1.390" data-track-index="8"><span id="w16_0" class="w em">DON'T</span> <span id="w16_1" class="w">ANSWER</span> <span id="w16_2" class="w em">UNKNOWN</span></div>
+      <div class="clip cap" data-start="15.563" data-duration="0.760" data-track-index="8"><span id="w17_0" class="w">CALLS.</span></div>
+      <div class="clip cap" data-start="16.323" data-duration="0.720" data-track-index="8"><span id="w18_0" class="w">IT'S</span> <span id="w18_1" class="w">HER</span> <span id="w18_2" class="w em">MOTHER'S</span></div>
+      <div class="clip cap" data-start="17.043" data-duration="0.788" data-track-index="8"><span id="w19_0" class="w">VOICE.</span></div>
+      <div class="clip cap" data-start="17.831" data-duration="0.260" data-track-index="8"><span id="w20_0" class="w">RULE</span></div>
+      <div class="clip cap" data-start="18.091" data-duration="0.820" data-track-index="8"><span id="w21_0" class="w">NUMBER</span> <span id="w21_1" class="w em">TWO.</span></div>
+      <div class="clip cap" data-start="18.911" data-duration="1.271" data-track-index="8"><span id="w22_0" class="w em">COUNT</span> <span id="w22_1" class="w">THE</span> <span id="w22_2" class="w">STAIRS.</span></div>
+      <div class="clip cap" data-start="20.182" data-duration="1.731" data-track-index="8"><span id="w23_0" class="w em">COUNT</span> <span id="w23_1" class="w em">EVERY</span> <span id="w23_2" class="w">STEP.</span></div>
+      <div class="clip cap" data-start="21.913" data-duration="0.770" data-track-index="8"><span id="w24_0" class="w">THERE'S</span> <span id="w24_1" class="w em">ONE</span> <span id="w24_2" class="w em">MORE</span></div>
+      <div class="clip cap" data-start="22.683" data-duration="0.750" data-track-index="8"><span id="w25_0" class="w">STEP</span> <span id="w25_1" class="w">THAN</span> <span id="w25_2" class="w">THERE</span></div>
+      <div class="clip cap" data-start="23.433" data-duration="0.846" data-track-index="8"><span id="w26_0" class="w">SHOULD</span> <span id="w26_1" class="w">BE.</span></div>
+      <div class="clip cap" data-start="24.279" data-duration="0.260" data-track-index="8"><span id="w27_0" class="w">RULE</span></div>
+      <div class="clip cap" data-start="24.539" data-duration="0.920" data-track-index="8"><span id="w28_0" class="w">NUMBER</span> <span id="w28_1" class="w">THREE.</span></div>
+      <div class="clip cap" data-start="25.459" data-duration="1.347" data-track-index="8"><span id="w29_0" class="w em">PORCH</span> <span id="w29_1" class="w">LIGHT</span> <span id="w29_2" class="w em">OFF.</span></div>
+      <div class="clip cap" data-start="26.806" data-duration="0.770" data-track-index="8"><span id="w30_0" class="w">THE</span> <span id="w30_1" class="w">LOBBY</span> <span id="w30_2" class="w">LIGHT</span></div>
+      <div class="clip cap" data-start="27.576" data-duration="0.580" data-track-index="8"><span id="w31_0" class="w">IS</span> <span id="w31_1" class="w">ON.</span></div>
+      <div class="clip cap" data-start="28.156" data-duration="0.910" data-track-index="8"><span id="w32_0" class="w em">DON'T</span> <span id="w32_1" class="w">GO</span> <span id="w32_2" class="w">TOWARD</span></div>
+      <div class="clip cap" data-start="29.066" data-duration="0.404" data-track-index="8"><span id="w33_0" class="w">IT.</span></div>
+      <div class="clip cap" data-start="29.470" data-duration="1.330" data-track-index="8"><span id="w34_0" class="w">SOMEONE</span> <span id="w34_1" class="w">IS</span> <span id="w34_2" class="w em">ALREADY</span></div>
+      <div class="clip cap" data-start="30.800" data-duration="1.039" data-track-index="8"><span id="w35_0" class="w">IN</span> <span id="w35_1" class="w">THE</span> <span id="w35_2" class="w">DOORWAY.</span></div>
+      <div class="clip cap" data-start="31.839" data-duration="0.350" data-track-index="8"><span id="w36_0" class="w">RULE</span></div>
+      <div class="clip cap" data-start="32.189" data-duration="0.970" data-track-index="8"><span id="w37_0" class="w">NUMBER</span> <span id="w37_1" class="w">FOUR.</span></div>
+      <div class="clip cap" data-start="33.159" data-duration="1.180" data-track-index="8"><span id="w38_0" class="w em">NEVER</span> <span id="w38_1" class="w">SAY</span> <span id="w38_2" class="w em">YES</span></div>
+      <div class="clip cap" data-start="34.339" data-duration="0.882" data-track-index="8"><span id="w39_0" class="w">TO</span> <span id="w39_1" class="w">THE</span> <span id="w39_2" class="w">DOOR.</span></div>
+      <div class="clip cap" data-start="35.221" data-duration="0.810" data-track-index="8"><span id="w40_0" class="w">IT</span> <span id="w40_1" class="w">ASKS,</span></div>
+      <div class="clip cap" data-start="36.031" data-duration="0.500" data-track-index="8"><span id="w41_0" class="w">"CAN</span> <span id="w41_1" class="w">I</span> <span id="w41_2" class="w em">COME</span></div>
+      <div class="clip cap" data-start="36.531" data-duration="0.441" data-track-index="8"><span id="w42_0" class="w">IN?"</span></div>
+      <div class="clip cap" data-start="36.972" data-duration="0.590" data-track-index="8"><span id="w43_0" class="w">IT</span> <span id="w43_1" class="w">SAYS</span> <span id="w43_2" class="w">HER</span></div>
+      <div class="clip cap" data-start="37.562" data-duration="0.840" data-track-index="8"><span id="w44_0" class="w em">NAME</span> <span id="w44_1" class="w em">RIGHT.</span></div>
+      <div class="clip cap" data-start="38.402" data-duration="0.460" data-track-index="8"><span id="w45_0" class="w">IT</span> <span id="w45_1" class="w">SAYS</span> <span id="w45_2" class="w">IT</span></div>
+      <div class="clip cap" data-start="38.862" data-duration="1.150" data-track-index="8"><span id="w46_0" class="w em">WRONG.</span></div>
+      <div class="clip cap" data-start="40.084" data-duration="0.800" data-track-index="8"><span id="w47_0" class="w">DO</span> <span id="w47_1" class="w">YOU</span> <span id="w47_2" class="w em">OPEN</span></div>
+      <div class="clip cap" data-start="40.884" data-duration="0.590" data-track-index="8"><span id="w48_0" class="w">IT?</span></div>
+      <audio id="mix" src="assets/vo/mix.wav" data-start="0" data-duration="44.386" data-track-index="9" data-volume="1"></audio>
+      <div id="flash"></div>
+      <div id="rflash"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#v0", { scale: 1.0 }, { scale: 1.07, duration: 2.673, ease: "none" }, 0.000);
+      tl.fromTo("#v1", { scale: 1.0 }, { scale: 1.07, duration: 1.584, ease: "none" }, 2.673);
+      tl.fromTo("#v2", { scale: 1.0 }, { scale: 1.07, duration: 1.719, ease: "none" }, 4.257);
+      tl.fromTo("#v3", { scale: 1.0 }, { scale: 1.07, duration: 2.529, ease: "none" }, 5.976);
+      tl.fromTo("#v4", { scale: 1.0 }, { scale: 1.07, duration: 4.358, ease: "none" }, 8.505);
+      tl.fromTo("#flash", { opacity: 0.9 }, { opacity: 0, duration: 0.18, ease: "power1.out", immediateRender: false }, 12.863);
+      tl.fromTo("#v5", { scale: 1.18 }, { scale: 1.0, duration: 0.3, ease: "power3.out", immediateRender: false }, 12.863);
+      tl.fromTo("#v5", { scale: 1.0 }, { scale: 1.06, duration: 3.130, ease: "none", immediateRender: false }, 13.163);
+      tl.fromTo("#v6", { scale: 1.0 }, { scale: 1.07, duration: 1.428, ease: "none" }, 16.293);
+      tl.fromTo("#flash", { opacity: 0.9 }, { opacity: 0, duration: 0.18, ease: "power1.out", immediateRender: false }, 17.721);
+      tl.fromTo("#v7", { scale: 1.18 }, { scale: 1.0, duration: 0.3, ease: "power3.out", immediateRender: false }, 17.721);
+      tl.fromTo("#v7", { scale: 1.0 }, { scale: 1.06, duration: 2.131, ease: "none", immediateRender: false }, 18.021);
+      tl.fromTo("#v8", { scale: 1.0 }, { scale: 1.07, duration: 1.731, ease: "none" }, 20.152);
+      tl.fromTo("#v9", { scale: 1.0 }, { scale: 1.07, duration: 2.286, ease: "none" }, 21.883);
+      tl.fromTo("#flash", { opacity: 0.9 }, { opacity: 0, duration: 0.18, ease: "power1.out", immediateRender: false }, 24.169);
+      tl.fromTo("#v10", { scale: 1.18 }, { scale: 1.0, duration: 0.3, ease: "power3.out", immediateRender: false }, 24.169);
+      tl.fromTo("#v10", { scale: 1.0 }, { scale: 1.06, duration: 2.307, ease: "none", immediateRender: false }, 24.469);
+      tl.fromTo("#v11", { scale: 1.0 }, { scale: 1.07, duration: 2.664, ease: "none" }, 26.776);
+      tl.fromTo("#v12", { scale: 1.0 }, { scale: 1.07, duration: 2.309, ease: "none" }, 29.440);
+      tl.fromTo("#flash", { opacity: 0.9 }, { opacity: 0, duration: 0.18, ease: "power1.out", immediateRender: false }, 31.749);
+      tl.fromTo("#v13", { scale: 1.18 }, { scale: 1.0, duration: 0.3, ease: "power3.out", immediateRender: false }, 31.749);
+      tl.fromTo("#v13", { scale: 1.0 }, { scale: 1.06, duration: 3.142, ease: "none", immediateRender: false }, 32.049);
+      tl.fromTo("#v14", { scale: 1.0 }, { scale: 1.07, duration: 4.583, ease: "none" }, 35.191);
+      tl.fromTo("#v15", { scale: 1.0 }, { scale: 1.07, duration: 4.612, ease: "none" }, 39.774);
+      tl.fromTo("#hook", { scale: 2.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "power4.in" }, 0.05);
+      tl.fromTo("#stage", { y: 0 }, { y: 22, duration: 0.04, yoyo: true, repeat: 5, ease: "none", immediateRender: false }, 0.33);
+      tl.fromTo("#hook", { opacity: 1 }, { opacity: 0.35, duration: 0.05, yoyo: true, repeat: 3, ease: "none", immediateRender: false }, 1.2);
+      tl.fromTo("#hook", { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.9, duration: 0.18, ease: "power1.in", immediateRender: false }, 2.523);
+      tl.fromTo("#floor", { x: -700 }, { x: 0, duration: 0.35, ease: "back.out(1.6)" }, 8.525);
+      tl.fromTo("#floor .arr", { y: -10 }, { y: 14, duration: 0.35, yoyo: true, repeat: 12, ease: "sine.inOut", immediateRender: false }, 8.875);
+      tl.fromTo("#floor", { x: 0 }, { x: 700, duration: 0.25, ease: "power2.in", immediateRender: false }, 12.643);
+      tl.fromTo("#clab", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 20.222);
+      tl.fromTo("#c56", { scale: 2.2 }, { scale: 1, duration: 0.22, ease: "power4.in" }, 22.253);
+      tl.fromTo("#rflash", { opacity: 0.55 }, { opacity: 0, duration: 0.35, ease: "power1.out", immediateRender: false }, 22.453);
+      tl.fromTo("#stage", { x: -16 }, { x: 16, duration: 0.045, yoyo: true, repeat: 5, ease: "none", immediateRender: false }, 22.453);
+      tl.fromTo("#stage", { x: 16 }, { x: 0, duration: 0.045, ease: "none", immediateRender: false }, 22.723);
+      tl.fromTo("#rflash", { opacity: 0.6 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, 38.902);
+      tl.fromTo("#stage", { x: -24, skewX: 6 }, { x: 24, skewX: -6, duration: 0.04, yoyo: true, repeat: 7, ease: "none", immediateRender: false }, 38.902);
+      tl.fromTo("#stage", { x: 24, skewX: -6 }, { x: 0, skewX: 0, duration: 0.04, ease: "none", immediateRender: false }, 39.222);
+      tl.fromTo("#end .yes", { x: -500, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "back.out(1.7)" }, 41.556);
+      tl.fromTo("#end .no", { x: 500, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "back.out(1.7)" }, 41.656);
+      tl.fromTo("#end .cmt", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 42.006);
+      tl.fromTo("#end .tri", { y: -8 }, { y: 12, duration: 0.3, yoyo: true, repeat: 5, ease: "sine.inOut", immediateRender: false }, 42.306);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 0.3, duration: 0.3, ease: "none", immediateRender: false }, 41.306);
+      tl.fromTo("#w0_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 0.110);
+      tl.fromTo("#w0_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 0.270);
+      tl.fromTo("#w0_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 0.640);
+      tl.fromTo("#w1_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 0.990);
+      tl.fromTo("#w1_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 1.170);
+      tl.fromTo("#w1_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 1.430);
+      tl.fromTo("#w2_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 1.970);
+      tl.fromTo("#w3_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 2.773);
+      tl.fromTo("#w3_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 2.893);
+      tl.fromTo("#w3_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 3.113);
+      tl.fromTo("#w4_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 3.493);
+      tl.fromTo("#w4_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 3.703);
+      tl.fromTo("#w5_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 4.287);
+      tl.fromTo("#w5_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 4.587);
+      tl.fromTo("#w5_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 4.687);
+      tl.fromTo("#w6_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 5.087);
+      tl.fromTo("#w6_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 5.387);
+      tl.fromTo("#w7_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 6.006);
+      tl.fromTo("#w7_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 6.426);
+      tl.fromTo("#w8_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 7.116);
+      tl.fromTo("#w8_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 7.306);
+      tl.fromTo("#w8_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 7.796);
+      tl.fromTo("#w9_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 8.535);
+      tl.fromTo("#w9_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 8.745);
+      tl.fromTo("#w9_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 9.335);
+      tl.fromTo("#w10_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 9.485);
+      tl.fromTo("#w10_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 9.615);
+      tl.fromTo("#w10_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 9.935);
+      tl.fromTo("#w11_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 10.564);
+      tl.fromTo("#w11_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 10.684);
+      tl.fromTo("#w11_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 11.324);
+      tl.fromTo("#w12_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 11.454);
+      tl.fromTo("#w12_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 11.634);
+      tl.fromTo("#w12_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 12.044);
+      tl.fromTo("#w13_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 12.264);
+      tl.fromTo("#w14_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 12.993);
+      tl.fromTo("#w15_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 13.293);
+      tl.fromTo("#w15_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 13.553);
+      tl.fromTo("#w16_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 14.173);
+      tl.fromTo("#w16_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 14.543);
+      tl.fromTo("#w16_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 15.073);
+      tl.fromTo("#w17_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 15.563);
+      tl.fromTo("#w18_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 16.323);
+      tl.fromTo("#w18_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 16.483);
+      tl.fromTo("#w18_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 16.603);
+      tl.fromTo("#w19_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 17.043);
+      tl.fromTo("#w20_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 17.831);
+      tl.fromTo("#w21_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 18.091);
+      tl.fromTo("#w21_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 18.341);
+      tl.fromTo("#w22_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 18.911);
+      tl.fromTo("#w22_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 19.231);
+      tl.fromTo("#w22_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 19.331);
+      tl.fromTo("#w23_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 20.182);
+      tl.fromTo("#w23_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 20.822);
+      tl.fromTo("#w23_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 21.202);
+      tl.fromTo("#w24_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 21.913);
+      tl.fromTo("#w24_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 22.213);
+      tl.fromTo("#w24_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 22.453);
+      tl.fromTo("#w25_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 22.683);
+      tl.fromTo("#w25_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 23.173);
+      tl.fromTo("#w25_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 23.333);
+      tl.fromTo("#w26_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 23.433);
+      tl.fromTo("#w26_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 23.763);
+      tl.fromTo("#w27_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 24.279);
+      tl.fromTo("#w28_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 24.539);
+      tl.fromTo("#w28_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 24.779);
+      tl.fromTo("#w29_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 25.459);
+      tl.fromTo("#w29_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 25.799);
+      tl.fromTo("#w29_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 26.079);
+      tl.fromTo("#w30_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 26.806);
+      tl.fromTo("#w30_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 26.966);
+      tl.fromTo("#w30_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 27.326);
+      tl.fromTo("#w31_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 27.576);
+      tl.fromTo("#w31_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 27.736);
+      tl.fromTo("#w32_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 28.156);
+      tl.fromTo("#w32_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 28.446);
+      tl.fromTo("#w32_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 28.696);
+      tl.fromTo("#w33_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 29.066);
+      tl.fromTo("#w34_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 29.470);
+      tl.fromTo("#w34_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 30.060);
+      tl.fromTo("#w34_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 30.240);
+      tl.fromTo("#w35_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 30.800);
+      tl.fromTo("#w35_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 30.920);
+      tl.fromTo("#w35_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 30.990);
+      tl.fromTo("#w36_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 31.839);
+      tl.fromTo("#w37_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 32.189);
+      tl.fromTo("#w37_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 32.429);
+      tl.fromTo("#w38_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 33.159);
+      tl.fromTo("#w38_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 33.589);
+      tl.fromTo("#w38_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 33.839);
+      tl.fromTo("#w39_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 34.339);
+      tl.fromTo("#w39_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 34.459);
+      tl.fromTo("#w39_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 34.579);
+      tl.fromTo("#w40_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 35.221);
+      tl.fromTo("#w40_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 35.391);
+      tl.fromTo("#w41_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 36.031);
+      tl.fromTo("#w41_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 36.211);
+      tl.fromTo("#w41_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 36.311);
+      tl.fromTo("#w42_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 36.531);
+      tl.fromTo("#w43_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 36.972);
+      tl.fromTo("#w43_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 37.152);
+      tl.fromTo("#w43_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 37.452);
+      tl.fromTo("#w44_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 37.562);
+      tl.fromTo("#w44_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 37.852);
+      tl.fromTo("#w45_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 38.402);
+      tl.fromTo("#w45_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 38.552);
+      tl.fromTo("#w45_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 38.782);
+      tl.fromTo("#w46_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 38.862);
+      tl.fromTo("#w47_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 40.084);
+      tl.fromTo("#w47_1", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 40.334);
+      tl.fromTo("#w47_2", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 40.584);
+      tl.fromTo("#w48_0", { opacity: 0, scale: 0.6, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(2.2)" }, 40.884);
+      tl.fromTo("#bar", { scaleX: 0 }, { scaleX: 1, duration: 44.386, ease: "none" }, 0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
