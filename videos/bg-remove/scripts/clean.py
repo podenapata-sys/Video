@@ -23,48 +23,46 @@ ROOT = Path(__file__).resolve().parent.parent
 W, H = 1080, 1920
 DONOR_STEPS = [20, 40, 60, 90, 120, 160, 200, 250, 300, 360]
 MIN_INLIERS = 40
-SHADOW_DROP = 14  # a pixel this much darker than the clean wall, left of the man, is shadow
+SHADOW_DROP = 14
+MERGED_UNTIL = 32          # frames where the man and the woman are one blob in the full matte
+SPLIT_SEARCH = (430, 540)  # columns to look for the gap between them in those frames  # a pixel this much darker than the clean wall, left of the man, is shadow
 
 
-def read_raw(path, vf, pix, ch):
+def read_raw(path, vf, pix, ch, w=W):
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(path), "-vf", vf, "-f", "rawvideo", "-pix_fmt", pix, "-"],
                          capture_output=True, check=True).stdout
-    return np.frombuffer(raw, np.uint8).reshape(-1, H, W, ch) if ch > 1 else np.frombuffer(raw, np.uint8).reshape(-1, H, W)
+    shape = (-1, H, w, ch) if ch > 1 else (-1, H, w)
+    return np.frombuffer(raw, np.uint8).reshape(shape)
 
 
-def split_people(alpha):
-    """Per frame: (woman mask, man mask). The woman is tracked backwards from the last frame by overlap."""
+def split_people(alpha, alpha_l, alpha_r):
+    """Per frame: (woman mask, man mask).
+
+    The full-frame matte always finds the woman (the main subject) but often drops the man, so the
+    half-frame crops (where he is the main subject) are matted too. The woman is the largest blob of
+    the full matte; in the first frames, where the two blobs touch, she is cut off at the thinnest
+    column between them. The man is every person pixel from any matte that is not her.
+    """
     n = len(alpha)
     woman, man = np.zeros((n, H, W), bool), np.zeros((n, H, W), bool)
-    prev_w, prev_m = None, None
-    for t in range(n - 1, -1, -1):
+    for t in range(n):
         b = (alpha[t] > 100).astype(np.uint8)
         k, lab, stats, _ = cv2.connectedComponentsWithStats(b, 8)
         comps = [i for i in range(1, k) if stats[i, cv2.CC_STAT_AREA] > 1500]
-        if not comps:
-            prev_w = None
-            continue
-        if prev_w is None:
-            wi = max(comps, key=lambda i: stats[i, cv2.CC_STAT_AREA])
-        else:
-            pw = cv2.dilate(prev_w.astype(np.uint8), np.ones((25, 25), np.uint8)).astype(bool)
-            wi = max(comps, key=lambda i: np.count_nonzero((lab == i) & pw))
-        w = lab == wi
-        m = np.zeros((H, W), bool)
-        for i in comps:
-            if i != wi:
-                m |= lab == i
-        if prev_m is not None and prev_w is not None and prev_m.any():
-            # the man is touching her: carve his part out of the merged blob using where he just was
-            grown = w.sum() > 1.15 * prev_w.sum()
-            if grown:
-                near_m = cv2.dilate(prev_m.astype(np.uint8), np.ones((41, 41), np.uint8)).astype(bool)
-                near_w = cv2.dilate(prev_w.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
-                part = w & near_m & ~near_w
-                m |= part
-                w &= ~part
-        woman[t], man[t] = w, m
-        prev_w, prev_m = w, m
+        w = np.zeros((H, W), bool)
+        if comps:
+            w = lab == max(comps, key=lambda i: stats[i, cv2.CC_STAT_AREA])
+        if t < MERGED_UNTIL:  # one blob: man on the left, her on the right
+            cols = w[:, SPLIT_SEARCH[0]:SPLIT_SEARCH[1]].sum(0)
+            cut = SPLIT_SEARCH[0] + int(np.argmin(cols))
+            w[:, :cut] = False
+        crop = np.zeros((H, W), bool)
+        crop[:, : W // 2] = alpha_l[t] > 100
+        crop[:, W // 2:] = alpha_r[t] > 100
+        m = ((b > 0) | crop) & ~cv2.dilate(w.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
+        k, lab, stats, _ = cv2.connectedComponentsWithStats(m.astype(np.uint8), 8)
+        keep = [i for i in range(1, k) if stats[i, cv2.CC_STAT_AREA] > 2500]
+        woman[t], man[t] = w, np.isin(lab, keep)
     return woman, man
 
 
@@ -114,10 +112,12 @@ def shadow_zone(man, hgt):
 def main():
     frames = read_raw(ROOT / "source.mp4", "null", "rgb24", 3)
     alpha = read_raw(ROOT / "work_matte.mov", "alphaextract", "gray", 1)
-    n = min(len(frames), len(alpha))
-    frames, alpha = frames[:n], alpha[:n]
+    half = [read_raw(ROOT / f"work_matte_{side}.mov", "alphaextract", "gray", 1, W // 2) for side in ("left", "right")]
+    n = min(len(frames), len(alpha), *(len(x) for x in half))
+    frames = frames[:n]
     print(f"{n} frames")
-    woman, man = split_people(alpha)
+    woman, man = split_people(alpha[:n], half[0][:n], half[1][:n])
+    del alpha, half
     people = woman | man
     al = Aligner(frames, people)
     print("features done")
