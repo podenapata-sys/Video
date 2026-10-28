@@ -251,12 +251,25 @@ def main():
     (ROOT / "index.html").write_text(build("16x9", timing))
     (ROOT / "reels" / "index.html").write_text(build("9x16", timing))  # its own project: one root composition each
     print(f"built index.html + reels/index.html, {len(timing["subs"])} subtitles, {timing["total"]:.2f}s, audio: {(ROOT / 'assets/vo/mix.wav').exists()}")
+    if "--remux" in sys.argv:  # audio only, on existing renders
+        for name in ("tea-stall-algorithm-16x9.mp4", "tea-stall-algorithm-9x16.mp4"):
+            remux_audio(ROOT / "renders" / name)
     if "--render" in sys.argv:
         for proj, name in ((ROOT, "tea-stall-algorithm-16x9.mp4"), (ROOT / "reels", "tea-stall-algorithm-9x16.mp4")):
             out = ROOT / "renders" / name
             args = CLI + ["render", str(proj), "-o", str(out), "--fps", "30", "--quality", "delivery"]
             r = subprocess.run(args, capture_output=True, text=True)
             print("\n".join(l for l in (r.stdout + r.stderr).splitlines() if "MB" in l or "rror" in l or "beginframe" in l or "screenshot" in l))
+            remux_audio(out)
+
+
+def remux_audio(out):
+    """The renderer's audio path lands ~1 dB under the mix; put the -14 LUFS mix in directly (video copied)."""
+    tmp = out.with_name(out.stem + ".tmp.mp4")
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(out), "-i", str(ROOT / "assets" / "vo" / "mix.wav"), "-map", "0:v",
+                    "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart",
+                    "-shortest", str(tmp)], check=True)
+    tmp.replace(out)
 
 
 if __name__ == "__main__":

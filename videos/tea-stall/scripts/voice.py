@@ -125,9 +125,17 @@ def main():
     total = round(t, 4)
     voice = np.concatenate(track)
     sf.write(VO / "voice.wav", voice, SR)
+    # -14 LUFS for Facebook: gentle 3:1 compression to tame peaks, then two-pass (measured, linear) loudnorm
+    comp = "acompressor=threshold=-24dB:ratio=3:attack=5:release=120:makeup=4dB"
+    meas = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(VO / "voice.wav"), "-af",
+                           f"{comp},loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-"],
+                          capture_output=True, text=True).stderr
+    m = json.loads(meas[meas.rindex("{"):meas.rindex("}") + 1])
+    norm = (f"loudnorm=I=-14:TP=-1.5:LRA=11:linear=true:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
+            f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}")
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(VO / "voice.wav"), "-af",
-                    f"loudnorm=I=-14:TP=-1.5:LRA=11,apad,afade=t=in:d=0.3,afade=t=out:st={total - 1:.3f}:d=1",
-                    "-ar", str(SR), "-ac", "2", "-t", f"{total:.3f}", str(VO / "mix.wav")], check=True)
+                    f"{comp},{norm},apad=whole_len={int(round(total * SR))},afade=t=in:d=0.3,afade=t=out:st={total - 1:.3f}:d=1",
+                    "-ar", str(SR), "-ac", "2", str(VO / "mix.wav")], check=True)  # no -t: it cuts 67 ms early after loudnorm
 
     subs = []
     for i, runs in enumerate(SUBS):
