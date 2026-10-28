@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Tea Stall Algorithm 9x16</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Hind Siliguri"; src: url("fonts/HindSiliguri-Regular.ttf") format("truetype"); font-weight: 400; }
+      @font-face { font-family: "Hind Siliguri"; src: url("fonts/HindSiliguri-SemiBold.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Hind Siliguri"; src: url("fonts/HindSiliguri-Bold.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Noto Sans Bengali"; src: url("fonts/NotoSansBengali-Variable.ttf") format("truetype"); font-weight: 100 900; }
+      @font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Regular.ttf") format("truetype"); font-weight: 400; }
+      @font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Medium.ttf") format("truetype"); font-weight: 500; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #141824; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #141824;
+        font-family: "Hind Siliguri", "Noto Sans Bengali", sans-serif; }
+      #field { position: absolute; inset: 0; background-color: #141824; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.09 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>"); }
+      #clipbox { position: absolute; left: 0px; top: 656px; width: 1920px; height: 1080px; overflow: hidden;
+        transform: scale(0.5625); transform-origin: 0 0; }
+      .shot { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      #band { position: absolute; inset: 0; background: #141824; z-index: 4; transform: scaleY(0); }
+      #bubfix { position: absolute; left: 646px; top: 160px; width: 200px; height: 96px; z-index: 3; }
+      #bubin { width: 100%; height: 100%; background: #F5F1E5; border-radius: 36px; display: flex; align-items: center;
+        justify-content: center; font-weight: 600; font-size: 30px; color: #111111; transform-origin: -34px 155px; }
+      #plate { position: absolute; left: 1340px; top: 40px; width: 560px; height: 540px; background: #141824; z-index: 3; }
+      #closebg { position: absolute; inset: 0; background: #141824; z-index: 3; }
+      .cross { position: absolute; width: 22px; height: 22px; z-index: 20; }
+      .cross svg { display: block; }
+      #barbox { position: absolute; left: 0; top: 0; width: 100%; height: 3px; z-index: 21; }
+      #bar { width: 100%; height: 100%; background: #FF3B1F; transform-origin: 0 50%; }
+      #squares { position: absolute; left: 64px; bottom: 40px; display: flex; gap: 6px; z-index: 20; }
+      #squares i { display: block; width: 8px; height: 8px; }
+      .mask { overflow: hidden; padding-top: 0.12em; }
+      .in { display: block; will-change: transform; }
+      .tag { position: absolute; width: auto; height: auto; z-index: 19; }
+      .tag .in { display: flex; align-items: center; gap: 8px; }
+      .tag .num { display: block; background: #111111; color: #FFFFFF; font-weight: 600; font-size: 22px; line-height: 1;
+        padding: 6px 9px 4px; }
+      .tag .tlab { display: block; color: #6E6E78; font-weight: 600; font-size: 22px; line-height: 1.2; background: #E6DACB;
+        padding: 3px 10px 1px; }
+      .subs { position: absolute; height: auto; text-align: center; z-index: 18; }
+      .subs .sm { display: inline-block; max-width: 960px; vertical-align: top; }
+      .subs .box { display: inline-block; background: #111111; color: #FFFFFF; border-left: 3px solid #FF3B1F;
+        padding: 10px 18px; font-weight: 600; font-size: 38px; line-height: 1.4; text-align: center; }
+      .head { position: absolute; width: auto; height: auto; font-weight: 700; line-height: 1.18; z-index: 17; }
+      #count { position: absolute; width: auto; height: auto; text-align: right; z-index: 17; }
+      #num { color: #FF3B1F; font-weight: 700; line-height: 1.0; }
+      #cap { color: #6E6E78; font-weight: 600; font-size: 30px; line-height: 1.2; }
+      #stampc { position: absolute; width: auto; height: auto; z-index: 17; }
+      #stamp { display: inline-block; color: #FF3B1F; font-weight: 700; line-height: 1.05; border: 4px solid #FF3B1F;
+        padding: 6px 26px 0; border-radius: 6px; }
+      .plab { position: absolute; width: 600px; height: auto; text-align: center; font-weight: 700; line-height: 1.2; z-index: 17; }
+      .plab .in { display: inline-block; background: #E6DACB; padding: 6px 20px 2px; border-left: 3px solid currentColor; }
+      #close, #close3 { position: absolute; left: 0; width: 100%; height: auto; text-align: center; font-weight: 700;
+        line-height: 1.3; z-index: 17; }
+      #close3 .in { color: #6E6E78; font-weight: 400; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="69.5332" data-width="1080" data-height="1920" data-fps="30">
+      <div id="field"></div>
+      <div id="clipbox">
+          <video id="v0" class="shot" src="assets/clips/scene1.mp4" data-start="0.0000" data-duration="11.6000" data-track-index="1" muted playsinline></video>
+          <video id="v1" class="shot" src="assets/clips/scene2.mp4" data-start="11.6000" data-duration="12.9333" data-track-index="1" muted playsinline></video>
+          <video id="v2" class="shot" src="assets/clips/scene3.mp4" data-start="24.5333" data-duration="10.6333" data-track-index="1" muted playsinline></video>
+          <video id="v3" class="shot" src="assets/clips/scene4.mp4" data-start="35.1666" data-duration="11.5333" data-track-index="1" muted playsinline></video>
+          <video id="v4" class="shot" src="assets/clips/scene5.mp4" data-start="46.6999" data-duration="13.6333" data-track-index="1" muted playsinline></video>
+          <video id="v5" class="shot" src="assets/clips/closing.mp4" data-start="60.3332" data-duration="9.2000" data-track-index="1" muted playsinline></video>
+          <div id="band"></div>
+          <div id="bubfix" class="clip" data-start="20.6106" data-duration="3.9227" data-track-index="3"><div id="bubin">কম্পিউটার?</div></div>
+          <div id="plate" class="clip" data-start="30.5830" data-duration="4.5336" data-track-index="3"></div>
+          <div id="closebg" class="clip" data-start="60.3332" data-duration="9.2000" data-track-index="3"></div>
+      </div>
+      <div class="cross" style="left:28px;top:28px"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="none" stroke="#6E6E78" stroke-width="1.5"/><path d="M11 0V22M0 11H22" stroke="#6E6E78" stroke-width="1.5"/></svg></div>
+      <div class="cross" style="right:28px;top:28px"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="none" stroke="#6E6E78" stroke-width="1.5"/><path d="M11 0V22M0 11H22" stroke="#6E6E78" stroke-width="1.5"/></svg></div>
+      <div class="cross" style="left:28px;bottom:28px"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="none" stroke="#6E6E78" stroke-width="1.5"/><path d="M11 0V22M0 11H22" stroke="#6E6E78" stroke-width="1.5"/></svg></div>
+      <div class="cross" style="right:28px;bottom:28px"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="none" stroke="#6E6E78" stroke-width="1.5"/><path d="M11 0V22M0 11H22" stroke="#6E6E78" stroke-width="1.5"/></svg></div>
+      <div id="barbox"><div id="bar"></div></div>
+      <div id="tag0" class="clip tag" data-start="0.0000" data-duration="11.6000" data-track-index="5" style="left:64px;top:150px"><div class="mask"><div class="in" id="tagin0"><span class="num">০১</span><span class="tlab">সকালের ভিড়</span></div></div></div>
+      <div id="tag1" class="clip tag" data-start="11.6000" data-duration="12.9333" data-track-index="5" style="left:64px;top:150px"><div class="mask"><div class="in" id="tagin1"><span class="num">০২</span><span class="tlab">অচেনা কাস্টমার</span></div></div></div>
+      <div id="tag2" class="clip tag" data-start="24.5333" data-duration="10.6333" data-track-index="5" style="left:64px;top:150px"><div class="mask"><div class="in" id="tagin2"><span class="num">০৩</span><span class="tlab">পরীক্ষা</span></div></div></div>
+      <div id="tag3" class="clip tag" data-start="35.1666" data-duration="11.5333" data-track-index="5" style="left:64px;top:150px"><div class="mask"><div class="in" id="tagin3"><span class="num">০৪</span><span class="tlab">ভয়</span></div></div></div>
+      <div id="tag4" class="clip tag" data-start="46.6999" data-duration="13.6333" data-track-index="5" style="left:64px;top:150px"><div class="mask"><div class="in" id="tagin4"><span class="num">০৫</span><span class="tlab">উত্তর</span></div></div></div>
+      <div id="squares"><i style="background:#FF3B1F"></i><i style="background:#2B36F5"></i><i style="background:#6E6E78"></i></div>
+      <div id="sub0" class="clip subs" data-start="0.220" data-duration="5.867" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin0">প্রতিদিন সকাল সাতটায় ঢাকার ব্যস্ত রাস্তায় রহিম চাচা তাঁর চায়ের দোকান খোলেন।</div></div></div>
+      <div id="sub1" class="clip subs" data-start="6.087" data-duration="5.473" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin1">বারো বছর ধরে তিনি জানেন, কে দুই চামচ চিনি খায়, আর কে বাকি রাখে।</div></div></div>
+      <div id="sub2" class="clip subs" data-start="11.820" data-duration="4.504" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin2">এক সন্ধ্যায় বেঞ্চে এসে বসে নাদিয়া, এক তরুণ ফ্রিল্যান্সার।</div></div></div>
+      <div id="sub3" class="clip subs" data-start="16.324" data-duration="2.993" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin3">“চাচা, আপনার দোকানটা স্মার্ট করে দিই?”</div></div></div>
+      <div id="sub4" class="clip subs" data-start="19.317" data-duration="5.176" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin4">রহিম চাচা হাসেন, “কেটলি আর বেঞ্চ, এখানে কম্পিউটার কী করবে?”</div></div></div>
+      <div id="sub5" class="clip subs" data-start="24.753" data-duration="2.778" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin5">নাদিয়া বানিয়ে দেয় একটা হোয়াটসঅ্যাপ বট।</div></div></div>
+      <div id="sub6" class="clip subs" data-start="27.531" data-duration="3.072" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin6">অফিস থেকেই অর্ডার, চিনির হিসাবও মনে রাখে।</div></div></div>
+      <div id="sub7" class="clip subs" data-start="30.603" data-duration="4.524" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin7">এক সপ্তাহে দিনে আশি কাপ থেকে বিক্রি দাঁড়ায় একশো চল্লিশে।</div></div></div>
+      <div id="sub8" class="clip subs" data-start="35.387" data-duration="5.485" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin8">কিন্তু পাশের দোকানদার মাথা নাড়েন, “মেশিন একদিন তোমার জায়গাই নিয়ে নেবে, রহিম।”</div></div></div>
+      <div id="sub9" class="clip subs" data-start="40.872" data-duration="2.906" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin9">সেই রাতে রহিম চাচার ঘুম আসে না।</div></div></div>
+      <div id="sub10" class="clip subs" data-start="43.778" data-duration="2.882" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin10">নিজের হাতেই কি নিজের বদলি বানাচ্ছেন?</div></div></div>
+      <div id="sub11" class="clip subs" data-start="46.920" data-duration="6.810" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin11">তারপর তিনি বোঝেন, বট অর্ডার নিতে পারে, কিন্তু ক্লান্ত রিকশাওয়ালার মেয়ের পরীক্ষার খবর নিতে পারে না।</div></div></div>
+      <div id="sub12" class="clip subs" data-start="53.730" data-duration="3.264" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin12">হিসাব রাখে মেশিন, যত্ন নেয় মানুষ।</div></div></div>
+      <div id="sub13" class="clip subs" data-start="56.994" data-duration="3.299" data-track-index="6" data-layout-allow-caption-zone="true" style="left:0;right:0;top:1312px;"><div class="mask sm"><div class="in box" id="subin13">বছর শেষে রহিম চাচার দোকান তিনটা।</div></div></div>
+      <div id="h1" class="clip head" data-start="1" data-duration="4" data-track-index="7" style="left:64px;top:300px;font-size:72px"><div class="mask"><div class="in" id="h1a" style="color:#FFFFFF">এক কাপ চা,</div></div><div class="mask"><div class="in" id="h1b" style="color:#FF3B1F">একটা অ্যালগরিদম</div></div></div>
+      <div id="count" class="clip" data-start="30.5830" data-duration="4.5336" data-track-index="7" style="right:72px;top:250px"><div class="mask"><div class="in" id="countin"><div id="num" style="font-size:160px">৮০</div><div id="cap">কাপ / দিন</div></div></div></div>
+      <div id="stampc" class="clip" data-start="43.8080" data-duration="2.8419" data-track-index="7" style="left:80px;top:330px"><div id="stamp" style="font-size:88px">বদলি?</div></div>
+      <div id="lab1" class="clip plab" data-start="53.7600" data-duration="6.5232" data-track-index="7" style="left:-30px;top:470px;font-size:44px"><div class="mask"><div class="in" id="lab1in" style="color:#2B36F5">হিসাব রাখে মেশিন</div></div></div>
+      <div id="lab2" class="clip plab" data-start="53.7600" data-duration="6.5232" data-track-index="7" style="left:510px;top:470px;font-size:44px"><div class="mask"><div class="in" id="lab2in" style="color:#FF3B1F">যত্ন নেয় মানুষ</div></div></div>
+      <div id="close" class="clip" data-start="60.3332" data-duration="9.2000" data-track-index="8" style="top:760px"><div class="mask"><div class="in" id="cl1" style="font-size:64px;color:#FFFFFF">এআই আপনার জায়গা নেয় না।</div></div><div class="mask"><div class="in" id="cl2" style="font-size:64px;color:#FF3B1F">নেয় আপনার কাজের বোঝা।</div></div></div>
+      <div id="close3" class="clip" data-start="64.6570" data-duration="4.8762" data-track-index="8" style="top:966px"><div class="mask"><div class="in" id="cl3" style="font-size:28px">শুধু সাহস করে তাকে সুযোগ দিতে হয়।</div></div></div>
+      <audio id="vo" src="assets/vo/mix.wav" data-start="0" data-duration="69.5332" data-track-index="9" data-volume="1"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#band", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.1333, ease: "power2.in" }, 35.0333);
+      tl.fromTo("#band", { scaleY: 1, transformOrigin: "50% 100%" }, { scaleY: 0, duration: 0.1333, ease: "power2.out", immediateRender: false }, 35.1666);
+      tl.fromTo("#bubin", { scale: 0.3 }, { scale: 1.12, duration: 0.3013, ease: "expo.out" }, 20.6106);
+      tl.to("#bubin", { scale: 1.0, duration: 0.3453, ease: "power2.inOut" }, 21.1706);
+      tl.fromTo("#bar", { scaleX: 0 }, { scaleX: 1, duration: 69.5332, ease: "none" }, 0);
+      tl.fromTo("#tagin0", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 0.1000);
+      tl.to("#tagin0", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 0.2440);
+      tl.fromTo("#tagin1", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 11.6000);
+      tl.to("#tagin1", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 11.7440);
+      tl.fromTo("#tagin2", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 24.5333);
+      tl.to("#tagin2", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 24.6773);
+      tl.fromTo("#tagin3", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 35.1666);
+      tl.to("#tagin3", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 35.3106);
+      tl.fromTo("#tagin4", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 46.6999);
+      tl.to("#tagin4", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 46.8439);
+      tl.fromTo("#subin0", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 0.2200);
+      tl.to("#subin0", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 0.3640);
+      tl.fromTo("#subin1", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 6.0870);
+      tl.to("#subin1", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 6.2310);
+      tl.fromTo("#subin2", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 11.8200);
+      tl.to("#subin2", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 11.9640);
+      tl.fromTo("#subin3", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 16.3240);
+      tl.to("#subin3", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 16.4680);
+      tl.fromTo("#subin4", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 19.3170);
+      tl.to("#subin4", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 19.4610);
+      tl.fromTo("#subin5", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 24.7530);
+      tl.to("#subin5", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 24.8970);
+      tl.fromTo("#subin6", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 27.5310);
+      tl.to("#subin6", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 27.6750);
+      tl.fromTo("#subin7", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 30.6030);
+      tl.to("#subin7", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 30.7470);
+      tl.fromTo("#subin8", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 35.3870);
+      tl.to("#subin8", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 35.5310);
+      tl.fromTo("#subin9", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 40.8720);
+      tl.to("#subin9", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 41.0160);
+      tl.fromTo("#subin10", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 43.7780);
+      tl.to("#subin10", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 43.9220);
+      tl.fromTo("#subin11", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 46.9200);
+      tl.to("#subin11", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 47.0640);
+      tl.fromTo("#subin12", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 53.7300);
+      tl.to("#subin12", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 53.8740);
+      tl.fromTo("#subin13", { yPercent: 110 }, { yPercent: -5, duration: 0.1440, ease: "expo.out" }, 56.9940);
+      tl.to("#subin13", { yPercent: 0, duration: 0.0560, ease: "power2.out" }, 57.1380);
+      tl.fromTo("#h1a", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 1.0000);
+      tl.to("#h1a", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 1.1920);
+      tl.fromTo("#h1b", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 1.1333);
+      tl.to("#h1b", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 1.3253);
+      tl.fromTo("#countin", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 30.5830);
+      tl.to("#countin", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 30.7750);
+      const BN = "০১২৩৪৫৬৭৮৯"; const numEl = document.getElementById("num"); const cnt = { v: 80 };
+      const showCount = () => { numEl.textContent = String(Math.round(cnt.v)).replace(/[0-9]/g, (d) => BN[d]); };
+      tl.fromTo(cnt, { v: 80 }, { v: 143, duration: 1.0, ease: "expo.out", onUpdate: showCount }, 30.6330);
+      tl.to(cnt, { v: 140, duration: 0.2, ease: "power2.out", onUpdate: showCount }, 31.6330);
+      tl.fromTo("#stamp", { scale: 1.2, rotation: -6, opacity: 0 }, { scale: 1, rotation: -6, opacity: 1, duration: 0.133, ease: "expo.out" }, 43.8080);
+      tl.fromTo("#stamp", { x: -7 }, { x: 7, duration: 0.0333, ease: "none", yoyo: true, repeat: 1, immediateRender: false }, 43.9410);
+      tl.to("#stamp", { x: 0, duration: 0.0333, ease: "none" }, 44.0080);
+      tl.fromTo("#lab1in", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 53.7600);
+      tl.to("#lab1in", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 53.9520);
+      tl.fromTo("#lab2in", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 54.0933);
+      tl.to("#lab2in", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 54.2853);
+      tl.fromTo("#cl1", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 60.5830);
+      tl.to("#cl1", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 60.7750);
+      tl.fromTo("#cl2", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 60.9163);
+      tl.to("#cl2", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 61.1083);
+      tl.fromTo("#cl3", { yPercent: 110 }, { yPercent: -5, duration: 0.1920, ease: "expo.out" }, 64.6570);
+      tl.to("#cl3", { yPercent: 0, duration: 0.0747, ease: "power2.out" }, 64.8490);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

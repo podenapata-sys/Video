@@ -1,0 +1,14 @@
+.hyperframes/
+node_modules/
+renders/*.mp4
+!renders/*-share.mp4
+assets/vo/mix.wav
+renders/.*.hf-transaction-*/
+renders/work-*/
+assets/raw_vo/
+assets/raw_clips/
+assets/seg/
+!renders/tea-stall-algorithm-16x9.mp4
+!renders/tea-stall-algorithm-9x16.mp4
+assets/vo/voice.wav
+reels/.hyperframes/
