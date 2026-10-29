@@ -30,12 +30,14 @@ LAYOUT = {
                  tag=(64, 56), sub_css="left:0;right:0;bottom:70px;", sub_font=30, sub_max=1300,
                  h1=(96, 150, 72), h1_line1=BLACK, count=dict(right=110, top=96, size=160),
                  stamp=(150, 420, 88), labels=(300, 480, 1440, 44),
-                 close=(390, 76, 28)),
+                 close=(390, 76, 28),
+                 end=dict(top=70, logo=460, s1=46, s1_split=False, gap12=12, s2=30, line=480, cta=46, phone=54, pill=26, maxw=1700)),
     "9x16": dict(W=1080, H=1920, clip=(0, 656, 0.5625), field=True,
                  tag=(64, 150), sub_css="left:0;right:0;top:1312px;", sub_font=38, sub_max=960,
                  h1=(64, 300, 72), h1_line1="#FFFFFF", count=dict(right=72, top=250, size=160),
                  stamp=(80, 330, 88), labels=(470, 270, 810, 44),
-                 close=(760, 64, 28)),
+                 close=(760, 64, 28),
+                 end=dict(top=360, logo=660, s1=54, s1_split=True, gap12=16, s2=34, line=520, cta=64, phone=72, pill=30, maxw=900)),
 }
 
 
@@ -43,11 +45,11 @@ def bn(n):
     return "".join(BN[int(c)] for c in str(n))
 
 
-def wipe(js, sel, at, frames, overshoot=True):
+def wipe(js, sel, at, frames, overshoot=True, start=110):
     """Text wipes up out of its mask: expo-out with ~5% overshoot, then settles."""
     d = frames * F
     if overshoot:
-        js.append(f'tl.fromTo("{sel}", {{ yPercent: 110 }}, {{ yPercent: -5, duration: {d * 0.72:.4f}, ease: "expo.out" }}, {at:.4f});')
+        js.append(f'tl.fromTo("{sel}", {{ yPercent: {start} }}, {{ yPercent: -5, duration: {d * 0.72:.4f}, ease: "expo.out" }}, {at:.4f});')
         js.append(f'tl.to("{sel}", {{ yPercent: 0, duration: {d * 0.28:.4f}, ease: "power2.out" }}, {at + d * 0.72:.4f});')
     else:
         js.append(f'tl.fromTo("{sel}", {{ yPercent: 110 }}, {{ yPercent: 0, duration: {d:.4f}, ease: "expo.out" }}, {at:.4f});')
@@ -145,11 +147,47 @@ def build(kind, timing):
     els.append(f'<div id="close" class="clip" data-start="{S[5]:.4f}" data-duration="{Ln[5]:.4f}" data-track-index="8" style="top:{top}px">'
                f'<div class="mask"><div class="in" id="cl1" style="font-size:{csz}px;color:#FFFFFF">এআই আপনার জায়গা নেয় না।</div></div>'
                f'<div class="mask"><div class="in" id="cl2" style="font-size:{csz}px;color:{RED}">নেয় আপনার কাজের বোঝা।</div></div></div>')
-    els.append(f'<div id="close3" class="clip" data-start="{q3:.4f}" data-duration="{total - q3:.4f}" data-track-index="8" style="top:{top + int(csz * 2 * 1.3) + 40}px">'
+    els.append(f'<div id="close3" class="clip" data-start="{q3:.4f}" data-duration="{timing['endcard'] - q3:.4f}" data-track-index="8" style="top:{top + int(csz * 2 * 1.3) + 40}px">'
                f'<div class="mask"><div class="in" id="cl3" style="font-size:{ssz}px">শুধু সাহস করে তাকে সুযোগ দিতে হয়।</div></div></div>')
     wipe(js, "#cl1", q1, 8)
     wipe(js, "#cl2", q1 + 10 * F, 8)
     wipe(js, "#cl3", q3, 8)
+
+    # ---- branded end card: white panel wipes up, then the Future Stack stack builds in (times relative to its start)
+    T, e = timing["endcard"], L["end"]
+    blue, black = BLUE, BLACK
+    if e["s1_split"]:
+        s1 = (f'<div class="mask"><div class="in" id="s1a" style="color:{blue}">কাজ করুক এআই,</div></div>'
+              f'<div class="mask"><div class="in" id="s1b" style="color:{black}">বাড়ুক আপনার ব্যবসা।</div></div>')
+    else:
+        s1 = (f'<div class="mask"><div class="in" id="s1a"><span style="color:{blue}">কাজ করুক এআই,</span> '
+              f'<span style="color:{black}">বাড়ুক আপনার ব্যবসা।</span></div></div>')
+    els.append(f'<div id="end" class="clip" data-start="{T:.4f}" data-duration="{total - T:.4f}" data-track-index="10">'
+               '<div id="endpanel"></div>'
+               f'<div id="endstack" style="top:{e["top"]}px;max-width:{e["maxw"]}px">'
+               f'<img id="logo" src="assets/logo-trimmed.png" alt="Future Stack Solutions" style="width:{e["logo"]}px" />'
+               f'<div id="s1" style="font-size:{e["s1"]}px">{s1}</div>'
+               f'<div id="s2" style="font-size:{e["s2"]}px;margin-top:{e["gap12"]}px">স্মার্ট ব্যবসার পেছনে, <b>ফিউচার স্ট্যাক</b></div>'
+               f'<div id="eline" style="width:{e["line"]}px"></div>'
+               f'<div class="mask" id="ctam"><div class="in" id="cta" style="font-size:{e["cta"]}px">যোগাযোগ করুন</div></div>'
+               f'<div class="mask" id="phonem"><div class="in" id="phone" style="font-size:{e["phone"]}px">+880 1632-932249</div></div>'
+               f'<div id="pill" style="font-size:{e["pill"]}px">এখনই কল বা হোয়াটসঅ্যাপ করুন</div>'
+               '</div></div>')
+    js.append(f'tl.fromTo("#endpanel", {{ yPercent: 100 }}, {{ yPercent: 0, duration: {10 * F:.4f}, ease: "expo.out" }}, {T:.4f});')
+    js.append(f'tl.fromTo("#logo", {{ scale: 0.92, opacity: 0 }}, {{ scale: 1.05, opacity: 1, duration: {8 * F:.4f}, ease: "expo.out" }}, {T + 0.3:.4f});')
+    js.append(f'tl.to("#logo", {{ scale: 1, duration: {4 * F:.4f}, ease: "power2.out" }}, {T + 0.3 + 8 * F:.4f});')
+    wipe(js, "#s1a", T + 1.0, 8, start=150)  # deeper masks (room for ু under ড়), so start further down
+    if e["s1_split"]:
+        wipe(js, "#s1b", T + 1.0 + 3 * F, 8, start=150)
+    js.append(f'tl.fromTo("#s2", {{ opacity: 0, y: 12 }}, {{ opacity: 1, y: 0, duration: {10 * F:.4f}, ease: "expo.out" }}, {T + 1.4:.4f});')
+    js.append(f'tl.fromTo("#eline", {{ scaleX: 0 }}, {{ scaleX: 1, duration: {10 * F:.4f}, ease: "expo.out" }}, {T + 1.8:.4f});')
+    wipe(js, "#cta", T + 2.1, 8, start=150)
+    wipe(js, "#phone", T + 2.4, 8, start=150)
+    js.append(f'tl.fromTo("#pill", {{ scale: 0.6, opacity: 0 }}, {{ scale: 1.06, opacity: 1, duration: 0.2, ease: "expo.out" }}, {T + 2.8:.4f});')
+    js.append(f'tl.to("#pill", {{ scale: 1, duration: 0.133, ease: "power2.out" }}, {T + 3.0:.4f});')
+    p0 = T + 3.2
+    reps = int((total - 0.05 - p0) / 0.6) - 1  # a finite pulse: 100% -> 104% -> 100% every 1.2 s, done before the end
+    js.append(f'tl.fromTo("#pill", {{ scale: 1 }}, {{ scale: 1.04, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: {reps}, immediateRender: false }}, {p0:.4f});')
 
     audio = ""
     if (ROOT / "assets" / "vo" / "mix.wav").exists():
@@ -181,6 +219,7 @@ PAGE = """<!doctype html>
       @font-face { font-family: "Noto Sans Bengali"; src: url("fonts/NotoSansBengali-Variable.ttf") format("truetype"); font-weight: 100 900; }
       @font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Regular.ttf") format("truetype"); font-weight: 400; }
       @font-face { font-family: "IBM Plex Mono"; src: url("fonts/IBMPlexMono-Medium.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Montserrat"; src: url("fonts/Montserrat-Variable.ttf") format("truetype"); font-weight: 100 900; }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: {{W}}px; height: {{H}}px; overflow: hidden; background: #141824; }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #141824;
@@ -225,6 +264,22 @@ PAGE = """<!doctype html>
       #close, #close3 { position: absolute; left: 0; width: 100%; height: auto; text-align: center; font-weight: 700;
         line-height: 1.3; z-index: 17; }
       #close3 .in { color: #6E6E78; font-weight: 400; }
+      #end { position: absolute; inset: 0; z-index: 19; overflow: hidden; }
+      #endpanel { position: absolute; inset: 0; background: #FFFFFF; }
+      #endstack { position: absolute; left: 0; right: 0; margin: 0 auto; display: flex; flex-direction: column;
+        align-items: center; text-align: center; }
+      #endstack .mask { padding-top: 0.06em; padding-bottom: 0.3em; margin-bottom: -0.3em; }  /* descenders (ু) */
+      #logo { display: block; height: auto; margin-bottom: 30px; }
+      #s1 { font-weight: 700; line-height: 1.25; }
+      #s2 { color: #444444; font-weight: 600; line-height: 1.3; }
+      #s2 b { color: #2B36F5; font-weight: 600; }
+      #eline { height: 2px; background: #2B36F5; margin-top: 26px; }
+      #cta { color: #111111; font-weight: 700; line-height: 1.25; }
+      #ctam { margin-top: 24px; }
+      #phonem { margin-top: 10px; }
+      #phone { font-family: "Montserrat", sans-serif; font-weight: 800; color: #2B36F5; letter-spacing: 1px; line-height: 1.2; }
+      #pill { margin-top: 22px; background: #FF3B1F; color: #FFFFFF; font-weight: 600; line-height: 1.3; padding: 12px 28px;
+        border-radius: 999px; white-space: nowrap; }
     </style>
   </head>
   <body>

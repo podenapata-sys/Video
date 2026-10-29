@@ -10,6 +10,8 @@ the brief's 10 s slots, so the grid follows the voice instead of squeezing it:
 - every phrase (speech between detected pauses) gets its final time; subtitles are runs of phrases
   (PHRASES below), and the headline cues hang off the phrase that says them
 - each 10 s clip is slowed to its scene length (frame-blended), so nothing freezes
+- a 5 s branded end card follows the closing card; its whoosh / pop / ticks are synthesised and laid in after
+  the voice is normalised
 Writes assets/vo/mix.wav (0.3 s fade-in, 1 s master fade-out, -14 LUFS) and timing.json.
 """
 import json
@@ -26,6 +28,10 @@ CLIPS = ROOT / "assets" / "clips"
 SR = 48000
 MAX_PAUSE = 0.45
 LEAD, TAIL, CLOSE_HOLD = 0.3, 0.45, 2.6
+END_CARD = 5.0  # branded end card after the closing card (no voice)
+# end-card sound design (s after the card starts, sound, dBFS peak): whoosh on the white wipe, pop on the logo,
+# soft ticks on slogan 1, the CTA and the number
+SFX = [(0.0, "whoosh", -16), (0.3, "pop", -18), (1.0, "tick", -24), (2.1, "tick", -24), (2.4, "tick", -24)]
 
 # per chunk: the text of each phrase between pauses (checked against the detected pause count)
 PHRASES = [
@@ -95,6 +101,41 @@ def tighten(path):
     return out, phrases
 
 
+def _noise(n, seed):
+    return np.random.default_rng(seed).standard_normal(n).astype(np.float32)
+
+
+def _lowpass(x, a):
+    a = np.broadcast_to(np.asarray(a, np.float32), x.shape)
+    y, acc = np.empty_like(x), 0.0
+    for i, v in enumerate(x):
+        acc += a[i] * (v - acc)
+        y[i] = acc
+    return y
+
+
+def _whoosh():
+    n = int(0.55 * SR)
+    u = np.linspace(0, 1, n)
+    return _lowpass(_noise(n, 3), 0.02 + 0.12 * np.sin(np.pi * u)) * np.sin(np.pi * u) ** 1.5
+
+
+def _pop():
+    n = int(0.09 * SR)
+    t = np.arange(n) / SR
+    f = 520 + 380 * np.exp(-t * 60)
+    return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 45) * np.minimum(1, t * 900)).astype(np.float32)
+
+
+def _tick():
+    n = int(0.04 * SR)
+    t = np.arange(n) / SR
+    return (np.sin(2 * np.pi * 1900 * t) * np.exp(-t * 160)).astype(np.float32)
+
+
+SOUNDS = {"whoosh": _whoosh, "pop": _pop, "tick": _tick}
+
+
 def retime_clip(name, length):
     src, dst = CLIPS / "base" / f"{name}.mp4", CLIPS / f"{name}.mp4"
     k = length / 10.0
@@ -122,6 +163,9 @@ def main():
         phrase_t.append([(round(t + LEAD + a, 3), round(t + LEAD + b, 3)) for a, b in ph])
         print(f"{name}: {length:6.3f}s  speech {speech:5.2f}s  clip x{length / 10:.3f}")
         t += length
+    endcard = round(t, 4)
+    track.append(np.zeros(int(round(END_CARD * SR)), np.float32))
+    t += END_CARD
     total = round(t, 4)
     voice = np.concatenate(track)
     sf.write(VO / "voice.wav", voice, SR)
@@ -134,8 +178,19 @@ def main():
     norm = (f"loudnorm=I=-14:TP=-1.5:LRA=11:linear=true:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
             f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}")
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(VO / "voice.wav"), "-af",
-                    f"{comp},{norm},apad=whole_len={int(round(total * SR))},afade=t=in:d=0.3,afade=t=out:st={total - 1:.3f}:d=1",
-                    "-ar", str(SR), "-ac", "2", str(VO / "mix.wav")], check=True)  # no -t: it cuts 67 ms early after loudnorm
+                    f"{comp},{norm},apad=whole_len={int(round(total * SR))}",
+                    "-ar", str(SR), "-ac", "2", str(VO / "voice_norm.wav")], check=True)  # no -t: it cuts 67 ms early after loudnorm
+    mix, _ = sf.read(VO / "voice_norm.wav", dtype="float32")
+    for at, kind, peak in SFX:
+        x = SOUNDS[kind]()
+        x = x / np.max(np.abs(x)) * 10 ** (peak / 20)
+        i = int((endcard + at) * SR)
+        mix[i:i + len(x)] += x[: len(mix) - i, None]
+    fin, fout = int(0.3 * SR), int(1.0 * SR)  # 0.3 s voice fade-in, 1 s master fade-out
+    mix[:fin] *= np.linspace(0, 1, fin)[:, None]
+    mix[-fout:] *= np.linspace(1, 0, fout)[:, None]
+    sf.write(VO / "mix.wav", mix, SR, subtype="PCM_16")  # stereo, as normalised (mono->stereo would add 3 dB)
+    (VO / "voice_norm.wav").unlink()
 
     subs = []
     for i, runs in enumerate(SUBS):
@@ -151,7 +206,7 @@ def main():
         "labels": phrase_t[4][2][0],  # "হিসাব রাখে মেশিন"
         "close": [phrase_t[5][0][0], phrase_t[5][2][0]],  # card lines; the gray line with its own words
     }
-    (ROOT / "timing.json").write_text(json.dumps({"total": total, "scenes": scenes, "subs": subs, "cues": cues,
+    (ROOT / "timing.json").write_text(json.dumps({"total": total, "endcard": endcard, "scenes": scenes, "subs": subs, "cues": cues,
                                                   "phrases": phrase_t}, indent=1, ensure_ascii=False))
     for i, name in enumerate(names):
         retime_clip(name, scenes[i]["length"])
