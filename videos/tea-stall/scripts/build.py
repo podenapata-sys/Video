@@ -154,7 +154,7 @@ def build(kind, timing):
     wipe(js, "#cl3", q3, 8)
 
     # ---- branded end card: white panel wipes up, then the Future Stack stack builds in (times relative to its start)
-    T, e = timing["endcard"], L["end"]
+    T, e, ec = timing["endcard"], L["end"], timing["endcues"]
     blue, black = BLUE, BLACK
     if e["s1_split"]:
         s1 = (f'<div class="mask"><div class="in" id="s1a" style="color:{blue}">কাজ করুক এআই,</div></div>'
@@ -176,16 +176,16 @@ def build(kind, timing):
     js.append(f'tl.fromTo("#endpanel", {{ yPercent: 100 }}, {{ yPercent: 0, duration: {10 * F:.4f}, ease: "expo.out" }}, {T:.4f});')
     js.append(f'tl.fromTo("#logo", {{ scale: 0.92, opacity: 0 }}, {{ scale: 1.05, opacity: 1, duration: {8 * F:.4f}, ease: "expo.out" }}, {T + 0.3:.4f});')
     js.append(f'tl.to("#logo", {{ scale: 1, duration: {4 * F:.4f}, ease: "power2.out" }}, {T + 0.3 + 8 * F:.4f});')
-    wipe(js, "#s1a", T + 1.0, 8, start=150)  # deeper masks (room for ু under ড়), so start further down
+    wipe(js, "#s1a", ec["s1"], 8, start=150)  # deeper masks (room for ু under ড়), so start further down
     if e["s1_split"]:
-        wipe(js, "#s1b", T + 1.0 + 3 * F, 8, start=150)
-    js.append(f'tl.fromTo("#s2", {{ opacity: 0, y: 12 }}, {{ opacity: 1, y: 0, duration: {10 * F:.4f}, ease: "expo.out" }}, {T + 1.4:.4f});')
-    js.append(f'tl.fromTo("#eline", {{ scaleX: 0 }}, {{ scaleX: 1, duration: {10 * F:.4f}, ease: "expo.out" }}, {T + 1.8:.4f});')
-    wipe(js, "#cta", T + 2.1, 8, start=150)
-    wipe(js, "#phone", T + 2.4, 8, start=150)
-    js.append(f'tl.fromTo("#pill", {{ scale: 0.6, opacity: 0 }}, {{ scale: 1.06, opacity: 1, duration: 0.2, ease: "expo.out" }}, {T + 2.8:.4f});')
-    js.append(f'tl.to("#pill", {{ scale: 1, duration: 0.133, ease: "power2.out" }}, {T + 3.0:.4f});')
-    p0 = T + 3.2
+        wipe(js, "#s1b", ec["s1b"], 8, start=150)
+    js.append(f'tl.fromTo("#s2", {{ opacity: 0, y: 12 }}, {{ opacity: 1, y: 0, duration: {10 * F:.4f}, ease: "expo.out" }}, {ec["s2"]:.4f});')
+    js.append(f'tl.fromTo("#eline", {{ scaleX: 0 }}, {{ scaleX: 1, duration: {10 * F:.4f}, ease: "expo.out" }}, {ec["line"]:.4f});')
+    wipe(js, "#cta", ec["cta"], 8, start=150)
+    wipe(js, "#phone", ec["phone"], 8, start=150)
+    js.append(f'tl.fromTo("#pill", {{ scale: 0.6, opacity: 0 }}, {{ scale: 1.06, opacity: 1, duration: 0.2, ease: "expo.out" }}, {ec["pill"]:.4f});')
+    js.append(f'tl.to("#pill", {{ scale: 1, duration: 0.133, ease: "power2.out" }}, {ec["pill"] + 0.2:.4f});')
+    p0 = ec["pill"] + 0.4
     reps = int((total - 0.05 - p0) / 0.6) - 1  # a finite pulse: 100% -> 104% -> 100% every 1.2 s, done before the end
     js.append(f'tl.fromTo("#pill", {{ scale: 1 }}, {{ scale: 1.04, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: {reps}, immediateRender: false }}, {p0:.4f});')
 

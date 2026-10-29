@@ -10,8 +10,8 @@ the brief's 10 s slots, so the grid follows the voice instead of squeezing it:
 - every phrase (speech between detected pauses) gets its final time; subtitles are runs of phrases
   (PHRASES below), and the headline cues hang off the phrase that says them
 - each 10 s clip is slowed to its scene length (frame-blended), so nothing freezes
-- a 5 s branded end card follows the closing card; its whoosh / pop / ticks are synthesised and laid in after
-  the voice is normalised
+- a branded end card follows the closing card, timed to its own voiceover (c7); its whoosh / pop / ticks are
+  synthesised and laid in after the voice is normalised
 Writes assets/vo/mix.wav (0.3 s fade-in, 1 s master fade-out, -14 LUFS) and timing.json.
 """
 import json
@@ -28,10 +28,11 @@ CLIPS = ROOT / "assets" / "clips"
 SR = 48000
 MAX_PAUSE = 0.45
 LEAD, TAIL, CLOSE_HOLD = 0.3, 0.45, 2.6
-END_CARD = 5.0  # branded end card after the closing card (no voice)
-# end-card sound design (s after the card starts, sound, dBFS peak): whoosh on the white wipe, pop on the logo,
-# soft ticks on slogan 1, the CTA and the number
-SFX = [(0.0, "whoosh", -16), (0.3, "pop", -18), (1.0, "tick", -24), (2.1, "tick", -24), (2.4, "tick", -24)]
+# branded end card after the closing card: the logo pops at +0.3, its voiceover (c7) starts at END_VO, every element
+# enters on the phrase that says it, then the full card holds END_HOLD
+END_VO, END_HOLD = 0.9, 1.3
+END_PHRASES = ["কাজ করুক এআই,", "বাড়ুক আপনার ব্যবসা।", "স্মার্ট ব্যবসার পেছনে, ফিউচার স্ট্যাক", "যোগাযোগ করুন",
+               "এখনই কল বা হোয়াটসঅ্যাপ করুন"]  # inferred from the pause pattern (phrase lengths), not transcribed
 
 # per chunk: the text of each phrase between pauses (checked against the detected pause count)
 PHRASES = [
@@ -164,8 +165,21 @@ def main():
         print(f"{name}: {length:6.3f}s  speech {speech:5.2f}s  clip x{length / 10:.3f}")
         t += length
     endcard = round(t, 4)
-    track.append(np.zeros(int(round(END_CARD * SR)), np.float32))
-    t += END_CARD
+    eaudio, eph = tighten(VO / "chunks" / "c7.mp3")
+    assert len(eph) == len(END_PHRASES), f"end card: {len(eph)} phrases detected, {len(END_PHRASES)} expected"
+    elen = round(round((END_VO + len(eaudio) / SR + END_HOLD) * 30) / 30, 4)
+    seg = np.zeros(int(round(elen * SR)), np.float32)
+    o = int(END_VO * SR)
+    seg[o:o + len(eaudio)] = eaudio
+    track.append(seg)
+    ep = [round(endcard + END_VO + a, 3) for a, _ in eph]  # phrase starts
+    endcues = {"s1": ep[0], "s1b": ep[1], "s2": ep[2], "line": round(ep[3] - 0.3, 3), "cta": ep[3],
+               "phone": round(ep[3] + 0.35, 3), "pill": ep[4]}
+    # sound design: whoosh on the white wipe, pop on the logo, soft ticks on slogan 1, the CTA and the number
+    sfx = [(endcard, "whoosh", -16), (endcard + 0.3, "pop", -18), (endcues["s1"], "tick", -24),
+           (endcues["cta"], "tick", -24), (endcues["phone"], "tick", -24)]
+    print(f"end card: {elen:.3f}s, phrases at {ep}")
+    t += elen
     total = round(t, 4)
     voice = np.concatenate(track)
     sf.write(VO / "voice.wav", voice, SR)
@@ -181,10 +195,10 @@ def main():
                     f"{comp},{norm},apad=whole_len={int(round(total * SR))}",
                     "-ar", str(SR), "-ac", "2", str(VO / "voice_norm.wav")], check=True)  # no -t: it cuts 67 ms early after loudnorm
     mix, _ = sf.read(VO / "voice_norm.wav", dtype="float32")
-    for at, kind, peak in SFX:
+    for at, kind, peak in sfx:
         x = SOUNDS[kind]()
         x = x / np.max(np.abs(x)) * 10 ** (peak / 20)
-        i = int((endcard + at) * SR)
+        i = int(at * SR)
         mix[i:i + len(x)] += x[: len(mix) - i, None]
     fin, fout = int(0.3 * SR), int(1.0 * SR)  # 0.3 s voice fade-in, 1 s master fade-out
     mix[:fin] *= np.linspace(0, 1, fin)[:, None]
@@ -206,7 +220,7 @@ def main():
         "labels": phrase_t[4][2][0],  # "হিসাব রাখে মেশিন"
         "close": [phrase_t[5][0][0], phrase_t[5][2][0]],  # card lines; the gray line with its own words
     }
-    (ROOT / "timing.json").write_text(json.dumps({"total": total, "endcard": endcard, "scenes": scenes, "subs": subs, "cues": cues,
+    (ROOT / "timing.json").write_text(json.dumps({"total": total, "endcard": endcard, "endcues": endcues, "scenes": scenes, "subs": subs, "cues": cues,
                                                   "phrases": phrase_t}, indent=1, ensure_ascii=False))
     for i, name in enumerate(names):
         retime_clip(name, scenes[i]["length"])
