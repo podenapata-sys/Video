@@ -11,9 +11,10 @@
 Every scene is a function scene_N(t0, k, L): t0 = its start, k scales its motion (the 15 s cut is shorter),
 L = the format layout. Visuals are designed once at the 9:16 size and placed per format by a static
 wrapper (position + scale); only inner elements are tweened, all with fromTo at absolute times on one paused
-timeline. Copy is verbatim from kit/copy.md and kit/storyboard.md. No music (none supplied): soft synthesised
-pops / whoosh / tick from the storyboard's sound notes.
+timeline. Copy is verbatim from kit/copy.md and kit/storyboard.md. Scene lengths and key moments follow the
+ElevenLabs voiceover (scripts/voice.py -> timing.json); soft synthesised pops / whoosh / tick sit under it.
 """
+import json
 import re
 import subprocess
 import sys
@@ -27,6 +28,14 @@ ICONS = ROOT / "assets" / "icons"
 CLI = ["node", "/root/.claude/plugins/cache/hyperframes/hyperframes/0.8.152/skills/hyperframes/scripts/plugin-cli.mjs"]
 SR = 48000
 BN = "০১২৩৪৫৬৭৮৯"
+
+
+CUE = {}  # per build: scene number -> {name: scene-relative time} from timing.json (the voice says it then)
+
+
+def cue(n, name, t0, default):
+    c = CUE.get(str(n), {})
+    return t0 + c[name] if name in c else default
 
 
 def icon(name, cls=""):
@@ -66,6 +75,7 @@ def textbox(L, inner, y=None, w=None, extra=""):
 def scene1(sid, t0, k, dur, L, js, sfx):
     f = L["f"]
     at = lambda x: t0 + x * k
+    b = cue(1, "b", t0, at(1.45))  # line B on "কিন্তু"
     stars = "".join('<svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>'
                     for _ in range(5))
     card = (f'<div class="mapcard" id="{sid}card"><div class="row"><div class="pin">{icon("map-pin")}</div>'
@@ -79,10 +89,10 @@ def scene1(sid, t0, k, dur, L, js, sfx):
     js += [f'tl.fromTo("#{sid}card", {{ y: 80, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.5 * k:.3f}, ease: "power3.out" }}, {at(0.0):.3f});',
            f'tl.fromTo("#{sid}a", {{ x: -60, opacity: 0 }}, {{ x: 0, opacity: 1, duration: {0.3 * k:.3f}, ease: "power2.out" }}, {at(0.0):.3f});',
            # each line >= 1.5 s on screen: A 0.0-1.7, B from 1.45 to the cut
-           f'tl.to("#{sid}a", {{ x: -120, opacity: 0, duration: {0.25 * k:.3f}, ease: "power2.in" }}, {at(1.45):.3f});',
-           f'tl.fromTo("#{sid}b", {{ x: 80, opacity: 0 }}, {{ x: 0, opacity: 1, duration: {0.35 * k:.3f}, ease: "power2.out" }}, {at(1.45):.3f});',
+           f'tl.to("#{sid}a", {{ x: -120, opacity: 0, duration: 0.25, ease: "power2.in" }}, {b:.3f});',
+           f'tl.fromTo("#{sid}b", {{ x: 80, opacity: 0 }}, {{ x: 0, opacity: 1, duration: 0.35, ease: "power2.out" }}, {b:.3f});',
            f'tl.fromTo("#{sid}slot", {{ borderColor: "#C8D6DC", color: "#9AB0B9", scale: 1 }}, {{ borderColor: "#F08A24", color: "#F08A24", '
-           f'scale: 1.06, duration: {0.25 * k:.3f}, yoyo: true, repeat: 3, ease: "sine.inOut" }}, {at(1.7):.3f});']
+           f'scale: 1.06, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut" }}, {b + 0.25:.3f});']
     return html
 
 
@@ -104,12 +114,13 @@ def scene2(sid, t0, k, dur, L, js, sfx):
     html += place(L, "bubbles", f'<div class="bubbles" id="{sid}bubs">{bub}</div>')
     html += textbox(L, f'<p id="{sid}cap" class="feat bn" style="font-size:{f["feat"]}px">একই প্রশ্ন, দিনে বারবার।</p>', y=L["caption_y"])
     for i in range(3):
-        t = at(0.3 + 0.35 * i)
+        t = cue(2, f"q{i}", t0, at(0.3 + 0.35 * i))  # bubbles on "দাম কত?", "কখন খোলা?", the third right after
         js.append(f'tl.fromTo("#{sid}q{i}", {{ scale: 0.6, opacity: 0 }}, {{ scale: 1, opacity: 1, duration: {0.35 * k:.3f}, ease: "back.out(2)" }}, {t:.3f});')
         sfx.append((t, "pop"))
-    js += [f'tl.fromTo("#{sid}cap", {{ y: 40, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.4 * k:.3f}, ease: "power3.out" }}, {at(2.2):.3f});',
-           f'tl.fromTo("#{sid}bubs", {{ x: -8 }}, {{ x: 8, duration: 0.05, yoyo: true, repeat: 5, ease: "none", immediateRender: false }}, {at(2.25):.3f});',
-           f'tl.to("#{sid}bubs", {{ x: 0, duration: 0.05, ease: "none" }}, {at(2.25) + 0.3:.3f});']
+    cap = cue(2, "cap", t0, at(2.2))  # caption on "একই প্রশ্ন"
+    js += [f'tl.fromTo("#{sid}cap", {{ y: 40, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.4 * k:.3f}, ease: "power3.out" }}, {cap:.3f});',
+           f'tl.fromTo("#{sid}bubs", {{ x: -8 }}, {{ x: 8, duration: 0.05, yoyo: true, repeat: 5, ease: "none", immediateRender: false }}, {cap + 0.05:.3f});',
+           f'tl.to("#{sid}bubs", {{ x: 0, duration: 0.05, ease: "none" }}, {cap + 0.35:.3f});']
     return html
 
 
@@ -142,7 +153,7 @@ def scene3(sid, t0, k, dur, L, js, sfx):
            f'tl.fromTo("#{sid}glow", {{ opacity: 0, scale: 0.7 }}, {{ opacity: 1, scale: 1, duration: {0.9 * k:.3f}, ease: "power2.out" }}, {at(0.2):.3f});']
     for i in range(len(words)):
         js.append(f'tl.fromTo("#{sid}w{i}", {{ opacity: 0, y: 20 }}, {{ opacity: 1, y: 0, duration: {0.22 * k:.3f}, ease: "power2.out" }}, {at(0.25 + 0.14 * i):.3f});')
-    js.append(f'tl.fromTo("#{sid}s", {{ opacity: 0 }}, {{ opacity: 1, duration: {0.4 * k:.3f}, ease: "none" }}, {at(1.3):.3f});')
+    js.append(f'tl.fromTo("#{sid}s", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.4, ease: "none" }}, {cue(3, "s", t0, at(1.3)):.3f});')  # on "যেমন ওমেগা ডেন্টাল"
     sfx.append((at(0.0), "whoosh"))
     return html
 
@@ -166,7 +177,7 @@ def scene5(sid, t0, k, dur, L, js, sfx):
             + title_block(sid, L, "অনলাইন বুকিং — রাতেও", small="সাথে সাথে ইমেইল আর গুগল শিটে")
             + place(L, "phone", phone(sid, ["05-booking-form"]).replace('</div></div>', f'{ring}</div>{check}</div>', 1)))
     js += [f'tl.fromTo("#{sid}t", {{ y: 40, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.45 * k:.3f}, ease: "power3.out" }}, {at(0.05):.3f});',
-           f'tl.fromTo("#{sid}s", {{ opacity: 0 }}, {{ opacity: 1, duration: {0.4 * k:.3f}, ease: "none" }}, {at(0.5):.3f});',
+           f'tl.fromTo("#{sid}s", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.4, ease: "none" }}, {cue(5, "s", t0, at(0.5)):.3f});',  # on "সাথে সাথে ইমেইলে"
            f'tl.fromTo("#{sid}ph", {{ y: 60, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.5 * k:.3f}, ease: "power3.out" }}, {at(0.0):.3f});',
            f'tl.fromTo("#{sid}ring", {{ scale: 0.4, opacity: 0.9 }}, {{ scale: 1.6, opacity: 0, duration: {0.6 * k:.3f}, ease: "power2.out", repeat: 1 }}, {at(0.9):.3f});',
            f'tl.fromTo("#{sid}chk", {{ scale: 2.2, opacity: 0, rotation: -15 }}, {{ scale: 1, opacity: 1, rotation: 0, duration: {0.3 * k:.3f}, ease: "back.out(1.8)" }}, {at(2.2):.3f});']
@@ -202,7 +213,7 @@ def scene7(sid, t0, k, dur, L, js, sfx):
             + textbox(L, f'<p id="{sid}t1" class="feat bn" style="font-size:{f["feat"]}px">রোগীর রেকর্ড ও পেমেন্ট — এক জায়গায়</p>')
             + textbox(L, f'<p id="{sid}t2" class="feat bn" style="font-size:{f["feat"]}px">দাম ও ছবি নিজেই বদলান</p>')
             + place(L, "cards", cards))
-    sw = at(1.75)  # the editor card slides in (21.25 s in the 30 s cut); each line then gets >= 1.5 s
+    sw = cue(7, "sw", t0, at(1.75))  # the editor card and line 2 on "দাম বদলান নিজেই"
     js += [f'tl.fromTo("#{sid}dash", {{ y: 60, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.5 * k:.3f}, ease: "power3.out" }}, {at(0.0):.3f});',
            f'tl.fromTo("#{sid}dimg", {{ scale: 1.0 }}, {{ scale: 1.08, duration: {3.5 * k:.3f}, ease: "none" }}, {at(0.0):.3f});',
            f'tl.fromTo("#{sid}t1", {{ y: 40, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.35 * k:.3f}, ease: "power3.out" }}, {at(0.0):.3f});',
@@ -221,8 +232,10 @@ def scene8(sid, t0, k, dur, L, js, sfx):
                     f'<p class="bn" style="font-size:{f["tile"] if L["name"] != "S" else 58}px">{tx}</p></div>' for i, (ic, tx) in enumerate(tiles))
     html = ('<div class="bgfill" style="background:radial-gradient(1000px 900px at 50% 40%,#FFFFFF 0%,#E6EFF3 100%)"></div>'
             + place(L, "tiles", f'<div class="tiles">{inner}</div>'))
+    t1 = cue(8, "t1", t0, at(0.45))  # the domain tile on "ডোমেইন…"
+    drops = [at(0.2), t1, t1 + 0.3]
     for i in range(3):
-        js.append(f'tl.fromTo("#{sid}tile{i}", {{ y: -120, opacity: 0 }}, {{ y: 0, opacity: 1, duration: {0.45 * k:.3f}, ease: "back.out(1.6)" }}, {at(0.2 + 0.25 * i):.3f});')
+        js.append(f'tl.fromTo("#{sid}tile{i}", {{ y: -120, opacity: 0 }}, {{ y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }}, {drops[i]:.3f});')
     js += [f'const roll_{sid} = document.getElementById("{sid}roll"); const rv_{sid} = {{ v: 1000 }};',
            f'tl.fromTo(rv_{sid}, {{ v: 1000 }}, {{ v: 0, duration: {0.9 * k:.3f}, ease: "power2.in", onUpdate: () => {{ '
            f'roll_{sid}.textContent = String(Math.round(rv_{sid}.v)).replace(/[0-9]/g, (d) => "{BN}"[d]); }} }}, {at(0.55):.3f});']
@@ -242,22 +255,24 @@ def scene9(sid, t0, k, dur, L, js, sfx):
             f'<div class="t"><small class="en">WhatsApp</small><strong class="en" style="font-size:{f["num"]}px">01632-932249</strong></div></div></div>'
             f'<p class="foot bn" id="{sid}foot" style="left:{x}px;top:{foot_top}px;width:{w if L["name"] != "S" else 900}px;font-size:{f["foot"]}px">'
             f'<span class="brand en">Future Stack Solutions</span>চালু থাকা উদাহরণ: <span class="en">omegadentalbd.com</span></p>')
+    wa = cue(9, "wa", t0, at(0.6))
     js += [f'tl.fromTo("#{sid}bg", {{ opacity: 0 }}, {{ opacity: 1, duration: {0.3 * k:.3f}, ease: "none" }}, {at(0.0):.3f});',
            f'tl.fromTo("#{sid}h", {{ y: 50, opacity: 0, scale: 0.94 }}, {{ y: 0, opacity: 1, scale: 1, duration: {0.55 * k:.3f}, ease: "power3.out" }}, {at(0.15):.3f});',
-           f'tl.fromTo("#{sid}wa", {{ scale: 0.85, opacity: 0 }}, {{ scale: 1, opacity: 1, duration: {0.5 * k:.3f}, ease: "back.out(1.6)" }}, {at(0.6):.3f});',
+           f'tl.fromTo("#{sid}wa", {{ scale: 0.85, opacity: 0 }}, {{ scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.6)" }}, {wa:.3f});',  # on "এখনই হোয়াটসঅ্যাপ করুন"
            f'tl.fromTo("#{sid}foot", {{ opacity: 0 }}, {{ opacity: 1, duration: {0.5 * k:.3f}, ease: "none" }}, {at(1.0):.3f});']
-    for p in (1.5, 3.0):  # WhatsApp pulses (27.5 s and 29 s in the 30 s cut)
-        js.append(f'tl.fromTo("#{sid}wa", {{ scale: 1 }}, {{ scale: 1.05, duration: {0.25 * k:.3f}, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }}, {at(p):.3f});')
+    for p in (wa + 0.9, wa + 2.0):  # soft WhatsApp pulses, only those that finish inside the scene
+        if p + 0.5 < t0 + dur - 0.1:
+            js.append(f'tl.fromTo("#{sid}wa", {{ scale: 1 }}, {{ scale: 1.05, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }}, {p:.3f});')
     return html
 
 
 SCENES = {1: (scene1, 3.0), 2: (scene2, 4.0), 3: (scene3, 3.5), 4: (scene4, 3.0), 5: (scene5, 3.5), 6: (scene6, 2.5),
           7: (scene7, 3.5), 8: (scene8, 3.0), 9: (scene9, 4.0)}
-CUTS = {
-    "30s": (V, [(n, None) for n in range(1, 10)]),
-    "15s": (V, [(1, 2.5), (3, 3.0), (5, 3.5), (7, 3.0), (9, 3.0)]),
-    "square": (SQ, [(n, None) for n in range(1, 10)]),
-    "wide": (WI, [(n, None) for n in range(1, 10)]),
+CUTS = {  # format layout, the voice timing to follow (timing.json from scripts/voice.py)
+    "30s": (V, "30s"),
+    "15s": (V, "15s"),
+    "square": (SQ, "30s"),
+    "wide": (WI, "30s"),
 }
 
 
@@ -297,15 +312,24 @@ def _tick():
 SOUNDS = {"whoosh": (_whoosh, -14), "pop": (_pop, -16), "tick": (_tick, -18)}
 
 
-def write_sfx(path, total, events):
-    bus = np.zeros(int(total * SR), np.float32)
+def write_mix(path, voice, total, events):
+    """The -14 LUFS voice (scripts/voice.py) with the soft SFX laid on top; 0.2 s fade-in, 0.5 s fade-out."""
+    v, _ = sf.read(voice, dtype="float32")
+    n = int(round(total * SR))
+    bus = np.zeros(n, np.float32)
+    mix = np.zeros((n, 2), np.float32)
+    mix[: min(n, len(v))] = v[:n]
     for t, kind in events:
         fn, peak = SOUNDS[kind]
         x = fn()
         x = x / np.max(np.abs(x)) * 10 ** (peak / 20)
         i = int(t * SR)
         bus[i:i + len(x)] += x[: len(bus) - i]
-    sf.write(path, np.repeat(bus[:, None], 2, axis=1), SR, subtype="PCM_16")
+    mix += bus[:, None]
+    fi, fo = int(0.2 * SR), int(0.5 * SR)
+    mix[:fi] *= np.linspace(0, 1, fi)[:, None]
+    mix[-fo:] *= np.linspace(1, 0, fo)[:, None]
+    sf.write(path, mix, SR, subtype="PCM_16")
 
 
 # ----------------------------------------------------------------------------------------------- page
@@ -426,22 +450,25 @@ PAGE = """<!doctype html>
 
 
 def build(cut):
-    L, plan = CUTS[cut]
+    global CUE
+    L, tkey = CUTS[cut]
+    timing = json.loads((ROOT / "timing.json").read_text())[tkey]
+    CUE = timing["cues"]
     js, sfx, secs = [], [], []
     t = 0.0
-    for n, d in plan:
+    for sc in timing["scenes"]:
+        n, dur = sc["n"], sc["length"]
         fn, orig = SCENES[n]
-        dur = d or orig
-        k = dur / orig
+        k = dur / orig  # scene motion stretches with the voice
         sid = f"s{n}"
         inner = fn(sid, t, k, dur, L, js, sfx)
         secs.append(f'<section id="{sid}" class="clip scene" data-start="{t:.3f}" data-duration="{dur:.3f}" data-track-index="1">{inner}</section>')
         t += dur
     total = round(t, 3)
     proj = ROOT / f"out-{cut}"
-    wav = proj / "sfx.wav"
-    write_sfx(wav, total, sfx)
-    audio = f'<audio id="sfx" src="sfx.wav" data-start="0" data-duration="{total}" data-track-index="9" data-volume="1"></audio>'
+    write_mix(proj / "mix.wav", ROOT / "assets" / "vo" / f"voice-{tkey}.wav", total, sfx)
+    (proj / "sfx.wav").unlink(missing_ok=True)
+    audio = f'<audio id="mix" src="mix.wav" data-start="0" data-duration="{total}" data-track-index="9" data-volume="1"></audio>'
     page = (PAGE.replace("{{CSS}}", CSS).replace("{{W}}", str(L["W"])).replace("{{H}}", str(L["H"]))
             .replace("{{TITLE}}", f"Omega Dental ad {cut}").replace("{{TOTAL}}", str(total))
             .replace("{{SCENES}}", "\n      ".join(secs)).replace("{{AUDIO}}", audio).replace("{{JS}}", "\n      ".join(js)))
