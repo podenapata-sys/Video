@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<title>Omega ad: starter (scene 1 + scene 9)</title>
+<!--
+  Starter composition for HyperFrames: scene 1 (hook) and scene 9 (CTA) from storyboard.md.
+  It shows the conventions the full ad should follow:
+    - one root element with data-composition-id / data-width / data-height / data-start
+    - each scene is a .clip with data-start / data-duration / data-track-index
+    - one paused GSAP timeline, registered on window.__timelines under the composition id,
+      with every tween placed at an absolute time, so any frame can be seeked
+    - fonts from ../fonts via @font-face, never from the web at render time
+  If the HyperFrames docs (npx hyperframes --help, or the skill) say otherwise, follow them.
+-->
+<style>
+@font-face{font-family:"Noto Sans Bengali";src:url(../fonts/noto-bengali.woff2) format("woff2");font-weight:400 800;font-display:block}
+@font-face{font-family:"Sora";src:url(../fonts/sora.woff2) format("woff2");font-weight:600 800;font-display:block}
+@font-face{font-family:"Inter";src:url(../fonts/inter.woff2) format("woff2");font-weight:400 700;font-display:block}
+:root{--teal:#57C3AD;--teal-dark:#2C8A78;--blue:#2B6CB0;--navy:#13294E;--orange:#F08A24;--ink:#16323C;--muted:#5B7682;--bg:#F4F8FA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg);
+  font-family:"Noto Sans Bengali","Sora",sans-serif;color:var(--ink)}
+.clip{position:absolute;inset:0}
+.bn{font-family:"Noto Sans Bengali","Sora",sans-serif}
+.en{font-family:"Sora","Noto Sans Bengali",sans-serif}
+
+/* scene 1: a generic map listing card, drawn from scratch (not a copy of any app's UI) */
+#s1{background:radial-gradient(1200px 900px at 50% 38%,#ffffff 0%,#EAF3F6 60%,#DDEBF0 100%)}
+.hook{position:absolute;left:80px;right:140px;font-weight:700;font-size:86px;line-height:1.25;color:var(--navy)}
+#hookA{top:250px}
+#hookB{top:250px;opacity:0}
+#hookB span{color:var(--orange)}
+.mapcard{position:absolute;left:90px;right:90px;top:760px;background:#fff;border-radius:44px;padding:52px 56px;
+  box-shadow:0 40px 90px -40px rgba(19,41,78,.45)}
+.mapcard .row{display:flex;align-items:center;gap:26px}
+.pin{width:92px;height:92px;border-radius:28px;background:#FDECEA;color:#D64532;display:grid;place-items:center}
+.pin svg{width:56px;height:56px}
+.mapcard h3{font-size:58px;font-weight:700;color:var(--navy);line-height:1.2}
+.stars{display:flex;gap:6px;margin-top:10px}
+.stars svg{width:38px;height:38px;fill:#F6B12C}
+.btns{display:flex;gap:22px;margin-top:44px}
+.btn{flex:1;height:112px;border-radius:30px;display:grid;place-items:center;font:700 38px "Sora",sans-serif;
+  background:#EEF5F8;color:var(--navy)}
+.btn.empty{background:transparent;border:5px dashed #C8D6DC;color:#9AB0B9}
+
+/* scene 9: CTA */
+#s9{background:linear-gradient(160deg,#13294E 0%,#1E4C86 55%,#2B6CB0 100%);opacity:0}
+.cta{position:absolute;left:80px;right:140px;top:420px;color:#fff}
+.cta h2{font-size:92px;font-weight:800;line-height:1.22}
+.cta h2 b{color:var(--teal);font-weight:800}
+.wa{margin-top:90px;display:inline-flex;align-items:center;gap:26px;background:#fff;color:var(--navy);
+  border-radius:999px;padding:30px 52px 30px 34px}
+.wa .dot{width:84px;height:84px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center}
+.wa .dot svg{width:48px;height:48px}
+.wa .t small{display:block;font:600 34px "Inter",sans-serif;color:var(--muted)}
+.wa .t strong{display:block;font:800 72px "Sora",sans-serif;letter-spacing:.5px}
+.foot{position:absolute;left:80px;right:140px;top:1360px;color:#CFE3EE;font-size:40px;line-height:1.5}
+.foot .brand{font:800 50px "Sora",sans-serif;color:#fff;display:block;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="omega-ad" data-start="0" data-width="1080" data-height="1920">
+
+  <section id="s1" class="clip" data-start="0" data-duration="3" data-track-index="1">
+    <p id="hookA" class="hook bn">রোগী গুগলে আপনার ক্লিনিক খুঁজে পেলেন…</p>
+    <p id="hookB" class="hook bn">…কিন্তু <span>Website</span> নেই।</p>
+    <div class="mapcard" id="mapcard">
+      <div class="row">
+        <div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <div>
+          <h3 class="bn">আপনার ক্লিনিক</h3>
+          <div class="stars">
+            <svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="btns">
+        <div class="btn">Directions</div>
+        <div class="btn">Call</div>
+        <div class="btn empty" id="webslot">Website</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s9" class="clip" data-start="3" data-duration="4" data-track-index="1">
+    <div class="cta">
+      <h2 id="ctaTitle" class="bn">আপনার ক্লিনিকের নাম দিয়ে <b>ফ্রি নমুনা পেজ</b></h2>
+      <div class="wa" id="wa">
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg></div>
+        <div class="t"><small>WhatsApp</small><strong>01632-932249</strong></div>
+      </div>
+    </div>
+    <p class="foot bn" id="foot"><span class="brand">Future Stack Solutions</span>চালু থাকা উদাহরণ: omegadentalbd.com</p>
+  </section>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+
+// scene 1 (0–3 s)
+tl.from("#mapcard", { y: 80, opacity: 0, duration: 0.5, ease: "power3.out" }, 0.0)
+  .from("#hookA",   { x: -60, opacity: 0, duration: 0.45, ease: "power2.out" }, 0.2)
+  .to("#hookA",     { x: -120, opacity: 0, duration: 0.35, ease: "power2.in" }, 1.55)
+  .fromTo("#hookB", { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power2.out" }, 1.65)
+  .to("#webslot",   { borderColor: "#F08A24", color: "#F08A24", scale: 1.06, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut" }, 1.7);
+
+// scene 9 (3–7 s)
+tl.to("#s9",          { opacity: 1, duration: 0.35, ease: "none" }, 3.0)
+  .from("#ctaTitle",  { y: 50, opacity: 0, duration: 0.55, ease: "power3.out" }, 3.15)
+  .from("#wa",        { scale: 0.85, opacity: 0, duration: 0.5, ease: "back.out(1.6)" }, 3.6)
+  .to("#wa",          { scale: 1.05, duration: 0.3, yoyo: true, repeat: 1, ease: "sine.inOut" }, 4.6)
+  .to("#wa",          { scale: 1.05, duration: 0.3, yoyo: true, repeat: 1, ease: "sine.inOut" }, 5.8)
+  .from("#foot",      { opacity: 0, duration: 0.5 }, 4.0)
+  .to({}, { duration: 0.01 }, 6.99);   // pins the timeline length to the composition length
+
+window.__timelines["omega-ad"] = tl;
+</script>
+</body>
+</html>

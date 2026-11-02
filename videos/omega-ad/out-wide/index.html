@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Omega Dental ad wide</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+@font-face{font-family:"Noto Sans Bengali";src:url(fonts/noto-bengali.woff2) format("woff2");font-weight:400 800;font-display:block}
+@font-face{font-family:"Sora";src:url(fonts/sora.woff2) format("woff2");font-weight:600 800;font-display:block}
+@font-face{font-family:"Inter";src:url(fonts/inter.woff2) format("woff2");font-weight:400 700;font-display:block}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: #F4F8FA; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #F4F8FA; color: #16323C;
+  font-family: "Noto Sans Bengali", "Sora", sans-serif; }
+.scene { overflow: hidden; }
+.bn { font-family: "Noto Sans Bengali", "Sora", sans-serif; }
+.en { font-family: "Sora", "Noto Sans Bengali", sans-serif; }
+.orange { color: #F08A24; }
+.bgfill { position: absolute; inset: 0; }
+.vis { position: absolute; transform-origin: 0 0; }
+.tbox { position: absolute; }
+.ic { width: 100%; height: 100%; display: block; }
+.hook { font-weight: 700; line-height: 1.25; color: #13294E; }
+.feat { font-weight: 700; line-height: 1.3; color: #13294E; }
+.small { font-weight: 500; line-height: 1.4; color: #2C8A78; margin-top: 18px; }
+.w { display: inline-block; }
+.trow { display: flex; align-items: center; gap: 24px; }
+.ticon { flex: none; width: 1.3em; height: 1.3em; color: #2C8A78; display: block; font-size: 64px; padding: 12px; background: #DDF3EE;
+  border-radius: 24px; }
+/* scene 1: a generic map listing card, drawn from scratch (not a copy of any app's UI) */
+.mapcard { width: 860px; background: #fff; border-radius: 44px; padding: 52px 56px; box-shadow: 0 40px 90px -40px rgba(19,41,78,.45); }
+.mapcard .row { display: flex; align-items: center; gap: 26px; }
+.pin { width: 92px; height: 92px; border-radius: 28px; background: #FDECEA; color: #D64532; display: grid; place-items: center; }
+.pin .ic { width: 56px; height: 56px; }
+.mapcard h3 { font-size: 58px; font-weight: 700; color: #13294E; line-height: 1.2; }
+.stars { display: flex; gap: 6px; margin-top: 10px; }
+.stars svg { width: 38px; height: 38px; fill: #F6B12C; }
+.btns { display: flex; gap: 22px; margin-top: 44px; }
+.btn { flex: 1; height: 112px; border-radius: 30px; display: grid; place-items: center; font-weight: 700; font-size: 38px;
+  background: #EEF5F8; color: #13294E; }
+.btn.empty { background: transparent; border: 5px dashed #C8D6DC; color: #9AB0B9; }
+/* scene 2 */
+.clockrow { display: flex; align-items: center; gap: 28px; }
+.clock { width: 150px; height: 150px; color: #13294E; }
+.clock svg { width: 100%; height: 100%; fill: #fff; stroke: #13294E; stroke-width: 5; stroke-linecap: round; }
+.clocktxt { font-size: 64px; font-weight: 700; color: #13294E; }
+.bubbles { width: 860px; display: flex; flex-direction: column; gap: 40px; }
+.bub { align-self: flex-start; display: flex; align-items: center; gap: 22px; background: #fff; border-radius: 44px 44px 44px 12px;
+  padding: 30px 40px; box-shadow: 0 24px 60px -30px rgba(19,41,78,.35); max-width: 860px; }
+.bub.r { align-self: flex-end; border-radius: 44px 44px 12px 44px; background: #DDF3EE; }
+.bub .ic { width: 60px; height: 60px; color: #2B6CB0; flex: none; }
+.bub span { font-size: 60px; font-weight: 700; color: #13294E; line-height: 1.25; }
+/* phone mockup (brand.md) */
+.phone { width: 600px; aspect-ratio: 1170/2532; border-radius: 76px; padding: 22px; background: #0E1B33; position: relative;
+  box-shadow: 0 60px 120px -40px rgba(19,41,78,.55), 0 0 0 3px #22345a inset; }
+.phone .screen { width: 100%; height: 100%; border-radius: 56px; overflow: hidden; background: #fff; position: relative; }
+.phone .screen img { width: 100%; display: block; position: absolute; left: 0; top: 0; }
+.glow { position: absolute; left: -150px; top: 150px; width: 900px; height: 900px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(87,195,173,.55) 0%, rgba(87,195,173,0) 65%); }
+.tapring { position: absolute; left: 278px; top: 570px; width: 200px; height: 200px; margin: -100px 0 0 -100px; border-radius: 50%;
+  border: 8px solid #57C3AD; }
+.stamp { position: absolute; right: -40px; bottom: 380px; width: 190px; height: 190px; border-radius: 50%; background: #fff;
+  color: #1FA855; padding: 18px; box-shadow: 0 20px 50px -20px rgba(19,41,78,.5); }
+.toggle { position: relative; display: inline-flex; gap: 0; background: #13294E; border-radius: 999px; padding: 10px; }
+.toggle span { position: relative; z-index: 1; width: 150px; text-align: center; font-size: 40px; font-weight: 700; color: #fff; line-height: 80px; }
+.toggle i { position: absolute; left: 10px; top: 10px; width: 150px; height: 80px; border-radius: 999px; background: #57C3AD; }
+/* scene 7 */
+.cards { position: relative; width: 860px; height: 760px; }
+.card { position: absolute; width: 760px; background: #fff; border-radius: 28px; overflow: hidden;
+  box-shadow: 0 40px 90px -40px rgba(19,41,78,.5); }
+.card.dash { left: 0; top: 0; }
+.card.edit { left: 100px; top: 280px; }
+.cardbar { height: 40px; background: #E6EFF3; display: flex; gap: 10px; align-items: center; padding: 0 18px; }
+.cardbar i { width: 14px; height: 14px; border-radius: 50%; background: #C8D6DC; }
+.shot { overflow: hidden; }
+.shot img { width: 100%; display: block; transform-origin: 30% 30%; }
+.sample { position: absolute; right: 16px; top: 50px; background: #13294E; color: #fff; font-size: 36px; font-weight: 600;
+  border-radius: 999px; padding: 4px 22px; }
+/* scene 8 */
+.tiles { width: 860px; display: flex; flex-direction: column; gap: 34px; }
+.tile { display: flex; align-items: center; gap: 36px; background: #fff; border-radius: 40px; padding: 44px 48px;
+  box-shadow: 0 30px 70px -36px rgba(19,41,78,.4); }
+.tile .tic { flex: none; width: 130px; height: 130px; border-radius: 34px; background: linear-gradient(135deg, #57C3AD, #2B6CB0);
+  color: #fff; padding: 30px; }
+.tile p { font-weight: 700; color: #13294E; line-height: 1.3; }
+/* scene 9 */
+.cta { position: absolute; color: #fff; }
+.cta h2 { font-weight: 800; line-height: 1.22; }
+.cta h2 b { color: #57C3AD; font-weight: 800; }
+.wa { margin-top: 70px; display: inline-flex; align-items: center; gap: 26px; background: #fff; color: #13294E; border-radius: 999px;
+  padding: 26px 52px 26px 30px; }
+.wa .dot { width: 84px; height: 84px; border-radius: 50%; background: #57C3AD; color: #fff; padding: 18px; }
+.wa .t small { display: block; font: 600 36px "Inter", sans-serif; color: #5B7682; }
+.wa .t strong { display: block; font-weight: 800; letter-spacing: .5px; line-height: 1.1; }
+.foot { position: absolute; color: #CFE3EE; line-height: 1.5; }
+.foot .brand { display: block; font-weight: 800; font-size: 1.25em; color: #fff; margin-bottom: 8px; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30.0" data-width="1920" data-height="1080" data-fps="30">
+      <section id="s1" class="clip scene" data-start="0.000" data-duration="3.000" data-track-index="1"><div class="bgfill" style="background:radial-gradient(1200px 900px at 50% 38%,#ffffff 0%,#EAF3F6 60%,#DDEBF0 100%)"></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><p id="s1a" class="hook bn" style="font-size:72px">রোগী গুগলে আপনার ক্লিনিক খুঁজে পেলেন…</p></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><p id="s1b" class="hook bn" style="font-size:72px">…কিন্তু <span class="orange en">Website</span> নেই।</p></div><div class="vis" style="left:1150px;top:330px;transform:scale(0.72);"><div class="mapcard" id="s1card"><div class="row"><div class="pin"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
+</div><div><h3 class="bn">আপনার ক্লিনিক</h3><div class="stars"><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg></div></div></div><div class="btns"><div class="btn en">Directions</div><div class="btn en">Call</div><div class="btn empty en" id="s1slot">Website</div></div></div></div></section>
+      <section id="s2" class="clip scene" data-start="3.000" data-duration="4.000" data-track-index="1"><div class="bgfill" style="background:linear-gradient(180deg,#F4F8FA 0%,#E6EFF3 100%)"></div><div class="vis" style="left:115px;top:470px;transform:scale(0.8)"><div class="clockrow" id="s2clk"><div class="clock"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><line id="s2hh" x1="50" y1="50" x2="50" y2="26"/><line id="s2mh" x1="50" y1="50" x2="50" y2="14"/></svg></div><span class="bn clocktxt">রাত ১১:০০</span></div></div><div class="vis" style="left:1180px;top:150px;transform:scale(0.72);"><div class="bubbles" id="s2bubs"><div class="bub " id="s2q0"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg>
+<span class="bn">দাম কত?</span></div><div class="bub r" id="s2q1"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg>
+<span class="bn">কখন খোলা?</span></div><div class="bub " id="s2q2"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg>
+<span class="bn">অ্যাপয়েন্টমেন্ট নেওয়া যাবে?</span></div></div></div><div class="tbox" style="left:115px;top:700px;width:1000px;"><p id="s2cap" class="feat bn" style="font-size:64px">একই প্রশ্ন, দিনে বারবার।</p></div></section>
+      <section id="s3" class="clip scene" data-start="7.000" data-duration="3.500" data-track-index="1"><div class="bgfill" style="background:radial-gradient(900px 900px at 50% 70%,#DDF3EE 0%,#F4F8FA 70%)"></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><p id="s3t" class="feat bn" style="font-size:64px"><span class="w" id="s3w0">নিজের</span> <span class="w" id="s3w1">ওয়েবসাইট</span> <span class="w" id="s3w2">—</span> <span class="w" id="s3w3">আপনার</span> <span class="w" id="s3w4">ক্লিনিকের</span> <span class="w" id="s3w5">নামে</span></p><p id="s3s" class="small bn" style="font-size:40px">উদাহরণ: <span class="en">omegadentalbd.com</span></p></div><div class="vis" style="left:1311px;top:66px;transform:scale(0.73);"><div class="glow" id="s3glow"></div><div class="phone" id="s3ph"><div class="screen"><img id="s3img0" src="assets/screens/phone/01-home-hero.png" alt="" /></div></div></div></section>
+      <section id="s4" class="clip scene" data-start="10.500" data-duration="3.000" data-track-index="1"><div class="bgfill" style="background:linear-gradient(180deg,#F4F8FA 0%,#E3F1EE 100%)"></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><div class="trow"><span class="ticon" id="s4ic"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9-9-9z"/><circle cx="7.5" cy="7.5" r="1.6"/></svg>
+</span><p id="s4t" class="feat bn" style="font-size:64px">দামের তালিকা — উত্তর আগেই</p></div></div><div class="vis" style="left:1311px;top:66px;transform:scale(0.73);"><div class="phone" id="s4ph"><div class="screen"><img id="s4img0" src="assets/screens/phone/03-price-list.png" alt="" /></div></div></div></section>
+      <section id="s5" class="clip scene" data-start="13.500" data-duration="3.500" data-track-index="1"><div class="bgfill" style="background:linear-gradient(180deg,#F4F8FA 0%,#E6EFF3 100%)"></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><p id="s5t" class="feat bn" style="font-size:64px">অনলাইন বুকিং — রাতেও</p><p id="s5s" class="small bn" style="font-size:40px">সাথে সাথে ইমেইল আর গুগল শিটে</p></div><div class="vis" style="left:1311px;top:66px;transform:scale(0.73);"><div class="phone" id="s5ph"><div class="screen"><img id="s5img0" src="assets/screens/phone/05-booking-form.png" alt="" /><div class="tapring" id="s5ring"></div></div><div class="stamp" id="s5chk"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+</div></div></div></section>
+      <section id="s6" class="clip scene" data-start="17.000" data-duration="2.500" data-track-index="1"><div class="bgfill" style="background:linear-gradient(180deg,#F4F8FA 0%,#E3F1EE 100%)"></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><div class="trow"><span class="ticon" id="s6ic"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg>
+</span><p id="s6t" class="feat bn" style="font-size:64px"><span class="bn">বাংলা</span> + <span class="en">English</span></p></div></div><div class="tbox" style="left:115px;top:292px;width:1000px;"><div class="toggle" id="s6tg"><span class="en">EN</span><span class="bn">বাংলা</span><i id="s6knob"></i></div></div><div class="vis" style="left:1311px;top:66px;transform:scale(0.73);"><div class="phone" id="s6ph"><div class="screen"><img id="s6img0" src="assets/screens/phone/01-home-hero.png" alt="" /><img id="s6img1" src="assets/screens/phone/09-home-hero-bangla.png" alt="" /></div></div></div></section>
+      <section id="s7" class="clip scene" data-start="19.500" data-duration="3.500" data-track-index="1"><div class="bgfill" style="background:linear-gradient(180deg,#F4F8FA 0%,#E6EFF3 100%)"></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><p id="s7t1" class="feat bn" style="font-size:64px">রোগীর রেকর্ড ও পেমেন্ট — এক জায়গায়</p></div><div class="tbox" style="left:115px;top:190px;width:1000px;"><p id="s7t2" class="feat bn" style="font-size:64px">দাম ও ছবি নিজেই বদলান</p></div><div class="vis" style="left:820px;top:200px;transform:scale(1.04);"><div class="cards"><div class="card dash" id="s7dash"><div class="cardbar"><i></i><i></i><i></i></div><div class="shot"><img id="s7dimg" src="assets/screens/admin/02-dashboard-records.png" alt="" /></div><span class="sample bn">নমুনা ডেটা</span></div><div class="card edit" id="s7edit"><div class="cardbar"><i></i><i></i><i></i></div><div class="shot"><img src="assets/screens/admin/01-editor-prices.png" alt="" /></div></div></div></div></section>
+      <section id="s8" class="clip scene" data-start="23.000" data-duration="3.000" data-track-index="1"><div class="bgfill" style="background:radial-gradient(1000px 900px at 50% 40%,#FFFFFF 0%,#E6EFF3 100%)"></div><div class="vis" style="left:530px;top:90px;transform:scale(1.0);"><div class="tiles"><div class="tile" id="s8tile0"><span class="tic"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 6v6c0 5-3.5 8.3-8 9.5C7.5 20.3 4 17 4 12V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+</span><p class="bn" style="font-size:58px">মাসে <span id="s8roll">০</span> টাকা হোস্টিং</p></div><div class="tile" id="s8tile1"><span class="tic"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+</span><p class="bn" style="font-size:58px">ডোমেইন আপনার নামে</p></div><div class="tile" id="s8tile2"><span class="tic"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+</span><p class="bn" style="font-size:58px">ফোনে দ্রুত, ধীর নেটেও</p></div></div></div></section>
+      <section id="s9" class="clip scene" data-start="26.000" data-duration="4.000" data-track-index="1"><div class="bgfill" id="s9bg" style="background:linear-gradient(160deg,#13294E 0%,#1E4C86 55%,#2B6CB0 100%)"></div><div class="cta" style="left:115px;top:210px;width:1000px"><h2 id="s9h" class="bn" style="font-size:76px">আপনার ক্লিনিকের নাম দিয়ে <b>ফ্রি নমুনা পেজ</b></h2><div class="wa" id="s9wa"><div class="dot"><svg class="ic " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg>
+</div><div class="t"><small class="en">WhatsApp</small><strong class="en" style="font-size:64px">01632-932249</strong></div></div></div><p class="foot bn" id="s9foot" style="left:115px;top:820px;width:1000px;font-size:38px"><span class="brand en">Future Stack Solutions</span>চালু থাকা উদাহরণ: <span class="en">omegadentalbd.com</span></p></section>
+      <audio id="sfx" src="sfx.wav" data-start="0" data-duration="30.0" data-track-index="9" data-volume="1"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s1card", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.500, ease: "power3.out" }, 0.000);
+      tl.fromTo("#s1a", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.300, ease: "power2.out" }, 0.000);
+      tl.to("#s1a", { x: -120, opacity: 0, duration: 0.250, ease: "power2.in" }, 1.450);
+      tl.fromTo("#s1b", { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.350, ease: "power2.out" }, 1.450);
+      tl.fromTo("#s1slot", { borderColor: "#C8D6DC", color: "#9AB0B9", scale: 1 }, { borderColor: "#F08A24", color: "#F08A24", scale: 1.06, duration: 0.250, yoyo: true, repeat: 3, ease: "sine.inOut" }, 1.700);
+      tl.fromTo("#s2clk", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.400, ease: "power3.out" }, 3.050);
+      tl.fromTo("#s2mh", { rotation: 0, svgOrigin: "50 50" }, { rotation: 90, svgOrigin: "50 50", duration: 3.600, ease: "steps(6)" }, 3.300);
+      tl.fromTo("#s2q0", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.350, ease: "back.out(2)" }, 3.300);
+      tl.fromTo("#s2q1", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.350, ease: "back.out(2)" }, 3.650);
+      tl.fromTo("#s2q2", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.350, ease: "back.out(2)" }, 4.000);
+      tl.fromTo("#s2cap", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.400, ease: "power3.out" }, 5.200);
+      tl.fromTo("#s2bubs", { x: -8 }, { x: 8, duration: 0.05, yoyo: true, repeat: 5, ease: "none", immediateRender: false }, 5.250);
+      tl.to("#s2bubs", { x: 0, duration: 0.05, ease: "none" }, 5.550);
+      tl.fromTo("#s3ph", { y: 700, rotation: 4 }, { y: 0, rotation: 0, duration: 0.800, ease: "power3.out" }, 7.000);
+      tl.fromTo("#s3glow", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.900, ease: "power2.out" }, 7.200);
+      tl.fromTo("#s3w0", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.220, ease: "power2.out" }, 7.250);
+      tl.fromTo("#s3w1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.220, ease: "power2.out" }, 7.390);
+      tl.fromTo("#s3w2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.220, ease: "power2.out" }, 7.530);
+      tl.fromTo("#s3w3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.220, ease: "power2.out" }, 7.670);
+      tl.fromTo("#s3w4", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.220, ease: "power2.out" }, 7.810);
+      tl.fromTo("#s3w5", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.220, ease: "power2.out" }, 7.950);
+      tl.fromTo("#s3s", { opacity: 0 }, { opacity: 1, duration: 0.400, ease: "none" }, 8.300);
+      tl.fromTo("#s4t", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.450, ease: "power3.out" }, 10.550);
+      tl.fromTo("#s4ic", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.400, ease: "back.out(2.2)" }, 10.850);
+      tl.fromTo("#s4img0", { y: 0 }, { y: -300, duration: 2.600, ease: "sine.inOut" }, 10.800);
+      tl.fromTo("#s5t", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.450, ease: "power3.out" }, 13.550);
+      tl.fromTo("#s5s", { opacity: 0 }, { opacity: 1, duration: 0.400, ease: "none" }, 14.000);
+      tl.fromTo("#s5ph", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.500, ease: "power3.out" }, 13.500);
+      tl.fromTo("#s5ring", { scale: 0.4, opacity: 0.9 }, { scale: 1.6, opacity: 0, duration: 0.600, ease: "power2.out", repeat: 1 }, 14.400);
+      tl.fromTo("#s5chk", { scale: 2.2, opacity: 0, rotation: -15 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.300, ease: "back.out(1.8)" }, 15.700);
+      tl.fromTo("#s6t", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.450, ease: "power3.out" }, 17.050);
+      tl.fromTo("#s6ic", { scale: 0 }, { scale: 1, duration: 0.400, ease: "back.out(2.2)" }, 17.300);
+      tl.fromTo("#s6tg", { opacity: 0 }, { opacity: 1, duration: 0.300, ease: "none" }, 17.300);
+      tl.fromTo("#s6knob", { x: 0 }, { x: 150, duration: 0.500, ease: "power2.inOut" }, 17.900);
+      tl.fromTo("#s6img1", { opacity: 0 }, { opacity: 1, duration: 0.500, ease: "none" }, 17.900);
+      tl.fromTo("#s7dash", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.500, ease: "power3.out" }, 19.500);
+      tl.fromTo("#s7dimg", { scale: 1.0 }, { scale: 1.08, duration: 3.500, ease: "none" }, 19.500);
+      tl.fromTo("#s7t1", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.350, ease: "power3.out" }, 19.500);
+      tl.to("#s7t1", { y: -30, opacity: 0, duration: 0.200, ease: "power2.in" }, 21.250);
+      tl.fromTo("#s7t2", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.450, ease: "power3.out" }, 21.250);
+      tl.fromTo("#s7edit", { xPercent: 120 }, { xPercent: 0, duration: 0.600, ease: "power3.out" }, 21.250);
+      tl.fromTo("#s8tile0", { y: -120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.450, ease: "back.out(1.6)" }, 23.200);
+      tl.fromTo("#s8tile1", { y: -120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.450, ease: "back.out(1.6)" }, 23.450);
+      tl.fromTo("#s8tile2", { y: -120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.450, ease: "back.out(1.6)" }, 23.700);
+      const roll_s8 = document.getElementById("s8roll"); const rv_s8 = { v: 1000 };
+      tl.fromTo(rv_s8, { v: 1000 }, { v: 0, duration: 0.900, ease: "power2.in", onUpdate: () => { roll_s8.textContent = String(Math.round(rv_s8.v)).replace(/[0-9]/g, (d) => "০১২৩৪৫৬৭৮৯"[d]); } }, 23.550);
+      tl.fromTo("#s9bg", { opacity: 0 }, { opacity: 1, duration: 0.300, ease: "none" }, 26.000);
+      tl.fromTo("#s9h", { y: 50, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.550, ease: "power3.out" }, 26.150);
+      tl.fromTo("#s9wa", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.500, ease: "back.out(1.6)" }, 26.600);
+      tl.fromTo("#s9foot", { opacity: 0 }, { opacity: 1, duration: 0.500, ease: "none" }, 27.000);
+      tl.fromTo("#s9wa", { scale: 1 }, { scale: 1.05, duration: 0.250, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 27.500);
+      tl.fromTo("#s9wa", { scale: 1 }, { scale: 1.05, duration: 0.250, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 29.000);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+.hyperframes/
+node_modules/
+out-*/.hyperframes/
+renders/work-*/
+renders/.*.hf-transaction-*/
