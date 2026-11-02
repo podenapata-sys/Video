@@ -3,3 +3,6 @@ node_modules/
 out-*/.hyperframes/
 renders/work-*/
 renders/.*.hf-transaction-*/
+kit/fonts/
+kit/icons/
+kit/screens/
