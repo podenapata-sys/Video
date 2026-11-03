@@ -9,7 +9,7 @@ Inputs are copies in src/ (the uploads are never touched):
 The voice lines run longer than the brief's slots, so the cut follows the voice (see SHOTS).
   src/end_card.webp   the end-card poster (1125x2000)
   src/vo/NN_name.mp3  voice lines; 09_cta.mp3 is optional until it arrives
-There is no music.mp3, so the bed is the clips' own audio at -20 dB, ducked under the voice.
+There is no music.mp3; the clips' own audio (an AI voice) is muted at the user's request, so only the voiceover plays.
 """
 import json
 import re
@@ -97,6 +97,8 @@ SHOTS = {
     "07_uses":     [("clip2", 2.958, 4.792, None)],                                 # field, garden, tank
     "08_caps":     [("clip2", 4.792, 6.94, None)],                                  # 2" models + 3 caps
 }
+# The clips' own audio carries an AI voice; the user asked for it to be muted, so the bed is silent.
+BED_GAIN = 0  # was -20dB
 CARD_MIN = 3.5  # end-card hold while 09_cta is missing
 ZOOM = {"C": 1.67, "L": 1.35, "R": 1.35}
 
@@ -157,7 +159,7 @@ def video(spans, card_at, total):
     parts.append(f"anullsrc=r={SR}:cl=stereo,atrim=0:{card:.4f}[ac]")
     parts.append(f"{''.join(vs)}[vc]concat=n={n + 1}:v=1:a=0,format=yuv420p[v]")
     # bed: the clips' own audio at -20 dB; short fade into the silent end card
-    parts.append(f"{''.join(as_)}concat=n={n}:v=0:a=1,aresample={SR},volume=-20dB,"
+    parts.append(f"{''.join(as_)}concat=n={n}:v=0:a=1,aresample={SR},volume={BED_GAIN},"
                  f"afade=t=out:st={card_at - 0.4:.3f}:d=0.4[ab];[ab][ac]concat=n=2:v=0:a=1[bed]")
     run("-i", str(SRC / "clip1.mp4"), "-loop", "1", "-framerate", str(FPS), "-t", f"{card + 0.5:.3f}",
         "-i", str(SRC / "end_card.webp"), "-i", str(SRC / "clip2.mp4"),
