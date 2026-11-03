@@ -4,12 +4,11 @@
   python3 scripts/make.py            (run from videos/vai-pump-ad/)
 
 Inputs are copies in src/ (the uploads are never touched):
-  src/clip1.mp4       the one product clip (10.03 s, 720x1280, 24 fps)
+  src/clip1.mp4       problem -> SaHa GoLD / JesMin -> line-up + battery (10.03 s, 720x1280, 24 fps); 0-10 s used
+  src/clip2.mp4       coil cut-aways -> garden / tank -> caps -> line-up (10.03 s); its first 7.2 s used
   src/end_card.webp   the end-card poster (1125x2000)
   src/vo/NN_name.mp3  voice lines; 09_cta.mp3 is optional until it arrives
-Only one clip was supplied, so clip2 (7.2 s) re-cuts it (user's choice): the JesMin -> line-up -> battery
-shot at 0.9x for the "models" line, then the SaHa GoLD splash at 0.82x under "copper coil".
-There is no music.mp3, so the bed is the clip's own audio at -20 dB, ducked under the voice.
+There is no music.mp3, so the bed is the clips' own audio at -20 dB, ducked under the voice.
 """
 import json
 import re
@@ -28,8 +27,6 @@ NORM = f"scale={W}:{H}:force_original_aspect_ratio=decrease,pad={W}:{H}:(ow-iw)/
 LINES = [("01_hook", 0.0), ("02_problem", 1.5), ("03_solution", 2.8), ("04_models", 3.8), ("05_copper", 10.0),
          ("06_silver", 11.5), ("07_uses", 13.0), ("08_caps", 15.0), ("09_cta", 17.5)]
 GAP, TAIL = 0.10, 0.4
-# clip2 = (source in, source out, speed); 4.0/0.9 + 2.26/0.82 = 7.2 s
-CLIP2_SEGS = [(5.9, 9.9, 0.9), (3.34, 5.6, 0.82)]
 
 # Subtitle block centres, chosen from extracted frames:
 # clips: y 640 (25%), the empty sky / rooftop band above the pumps (tops ~37-42%); the lower half is taken by the
@@ -88,23 +85,18 @@ def voice():
 
 
 def video(total):
-    """clip1 | re-cut clip2 | end card (frozen-extended to the voice), all 1440x2560 30 fps; plus the -20 dB bed."""
+    """clip1 | clip2 | end card (frozen-extended to the voice), all 1440x2560 30 fps; plus the -20 dB bed."""
     card = total - CARD_AT
     c1 = SRC / "clip1.mp4"
     parts = [f"[0:v]trim=0:{CLIP1},setpts=PTS-STARTPTS,fps={FPS},{NORM},tpad=stop_mode=clone:stop_duration=1,"
              f"trim=0:{CLIP1},setpts=PTS-STARTPTS[v0]",
              f"[0:a]atrim=0:{CLIP1},asetpts=PTS-STARTPTS,apad=whole_dur={CLIP1}[a0]"]
     vs, as_ = ["[v0]"], ["[a0]"]
-    for i, (a, b, sp) in enumerate(CLIP2_SEGS, 1):
-        L = (b - a) / sp
-        # slight push-in (1.00 -> 1.06) so the re-used shot reads as a new angle
-        z = f"(1+0.06*t/{L:.4f})"
-        parts.append(f"[0:v]trim={a}:{b},setpts=(PTS-STARTPTS)/{sp},fps={FPS},{NORM},"
-                     f"scale=w='trunc({W}*{z}/2)*2':h='trunc({H}*{z}/2)*2':eval=frame,crop={W}:{H},"
-                     f"trim=0:{L:.4f},setpts=PTS-STARTPTS[v{i}]")
-        parts.append(f"[0:a]atrim={a}:{b},asetpts=PTS-STARTPTS,atempo={sp},apad=whole_dur={L:.4f},atrim=0:{L:.4f}[a{i}]")
-        vs.append(f"[v{i}]")
-        as_.append(f"[a{i}]")
+    # clip2: the first 7.2 s of src/clip2.mp4 (coil cut-aways -> garden/tank -> caps), as specified
+    parts.append(f"[2:v]trim=0:{CLIP2},setpts=PTS-STARTPTS,fps={FPS},{NORM},trim=0:{CLIP2},setpts=PTS-STARTPTS[v1]")
+    parts.append(f"[2:a]atrim=0:{CLIP2},asetpts=PTS-STARTPTS,apad=whole_dur={CLIP2}[a1]")
+    vs.append("[v1]")
+    as_.append("[a1]")
     n = len(vs)
     z = f"(1+0.02*min(t,{CARD})/{CARD})"  # 5 s push-in, then a frozen hold
     parts.append(f"[1:v]{NORM},fps={FPS},scale=w='trunc({W}*{z}/2)*2':h='trunc({H}*{z}/2)*2':eval=frame,"
@@ -115,7 +107,7 @@ def video(total):
     parts.append(f"{''.join(as_)}concat=n={n}:v=0:a=1,aresample={SR},volume=-20dB,"
                  f"afade=t=out:st={CARD_AT - 0.4}:d=0.4[ab];[ab][ac]concat=n=2:v=0:a=1[bed]")
     run("-i", str(c1), "-loop", "1", "-framerate", str(FPS), "-t", f"{card + 0.5:.3f}", "-i", str(SRC / "end_card.webp"),
-        "-filter_complex", ";".join(parts), "-map", "[v]", "-c:v", "libx264", "-crf", "14", "-preset", "fast",
+        "-i", str(SRC / "clip2.mp4"), "-filter_complex", ";".join(parts), "-map", "[v]", "-c:v", "libx264", "-crf", "14", "-preset", "fast",
         "-pix_fmt", "yuv420p", "-r", str(FPS), "-t", f"{total:.4f}", str(WORK / "video.mp4"),
         "-map", "[bed]", "-ar", str(SR), "-ac", "2", "-t", f"{total:.4f}", str(WORK / "bed.wav"))
 
