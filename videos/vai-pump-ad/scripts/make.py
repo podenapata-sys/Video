@@ -27,6 +27,9 @@ NORM = f"scale={W}:{H}:force_original_aspect_ratio=decrease,pad={W}:{H}:(ow-iw)/
 LINES = [("01_hook", 0.0), ("02_problem", 1.5), ("03_solution", 2.8), ("04_models", 3.8), ("05_copper", 10.0),
          ("06_silver", 11.5), ("07_uses", 13.0), ("08_caps", 15.0), ("09_cta", 17.5)]
 GAP, TAIL = 0.10, 0.4
+# 06_silver.mp3 says "জেসমিনে সিলভার কয়েল" and then repeats part of it; keep only the first take (0-1.38 s
+# after the lead trim: the "কয়েল" ending at 1.33 s matches 05_copper's "কয়েল").
+KEEP = {"06_silver": 1.38}
 
 # Subtitle block centres, chosen from extracted frames:
 # clips: y 640 (25%), the empty sky / rooftop band above the pumps (tops ~37-42%); the lower half is taken by the
@@ -45,7 +48,7 @@ TEXTS = [
     "জেসমিনে সিলভার কয়েল।",
     "কৃষি, বাগান, সবখানে কাজের।",
     "দুই ইঞ্চি মডেলে তিনটি ক্যাপ একদম ফ্রি!",
-    "সারা দেশে কুরিয়ার, এখনই হোয়াটসঅ্যাপ করুন!",
+    "অর্ডার করতে হোয়াটসঅ্যাপ করুন!",  # the user's new CTA line (was: সারা দেশে কুরিয়ার, এখনই হোয়াটসঅ্যাপ করুন!)
 ]
 
 
@@ -71,8 +74,10 @@ def voice():
             print(f"  {name}: not supplied yet, skipped")
             continue
         wav = WORK / f"{name}.wav"
-        run("-i", str(src), "-af", "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.02",
-            "-ar", str(SR), "-ac", "1", str(wav))
+        af = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.02"
+        if name in KEEP:  # drop a repeated take at the end of the file (user's request)
+            af += f",atrim=0:{KEEP[name]},afade=t=out:st={KEEP[name] - 0.04}:d=0.04"
+        run("-i", str(src), "-af", af, "-ar", str(SR), "-ac", "1", str(wav))
         d = dur(wav)
         start = want if prev_end is None or want >= prev_end + GAP else prev_end + GAP
         start = round(start, 3)
@@ -93,7 +98,7 @@ SHOTS = {
     "03_solution": [("clip1", 7.2, 10.0, None)],                                    # line-up + 12V battery
     "04_models":   [("clip1", 3.5, 5.625, None), ("clip1", 5.625, 7.2, None)],     # SaHa GoLD 1"/2" (once visible), JesMin
     "05_copper":   [("clip2", 0.0, 2.958, "L")],                                    # copper-coil cut-away
-    "06_silver":   [("clip2", 0.0, 2.958, "R")],                                    # silver-coil cut-away
+    "06_silver":   [("clip2", 0.0, 1.6, "R")],                                      # silver-coil cut-away
     "07_uses":     [("clip2", 2.958, 4.792, None)],                                 # field, garden, tank
     "08_caps":     [("clip2", 4.792, 6.94, None)],                                  # 2" models + 3 caps
 }
