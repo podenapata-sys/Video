@@ -4,8 +4,9 @@
   python3 scripts/make.py            (run from videos/vai-pump-ad/)
 
 Inputs are copies in src/ (the uploads are never touched):
-  src/clip1.mp4       problem -> SaHa GoLD / JesMin -> line-up + battery (10.03 s, 720x1280, 24 fps); 0-10 s used
-  src/clip2.mp4       coil cut-aways -> garden / tank -> caps -> line-up (10.03 s); its first 7.2 s used
+  src/clip1.mp4       problem -> SaHa GoLD / JesMin -> line-up + battery (10.03 s, 720x1280, 24 fps)
+  src/clip2.mp4       coil cut-aways -> field / garden / tank -> caps -> dark line-up (unused) (10.03 s)
+The voice lines run longer than the brief's slots, so the cut follows the voice (see SHOTS).
   src/end_card.webp   the end-card poster (1125x2000)
   src/vo/NN_name.mp3  voice lines; 09_cta.mp3 is optional until it arrives
 There is no music.mp3, so the bed is the clips' own audio at -20 dB, ducked under the voice.
@@ -20,8 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC, OUT = ROOT / "src", ROOT / "out"
 WORK = OUT / "work"
 W, H, FPS, SR = 1440, 2560, 30, 48000
-CLIP1, CLIP2, CARD = 10.0, 7.2, 5.0
-CARD_AT = CLIP1 + CLIP2  # 17.2
+CARD = 5.0  # end-card push-in length; it then holds frozen
 NORM = f"scale={W}:{H}:force_original_aspect_ratio=decrease,pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=white,setsar=1"
 
 LINES = [("01_hook", 0.0), ("02_problem", 1.5), ("03_solution", 2.8), ("04_models", 3.8), ("05_copper", 10.0),
@@ -84,30 +84,84 @@ def voice():
     return placed
 
 
-def video(total):
-    """clip1 | clip2 | end card (frozen-extended to the voice), all 1440x2560 30 fps; plus the -20 dB bed."""
-    card = total - CARD_AT
-    c1 = SRC / "clip1.mp4"
-    parts = [f"[0:v]trim=0:{CLIP1},setpts=PTS-STARTPTS,fps={FPS},{NORM},tpad=stop_mode=clone:stop_duration=1,"
-             f"trim=0:{CLIP1},setpts=PTS-STARTPTS[v0]",
-             f"[0:a]atrim=0:{CLIP1},asetpts=PTS-STARTPTS,apad=whole_dur={CLIP1}[a0]"]
-    vs, as_ = ["[v0]"], ["[a0]"]
-    # clip2: the first 7.2 s of src/clip2.mp4 (coil cut-aways -> garden/tank -> caps), as specified
-    parts.append(f"[2:v]trim=0:{CLIP2},setpts=PTS-STARTPTS,fps={FPS},{NORM},trim=0:{CLIP2},setpts=PTS-STARTPTS[v1]")
-    parts.append(f"[2:a]atrim=0:{CLIP2},asetpts=PTS-STARTPTS,apad=whole_dur={CLIP2}[a1]")
-    vs.append("[v1]")
-    as_.append("[a1]")
-    n = len(vs)
+# The picture follows the voice (user's request): every line gets the shot that shows what it says, and that
+# shot runs from the line's start to the next line's start. (source, in, out, framing); a line's pieces are
+# retimed together to fill its span. clip2 after 6.958 s (the dark-blue line-up) is not used (user's request).
+SHOTS = {
+    "01_hook":     [("clip1", 0.0, 1.458, None), ("clip1", 1.458, 2.792, None)],   # field farmer, garden woman
+    "02_problem":  [("clip1", 1.5, 2.79, "C"), ("clip1", 0.0, 1.45, "C")],         # the same two, close-up
+    "03_solution": [("clip1", 7.2, 10.0, None)],                                    # line-up + 12V battery
+    "04_models":   [("clip1", 3.5, 5.625, None), ("clip1", 5.625, 7.2, None)],     # SaHa GoLD 1"/2" (once visible), JesMin
+    "05_copper":   [("clip2", 0.0, 2.958, "L")],                                    # copper-coil cut-away
+    "06_silver":   [("clip2", 0.0, 2.958, "R")],                                    # silver-coil cut-away
+    "07_uses":     [("clip2", 2.958, 4.792, None)],                                 # field, garden, tank
+    "08_caps":     [("clip2", 4.792, 6.94, None)],                                  # 2" models + 3 caps
+}
+CARD_MIN = 3.5  # end-card hold while 09_cta is missing
+ZOOM = {"C": 1.67, "L": 1.35, "R": 1.35}
+
+
+def timeline(placed):
+    """[(line, t0, t1)] scene spans on the voice grid, then the end-card start and the total length."""
+    names = [p[0] for p in placed]
+    spans = []
+    for k, (name, s, e, _, _) in enumerate(placed):
+        if name not in SHOTS:
+            continue
+        t0 = 0.0 if k == 0 else s
+        t1 = placed[k + 1][1] if k + 1 < len(placed) else e + GAP
+        spans.append((name, t0, t1))
+    card_at = frames(spans[-1][2])
+    last_end = placed[-1][2]
+    total = frames(max(card_at + CARD_MIN, last_end + 0.6) if "09_cta" in names else card_at + CARD_MIN)
+    return spans, card_at, total
+
+
+def video(spans, card_at, total):
+    """Scenes cut to the voice | end card, all 1440x2560 30 fps; plus the -20 dB bed from the same cuts."""
+    card = total - card_at
+    idx = {"clip1": 0, "clip2": 2}
+    parts, vs, as_, n = [], [], [], 0
+    for name, t0, t1 in spans:
+        pieces = SHOTS[name]
+        src_len = sum(b - a for _, a, b, _ in pieces)
+        out_len = t1 - t0
+        sp = src_len / out_len  # < 1 slows down
+        acc = 0.0
+        for src, a, b, fr in pieces:
+            L = frames(t0 + acc + (b - a) / sp) - frames(t0 + acc)  # frame-exact piece boundaries
+            acc += (b - a) / sp
+            i = idx[src]
+            frame = ""
+            if fr:
+                z = ZOOM[fr]
+                x = {"C": "(iw-ow)/2", "L": "0", "R": "iw-ow"}[fr]
+                frame = f"crop=w=trunc(iw/{z}/2)*2:h=trunc(ih/{z}/2)*2:x={x}:y=(ih-oh)/2,"
+            interp = f"minterpolate=fps={FPS}:mi_mode=mci:mc_mode=aobmc:me_mode=bidir" if sp < 0.8 else f"fps={FPS}"
+            parts.append(f"[{i}:v]trim={a}:{b},setpts=(PTS-STARTPTS)/{sp:.5f},{frame}{interp},{NORM},"
+                         f"tpad=stop_mode=clone:stop_duration=0.2,trim=0:{L:.4f},setpts=PTS-STARTPTS[v{n}]")
+            tempo, t = [], sp
+            while t < 0.5:
+                tempo.append("atempo=0.5")
+                t /= 0.5
+            tempo.append(f"atempo={t:.5f}")
+            parts.append(f"[{i}:a]atrim={a}:{b},asetpts=PTS-STARTPTS,{','.join(tempo)},apad=whole_dur={L:.4f},"
+                         f"atrim=0:{L:.4f}[a{n}]")
+            vs.append(f"[v{n}]")
+            as_.append(f"[a{n}]")
+            n += 1
+        print(f"  scene {name:12} {t0:6.3f}-{t1:6.3f}  speed {sp:.2f}x")
     z = f"(1+0.02*min(t,{CARD})/{CARD})"  # 5 s push-in, then a frozen hold
     parts.append(f"[1:v]{NORM},fps={FPS},scale=w='trunc({W}*{z}/2)*2':h='trunc({H}*{z}/2)*2':eval=frame,"
                  f"crop={W}:{H},trim=0:{card:.4f},setpts=PTS-STARTPTS[vc]")
     parts.append(f"anullsrc=r={SR}:cl=stereo,atrim=0:{card:.4f}[ac]")
     parts.append(f"{''.join(vs)}[vc]concat=n={n + 1}:v=1:a=0,format=yuv420p[v]")
-    # bed: original clip audio at -20 dB; short fade into the silent end card
+    # bed: the clips' own audio at -20 dB; short fade into the silent end card
     parts.append(f"{''.join(as_)}concat=n={n}:v=0:a=1,aresample={SR},volume=-20dB,"
-                 f"afade=t=out:st={CARD_AT - 0.4}:d=0.4[ab];[ab][ac]concat=n=2:v=0:a=1[bed]")
-    run("-i", str(c1), "-loop", "1", "-framerate", str(FPS), "-t", f"{card + 0.5:.3f}", "-i", str(SRC / "end_card.webp"),
-        "-i", str(SRC / "clip2.mp4"), "-filter_complex", ";".join(parts), "-map", "[v]", "-c:v", "libx264", "-crf", "14", "-preset", "fast",
+                 f"afade=t=out:st={card_at - 0.4:.3f}:d=0.4[ab];[ab][ac]concat=n=2:v=0:a=1[bed]")
+    run("-i", str(SRC / "clip1.mp4"), "-loop", "1", "-framerate", str(FPS), "-t", f"{card + 0.5:.3f}",
+        "-i", str(SRC / "end_card.webp"), "-i", str(SRC / "clip2.mp4"),
+        "-filter_complex", ";".join(parts), "-map", "[v]", "-c:v", "libx264", "-crf", "14", "-preset", "fast",
         "-pix_fmt", "yuv420p", "-r", str(FPS), "-t", f"{total:.4f}", str(WORK / "video.mp4"),
         "-map", "[bed]", "-ar", str(SR), "-ac", "2", "-t", f"{total:.4f}", str(WORK / "bed.wav"))
 
@@ -193,17 +247,18 @@ def sub_png(text, path):
     return bw, bh, len(rows)
 
 
-def subtitles(placed):
+def subtitles(placed, card_at):
     lines = (ROOT / "scripts" / "subs.txt").read_text(encoding="utf-8").splitlines()
     assert lines == TEXTS, "subtitle text differs from the spec"
-    cs = cues(placed)
+    # a clip line never runs onto the end card (its position there would cover the logo row)
+    cs = [(i, s, e if (s + e) / 2 >= card_at else min(e, card_at)) for i, s, e in cues(placed)]
     srt = [f"{k}\n{ts(s, ',')} --> {ts(e, ',')}\n{TEXTS[i]}\n" for k, (i, s, e) in enumerate(cs, 1)]
     (OUT / "subtitles.srt").write_text("\n".join(srt), encoding="utf-8")
     subs = []
     for i, s, e in cs:
         png = WORK / f"sub{i + 1:02d}.png"
         bw, bh, nrows = sub_png(TEXTS[i], png)
-        cy = CARD_Y if (s + e) / 2 >= CARD_AT else CLIP_Y
+        cy = CARD_Y if (s + e) / 2 >= card_at else CLIP_Y
         subs.append((png, s, e, (W - bw) // 2, cy - bh // 2))
         print(f"  sub {i + 1:02d} {s:6.3f}-{e:6.3f}  {nrows} line(s)  centre y {cy} ({cy / H:.1%})")
     return subs
@@ -228,12 +283,12 @@ def main():
     WORK.mkdir(parents=True, exist_ok=True)
     print("voice placement:")
     placed = voice()
-    total = frames(max(CLIP1 + CLIP2 + CARD, placed[-1][2] + TAIL))
-    print(f"total {total:.3f} s (end card {total - CARD_AT:.2f} s{', frozen-extended' if total > 22.2 else ''})")
-    subs = subtitles(placed)
+    spans, card_at, total = timeline(placed)
+    print(f"end card {card_at:.3f}-{total:.3f} s, total {total:.3f} s")
+    subs = subtitles(placed, card_at)
     if "--subs-only" in sys.argv:
         return
-    video(total)
+    video(spans, card_at, total)
     audio(placed, total)
     encode(total, subs)
     print("wrote", OUT / "final_ad_1440x2560.mp4")
