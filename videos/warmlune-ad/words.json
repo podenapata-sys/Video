@@ -1,0 +1,668 @@
+[
+ {
+  "scene": 1,
+  "i": 0,
+  "word": "মাসের",
+  "text": "মাসের",
+  "start": 0.25,
+  "end": 1.04,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 1,
+  "word": "ওই",
+  "text": "ওই",
+  "start": 1.04,
+  "end": 1.41,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 2,
+  "word": "কয়েকটা",
+  "text": "কয়েকটা",
+  "start": 1.41,
+  "end": 2.38,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 3,
+  "word": "দিন...",
+  "text": "দিন...",
+  "start": 2.38,
+  "end": 2.763,
+  "break": true
+ },
+ {
+  "scene": 1,
+  "i": 4,
+  "word": "ভেতরের",
+  "text": "ভেতরের",
+  "start": 3.137,
+  "end": 3.93,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 5,
+  "word": "কষ্টটা",
+  "text": "কষ্টটা",
+  "start": 3.93,
+  "end": 4.43,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 6,
+  "word": "শুধু",
+  "text": "শুধু",
+  "start": 4.43,
+  "end": 4.75,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 7,
+  "word": "আমরাই",
+  "text": "আমরাই",
+  "start": 4.75,
+  "end": 5.46,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 8,
+  "word": "বুঝি।",
+  "text": "বুঝি।",
+  "start": 5.46,
+  "end": 5.754,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 0,
+  "word": "ক্লাস,",
+  "text": "ক্লাস,",
+  "start": 6.517,
+  "end": 7.537,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 1,
+  "word": "কাজ,",
+  "text": "কাজ,",
+  "start": 7.537,
+  "end": 8.735,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 2,
+  "word": "সবকিছু",
+  "text": "সবকিছু",
+  "start": 8.903,
+  "end": 9.477,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 3,
+  "word": "অপেক্ষা",
+  "text": "অপেক্ষা",
+  "start": 9.477,
+  "end": 9.857,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 4,
+  "word": "করছে...",
+  "text": "করছে...",
+  "start": 9.857,
+  "end": 10.136,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 5,
+  "word": "কিন্তু",
+  "text": "কিন্তু",
+  "start": 10.515,
+  "end": 10.767,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 6,
+  "word": "শরীরটা",
+  "text": "শরীরটা",
+  "start": 10.767,
+  "end": 11.367,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 7,
+  "word": "যেন",
+  "text": "যেন",
+  "start": 11.367,
+  "end": 11.827,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 8,
+  "word": "আর",
+  "text": "আর",
+  "start": 11.827,
+  "end": 12.027,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 9,
+  "word": "সঙ্গ",
+  "text": "সঙ্গ",
+  "start": 12.027,
+  "end": 12.427,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 10,
+  "word": "দেয়",
+  "text": "দেয়",
+  "start": 12.427,
+  "end": 12.907,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 11,
+  "word": "না।",
+  "text": "না।",
+  "start": 12.907,
+  "end": 12.978,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 0,
+  "word": "প্ল্যান",
+  "text": "প্ল্যান",
+  "start": 13.517,
+  "end": 13.957,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 1,
+  "word": "বদলে",
+  "text": "বদলে",
+  "start": 13.957,
+  "end": 14.417,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 2,
+  "word": "যায়...",
+  "text": "যায়...",
+  "start": 14.417,
+  "end": 14.786,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 3,
+  "word": "আর",
+  "text": "আর",
+  "start": 15.275,
+  "end": 15.457,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 4,
+  "word": "তখন",
+  "text": "তখন",
+  "start": 15.457,
+  "end": 16.057,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 5,
+  "word": "দরকার,",
+  "text": "দরকার,",
+  "start": 16.057,
+  "end": 16.456,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 6,
+  "word": "একটু",
+  "text": "একটু",
+  "start": 16.837,
+  "end": 17.347,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 7,
+  "word": "নিজের",
+  "text": "নিজের",
+  "start": 17.347,
+  "end": 17.747,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 8,
+  "word": "যত্ন।",
+  "text": "যত্ন।",
+  "start": 17.747,
+  "end": 18.073,
+  "break": true
+ },
+ {
+  "scene": 4,
+  "i": 0,
+  "word": "তোমার",
+  "text": "তোমার",
+  "start": 18.617,
+  "end": 19.057,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 1,
+  "word": "আরামের",
+  "text": "আরামের",
+  "start": 19.057,
+  "end": 19.717,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 2,
+  "word": "মুহূর্তের",
+  "text": "মুহূর্তের",
+  "start": 19.717,
+  "end": 20.177,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 3,
+  "word": "জন্য...",
+  "text": "জন্য...",
+  "start": 20.177,
+  "end": 20.554,
+  "break": true
+ },
+ {
+  "scene": 4,
+  "i": 4,
+  "word": "পরিচিত",
+  "text": "পরিচিত",
+  "start": 20.894,
+  "end": 21.327,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 5,
+  "word": "হও,",
+  "text": "হও,",
+  "start": 21.327,
+  "end": 21.704,
+  "break": true
+ },
+ {
+  "scene": 4,
+  "i": 6,
+  "word": "ওয়ার্মলুনের",
+  "text": "WarmLune-এর",
+  "start": 22.071,
+  "end": 22.847,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 7,
+  "word": "সঙ্গে।",
+  "text": "সঙ্গে।",
+  "start": 22.847,
+  "end": 23.268,
+  "break": true
+ },
+ {
+  "scene": 5,
+  "i": 0,
+  "word": "তিনটি",
+  "text": "তিনটি",
+  "start": 23.817,
+  "end": 24.197,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 1,
+  "word": "হিট",
+  "text": "হিট",
+  "start": 24.197,
+  "end": 24.417,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 2,
+  "word": "লেভেল,",
+  "text": "লেভেল,",
+  "start": 24.417,
+  "end": 24.924,
+  "break": true
+ },
+ {
+  "scene": 5,
+  "i": 3,
+  "word": "এল-সি-ডি",
+  "text": "LCD",
+  "start": 25.297,
+  "end": 26.097,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 4,
+  "word": "ডিসপ্লে,",
+  "text": "ডিসপ্লে,",
+  "start": 26.097,
+  "end": 26.442,
+  "break": true
+ },
+ {
+  "scene": 5,
+  "i": 5,
+  "word": "আর",
+  "text": "আর",
+  "start": 26.729,
+  "end": 27.117,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 6,
+  "word": "ভাইব্রেশন",
+  "text": "ভাইব্রেশন",
+  "start": 27.117,
+  "end": 27.927,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 7,
+  "word": "ম্যাসাজ।",
+  "text": "ম্যাসাজ।",
+  "start": 27.927,
+  "end": 28.389,
+  "break": true
+ },
+ {
+  "scene": 6,
+  "i": 0,
+  "word": "পুরোপুরি",
+  "text": "পুরোপুরি",
+  "start": 28.95,
+  "end": 29.57,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 1,
+  "word": "তারবিহীন,",
+  "text": "তারবিহীন,",
+  "start": 29.57,
+  "end": 30.398,
+  "break": true
+ },
+ {
+  "scene": 6,
+  "i": 2,
+  "word": "রিচার্জেবল...",
+  "text": "রিচার্জেবল...",
+  "start": 30.783,
+  "end": 31.653,
+  "break": true
+ },
+ {
+  "scene": 6,
+  "i": 3,
+  "word": "বই",
+  "text": "বই",
+  "start": 32.015,
+  "end": 32.34,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 4,
+  "word": "পড়ো,",
+  "text": "পড়ো,",
+  "start": 32.34,
+  "end": 32.654,
+  "break": true
+ },
+ {
+  "scene": 6,
+  "i": 5,
+  "word": "বিশ্রাম",
+  "text": "বিশ্রাম",
+  "start": 32.971,
+  "end": 33.52,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 6,
+  "word": "নাও,",
+  "text": "নাও,",
+  "start": 33.52,
+  "end": 33.718,
+  "break": true
+ },
+ {
+  "scene": 6,
+  "i": 7,
+  "word": "যেখানে",
+  "text": "যেখানে",
+  "start": 34.095,
+  "end": 34.6,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 8,
+  "word": "খুশি।",
+  "text": "খুশি।",
+  "start": 34.6,
+  "end": 35.034,
+  "break": true
+ },
+ {
+  "scene": 7,
+  "i": 0,
+  "word": "পিরিয়ড",
+  "text": "পিরিয়ড",
+  "start": 35.583,
+  "end": 36.173,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 1,
+  "word": "তোমার",
+  "text": "তোমার",
+  "start": 36.173,
+  "end": 36.833,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 2,
+  "word": "জীবনের",
+  "text": "জীবনের",
+  "start": 36.833,
+  "end": 37.343,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 3,
+  "word": "একটা",
+  "text": "একটা",
+  "start": 37.343,
+  "end": 37.953,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 4,
+  "word": "অংশ...",
+  "text": "অংশ...",
+  "start": 37.953,
+  "end": 38.241,
+  "break": true
+ },
+ {
+  "scene": 7,
+  "i": 5,
+  "word": "পুরো",
+  "text": "পুরো",
+  "start": 38.586,
+  "end": 39.103,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 6,
+  "word": "জীবন",
+  "text": "জীবন",
+  "start": 39.103,
+  "end": 39.813,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 7,
+  "word": "নয়।",
+  "text": "নয়।",
+  "start": 39.813,
+  "end": 40.155,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 0,
+  "word": "ওয়ার্মলুন...",
+  "text": "WarmLune...",
+  "start": 40.917,
+  "end": 41.779,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 1,
+  "word": "কঠিন",
+  "text": "কঠিন",
+  "start": 42.197,
+  "end": 42.667,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 2,
+  "word": "দিনে,",
+  "text": "দিনে,",
+  "start": 42.667,
+  "end": 42.998,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 3,
+  "word": "একটু",
+  "text": "একটু",
+  "start": 43.293,
+  "end": 43.717,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 4,
+  "word": "উষ্ণ",
+  "text": "উষ্ণ",
+  "start": 43.717,
+  "end": 44.027,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 5,
+  "word": "আরাম।",
+  "text": "আরাম।",
+  "start": 44.027,
+  "end": 44.582,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 6,
+  "word": "অর্ডার",
+  "text": "অর্ডার",
+  "start": 44.942,
+  "end": 45.277,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 7,
+  "word": "করতে,",
+  "text": "করতে,",
+  "start": 45.277,
+  "end": 45.658,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 8,
+  "word": "এখনই",
+  "text": "এখনই",
+  "start": 45.945,
+  "end": 46.537,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 9,
+  "word": "ইনবক্স",
+  "text": "ইনবক্স",
+  "start": 46.537,
+  "end": 46.827,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 10,
+  "word": "করো।",
+  "text": "করো।",
+  "start": 46.827,
+  "end": 47.155,
+  "break": true
+ }
+]
