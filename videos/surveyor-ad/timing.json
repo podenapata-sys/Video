@@ -1,0 +1,102 @@
+{
+ "total": 76.0333,
+ "lead": 0.4,
+ "scenes": [
+  {
+   "n": 1,
+   "start": 0.0,
+   "length": 8.866666666666667,
+   "vo_at": 0.4,
+   "speech": 7.279,
+   "rate": 0.8625,
+   "clip_play": 9.267,
+   "hold_from": null,
+   "muted": false,
+   "mute_reason": ""
+  },
+  {
+   "n": 2,
+   "start": 8.8667,
+   "length": 10.533333333333333,
+   "vo_at": 9.2667,
+   "speech": 9.535,
+   "rate": 0.8,
+   "clip_play": 9.991,
+   "hold_from": 9.991,
+   "muted": true,
+   "mute_reason": "AI dialogue"
+  },
+  {
+   "n": 3,
+   "start": 19.4,
+   "length": 11.3,
+   "vo_at": 19.8,
+   "speech": 9.692,
+   "rate": 0.8,
+   "clip_play": 9.991,
+   "hold_from": 9.991,
+   "muted": false,
+   "mute_reason": ""
+  },
+  {
+   "n": 4,
+   "start": 30.7,
+   "length": 8.866666666666667,
+   "vo_at": 31.1,
+   "speech": 7.879,
+   "rate": 0.8443,
+   "clip_play": 9.467,
+   "hold_from": null,
+   "muted": true,
+   "mute_reason": "AI dialogue"
+  },
+  {
+   "n": 5,
+   "start": 39.5667,
+   "length": 7.5,
+   "vo_at": 39.9667,
+   "speech": 6.514,
+   "rate": 0.9867,
+   "clip_play": 8.1,
+   "hold_from": null,
+   "muted": false,
+   "mute_reason": ""
+  },
+  {
+   "n": 6,
+   "start": 47.0667,
+   "length": 6.233333333333333,
+   "vo_at": 47.4667,
+   "speech": 5.232,
+   "rate": 1.0,
+   "clip_play": 6.833,
+   "hold_from": null,
+   "muted": false,
+   "mute_reason": ""
+  },
+  {
+   "n": 7,
+   "start": 53.3,
+   "length": 7.666666666666667,
+   "vo_at": 53.7,
+   "speech": 6.052,
+   "rate": 0.9669,
+   "clip_play": 8.267,
+   "hold_from": null,
+   "muted": true,
+   "mute_reason": "tonal music drone"
+  },
+  {
+   "n": 8,
+   "start": 60.9667,
+   "length": 15.066666666666666,
+   "vo_at": 61.3667,
+   "speech": 12.675,
+   "rate": 0.8,
+   "clip_play": 9.991,
+   "hold_from": 9.991,
+   "muted": true,
+   "mute_reason": "tonal music drone"
+  }
+ ]
+}

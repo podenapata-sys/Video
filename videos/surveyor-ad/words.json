@@ -1,0 +1,1091 @@
+[
+ {
+  "scene": 1,
+  "i": 0,
+  "text": "সারাজীবনের",
+  "speaker": "R",
+  "start": 0.4,
+  "end": 1.49,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 1,
+  "text": "কষ্টের",
+  "speaker": "R",
+  "start": 1.49,
+  "end": 1.97,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 2,
+  "text": "টাকায়...",
+  "speaker": "R",
+  "start": 1.97,
+  "end": 2.495,
+  "break": true
+ },
+ {
+  "scene": 1,
+  "i": 3,
+  "text": "এক",
+  "speaker": "R",
+  "start": 2.918,
+  "end": 3.18,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 4,
+  "text": "টুকরো",
+  "speaker": "R",
+  "start": 3.18,
+  "end": 3.65,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 5,
+  "text": "জমি।",
+  "speaker": "R",
+  "start": 3.65,
+  "end": 4.021,
+  "break": true
+ },
+ {
+  "scene": 1,
+  "i": 6,
+  "text": "স্বপ্ন,",
+  "speaker": "R",
+  "start": 4.521,
+  "end": 5.176,
+  "break": true
+ },
+ {
+  "scene": 1,
+  "i": 7,
+  "text": "একদিন",
+  "speaker": "R",
+  "start": 5.685,
+  "end": 6.13,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 8,
+  "text": "এখানেই",
+  "speaker": "R",
+  "start": 6.13,
+  "end": 6.78,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 9,
+  "text": "হবে",
+  "speaker": "R",
+  "start": 6.78,
+  "end": 7.04,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 10,
+  "text": "নিজের",
+  "speaker": "R",
+  "start": 7.04,
+  "end": 7.23,
+  "break": false
+ },
+ {
+  "scene": 1,
+  "i": 11,
+  "text": "ঠিকানা।",
+  "speaker": "R",
+  "start": 7.23,
+  "end": 7.679,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 0,
+  "text": "ভাই,",
+  "speaker": "N",
+  "start": 9.267,
+  "end": 9.601,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 1,
+  "text": "এই",
+  "speaker": "N",
+  "start": 9.859,
+  "end": 10.167,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 2,
+  "text": "জায়গাটা",
+  "speaker": "N",
+  "start": 10.167,
+  "end": 11.097,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 3,
+  "text": "তো",
+  "speaker": "N",
+  "start": 11.097,
+  "end": 11.117,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 4,
+  "text": "আমার",
+  "speaker": "N",
+  "start": 11.117,
+  "end": 11.877,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 5,
+  "text": "জমির",
+  "speaker": "N",
+  "start": 11.877,
+  "end": 12.327,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 6,
+  "text": "মধ্যে",
+  "speaker": "N",
+  "start": 12.327,
+  "end": 12.677,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 7,
+  "text": "পড়ে!",
+  "speaker": "N",
+  "start": 12.677,
+  "end": 13.11,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 8,
+  "text": "কিন্তু",
+  "speaker": "O",
+  "start": 13.445,
+  "end": 13.827,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 9,
+  "text": "আমার",
+  "speaker": "O",
+  "start": 13.827,
+  "end": 14.267,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 10,
+  "text": "দলিলে",
+  "speaker": "O",
+  "start": 14.267,
+  "end": 14.677,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 11,
+  "text": "তো",
+  "speaker": "O",
+  "start": 14.677,
+  "end": 14.697,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 12,
+  "text": "এটাই",
+  "speaker": "O",
+  "start": 14.697,
+  "end": 15.287,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 13,
+  "text": "আছে!",
+  "speaker": "O",
+  "start": 15.287,
+  "end": 15.526,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 14,
+  "text": "হঠাৎ",
+  "speaker": "R",
+  "start": 16.101,
+  "end": 16.467,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 15,
+  "text": "শুরু",
+  "speaker": "R",
+  "start": 16.467,
+  "end": 16.807,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 16,
+  "text": "হলো...",
+  "speaker": "R",
+  "start": 16.807,
+  "end": 17.115,
+  "break": true
+ },
+ {
+  "scene": 2,
+  "i": 17,
+  "text": "সীমানা",
+  "speaker": "R",
+  "start": 17.506,
+  "end": 18.087,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 18,
+  "text": "নিয়ে",
+  "speaker": "R",
+  "start": 18.087,
+  "end": 18.327,
+  "break": false
+ },
+ {
+  "scene": 2,
+  "i": 19,
+  "text": "বিরোধ।",
+  "speaker": "R",
+  "start": 18.327,
+  "end": 18.802,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 0,
+  "text": "দলিল",
+  "speaker": "R",
+  "start": 19.8,
+  "end": 20.42,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 1,
+  "text": "আছে,",
+  "speaker": "R",
+  "start": 20.42,
+  "end": 20.752,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 2,
+  "text": "নকশাও",
+  "speaker": "R",
+  "start": 20.973,
+  "end": 21.69,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 3,
+  "text": "আছে...",
+  "speaker": "R",
+  "start": 21.69,
+  "end": 21.927,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 4,
+  "text": "কিন্তু",
+  "speaker": "R",
+  "start": 22.299,
+  "end": 22.77,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 5,
+  "text": "আসল",
+  "speaker": "R",
+  "start": 22.77,
+  "end": 23.27,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 6,
+  "text": "সীমানা",
+  "speaker": "R",
+  "start": 23.27,
+  "end": 23.74,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 7,
+  "text": "কোথায়?",
+  "speaker": "R",
+  "start": 23.74,
+  "end": 24.161,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 8,
+  "text": "নিজের",
+  "speaker": "T",
+  "start": 24.8,
+  "end": 25.47,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 9,
+  "text": "জমির",
+  "speaker": "T",
+  "start": 25.47,
+  "end": 26.03,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 10,
+  "text": "সীমানাই",
+  "speaker": "T",
+  "start": 26.03,
+  "end": 26.99,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 11,
+  "text": "যদি",
+  "speaker": "T",
+  "start": 26.99,
+  "end": 27.37,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 12,
+  "text": "না",
+  "speaker": "T",
+  "start": 27.37,
+  "end": 27.8,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 13,
+  "text": "জানি...",
+  "speaker": "T",
+  "start": 27.8,
+  "end": 28.171,
+  "break": true
+ },
+ {
+  "scene": 3,
+  "i": 14,
+  "text": "কী",
+  "speaker": "T",
+  "start": 28.739,
+  "end": 28.93,
+  "break": false
+ },
+ {
+  "scene": 3,
+  "i": 15,
+  "text": "করব?",
+  "speaker": "T",
+  "start": 28.93,
+  "end": 29.492,
+  "break": true
+ },
+ {
+  "scene": 4,
+  "i": 0,
+  "text": "অবশেষে",
+  "speaker": "R",
+  "start": 31.1,
+  "end": 31.69,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 1,
+  "text": "তিনি",
+  "speaker": "R",
+  "start": 31.69,
+  "end": 31.73,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 2,
+  "text": "যোগাযোগ",
+  "speaker": "R",
+  "start": 31.73,
+  "end": 32.37,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 3,
+  "text": "করলেন,",
+  "speaker": "R",
+  "start": 32.37,
+  "end": 32.772,
+  "break": true
+ },
+ {
+  "scene": 4,
+  "i": 4,
+  "text": "খুলনা",
+  "speaker": "R",
+  "start": 33.086,
+  "end": 33.51,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 5,
+  "text": "বিভাগীয়",
+  "speaker": "R",
+  "start": 33.51,
+  "end": 34.07,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 6,
+  "text": "ডিজিটাল",
+  "speaker": "R",
+  "start": 34.07,
+  "end": 34.47,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 7,
+  "text": "সার্ভেয়ার",
+  "speaker": "R",
+  "start": 34.47,
+  "end": 34.96,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 8,
+  "text": "এসোসিয়েশনের",
+  "speaker": "R",
+  "start": 34.96,
+  "end": 35.76,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 9,
+  "text": "সঙ্গে।",
+  "speaker": "R",
+  "start": 35.76,
+  "end": 36.047,
+  "break": true
+ },
+ {
+  "scene": 4,
+  "i": 10,
+  "text": "শুরু",
+  "speaker": "R",
+  "start": 36.458,
+  "end": 36.8,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 11,
+  "text": "হলো",
+  "speaker": "R",
+  "start": 36.8,
+  "end": 37.27,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 12,
+  "text": "সঠিক",
+  "speaker": "R",
+  "start": 37.27,
+  "end": 37.77,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 13,
+  "text": "পরিমাপের",
+  "speaker": "R",
+  "start": 37.77,
+  "end": 38.38,
+  "break": false
+ },
+ {
+  "scene": 4,
+  "i": 14,
+  "text": "প্রস্তুতি।",
+  "speaker": "R",
+  "start": 38.38,
+  "end": 38.979,
+  "break": true
+ },
+ {
+  "scene": 5,
+  "i": 0,
+  "text": "ল্যান্ড",
+  "speaker": "R",
+  "start": 39.967,
+  "end": 40.457,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 1,
+  "text": "ডিমার্কেশন।",
+  "speaker": "R",
+  "start": 40.457,
+  "end": 41.191,
+  "break": true
+ },
+ {
+  "scene": 5,
+  "i": 2,
+  "text": "কাগজপত্র",
+  "speaker": "R",
+  "start": 41.62,
+  "end": 42.357,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 3,
+  "text": "যাচাই",
+  "speaker": "R",
+  "start": 42.357,
+  "end": 42.727,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 4,
+  "text": "করে,",
+  "speaker": "R",
+  "start": 42.727,
+  "end": 43.014,
+  "break": true
+ },
+ {
+  "scene": 5,
+  "i": 5,
+  "text": "মাঠে",
+  "speaker": "R",
+  "start": 43.206,
+  "end": 43.467,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 6,
+  "text": "জমির",
+  "speaker": "R",
+  "start": 43.467,
+  "end": 44.017,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 7,
+  "text": "সঠিক",
+  "speaker": "R",
+  "start": 44.017,
+  "end": 44.467,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 8,
+  "text": "পরিমাপ",
+  "speaker": "R",
+  "start": 44.467,
+  "end": 45.077,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 9,
+  "text": "ও",
+  "speaker": "R",
+  "start": 45.077,
+  "end": 45.087,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 10,
+  "text": "সীমানা",
+  "speaker": "R",
+  "start": 45.087,
+  "end": 45.697,
+  "break": false
+ },
+ {
+  "scene": 5,
+  "i": 11,
+  "text": "চিহ্নিতকরণ।",
+  "speaker": "R",
+  "start": 45.697,
+  "end": 46.481,
+  "break": true
+ },
+ {
+  "scene": 6,
+  "i": 0,
+  "text": "পাশাপাশি",
+  "speaker": "R",
+  "start": 47.467,
+  "end": 48.137,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 1,
+  "text": "পেন্টাগ্রাফ",
+  "speaker": "R",
+  "start": 48.137,
+  "end": 48.697,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 2,
+  "text": "সার্ভিস।",
+  "speaker": "R",
+  "start": 48.697,
+  "end": 49.269,
+  "break": true
+ },
+ {
+  "scene": 6,
+  "i": 3,
+  "text": "মৌজা",
+  "speaker": "R",
+  "start": 49.669,
+  "end": 49.947,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 4,
+  "text": "ম্যাপের",
+  "speaker": "R",
+  "start": 49.947,
+  "end": 50.577,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 5,
+  "text": "স্কেলিং",
+  "speaker": "R",
+  "start": 50.577,
+  "end": 50.977,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 6,
+  "text": "ও",
+  "speaker": "R",
+  "start": 50.977,
+  "end": 51.057,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 7,
+  "text": "নকশার",
+  "speaker": "R",
+  "start": 51.057,
+  "end": 51.777,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 8,
+  "text": "কারিগরি",
+  "speaker": "R",
+  "start": 51.777,
+  "end": 52.287,
+  "break": false
+ },
+ {
+  "scene": 6,
+  "i": 9,
+  "text": "কাজ।",
+  "speaker": "R",
+  "start": 52.287,
+  "end": 52.699,
+  "break": true
+ },
+ {
+  "scene": 7,
+  "i": 0,
+  "text": "জমি",
+  "speaker": "R",
+  "start": 53.7,
+  "end": 54.02,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 1,
+  "text": "নিয়ে",
+  "speaker": "R",
+  "start": 54.02,
+  "end": 54.49,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 2,
+  "text": "আর",
+  "speaker": "R",
+  "start": 54.49,
+  "end": 54.86,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 3,
+  "text": "দুশ্চিন্তা",
+  "speaker": "R",
+  "start": 54.86,
+  "end": 55.25,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 4,
+  "text": "নয়।",
+  "speaker": "R",
+  "start": 55.25,
+  "end": 55.596,
+  "break": true
+ },
+ {
+  "scene": 7,
+  "i": 5,
+  "text": "সঠিক",
+  "speaker": "R",
+  "start": 55.974,
+  "end": 56.61,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 6,
+  "text": "তথ্য...",
+  "speaker": "R",
+  "start": 56.61,
+  "end": 56.922,
+  "break": true
+ },
+ {
+  "scene": 7,
+  "i": 7,
+  "text": "সঠিক",
+  "speaker": "R",
+  "start": 57.213,
+  "end": 57.69,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 8,
+  "text": "পরিমাপ...",
+  "speaker": "R",
+  "start": 57.69,
+  "end": 58.201,
+  "break": true
+ },
+ {
+  "scene": 7,
+  "i": 9,
+  "text": "পেশাদার",
+  "speaker": "R",
+  "start": 58.565,
+  "end": 59.11,
+  "break": false
+ },
+ {
+  "scene": 7,
+  "i": 10,
+  "text": "সহযোগিতা।",
+  "speaker": "R",
+  "start": 59.11,
+  "end": 59.752,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 0,
+  "text": "জমির",
+  "speaker": "R",
+  "start": 61.367,
+  "end": 61.777,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 1,
+  "text": "সীমানা",
+  "speaker": "R",
+  "start": 61.777,
+  "end": 62.357,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 2,
+  "text": "নিয়ে",
+  "speaker": "R",
+  "start": 62.357,
+  "end": 62.567,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 3,
+  "text": "দুশ্চিন্তা?",
+  "speaker": "R",
+  "start": 62.567,
+  "end": 62.978,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 4,
+  "text": "খুলনা",
+  "speaker": "R",
+  "start": 63.487,
+  "end": 63.927,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 5,
+  "text": "বিভাগীয়",
+  "speaker": "R",
+  "start": 63.927,
+  "end": 64.427,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 6,
+  "text": "ডিজিটাল",
+  "speaker": "R",
+  "start": 64.427,
+  "end": 64.697,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 7,
+  "text": "সার্ভেয়ার",
+  "speaker": "R",
+  "start": 64.697,
+  "end": 65.347,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 8,
+  "text": "এসোসিয়েশন।",
+  "speaker": "R",
+  "start": 65.347,
+  "end": 65.935,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 9,
+  "text": "ল্যান্ড",
+  "speaker": "R",
+  "start": 66.216,
+  "end": 66.567,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 10,
+  "text": "ডিমার্কেশন",
+  "speaker": "R",
+  "start": 66.567,
+  "end": 67.297,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 11,
+  "text": "ও",
+  "speaker": "R",
+  "start": 67.297,
+  "end": 67.477,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 12,
+  "text": "পেন্টাগ্রাফ",
+  "speaker": "R",
+  "start": 67.477,
+  "end": 67.957,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 13,
+  "text": "সার্ভিস।",
+  "speaker": "R",
+  "start": 67.957,
+  "end": 68.457,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 14,
+  "text": "এখনই",
+  "speaker": "R",
+  "start": 68.749,
+  "end": 69.157,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 15,
+  "text": "হোয়াটসঅ্যাপ",
+  "speaker": "R",
+  "start": 69.157,
+  "end": 69.487,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 16,
+  "text": "করুন।",
+  "speaker": "R",
+  "start": 69.487,
+  "end": 69.825,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 17,
+  "text": "আপনার",
+  "speaker": "R",
+  "start": 70.176,
+  "end": 70.607,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 18,
+  "text": "জমি,",
+  "speaker": "R",
+  "start": 70.607,
+  "end": 70.975,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 19,
+  "text": "সঠিক",
+  "speaker": "R",
+  "start": 71.087,
+  "end": 71.597,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 20,
+  "text": "পরিমাপের",
+  "speaker": "R",
+  "start": 71.597,
+  "end": 72.077,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 21,
+  "text": "কাজে...",
+  "speaker": "R",
+  "start": 72.077,
+  "end": 72.398,
+  "break": true
+ },
+ {
+  "scene": 8,
+  "i": 22,
+  "text": "আমরা",
+  "speaker": "R",
+  "start": 72.741,
+  "end": 73.247,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 23,
+  "text": "আপনার",
+  "speaker": "R",
+  "start": 73.247,
+  "end": 73.677,
+  "break": false
+ },
+ {
+  "scene": 8,
+  "i": 24,
+  "text": "পাশে।",
+  "speaker": "R",
+  "start": 73.677,
+  "end": 74.041,
+  "break": true
+ }
+]

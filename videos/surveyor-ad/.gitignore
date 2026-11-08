@@ -1,0 +1,11 @@
+out/work/
+out/snap*/
+out/render_raw.mp4
+.hyperframes/
+assets/vo/trim/
+assets/vo/voice.wav
+assets/music/bed.wav
+assets/ambience.wav
+assets/sfx/impact_track.wav
+__pycache__/
+out/work-*/
