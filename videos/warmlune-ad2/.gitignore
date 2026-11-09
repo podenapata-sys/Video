@@ -5,3 +5,4 @@ out/render_raw.mp4
 .hyperframes/
 media/music_raw.wav
 __pycache__/
+out/.*hf-transaction*/
