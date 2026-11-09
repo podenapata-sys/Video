@@ -160,8 +160,9 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:#000; }}
   background:linear-gradient(180deg, rgba(70,14,36,.86) 0%, rgba(90,20,48,.78) 62%, rgba(90,20,48,0) 100%); }}
 .cta {{ position:absolute; left:0; width:100%; text-align:center; z-index:41; visibility:hidden; text-shadow:0 2px 8px rgba(0,0,0,.6); }}
 #cta1 {{ top:{0.085 * H:.0f}px; font-family:"Montserrat", sans-serif; font-weight:800; font-size:52px; letter-spacing:.24em; text-indent:.24em; }}
-#cta2 {{ top:{0.155 * H:.0f}px; font-weight:800; font-size:80px; color:{CORAL}; -webkit-text-stroke:4px rgba(255,255,255,.9); paint-order:stroke fill;
-  text-shadow:0 0 18px rgba(255,255,255,.35), 0 3px 10px rgba(0,0,0,.45); }}
+#cta2 {{ top:{0.148 * H:.0f}px; left:50%; width:auto; translate:-50% 0; white-space:nowrap; font-weight:800; font-size:80px; line-height:1.15;
+  color:{CORAL}; background:#FFFFFF; border-radius:28px; padding:14px 48px 10px; text-shadow:none;
+  box-shadow:0 0 0 5px {GOLD}, 0 18px 44px -10px rgba(0,0,0,.6), 0 0 60px rgba(255,179,71,.45); }}
 #cta3 {{ top:{0.245 * H:.0f}px; font-weight:400; font-size:36px; }}
 #cta3 .w {{ display:inline-block; }}
 #cta4 {{ top:{0.31 * H:.0f}px; left:50%; width:auto; translate:-50% 0; white-space:nowrap; background:{CORAL}; color:#fff; border-radius:999px;
