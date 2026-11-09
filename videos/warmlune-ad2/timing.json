@@ -1,0 +1,92 @@
+{
+ "total": 55.0,
+ "cuts": [
+  0,
+  4,
+  8,
+  13,
+  18,
+  23,
+  28,
+  33,
+  40,
+  48,
+  55
+ ],
+ "lines": [
+  {
+   "scene": 1,
+   "start": 0.15,
+   "end": 4.659,
+   "dur": 4.509,
+   "spills_into_next": 0.659
+  },
+  {
+   "scene": 2,
+   "start": 4.779,
+   "end": 7.605,
+   "dur": 2.826,
+   "spills_into_next": 0
+  },
+  {
+   "scene": 3,
+   "start": 8.15,
+   "end": 11.165,
+   "dur": 3.015,
+   "spills_into_next": 0
+  },
+  {
+   "scene": 4,
+   "start": 13.15,
+   "end": 16.453,
+   "dur": 3.303,
+   "spills_into_next": 0
+  },
+  {
+   "scene": 5,
+   "start": 18.15,
+   "end": 22.879,
+   "dur": 4.729,
+   "spills_into_next": 0
+  },
+  {
+   "scene": 6,
+   "start": 23.15,
+   "end": 27.006,
+   "dur": 3.856,
+   "spills_into_next": 0
+  },
+  {
+   "scene": 7,
+   "start": 28.15,
+   "end": 33.734,
+   "dur": 5.584,
+   "spills_into_next": 0.734
+  },
+  {
+   "scene": 8,
+   "start": 33.854,
+   "end": 39.609,
+   "dur": 5.755,
+   "spills_into_next": 0
+  },
+  {
+   "scene": 9,
+   "start": 40.15,
+   "end": 43.415,
+   "dur": 3.265,
+   "spills_into_next": 0
+  },
+  {
+   "scene": 10,
+   "start": 48.15,
+   "end": 52.646,
+   "dur": 4.496,
+   "spills_into_next": 0
+  }
+ ],
+ "music": {
+  "part2_at": 7.6,
+  "part3_at": 32.5
+ }
+}

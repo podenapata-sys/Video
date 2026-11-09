@@ -1,0 +1,7 @@
+out/work/
+out/work-*/
+out/snap*/
+out/render_raw.mp4
+.hyperframes/
+media/music_raw.wav
+__pycache__/
