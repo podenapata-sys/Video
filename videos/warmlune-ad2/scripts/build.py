@@ -4,7 +4,7 @@
   python3 scripts/audio.py && python3 scripts/build.py
 
 Clip mapping (by content; the uploaded PT numbers did not match the shot list, user-approved):
-S1 PT-1, S2 PT-2, S3 PT-10 opening (no "holds up the belt" clip exists), S4 PT-3, S5 PT-4, S6 PT-5, S7 PT-6, S8 PT-7
+S1 PT-1, S2 PT-2, S3 the separately supplied reveal clip, S4 PT-3, S5 PT-4, S6 PT-5, S7 PT-6, S8 PT-7
 (PT-8 is a near-duplicate), S9 PT-9, S10 PT-10 later part. Captions are animated per word (never per character).
 """
 import json
@@ -137,7 +137,8 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:#000; }}
 #flash {{ position:absolute; inset:0; z-index:60; background:#fff; opacity:0; pointer-events:none; }}
 #black {{ position:absolute; inset:0; z-index:90; background:#000; opacity:1; pointer-events:none; }}
 .cap {{ position:absolute; left:54px; width:{W - 108}px; translate:0 -50%; z-index:40; text-align:center; visibility:hidden;
-  font-weight:800; font-size:48px; line-height:1.3; text-shadow:0 2px 8px rgba(0,0,0,.6); white-space:nowrap; }}
+  font-weight:800; font-size:48px; line-height:1.3; text-shadow:0 2px 8px rgba(0,0,0,.6); white-space:nowrap;
+  -webkit-text-stroke:5px rgba(0,0,0,.5); paint-order:stroke fill; }}
 .cap .w {{ display:inline-block; }}
 .cap .ic {{ display:inline-block; margin-right:14px; font-family:{EMOJI}; font-weight:400; }}
 .w.gold {{ color:{GOLD}; }} .w.coral {{ color:{CORAL}; }} .w.green {{ color:{GREEN}; }}
@@ -147,7 +148,7 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:#000; }}
   background:rgba(0,0,0,.5); border-radius:999px; padding:12px 40px 10px; font-weight:800; font-size:48px; text-shadow:0 2px 8px rgba(0,0,0,.6); }}
 .pillcap .w {{ display:inline-block; }}
 .pillcap .ic {{ display:inline-block; margin-right:14px; font-family:{EMOJI}; font-weight:400; }}
-#brand3 {{ position:absolute; top:{0.24 * H:.0f}px; left:0; width:100%; text-align:center; z-index:40; visibility:hidden;
+#brand3 {{ position:absolute; top:{0.085 * H:.0f}px; left:0; width:100%; text-align:center; z-index:40; visibility:hidden;
   font-family:"Montserrat", sans-serif; font-weight:800; font-size:64px; letter-spacing:.24em; text-indent:.24em;
   text-shadow:0 0 18px rgba(255,190,90,.85), 0 0 42px rgba(255,170,60,.55), 0 2px 8px rgba(0,0,0,.5); }}
 #brand3 .spark {{ font-family:{EMOJI}; letter-spacing:0; margin-right:18px; }}
@@ -159,7 +160,8 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:#000; }}
   background:linear-gradient(180deg, rgba(70,14,36,.86) 0%, rgba(90,20,48,.78) 62%, rgba(90,20,48,0) 100%); }}
 .cta {{ position:absolute; left:0; width:100%; text-align:center; z-index:41; visibility:hidden; text-shadow:0 2px 8px rgba(0,0,0,.6); }}
 #cta1 {{ top:{0.085 * H:.0f}px; font-family:"Montserrat", sans-serif; font-weight:800; font-size:52px; letter-spacing:.24em; text-indent:.24em; }}
-#cta2 {{ top:{0.155 * H:.0f}px; font-weight:800; font-size:80px; color:{CORAL}; text-shadow:0 2px 10px rgba(0,0,0,.45), 0 0 1px #fff; }}
+#cta2 {{ top:{0.155 * H:.0f}px; font-weight:800; font-size:80px; color:{CORAL}; -webkit-text-stroke:4px rgba(255,255,255,.9); paint-order:stroke fill;
+  text-shadow:0 0 18px rgba(255,255,255,.35), 0 3px 10px rgba(0,0,0,.45); }}
 #cta3 {{ top:{0.245 * H:.0f}px; font-weight:400; font-size:36px; }}
 #cta3 .w {{ display:inline-block; }}
 #cta4 {{ top:{0.31 * H:.0f}px; left:50%; width:auto; translate:-50% 0; white-space:nowrap; background:{CORAL}; color:#fff; border-radius:999px;
