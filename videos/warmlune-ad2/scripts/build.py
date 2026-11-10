@@ -4,7 +4,7 @@
   python3 scripts/audio.py && python3 scripts/build.py
 
 Clip mapping (by content; the uploaded PT numbers did not match the shot list, user-approved):
-S1 PT-1, S2 PT-2, S3 the separately supplied reveal clip, S4 PT-3, S5 PT-4, S6 PT-5, S7 PT-6, S8 PT-7
+S1 PT-1, S2 PT-2, S3 the supplied 'lifts belt' clip (from 1 s), S4 PT-3, S5 PT-4, S6 PT-5, S7 PT-6, S8 PT-7
 (PT-8 is a near-duplicate), S9 PT-9, S10 PT-10 later part. Captions are animated per word (never per character).
 """
 import json
@@ -16,7 +16,7 @@ CUTS = [0, 4, 8, 13, 18, 23, 28, 33, 40, 48, 55]
 CORAL, GOLD, RED, GREEN = "#E8446A", "#FFB347", "#FF4444", "#4CAF50"
 CLIP = {1: "S1_pain", 2: "S2_hotwater", 3: "S3_reveal", 4: "S4_button", 5: "S5_wearing", 6: "S6_relax",
         7: "S7_flatlay", 8: "S8_order", 9: "S9_trust", 10: "S10_hero"}
-MEDIA_START = {10: 1.0}                     # S3 uses PT-10 from 0 s, S10 from 1 s
+MEDIA_START = {3: 1.0, 10: 1.0}             # S3: the new lift clip from 1 s (lift lands just after the flash); S10 from 1 s
 XF56 = 0.8                                  # S5 -> S6 slow crossfade
 # caption centre per scene (bottom third), moved where the belt sits in that band (checked on frames)
 CAP_Y = {2: 0.74, 4: 0.74, 5: 0.80, 6: 0.74, 7: 0.76, 8: 0.70, 9: 0.68}
@@ -110,7 +110,6 @@ def main():
     # ---------------- S10 CTA (top 55%, over a dark-pink panel) ----------------
     js.append('tl.fromTo("#panel", {opacity:0}, {opacity:1, duration:0.5, ease:"sine.out"}, 48.2);')
     js.append('tl.fromTo("#cta1", {autoAlpha:0}, {autoAlpha:1, duration:0.4}, 48.5);')
-    js.append('tl.fromTo("#cta2", {autoAlpha:0, scale:0.9}, {autoAlpha:1, scale:1, duration:0.45, ease:"back.out(1.8)"}, 49.0);')
     js.append('tl.fromTo("#cta3 .w", {autoAlpha:0, y:12}, {autoAlpha:1, y:0, duration:0.3, stagger:0.1}, 49.5); tl.set("#cta3", {autoAlpha:1}, 49.5);')
     js.append('tl.fromTo("#cta4", {autoAlpha:0, y:40}, {autoAlpha:1, y:0, duration:0.4, ease:"power3.out"}, 50.0);')
     t = 50.6
@@ -148,7 +147,7 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:#000; }}
   background:rgba(0,0,0,.5); border-radius:999px; padding:12px 40px 10px; font-weight:800; font-size:48px; text-shadow:0 2px 8px rgba(0,0,0,.6); }}
 .pillcap .w {{ display:inline-block; }}
 .pillcap .ic {{ display:inline-block; margin-right:14px; font-family:{EMOJI}; font-weight:400; }}
-#brand3 {{ position:absolute; top:{0.085 * H:.0f}px; left:0; width:100%; text-align:center; z-index:40; visibility:hidden;
+#brand3 {{ position:absolute; top:{0.04 * H:.0f}px; left:0; width:100%; text-align:center; z-index:40; visibility:hidden;
   font-family:"Montserrat", sans-serif; font-weight:800; font-size:64px; letter-spacing:.24em; text-indent:.24em;
   text-shadow:0 0 18px rgba(255,190,90,.85), 0 0 42px rgba(255,170,60,.55), 0 2px 8px rgba(0,0,0,.5); }}
 #brand3 .spark {{ font-family:{EMOJI}; letter-spacing:0; margin-right:18px; }}
@@ -156,19 +155,16 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:#000; }}
 #brand3 .shine {{ position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, transparent, rgba(255,240,200,.85), transparent);
   mix-blend-mode:screen; }}
 #brand3 sup, #cta1 sup {{ font-size:.38em; letter-spacing:0; vertical-align:1.5em; }}
-#panel {{ position:absolute; left:0; top:0; width:100%; height:{0.58 * H:.0f}px; z-index:30; opacity:0; pointer-events:none;
+#panel {{ position:absolute; left:0; top:0; width:100%; height:{0.5 * H:.0f}px; z-index:30; opacity:0; pointer-events:none;
   background:linear-gradient(180deg, rgba(70,14,36,.86) 0%, rgba(90,20,48,.78) 62%, rgba(90,20,48,0) 100%); }}
 .cta {{ position:absolute; left:0; width:100%; text-align:center; z-index:41; visibility:hidden; text-shadow:0 2px 8px rgba(0,0,0,.6); }}
-#cta1 {{ top:{0.085 * H:.0f}px; font-family:"Montserrat", sans-serif; font-weight:800; font-size:52px; letter-spacing:.24em; text-indent:.24em; }}
-#cta2 {{ top:{0.148 * H:.0f}px; left:50%; width:auto; translate:-50% 0; white-space:nowrap; font-weight:800; font-size:80px; line-height:1.15;
-  color:{CORAL}; background:#FFFFFF; border-radius:28px; padding:14px 48px 10px; text-shadow:none;
-  box-shadow:0 0 0 5px {GOLD}, 0 18px 44px -10px rgba(0,0,0,.6), 0 0 60px rgba(255,179,71,.45); }}
-#cta3 {{ top:{0.245 * H:.0f}px; font-weight:400; font-size:36px; }}
+#cta1 {{ top:{0.10 * H:.0f}px; font-family:"Montserrat", sans-serif; font-weight:800; font-size:52px; letter-spacing:.24em; text-indent:.24em; }}
+#cta3 {{ top:{0.175 * H:.0f}px; font-weight:400; font-size:40px; }}
 #cta3 .w {{ display:inline-block; }}
-#cta4 {{ top:{0.31 * H:.0f}px; left:50%; width:auto; translate:-50% 0; white-space:nowrap; background:{CORAL}; color:#fff; border-radius:999px;
+#cta4 {{ top:{0.245 * H:.0f}px; left:50%; width:auto; translate:-50% 0; white-space:nowrap; background:{CORAL}; color:#fff; border-radius:999px;
   padding:16px 40px; font-weight:800; font-size:44px; display:flex; align-items:center; gap:14px; box-shadow:0 14px 36px -10px rgba(0,0,0,.55); }}
 #cta4 svg {{ width:40px; height:40px; }}
-#cta5 {{ top:{0.405 * H:.0f}px; font-size:28px; font-weight:400; }}
+#cta5 {{ top:{0.335 * H:.0f}px; font-size:28px; font-weight:400; }}
 """
     arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15M13 6l6 6-6 6"/></svg>'
     body = f"""<!doctype html>
@@ -181,7 +177,6 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:#000; }}
   {''.join(caps)}
   <div id="panel"></div>
   <div class="cta" id="cta1">WARMLUNE<sup>™</sup></div>
-  <div class="cta" id="cta2">মাত্র ৳১,০৯৯</div>
   <div class="cta" id="cta3">{words("তারবিহীন হিটিং ও ম্যাসাজ বেল্ট")}</div>
   <div class="cta" id="cta4"><span>অর্ডার করুন</span>{arrow}</div>
   <div class="cta" id="cta5">ক্যাশ অন ডেলিভারি · ৭ দিন গ্যারান্টি</div>
