@@ -1,17 +1,17 @@
 {
- "total": 55.0,
+ "total": 53.2,
  "cuts": [
   0,
   4,
   10.2,
-  15.2,
-  20.2,
-  25.2,
-  30.2,
-  35.2,
-  42.2,
-  48,
-  55
+  13.4,
+  18.4,
+  23.4,
+  28.4,
+  33.4,
+  40.4,
+  46.2,
+  53.2
  ],
  "lines": [
   {
@@ -37,56 +37,56 @@
   },
   {
    "scene": 4,
-   "start": 15.35,
-   "end": 18.72,
+   "start": 13.55,
+   "end": 16.92,
    "dur": 3.37,
    "spills_into_next": 0
   },
   {
    "scene": 5,
-   "start": 20.35,
-   "end": 25.499,
+   "start": 18.55,
+   "end": 23.699,
    "dur": 5.149,
    "spills_into_next": 0.299
   },
   {
    "scene": 6,
-   "start": 25.619,
-   "end": 29.546,
+   "start": 23.819,
+   "end": 27.746,
    "dur": 3.927,
    "spills_into_next": 0
   },
   {
    "scene": 7,
-   "start": 30.35,
-   "end": 35.935,
+   "start": 28.55,
+   "end": 34.135,
    "dur": 5.585,
    "spills_into_next": 0.735
   },
   {
    "scene": 8,
-   "start": 36.055,
-   "end": 41.743,
+   "start": 34.255,
+   "end": 39.943,
    "dur": 5.688,
    "spills_into_next": 0
   },
   {
    "scene": 9,
-   "start": 42.35,
-   "end": 45.703,
+   "start": 40.55,
+   "end": 43.903,
    "dur": 3.353,
    "spills_into_next": 0
   },
   {
    "scene": 10,
-   "start": 48.15,
-   "end": 50.532,
+   "start": 46.35,
+   "end": 48.732,
    "dur": 2.382,
    "spills_into_next": 0
   }
  ],
  "music": {
   "part2_at": 9.799999999999999,
-  "part3_at": 34.7
+  "part3_at": 32.9
  }
 }

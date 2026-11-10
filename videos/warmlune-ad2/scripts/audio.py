@@ -20,9 +20,11 @@ import soundfile as sf
 
 ROOT = Path(__file__).resolve().parent.parent
 MD = ROOT / "media"
-SR, TOTAL = 48000, 55.0
+SR = 48000
 # S2 extended to fit the new (longer) hot-water-bag line; S9 gives back the time (user-approved)
-CUTS = [0, 4, 10.2, 15.2, 20.2, 25.2, 30.2, 35.2, 42.2, 48, 55]
+# S3 ends 0.27 s after its voice line: the clip's silent lip-sync tail is cut (user request); total 53.2 s
+CUTS = [0, 4, 10.2, 13.4, 18.4, 23.4, 28.4, 33.4, 40.4, 46.2, 53.2]
+TOTAL = float(CUTS[-1])
 LEAD, GAP = 0.15, 0.12
 
 
@@ -110,7 +112,7 @@ def main():
     raw.unlink()
     pre = MD / "mix_raw.wav"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(MD / "voiceover.wav"), "-i", str(MD / "music.wav"), "-filter_complex",
-                    "[0:a][1:a]amix=inputs=2:normalize=0,afade=t=in:d=0.5,afade=t=out:st=54.5:d=0.5[o]", "-map", "[o]",
+                    f"[0:a][1:a]amix=inputs=2:normalize=0,afade=t=in:d=0.5,afade=t=out:st={TOTAL - 0.5:.3f}:d=0.5[o]", "-map", "[o]",
                     "-c:a", "pcm_f32le", str(pre)], check=True)
     meas = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(pre), "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json",
                            "-f", "null", "-"], capture_output=True, text=True).stderr

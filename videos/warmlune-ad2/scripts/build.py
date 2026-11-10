@@ -11,9 +11,11 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-W, H, TOTAL = 1080, 1920, 55.0
+W, H = 1080, 1920
 # S2 extended to fit the new voice line, S9 gives the time back (user-approved); graphics follow scene-relative offsets
-CUTS = [0, 4, 10.2, 15.2, 20.2, 25.2, 30.2, 35.2, 42.2, 48, 55]
+# S3 ends 0.27 s after its voice line: the clip's silent lip-sync tail is cut (user request); total 53.2 s
+CUTS = [0, 4, 10.2, 13.4, 18.4, 23.4, 28.4, 33.4, 40.4, 46.2, 53.2]
+TOTAL = float(CUTS[-1])
 C = CUTS
 CORAL, GOLD, RED, GREEN = "#E8446A", "#FFB347", "#FF4444", "#4CAF50"
 CLIP = {1: "S1_pain", 2: "S2_hotwater", 3: "S3_reveal", 4: "S4_button", 5: "S5_wearing", 6: "S6_relax",
@@ -65,7 +67,7 @@ def main():
     js.append(f'tl.fromTo("#s6", {{autoAlpha:0}}, {{autoAlpha:1, duration:{XF56}, ease:"sine.inOut", immediateRender:false}}, {a6:.3f});')
     # black in / out
     js.append('tl.fromTo("#black", {opacity:1}, {opacity:0, duration:0.5, ease:"sine.out"}, 0);')
-    js.append('tl.to("#black", {opacity:1, duration:0.5, ease:"sine.in"}, 54.5);')
+    js.append(f'tl.to("#black", {{opacity:1, duration:0.5, ease:"sine.in"}}, {TOTAL - 0.5:.3f});')
     # S2 -> S3 white flash (0.3 s): peak on the cut
     js.append(f'tl.fromTo("#flash", {{opacity:0}}, {{opacity:1, duration:0.1, ease:"none"}}, {C[2] - 0.1:.3f}); tl.to("#flash", {{opacity:0, duration:0.2, ease:"sine.out"}}, {C[2]:.3f});')
     # S9 -> S10 punch-in: S9 pushes in over its last 0.25 s
@@ -91,7 +93,7 @@ def main():
 
     ic = lambda e: f'<span class="ic">{e}</span>'
     cap("c2", 2, words("গরম পানির ব্যাগ"), C[1] + 0.5, C[2] - 0.3, "", "left", ic("❌"))
-    cap("c4", 4, words("৩০ সেকেন্ডে গরম", "w gold"), C[3] + 1.0, C[4], "", "pop", ic("⚡"))
+    cap("c4", 4, words("৩-৪ সেকেন্ডে গরম", "w gold"), C[3] + 1.0, C[4], "", "pop", ic("⚡"))  # matches the new voice line
     cap("c5", 5, words("৩ হিট লেভেল + ম্যাসাজ", "w coral"), C[4] + 1.0, C[5], "", "right", ic("🔥"))
     cap("c6", 6, words("তারবিহীন ও হালকা"), C[5] + 1.0, C[6], "font-size:40px;", "fade", ic("🪶"))
     cap("c7", 7, words("গিফট বক্স প্যাকেজ"), C[6] + 1.0, C[7], "", "fade", ic("🎁"))
@@ -110,15 +112,16 @@ def main():
     js.append(f'tl.to("#brand3", {{autoAlpha:0, duration:0.3}}, {C[3] - 0.3:.3f});')
 
     # ---------------- S10 CTA (top 55%, over a dark-pink panel) ----------------
-    js.append('tl.fromTo("#panel", {opacity:0}, {opacity:1, duration:0.5, ease:"sine.out"}, 48.2);')
-    js.append('tl.fromTo("#cta1", {autoAlpha:0}, {autoAlpha:1, duration:0.4}, 48.5);')
-    js.append('tl.fromTo("#cta3 .w", {autoAlpha:0, y:12}, {autoAlpha:1, y:0, duration:0.3, stagger:0.1}, 49.5); tl.set("#cta3", {autoAlpha:1}, 49.5);')
-    js.append('tl.fromTo("#cta4", {autoAlpha:0, y:40}, {autoAlpha:1, y:0, duration:0.4, ease:"power3.out"}, 50.0);')
-    t = 50.6
-    while t + 1.5 <= 54.6:   # seek-safe pulse loop: 100 -> 105 -> 100 % every 1.5 s
+    s10 = C[9]   # CTA times are relative to the S10 cut (brief: +0.5, +1.5, +2.0, +2.5)
+    js.append(f'tl.fromTo("#panel", {{opacity:0}}, {{opacity:1, duration:0.5, ease:"sine.out"}}, {s10 + 0.2:.3f});')
+    js.append(f'tl.fromTo("#cta1", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.4}}, {s10 + 0.5:.3f});')
+    js.append(f'tl.fromTo("#cta3 .w", {{autoAlpha:0, y:12}}, {{autoAlpha:1, y:0, duration:0.3, stagger:0.1}}, {s10 + 1.5:.3f}); tl.set("#cta3", {{autoAlpha:1}}, {s10 + 1.5:.3f});')
+    js.append(f'tl.fromTo("#cta4", {{autoAlpha:0, y:40}}, {{autoAlpha:1, y:0, duration:0.4, ease:"power3.out"}}, {s10 + 2.0:.3f});')
+    t = s10 + 2.6
+    while t + 1.5 <= TOTAL - 0.4:   # seek-safe pulse loop: 100 -> 105 -> 100 % every 1.5 s
         js.append(f'tl.to("#cta4", {{scale:1.05, duration:0.75, ease:"sine.inOut", yoyo:true, repeat:1}}, {t:.2f});')
         t += 1.5
-    js.append('tl.fromTo("#cta5", {autoAlpha:0}, {autoAlpha:1, duration:0.4}, 50.5);')
+    js.append(f'tl.fromTo("#cta5", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.4}}, {s10 + 2.5:.3f});')
 
     css = f"""
 @font-face {{ font-family:"Noto Sans Bengali"; src:url(media/fonts/noto-bengali.woff2) format("woff2"); font-weight:400 800; font-display:block; }}
