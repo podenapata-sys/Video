@@ -55,28 +55,28 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
     <video id="v1" class="clip" src="media/S1_pain.mp4" muted playsinline data-start="0.000" data-duration="4.000"
       data-media-start="0.000" data-track-index="1"></video></div></div><div class="grade dim"></div></div>
   <div class="scene" id="s2" style="z-index:2"><div class="push" id="p2"><div class="cam" id="cam2">
-    <video id="v2" class="clip" src="media/S2_hotwater.mp4" muted playsinline data-start="4.000" data-duration="4.000"
+    <video id="v2" class="clip" src="media/S2_hotwater.mp4" muted playsinline data-start="4.000" data-duration="6.200"
       data-media-start="0.000" data-track-index="2"></video></div></div><div class="grade dim"></div></div>
   <div class="scene" id="s3" style="z-index:3"><div class="push" id="p3"><div class="cam" id="cam3">
-    <video id="v3" class="clip" src="media/S3_reveal.mp4" muted playsinline data-start="8.000" data-duration="5.000"
+    <video id="v3" class="clip" src="media/S3_reveal.mp4" muted playsinline data-start="10.200" data-duration="5.000"
       data-media-start="1.000" data-track-index="3"></video></div></div><div class="grade bright"></div></div>
   <div class="scene" id="s4" style="z-index:4"><div class="push" id="p4"><div class="cam" id="cam4">
-    <video id="v4" class="clip" src="media/S4_button.mp4" muted playsinline data-start="13.000" data-duration="5.000"
+    <video id="v4" class="clip" src="media/S4_button.mp4" muted playsinline data-start="15.200" data-duration="5.000"
       data-media-start="0.000" data-track-index="4"></video></div></div><div class="grade bright"></div></div>
   <div class="scene" id="s5" style="z-index:5"><div class="push" id="p5"><div class="cam" id="cam5">
-    <video id="v5" class="clip" src="media/S5_wearing.mp4" muted playsinline data-start="18.000" data-duration="5.400"
+    <video id="v5" class="clip" src="media/S5_wearing.mp4" muted playsinline data-start="20.200" data-duration="5.400"
       data-media-start="0.000" data-track-index="5"></video></div></div><div class="grade bright"></div></div>
   <div class="scene" id="s6" style="z-index:6"><div class="push" id="p6"><div class="cam" id="cam6">
-    <video id="v6" class="clip" src="media/S6_relax.mp4" muted playsinline data-start="22.600" data-duration="5.400"
+    <video id="v6" class="clip" src="media/S6_relax.mp4" muted playsinline data-start="24.800" data-duration="5.400"
       data-media-start="0.000" data-track-index="6"></video></div></div><div class="grade bright"></div></div>
   <div class="scene" id="s7" style="z-index:7"><div class="push" id="p7"><div class="cam" id="cam7">
-    <video id="v7" class="clip" src="media/S7_flatlay.mp4" muted playsinline data-start="28.000" data-duration="5.000"
+    <video id="v7" class="clip" src="media/S7_flatlay.mp4" muted playsinline data-start="30.200" data-duration="5.000"
       data-media-start="0.000" data-track-index="7"></video></div></div><div class="grade bright"></div></div>
   <div class="scene" id="s8" style="z-index:8"><div class="push" id="p8"><div class="cam" id="cam8">
-    <video id="v8" class="clip" src="media/S8_order.mp4" muted playsinline data-start="33.000" data-duration="7.000"
+    <video id="v8" class="clip" src="media/S8_order.mp4" muted playsinline data-start="35.200" data-duration="7.000"
       data-media-start="0.000" data-track-index="8"></video></div></div><div class="grade bright"></div></div>
   <div class="scene" id="s9" style="z-index:9"><div class="push" id="p9"><div class="cam" id="cam9">
-    <video id="v9" class="clip" src="media/S9_trust.mp4" muted playsinline data-start="40.000" data-duration="8.000"
+    <video id="v9" class="clip" src="media/S9_trust.mp4" muted playsinline data-start="42.200" data-duration="5.800"
       data-media-start="0.000" data-track-index="9"></video></div></div><div class="grade bright"></div></div>
   <div class="scene" id="s10" style="z-index:10"><div class="push" id="p10"><div class="cam" id="cam10">
     <video id="v10" class="clip" src="media/S10_hero.mp4" muted playsinline data-start="48.000" data-duration="7.000"
@@ -98,67 +98,67 @@ window.__timelines = window.__timelines || {};
 const tl = gsap.timeline({ paused: true });
 tl.set("#s1", {autoAlpha:0}, 4.000);
 tl.fromTo("#cam1", {scale:1.0}, {scale:1.04, duration:4.000, ease:"none"}, 0.000);
-tl.set("#s2", {autoAlpha:0}, 0); tl.set("#s2", {autoAlpha:1}, 4.000); tl.set("#s2", {autoAlpha:0}, 8.000);
-tl.fromTo("#cam2", {scale:1.0}, {scale:1.04, duration:4.000, ease:"none"}, 4.000);
-tl.set("#s3", {autoAlpha:0}, 0); tl.set("#s3", {autoAlpha:1}, 8.000); tl.set("#s3", {autoAlpha:0}, 13.000);
-tl.fromTo("#cam3", {scale:1.0}, {scale:1.04, duration:5.000, ease:"none"}, 8.000);
-tl.set("#s4", {autoAlpha:0}, 0); tl.set("#s4", {autoAlpha:1}, 13.000); tl.set("#s4", {autoAlpha:0}, 18.000);
-tl.fromTo("#cam4", {scale:1.0}, {scale:1.04, duration:5.000, ease:"none"}, 13.000);
-tl.set("#s5", {autoAlpha:0}, 0); tl.set("#s5", {autoAlpha:1}, 18.000); tl.set("#s5", {autoAlpha:0}, 23.400);
-tl.fromTo("#cam5", {scale:1.0}, {scale:1.04, duration:5.400, ease:"none"}, 18.000);
-tl.set("#s6", {autoAlpha:0}, 0); tl.set("#s6", {autoAlpha:1}, 22.600); tl.set("#s6", {autoAlpha:0}, 28.000);
-tl.fromTo("#cam6", {scale:1.0}, {scale:1.04, duration:5.400, ease:"none"}, 22.600);
-tl.set("#s7", {autoAlpha:0}, 0); tl.set("#s7", {autoAlpha:1}, 28.000); tl.set("#s7", {autoAlpha:0}, 33.000);
-tl.fromTo("#cam7", {scale:1.0}, {scale:1.04, duration:5.000, ease:"none"}, 28.000);
-tl.set("#s8", {autoAlpha:0}, 0); tl.set("#s8", {autoAlpha:1}, 33.000); tl.set("#s8", {autoAlpha:0}, 40.000);
-tl.fromTo("#cam8", {scale:1.0}, {scale:1.04, duration:7.000, ease:"none"}, 33.000);
-tl.set("#s9", {autoAlpha:0}, 0); tl.set("#s9", {autoAlpha:1}, 40.000); tl.set("#s9", {autoAlpha:0}, 48.000);
-tl.fromTo("#cam9", {scale:1.0}, {scale:1.04, duration:8.000, ease:"none"}, 40.000);
+tl.set("#s2", {autoAlpha:0}, 0); tl.set("#s2", {autoAlpha:1}, 4.000); tl.set("#s2", {autoAlpha:0}, 10.200);
+tl.fromTo("#cam2", {scale:1.0}, {scale:1.04, duration:6.200, ease:"none"}, 4.000);
+tl.set("#s3", {autoAlpha:0}, 0); tl.set("#s3", {autoAlpha:1}, 10.200); tl.set("#s3", {autoAlpha:0}, 15.200);
+tl.fromTo("#cam3", {scale:1.0}, {scale:1.04, duration:5.000, ease:"none"}, 10.200);
+tl.set("#s4", {autoAlpha:0}, 0); tl.set("#s4", {autoAlpha:1}, 15.200); tl.set("#s4", {autoAlpha:0}, 20.200);
+tl.fromTo("#cam4", {scale:1.0}, {scale:1.04, duration:5.000, ease:"none"}, 15.200);
+tl.set("#s5", {autoAlpha:0}, 0); tl.set("#s5", {autoAlpha:1}, 20.200); tl.set("#s5", {autoAlpha:0}, 25.600);
+tl.fromTo("#cam5", {scale:1.0}, {scale:1.04, duration:5.400, ease:"none"}, 20.200);
+tl.set("#s6", {autoAlpha:0}, 0); tl.set("#s6", {autoAlpha:1}, 24.800); tl.set("#s6", {autoAlpha:0}, 30.200);
+tl.fromTo("#cam6", {scale:1.0}, {scale:1.04, duration:5.400, ease:"none"}, 24.800);
+tl.set("#s7", {autoAlpha:0}, 0); tl.set("#s7", {autoAlpha:1}, 30.200); tl.set("#s7", {autoAlpha:0}, 35.200);
+tl.fromTo("#cam7", {scale:1.0}, {scale:1.04, duration:5.000, ease:"none"}, 30.200);
+tl.set("#s8", {autoAlpha:0}, 0); tl.set("#s8", {autoAlpha:1}, 35.200); tl.set("#s8", {autoAlpha:0}, 42.200);
+tl.fromTo("#cam8", {scale:1.0}, {scale:1.04, duration:7.000, ease:"none"}, 35.200);
+tl.set("#s9", {autoAlpha:0}, 0); tl.set("#s9", {autoAlpha:1}, 42.200); tl.set("#s9", {autoAlpha:0}, 48.000);
+tl.fromTo("#cam9", {scale:1.0}, {scale:1.04, duration:5.800, ease:"none"}, 42.200);
 tl.set("#s10", {autoAlpha:0}, 0); tl.set("#s10", {autoAlpha:1}, 48.000); tl.set("#s10", {autoAlpha:0}, 55.000);
 tl.fromTo("#cam10", {scale:1.08}, {scale:1.0, duration:0.45, ease:"power3.out"}, 48.000);
 tl.to("#cam10", {scale:1.04, duration:6.550, ease:"none"}, 48.450);
-tl.fromTo("#s6", {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:"sine.inOut", immediateRender:false}, 22.600);
+tl.fromTo("#s6", {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:"sine.inOut", immediateRender:false}, 24.800);
 tl.fromTo("#black", {opacity:1}, {opacity:0, duration:0.5, ease:"sine.out"}, 0);
 tl.to("#black", {opacity:1, duration:0.5, ease:"sine.in"}, 54.5);
-tl.fromTo("#flash", {opacity:0}, {opacity:1, duration:0.1, ease:"none"}, 7.9); tl.to("#flash", {opacity:0, duration:0.2, ease:"sine.out"}, 8.0);
-tl.to("#p9", {scale:1.12, duration:0.25, ease:"power2.in"}, 47.75);
+tl.fromTo("#flash", {opacity:0}, {opacity:1, duration:0.1, ease:"none"}, 10.100); tl.to("#flash", {opacity:0, duration:0.2, ease:"sine.out"}, 10.200);
+tl.to("#p9", {scale:1.12, duration:0.25, ease:"power2.in"}, 47.750);
 tl.set("#c2", {autoAlpha:1}, 4.500);
 tl.fromTo("#c2", {x:-140}, {x:0, duration:0.45, ease:"power3.out"}, 4.500);
 tl.fromTo("#c2 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 4.500);
 tl.fromTo("#c2 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 4.500);
-tl.to("#c2", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 7.500);
-tl.set("#c4", {autoAlpha:1}, 14.000);
-tl.fromTo("#c4", {scale:0.6}, {scale:1, duration:0.45, ease:"back.out(2.6)"}, 14.000);
-tl.fromTo("#c4 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 14.000);
-tl.fromTo("#c4 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 14.000);
-tl.to("#c4", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 17.700);
-tl.set("#c5", {autoAlpha:1}, 19.000);
-tl.fromTo("#c5", {x:140}, {x:0, duration:0.45, ease:"power3.out"}, 19.000);
-tl.fromTo("#c5 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 19.000);
-tl.fromTo("#c5 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 19.000);
-tl.to("#c5", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 22.700);
-tl.set("#c6", {autoAlpha:1}, 24.000);
-tl.fromTo("#c6 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 24.000);
-tl.fromTo("#c6 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 24.000);
-tl.to("#c6", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 27.700);
-tl.set("#c7", {autoAlpha:1}, 29.000);
-tl.fromTo("#c7 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 29.000);
-tl.fromTo("#c7 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 29.000);
-tl.to("#c7", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 32.700);
-tl.set("#c9", {autoAlpha:1}, 41.000);
-tl.fromTo("#c9", {scale:0.6}, {scale:1, duration:0.45, ease:"back.out(2.6)"}, 41.000);
-tl.fromTo("#c9 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 41.000);
-tl.fromTo("#c9 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 41.000);
+tl.to("#c2", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 9.600);
+tl.set("#c4", {autoAlpha:1}, 16.200);
+tl.fromTo("#c4", {scale:0.6}, {scale:1, duration:0.45, ease:"back.out(2.6)"}, 16.200);
+tl.fromTo("#c4 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 16.200);
+tl.fromTo("#c4 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 16.200);
+tl.to("#c4", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 19.900);
+tl.set("#c5", {autoAlpha:1}, 21.200);
+tl.fromTo("#c5", {x:140}, {x:0, duration:0.45, ease:"power3.out"}, 21.200);
+tl.fromTo("#c5 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 21.200);
+tl.fromTo("#c5 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 21.200);
+tl.to("#c5", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 24.900);
+tl.set("#c6", {autoAlpha:1}, 26.200);
+tl.fromTo("#c6 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 26.200);
+tl.fromTo("#c6 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 26.200);
+tl.to("#c6", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 29.900);
+tl.set("#c7", {autoAlpha:1}, 31.200);
+tl.fromTo("#c7 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 31.200);
+tl.fromTo("#c7 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 31.200);
+tl.to("#c7", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 34.900);
+tl.set("#c9", {autoAlpha:1}, 43.200);
+tl.fromTo("#c9", {scale:0.6}, {scale:1, duration:0.45, ease:"back.out(2.6)"}, 43.200);
+tl.fromTo("#c9 .w", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.25, ease:"power2.out", stagger:0.1}, 43.200);
+tl.fromTo("#c9 .ic", {autoAlpha:0, scale:0.5}, {autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2)"}, 43.200);
 tl.to("#c9", {autoAlpha:0, duration:0.3, ease:"power1.in"}, 47.100);
-tl.fromTo("#c8a", {autoAlpha:0, x:-120}, {autoAlpha:1, x:0, duration:0.3, ease:"power3.out"}, 34.000);
-tl.fromTo("#c8a .w", {autoAlpha:0}, {autoAlpha:1, duration:0.2, stagger:0.1}, 34.000);
-tl.to("#c8a", {autoAlpha:0, duration:0.3}, 39.2);
-tl.fromTo("#c8b", {autoAlpha:0, x:-120}, {autoAlpha:1, x:0, duration:0.3, ease:"power3.out"}, 34.500);
-tl.fromTo("#c8b .w", {autoAlpha:0}, {autoAlpha:1, duration:0.2, stagger:0.1}, 34.500);
-tl.to("#c8b", {autoAlpha:0, duration:0.3}, 39.2);
-tl.fromTo("#brand3", {autoAlpha:0, scale:0.8}, {autoAlpha:1, scale:1, duration:0.5, ease:"power2.out"}, 9.0);
-tl.fromTo("#brand3 .shine", {xPercent:-160}, {xPercent:260, duration:1.4, ease:"sine.inOut"}, 9.3);
-tl.to("#brand3", {autoAlpha:0, duration:0.3}, 12.7);
+tl.fromTo("#c8a", {autoAlpha:0, x:-120}, {autoAlpha:1, x:0, duration:0.3, ease:"power3.out"}, 36.200);
+tl.fromTo("#c8a .w", {autoAlpha:0}, {autoAlpha:1, duration:0.2, stagger:0.1}, 36.200);
+tl.to("#c8a", {autoAlpha:0, duration:0.3}, 41.400);
+tl.fromTo("#c8b", {autoAlpha:0, x:-120}, {autoAlpha:1, x:0, duration:0.3, ease:"power3.out"}, 36.700);
+tl.fromTo("#c8b .w", {autoAlpha:0}, {autoAlpha:1, duration:0.2, stagger:0.1}, 36.700);
+tl.to("#c8b", {autoAlpha:0, duration:0.3}, 41.400);
+tl.fromTo("#brand3", {autoAlpha:0, scale:0.8}, {autoAlpha:1, scale:1, duration:0.5, ease:"power2.out"}, 11.200);
+tl.fromTo("#brand3 .shine", {xPercent:-160}, {xPercent:260, duration:1.4, ease:"sine.inOut"}, 11.500);
+tl.to("#brand3", {autoAlpha:0, duration:0.3}, 14.900);
 tl.fromTo("#panel", {opacity:0}, {opacity:1, duration:0.5, ease:"sine.out"}, 48.2);
 tl.fromTo("#cta1", {autoAlpha:0}, {autoAlpha:1, duration:0.4}, 48.5);
 tl.fromTo("#cta3 .w", {autoAlpha:0, y:12}, {autoAlpha:1, y:0, duration:0.3, stagger:0.1}, 49.5); tl.set("#cta3", {autoAlpha:1}, 49.5);

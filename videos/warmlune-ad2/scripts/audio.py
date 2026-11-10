@@ -3,10 +3,10 @@
 
   python3 scripts/audio.py        (run from videos/warmlune-ad2/)
 
-- Scene cuts are fixed by the brief: 0 4 8 13 18 23 28 33 40 48 55.
+- Scene cuts: 0 4 10.2 15.2 20.2 25.2 30.2 35.2 42.2 48 55 (S2 fits the new voice line; S9 shortened).
 - Each line (media/vo/voN.mp3, one per scene) has its leading/trailing silence trimmed and starts 0.15 s after its
   scene cut, or 0.12 s after the previous line ends if that line is still speaking. Never cut, never sped up.
-- Music: part 1 (melancholic) 0-8 s, part 2 (hopeful) from the 8 s flash, part 3 (urgency) from 33 s, crossfaded;
+- Music: part 1 (melancholic) 0-8 s, part 2 (hopeful) from the S2->S3 flash, part 3 (urgency) from the S8 cut, crossfaded;
   each about -12 dB (25%), ducked further (to about -18 dB) under the voice. Fade in from black, fade out at the end.
 Writes media/voiceover.wav, media/music.wav, media/mix.wav and timing.json.
 """
@@ -21,7 +21,8 @@ import soundfile as sf
 ROOT = Path(__file__).resolve().parent.parent
 MD = ROOT / "media"
 SR, TOTAL = 48000, 55.0
-CUTS = [0, 4, 8, 13, 18, 23, 28, 33, 40, 48, 55]
+# S2 extended to fit the new (longer) hot-water-bag line; S9 gives back the time (user-approved)
+CUTS = [0, 4, 10.2, 15.2, 20.2, 25.2, 30.2, 35.2, 42.2, 48, 55]
 LEAD, GAP = 0.15, 0.12
 
 
@@ -95,8 +96,8 @@ def main():
     bus = np.zeros((N, 2), np.float32)
     p1, p2, p3 = (dec(MD / "music" / f"part{k}.mp3", 2) for k in (1, 2, 3))
     xf2, xf3 = 0.8, 1.0
-    a2 = 8.0 - 0.4                    # part 2 crossfades across the 8 s flash
-    a3 = 33.0 - 0.5                   # part 3 crossfades across the 33 s cut
+    a2 = CUTS[2] - 0.4                # part 2 crossfades across the S2->S3 flash
+    a3 = CUTS[7] - 0.5                # part 3 crossfades across the S8 cut
     place(bus, fade(p1[:int((a2 + xf2) * SR)], fin=0.5, fout=xf2), 0.0)
     place(bus, fade(p2[:int((a3 + xf3 - a2) * SR)], fin=xf2, fout=xf3), a2)
     place(bus, fade(p3[:int((TOTAL - a3) * SR)], fin=xf3, fout=1.5), a3)

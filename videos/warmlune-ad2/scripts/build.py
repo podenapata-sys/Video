@@ -12,7 +12,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 W, H, TOTAL = 1080, 1920, 55.0
-CUTS = [0, 4, 8, 13, 18, 23, 28, 33, 40, 48, 55]
+# S2 extended to fit the new voice line, S9 gives the time back (user-approved); graphics follow scene-relative offsets
+CUTS = [0, 4, 10.2, 15.2, 20.2, 25.2, 30.2, 35.2, 42.2, 48, 55]
+C = CUTS
 CORAL, GOLD, RED, GREEN = "#E8446A", "#FFB347", "#FF4444", "#4CAF50"
 CLIP = {1: "S1_pain", 2: "S2_hotwater", 3: "S3_reveal", 4: "S4_button", 5: "S5_wearing", 6: "S6_relax",
         7: "S7_flatlay", 8: "S8_order", 9: "S9_trust", 10: "S10_hero"}
@@ -65,9 +67,9 @@ def main():
     js.append('tl.fromTo("#black", {opacity:1}, {opacity:0, duration:0.5, ease:"sine.out"}, 0);')
     js.append('tl.to("#black", {opacity:1, duration:0.5, ease:"sine.in"}, 54.5);')
     # S2 -> S3 white flash (0.3 s): peak on the cut
-    js.append('tl.fromTo("#flash", {opacity:0}, {opacity:1, duration:0.1, ease:"none"}, 7.9); tl.to("#flash", {opacity:0, duration:0.2, ease:"sine.out"}, 8.0);')
+    js.append(f'tl.fromTo("#flash", {{opacity:0}}, {{opacity:1, duration:0.1, ease:"none"}}, {C[2] - 0.1:.3f}); tl.to("#flash", {{opacity:0, duration:0.2, ease:"sine.out"}}, {C[2]:.3f});')
     # S9 -> S10 punch-in: S9 pushes in over its last 0.25 s
-    js.append('tl.to("#p9", {scale:1.12, duration:0.25, ease:"power2.in"}, 47.75);')
+    js.append(f'tl.to("#p9", {{scale:1.12, duration:0.25, ease:"power2.in"}}, {C[9] - 0.25:.3f});')
 
     # ---------------- captions (bottom third, per-word reveal 0.1 s apart) ----------------
     caps = []
@@ -88,24 +90,24 @@ def main():
         js.append(f'tl.to("#{cid}", {{autoAlpha:0, duration:0.3, ease:"power1.in"}}, {t_out - 0.3:.3f});')
 
     ic = lambda e: f'<span class="ic">{e}</span>'
-    cap("c2", 2, words("গরম পানির ব্যাগ"), 4.5, 7.8, "", "left", ic("❌"))
-    cap("c4", 4, words("৩০ সেকেন্ডে গরম", "w gold"), 14.0, 18.0, "", "pop", ic("⚡"))
-    cap("c5", 5, words("৩ হিট লেভেল + ম্যাসাজ", "w coral"), 19.0, 23.0, "", "right", ic("🔥"))
-    cap("c6", 6, words("তারবিহীন ও হালকা"), 24.0, 28.0, "font-size:40px;", "fade", ic("🪶"))
-    cap("c7", 7, words("গিফট বক্স প্যাকেজ"), 29.0, 33.0, "", "fade", ic("🎁"))
-    cap("c9", 9, words("৭ দিন রিপ্লেসমেন্ট গ্যারান্টি", "w green"), 41.0, 47.4, "", "pop", ic("✅"))
+    cap("c2", 2, words("গরম পানির ব্যাগ"), C[1] + 0.5, C[2] - 0.3, "", "left", ic("❌"))
+    cap("c4", 4, words("৩০ সেকেন্ডে গরম", "w gold"), C[3] + 1.0, C[4], "", "pop", ic("⚡"))
+    cap("c5", 5, words("৩ হিট লেভেল + ম্যাসাজ", "w coral"), C[4] + 1.0, C[5], "", "right", ic("🔥"))
+    cap("c6", 6, words("তারবিহীন ও হালকা"), C[5] + 1.0, C[6], "font-size:40px;", "fade", ic("🪶"))
+    cap("c7", 7, words("গিফট বক্স প্যাকেজ"), C[6] + 1.0, C[7], "", "fade", ic("🎁"))
+    cap("c9", 9, words("৭ দিন রিপ্লেসমেন্ট গ্যারান্টি", "w green"), C[8] + 1.0, C[9] - 0.6, "", "pop", ic("✅"))
     # S8: two stacked pills
     y8 = CAP_Y[8] * H
     caps.append(f'<div class="pillcap" id="c8a" style="top:{y8 - 50:.0f}px">{ic("💬")}{words("ইনবক্স করুন")}</div>')
     caps.append(f'<div class="pillcap" id="c8b" style="top:{y8 + 62:.0f}px">{ic("💰")}{words("ক্যাশ অন ডেলিভারি")}</div>')
-    for cid, t in (("c8a", 34.0), ("c8b", 34.5)):
+    for cid, t in (("c8a", C[7] + 1.0), ("c8b", C[7] + 1.5)):
         js.append(f'tl.fromTo("#{cid}", {{autoAlpha:0, x:-120}}, {{autoAlpha:1, x:0, duration:0.3, ease:"power3.out"}}, {t:.3f});')
         js.append(f'tl.fromTo("#{cid} .w", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.2, stagger:0.1}}, {t:.3f});')
-        js.append(f'tl.to("#{cid}", {{autoAlpha:0, duration:0.3}}, 39.2);')
+        js.append(f'tl.to("#{cid}", {{autoAlpha:0, duration:0.3}}, {C[8] - 0.8:.3f});')
     # S3: WARMLUNE with golden glow + shimmer
-    js.append('tl.fromTo("#brand3", {autoAlpha:0, scale:0.8}, {autoAlpha:1, scale:1, duration:0.5, ease:"power2.out"}, 9.0);')
-    js.append('tl.fromTo("#brand3 .shine", {xPercent:-160}, {xPercent:260, duration:1.4, ease:"sine.inOut"}, 9.3);')
-    js.append('tl.to("#brand3", {autoAlpha:0, duration:0.3}, 12.7);')
+    js.append(f'tl.fromTo("#brand3", {{autoAlpha:0, scale:0.8}}, {{autoAlpha:1, scale:1, duration:0.5, ease:"power2.out"}}, {C[2] + 1.0:.3f});')
+    js.append(f'tl.fromTo("#brand3 .shine", {{xPercent:-160}}, {{xPercent:260, duration:1.4, ease:"sine.inOut"}}, {C[2] + 1.3:.3f});')
+    js.append(f'tl.to("#brand3", {{autoAlpha:0, duration:0.3}}, {C[3] - 0.3:.3f});')
 
     # ---------------- S10 CTA (top 55%, over a dark-pink panel) ----------------
     js.append('tl.fromTo("#panel", {opacity:0}, {opacity:1, duration:0.5, ease:"sine.out"}, 48.2);')
