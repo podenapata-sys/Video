@@ -79,15 +79,15 @@ cue("click_ui", 0.9, 0.55)
 js.append('tl.fromTo("#selbox", {autoAlpha:0, scale:0.9}, {autoAlpha:1, scale:1, duration:0.25, ease:"back.out(2)"}, 0.95);')
 js.append('tl.to("#cursor", {x:760, y:1180, autoAlpha:0, duration:0.6, ease:"power2.in"}, 2.3);')
 js.append('tl.to("#selbox", {autoAlpha:0, duration:0.25}, 2.6);')
-# clone row: three live face crops, numbered ১ ২ ৩, on "সমস্যা এই ৩টা জায়গায়"
+# three numbered problem tiles (on the chest, never on the face), on "সমস্যা এই ৩টা জায়গায়"
 tc = w(1, "সমস্যা", 1)
-for i in range(3):
-    x = 120 + i * 300
-    vid = live_video(f"clone{i}", tc + i * 0.12, s2 - 0.02, "clonev")
-    html.append(f'<div class="clone" id="cl{i}" style="left:{x}px">{vid}<b>{str(i + 1).translate(BN)}</b></div>')
-    js.append(f'tl.fromTo("#cl{i}", {{autoAlpha:0, scale:0.3, y:40}}, {{autoAlpha:1, scale:1, y:0, duration:0.3, ease:"back.out(2.2)"}}, {tc + i * 0.12:.3f});')
-    js.append(f'tl.to("#cl{i}", {{autoAlpha:0, duration:0.15}}, {s2 - 0.15:.3f});')
-cue("whoosh_fast", tc, 0.45)
+for i, (ico, lab) in enumerate((("⏱", "দেরিতে রিপ্লাই"), ("🔔", "ফলো-আপ নেই"), ("🌐", "শুধু ফেসবুক"))):
+    x = 75 + i * 320
+    html.append(f'<div class="ptile" id="cl{i}" style="left:{x}px"><span class="pico">{ico}</span><b>{str(i + 1).translate(BN)}</b><span class="plab">{lab}</span></div>')
+    js.append(f'tl.fromTo("#cl{i}", {{autoAlpha:0, scale:0.3, y:80, rotation:{(-8, 0, 8)[i]}}}, {{autoAlpha:1, scale:1, y:0, rotation:0, duration:0.32, ease:"back.out(2.2)"}}, {tc + i * 0.14:.3f});')
+    js.append(f'tl.to("#cl{i}", {{autoAlpha:0, y:-30, duration:0.15}}, {s2 - 0.15:.3f});')
+    cue("pop_notification", tc + i * 0.14, 0.32)
+cue("whoosh_fast", tc - 0.05, 0.35)
 
 # ------------------------------------------------------------------ checklist panel (right)
 items = [("০১", "দেরিতে রিপ্লাই"), ("০২", "ফলো-আপ নেই"), ("০৩", "শুধু ফেসবুক পেজ"), ("•", "ফ্রি অডিট")]
@@ -103,12 +103,17 @@ for i, sec in enumerate((2, 3, 4, 5)):
 js.append(f'tl.set("#pbtn", {{className:"gold"}}, {SECS[5]["start"]:.3f});')
 js.append(f'tl.fromTo("#pbtn", {{scale:1}}, {{scale:1.08, duration:0.2, yoyo:true, repeat:3, ease:"sine.inOut"}}, {SECS[5]["start"] + 0.1:.3f});')
 
-# section transitions: quick glitch flash
-for sec in (2, 3):
+# section openers: letter dive -- a paper card with a giant numeral cut out of it (footage shows through the glyph),
+# then the camera dives through the numeral. Starts on the section's first word ("এক নম্বর" / "দুই নম্বর").
+for sec, num in ((2, "০১"), (3, "০২")):
     t = SECS[sec]["start"]
-    js.append(f'tl.to("#glitch", {{opacity:0.9, x:-24, duration:0.04, ease:"none"}}, {t - 0.03:.3f});')
-    js.append(f'tl.to("#glitch", {{opacity:0, x:0, duration:0.14, ease:"steps(3)"}}, {t + 0.03:.3f});')
-    cue("glitch_digital", t - 0.03, 0.4)
+    html.append(f'<div class="dive" id="dv{sec}" data-layout-ignore><span>{num}</span></div>')
+    js.append(f'tl.fromTo("#dv{sec}", {{autoAlpha:1, scale:1}}, {{scale:1.08, duration:0.32, ease:"none", immediateRender:false}}, {t:.3f});')
+    js.append(f'tl.to("#dv{sec}", {{scale:7, autoAlpha:0, duration:0.34, ease:"power3.in"}}, {t + 0.32:.3f});')
+    js.append(f'tl.to("#glitch", {{opacity:0.8, x:-24, duration:0.04, ease:"none"}}, {t + 0.62:.3f});')
+    js.append(f'tl.to("#glitch", {{opacity:0, x:0, duration:0.12, ease:"steps(3)"}}, {t + 0.68:.3f});')
+    cue("whoosh_fast", t + 0.3, 0.5)
+    cue("glitch_digital", t + 0.6, 0.25)
 
 # ------------------------------------------------------------------ section 2 : late reply (predict keys + bot reply)
 s3 = SECS[3]["start"]
@@ -123,31 +128,39 @@ html.append(f'''<div class="card" id="chat">
  <div class="keys" id="keys"><span class="pk on">Price koto?</span><span class="pk">Delivery?</span><span class="pk">Available?</span></div>
  <div class="input" id="inp">{chars}<i class="caret"></i></div>
 </div>''')
-t_type = SECS[2]["start"] + 0.5
-show("#chat", SECS[2]["start"] + 0.1, s3 - 0.02, fin=0.3)
+t_type = SECS[2]["start"] + 0.75
+show("#chat", SECS[2]["start"] + 0.62, s3 - 0.02, fin=0.3)
 for i in range(len(typed)):
     js.append(f'tl.fromTo("#ch{i}", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.01}}, {t_type + i * 0.075:.3f});')
 cue("typing_keys", t_type, 0.35)
 t_send = w(2, "দাম")
-js.append(f'tl.to("#inp, #keys", {{autoAlpha:0, duration:0.15}}, {t_send:.3f});')
+js.append(f'tl.set("#inp, #keys", {{display:"none"}}, {t_send:.3f}); tl.set("#cbub", {{display:"block"}}, {t_send:.3f});')
 js.append(f'tl.fromTo("#cbub", {{autoAlpha:0, y:20}}, {{autoAlpha:1, y:0, duration:0.25, ease:"back.out(2)"}}, {t_send:.3f});')
 cue("pop_notification", t_send, 0.35)
 t_wait = w(2, "অপেক্ষা")
+js.append(f'tl.set("#seen", {{display:"block"}}, {t_wait:.3f});')
 js.append(f'tl.fromTo("#seen", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.25}}, {t_wait:.3f});')
 t_left = w(2, "পাশের")
+js.append(f'tl.set("#leftp", {{display:"block"}}, {t_left:.3f});')
 js.append(f'tl.fromTo("#leftp", {{autoAlpha:0, x:-30}}, {{autoAlpha:1, x:0, duration:0.25, ease:"power3.out"}}, {t_left:.3f});')
 t_bot = w(2, "এআই")
-js.append(f'tl.to("#seen, #leftp", {{autoAlpha:0, duration:0.15}}, {t_bot - 0.05:.3f});')
+js.append(f'tl.set("#seen, #leftp", {{display:"none"}}, {t_bot:.3f}); tl.set("#bot", {{display:"block"}}, {t_bot:.3f});')
 js.append(f'tl.fromTo("#bot", {{autoAlpha:0, scale:0.6, transformOrigin:"100% 100%"}}, {{autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2.4)"}}, {t_bot:.3f});')
 cue("chime_success", t_bot, 0.45)
+hs = [("🌙 রাত ২টাতেও", w(2, "রাত")), ("⚡ সেকেন্ডে উত্তর", w(2, "সেকেন্ডে")), ("✅ অর্ডার কনফার্ম", w(2, "উত্তর"))]
+html.append('<div class="hstack" id="hs2">' + "".join(f'<span class="hchip" id="hc2{i}">{t}</span>' for i, (t, _) in enumerate(hs)) + '</div>')
+for i, (_, t) in enumerate(hs):
+    js.append(f'tl.fromTo("#hc2{i}", {{autoAlpha:0, y:-90, rotation:{(-4, 3, -2)[i]}}}, {{autoAlpha:1, y:0, duration:0.3, ease:"bounce.out"}}, {t:.3f});')
+    cue("click_ui", t, 0.3)
+js.append(f'tl.to("#hs2", {{autoAlpha:0, y:-40, duration:0.15}}, {s3 - 0.17:.3f});')
 
 # ------------------------------------------------------------------ section 3 : no follow-up (post wall + voice note)
 s4 = SECS[4]["start"]
-tiles = "".join(f'<div class="tile" id="tw{i}"><i class="av s{i % 5}"></i><span class="ln"></span><span class="tag">কেনেনি</span></div>' for i in range(9))
+tiles = "".join(f'<div class="tile" id="tw{i}"><i class="av s{i % 5}"></i><span class="ln"></span><span class="tag">কেনেনি</span></div>' for i in range(10))
 html.append(f'<div class="card" id="wall"><div class="wh">আজ কেনেনি: <b id="wcount">০</b> জন</div><div class="grid">{tiles}</div></div>')
-t_wall = SECS[3]["start"] + 0.1
+t_wall = SECS[3]["start"] + 0.62
 show("#wall", t_wall, w(3, "অটোমেশন") + 0.05, fin=0.25)
-for i in range(9):
+for i in range(10):
     js.append(f'tl.fromTo("#tw{i}", {{autoAlpha:0, scale:0.5}}, {{autoAlpha:1, scale:1, duration:0.2, ease:"back.out(2)"}}, {t_wall + 0.25 + i * 0.07:.3f});')
 cue("pop_notification", t_wall + 0.25, 0.35)
 for k, val in enumerate([3, 9, 16, 24, 31, 38, 44, 47]):
@@ -162,6 +175,13 @@ for i in range(26):
 js.append(f'tl.fromTo("#del", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.2}}, {w(3, "রিমাইন্ডার"):.3f});')
 cue("pop_notification", t_auto, 0.4)
 cue("chime_success", w(3, "রিমাইন্ডার"), 0.3)
+html.append('<div class="hstack" id="hs3"><span class="hchip red" id="hc30">😶 কেউ মনে করায়নি</span><span class="hchip green" id="hc31">🤖 অটো ফলো-আপ চালু</span></div>')
+t_noone = w(3, "কেউ")
+js.append(f'tl.fromTo("#hc30", {{autoAlpha:0, y:-90}}, {{autoAlpha:1, y:0, duration:0.3, ease:"bounce.out"}}, {t_noone:.3f});')
+js.append(f'tl.set("#hc30", {{display:"none"}}, {t_auto:.3f});')
+js.append(f'tl.fromTo("#hc31", {{autoAlpha:0, scale:0.4}}, {{autoAlpha:1, scale:1, duration:0.3, ease:"back.out(2.5)"}}, {t_auto:.3f});')
+js.append(f'tl.to("#hs3", {{autoAlpha:0, duration:0.12}}, {s4 - 0.14:.3f});')
+cue("click_ui", t_noone, 0.3)
 
 # ------------------------------------------------------------------ section 4 : only Facebook (press front + tear + landing b-roll)
 s5 = SECS[4]["end"]
@@ -220,6 +240,8 @@ for i in range(60):
     js.append(f'tl.fromTo("#d{i}", {{autoAlpha:0, x:0, y:0}}, {{autoAlpha:0.9, x:{160 + (i * 29) % 260}, y:{-60 - (i * 17) % 160}, duration:0.9, ease:"power1.out"}}, {BLOW + (i % 12) * 0.05:.3f});')
 js.append(f'tl.to("#dustwrap", {{autoAlpha:0, duration:0.3}}, {CARD - 0.25:.3f});')
 cue("wind_dust", BLOW - 0.05, 0.55)
+for sec in (2, 3):
+    js.append(f'tl.set("#panel", {{zIndex:48}}, {SECS[sec]["start"]:.3f}); tl.set("#panel", {{zIndex:30}}, {SECS[sec]["start"] + 0.66:.3f});')
 # the panel steps aside for the full-screen moments (newspaper, impact) and leaves before the blow-away
 js.append(f'tl.to("#panel", {{autoAlpha:0, duration:0.1}}, {t_np:.3f}); tl.to("#panel", {{autoAlpha:1, duration:0.2}}, {t_tear + 0.5:.3f});')
 js.append(f'tl.to("#panel", {{autoAlpha:0, duration:0.05}}, {c6:.3f}); tl.to("#panel", {{autoAlpha:1, duration:0.15}}, {t_imp_end:.3f});')
@@ -301,58 +323,65 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:{BG}; }}
 .tp {{ background:#fff; color:{BG}; font-weight:700; font-size:54px; padding:10px 34px 4px; border-radius:22px; box-shadow:0 10px 30px -10px rgba(0,0,0,.6); }}
 .tp.en {{ font-family:"Sora"; font-weight:700; font-size:34px; padding:10px 28px; background:{BLUE}; color:{BG}; }}
 #cursor {{ position:absolute; left:0; top:0; z-index:40; visibility:hidden; display:flex; align-items:flex-start; gap:6px; }}
-.ctag {{ margin-top:46px; background:{BLUE}; color:{BG}; font-family:"Sora"; font-weight:700; font-size:24px; padding:6px 14px; border-radius:8px; }}
+.ctag {{ margin-top:46px; background:{BLUE}; color:{BG}; font-family:"Sora"; font-weight:700; font-size:28px; padding:6px 14px; border-radius:8px; }}
 #selbox {{ position:absolute; left:330px; top:400px; width:420px; height:520px; border:3px solid {BLUE_HI}; z-index:35; visibility:hidden; }}
 #selbox .h {{ position:absolute; width:18px; height:18px; background:#fff; border:3px solid {BLUE}; }}
 .h.tl {{ left:-11px; top:-11px; }} .h.tr {{ right:-11px; top:-11px; }} .h.bl {{ left:-11px; bottom:-11px; }} .h.br {{ right:-11px; bottom:-11px; }}
-.dim {{ position:absolute; left:50%; top:-58px; translate:-50% 0; background:{BLUE}; color:{BG}; font-family:"Sora"; font-weight:700; font-size:24px; padding:6px 14px; border-radius:8px; white-space:nowrap; }}
-.clone {{ position:absolute; top:1010px; width:240px; height:240px; border-radius:50%; overflow:hidden; border:5px solid {BLUE_HI}; z-index:30; visibility:hidden;
-  box-shadow:0 18px 40px -12px rgba(0,0,0,.7); background:{BG}; }}
-.clone video {{ position:absolute; width:620px; height:1102px; left:-190px; top:-240px; object-fit:cover; filter:brightness(.9); }}
-.clone b {{ position:absolute; right:10px; bottom:6px; width:58px; height:58px; border-radius:50%; background:{BLUE}; color:{BG}; font-size:38px; font-weight:700;
-  display:flex; align-items:center; justify-content:center; padding-top:6px; }}
+.dim {{ position:absolute; left:50%; top:-58px; translate:-50% 0; background:{BLUE}; color:{BG}; font-family:"Sora"; font-weight:700; font-size:28px; padding:6px 14px; border-radius:8px; white-space:nowrap; }}
+.ptile {{ position:absolute; top:1040px; width:290px; height:270px; border-radius:28px; background:#fff; color:{BG}; z-index:30; visibility:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 22px 50px -14px rgba(0,0,0,.8); border-bottom:8px solid {BLUE}; }}
+.ptile b {{ font-size:130px; font-weight:700; line-height:1; color:{BLUE}; margin-top:10px; }}
+.ptile .plab {{ font-size:32px; font-weight:700; margin-top:4px; }}
+.ptile .pico {{ position:absolute; left:18px; top:14px; font-size:40px; }}
+.dive {{ position:absolute; inset:0; z-index:47; visibility:hidden; background:#F2EDE1; mix-blend-mode:screen; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; transform-origin:46% 46%; }}
+.dive span {{ font-size:820px; font-weight:700; line-height:.9; color:#000; letter-spacing:-.04em; }}
+.dive i {{ font-style:normal; font-size:76px; font-weight:700; color:#1B1712; margin-top:20px; }}
+.hstack {{ position:absolute; left:70px; top:90px; width:640px; z-index:33; display:flex; flex-direction:column; align-items:flex-start; gap:12px; }}
+.hchip {{ visibility:hidden; background:#fff; color:{BG}; font-weight:700; font-size:40px; padding:10px 26px 4px; border-radius:18px; box-shadow:0 14px 30px -10px rgba(0,0,0,.7); }}
+.hchip.red {{ background:{RED}; color:#fff; }} .hchip.green {{ background:{GREEN}; color:{BG}; }}
 #panel {{ position:absolute; left:744px; top:330px; width:310px; z-index:30; visibility:hidden; background:rgba(18,21,26,.9); border:1px solid {BORDER};
   border-radius:16px; padding:18px 16px 16px; box-shadow:0 20px 50px -18px rgba(0,0,0,.7); }}
-#panel .ph {{ font-size:22px; font-weight:600; color:{MUTED}; display:flex; justify-content:space-between; margin-bottom:10px; letter-spacing:.02em; }}
+#panel .ph {{ font-size:26px; font-weight:600; color:{MUTED}; display:flex; justify-content:space-between; margin-bottom:10px; letter-spacing:.02em; }}
 #panel ul {{ list-style:none; display:flex; flex-direction:column; gap:8px; }}
 #panel li {{ font-size:27px; font-weight:600; padding:8px 12px 4px; border-radius:10px; color:{MUTED}; display:flex; gap:10px; align-items:baseline; }}
-#panel li .num {{ font-size:22px; color:{MUTED}; }}
+#panel li .num {{ font-size:26px; color:{MUTED}; }}
 #panel li.on {{ background:{BLUE}; color:{BG}; }} #panel li.on .num {{ color:{BG}; }}
 #pbtn {{ margin-top:14px; text-align:center; font-size:26px; font-weight:700; padding:10px 0 6px; border-radius:999px; background:{BLUE}; color:{BG}; }}
 #pbtn.gold {{ background:{AMBER}; color:{BG}; box-shadow:0 0 24px rgba(240,162,59,.55); }}
 .en {{ font-family:"Sora"; font-weight:800; letter-spacing:.02em; }}
-.card {{ position:absolute; left:64px; top:870px; width:640px; z-index:30; visibility:hidden; background:rgba(18,21,26,.94); border:1px solid {BORDER};
+.card {{ position:absolute; left:64px; bottom:520px; width:640px; z-index:30; visibility:hidden; background:rgba(18,21,26,.94); border:1px solid {BORDER};
   border-radius:20px; padding:22px; box-shadow:0 24px 60px -20px rgba(0,0,0,.75); }}
-.chead {{ display:flex; align-items:center; gap:12px; font-size:24px; font-weight:600; color:{MUTED}; margin-bottom:10px; }}
+.chead {{ display:flex; align-items:center; gap:12px; font-size:28px; font-weight:600; color:{MUTED}; margin-bottom:10px; }}
 .av {{ display:inline-block; width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#3BB4F2,#5683FF); }}
 .chead .dot {{ width:12px; height:12px; border-radius:50%; background:{GREEN}; margin-left:auto; }}
-.bubble {{ font-family:"Sora","Hind Siliguri",sans-serif; font-size:28px; padding:10px 20px; border-radius:20px; max-width:86%; margin-bottom:8px; visibility:hidden; }}
-.bubble small {{ display:block; font-size:18px; opacity:.7; margin-top:4px; font-family:"Hind Siliguri"; }}
+.bubble {{ font-family:"Sora","Hind Siliguri",sans-serif; font-size:30px; padding:10px 20px; border-radius:20px; max-width:90%; margin-bottom:8px; visibility:hidden; display:none; }}
+.bubble small {{ display:block; font-size:22px; opacity:.7; margin-top:4px; font-family:"Hind Siliguri"; }}
 .bubble.cust {{ background:{SURF2}; }}
 .bubble.bot {{ background:{BLUE}; color:{BG}; margin-left:auto; font-family:"Hind Siliguri"; font-weight:700; font-size:30px; }}
-.seen {{ font-size:26px; color:{AMBER}; margin:0 0 10px 6px; visibility:hidden; }}
-.left {{ font-size:28px; color:{RED}; font-weight:600; margin:0 0 10px 6px; visibility:hidden; }}
+.seen {{ font-size:30px; color:{AMBER}; margin:0 0 10px 6px; visibility:hidden; display:none; }}
+.left {{ font-size:30px; color:{RED}; font-weight:600; margin:0 0 10px 6px; visibility:hidden; display:none; }}
 .keys {{ display:flex; gap:10px; margin:6px 0 10px; }}
-.pk {{ font-family:"Sora"; font-size:22px; padding:8px 14px; border-radius:10px; background:{SURF2}; color:{MUTED}; }}
+.pk {{ font-family:"Sora"; font-size:26px; padding:8px 14px; border-radius:10px; background:{SURF2}; color:{MUTED}; }}
 .pk.on {{ background:{BLUE}; color:{BG}; }}
 .input {{ font-family:"Sora"; font-size:30px; background:{BG}; border:1px solid {BORDER}; border-radius:999px; padding:10px 22px; min-height:60px; display:flex; align-items:center; }}
 .ch {{ visibility:hidden; }}
 .caret {{ display:inline-block; width:3px; height:36px; background:{BLUE_HI}; margin-left:4px; }}
 .wh {{ font-size:32px; font-weight:700; margin-bottom:14px; }} .wh b {{ color:{RED}; }}
-.grid {{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }}
-.tile {{ background:{SURF2}; border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px; align-items:flex-start; visibility:hidden; }}
+.grid {{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }}
+.tile {{ background:{SURF2}; border-radius:14px; padding:10px 8px; align-items:center !important; display:flex; flex-direction:column; gap:8px; align-items:flex-start; visibility:hidden; }}
 .tile .ln {{ width:80%; height:10px; border-radius:6px; background:{BORDER}; }}
-.tile .tag {{ font-size:20px; font-weight:600; color:{RED}; background:rgba(242,107,94,.14); padding:2px 10px 0; border-radius:8px; }}
+.tile .tag {{ font-size:26px; font-weight:600; color:{RED}; background:rgba(242,107,94,.14); padding:2px 10px 0; border-radius:8px; }}
 .av.s1 {{ background:linear-gradient(135deg,#F0A23B,#F26B5E); }} .av.s2 {{ background:linear-gradient(135deg,#3CC48F,#3BB4F2); }}
 .av.s3 {{ background:linear-gradient(135deg,#8AA9FF,#5683FF); }} .av.s4 {{ background:linear-gradient(135deg,#A9B0BC,#434A57); }}
-#vnote {{ top:940px; }}
+#vnote {{ bottom:520px; }}
 .vrow {{ display:flex; align-items:center; gap:16px; }}
 .play {{ width:64px; height:64px; border-radius:50%; background:{BLUE}; color:{BG}; display:flex; align-items:center; justify-content:center; font-size:30px; }}
 .wave {{ display:flex; align-items:center; gap:5px; height:60px; flex:1; }}
 .bar {{ width:8px; border-radius:4px; background:{BLUE_HI}; display:block; }}
-.vt {{ font-family:"Sora"; font-size:24px; color:{MUTED}; }}
-.vfoot {{ margin-top:14px; display:flex; flex-direction:column; gap:8px; font-size:26px; }}
-.del {{ font-family:"Sora"; font-size:22px; color:{GREEN}; visibility:hidden; }}
+.vt {{ font-family:"Sora"; font-size:28px; color:{MUTED}; }}
+.vfoot {{ margin-top:14px; display:flex; flex-direction:column; gap:8px; font-size:30px; }}
+.del {{ font-family:"Sora"; font-size:28px; color:{GREEN}; visibility:hidden; }}
 #npwrap {{ position:absolute; inset:0; z-index:45; visibility:hidden; }}
 .npL, .npR {{ position:absolute; inset:0; }}
 .npL img, .npR img {{ position:absolute; inset:0; width:100%; height:100%; }}
@@ -360,14 +389,14 @@ html, body {{ width:{W}px; height:{H}px; overflow:hidden; background:{BG}; }}
 .npR {{ clip-path:polygon(52% 0, 100% 0, 100% 100%, 52% 100%, 47% 91%, 53% 82%, 46% 71%, 55% 60%, 47% 49%, 53% 38%, 46% 28%, 54% 18%, 47% 9%); }}
 .np {{ position:absolute; inset:0; background:#F2EDE1; color:#1B1712; padding:80px 64px; font-family:"Hind Siliguri"; }}
 .mast {{ font-size:120px; font-weight:700; text-align:center; border-bottom:6px double #1B1712; line-height:1.25; }}
-.dline {{ font-size:24px; text-align:center; border-bottom:2px solid #1B1712; padding:8px 0 4px; margin-bottom:26px; }}
+.dline {{ font-size:28px; text-align:center; border-bottom:2px solid #1B1712; padding:8px 0 4px; margin-bottom:26px; }}
 .hl {{ font-size:72px; font-weight:700; line-height:1.18; text-align:center; margin-bottom:24px; }}
 .photo {{ position:relative; height:760px; overflow:hidden; border:3px solid #1B1712; }}
 .photo video {{ position:absolute; width:100%; height:100%; object-fit:cover; object-position:50% 30%; filter:grayscale(1) contrast(1.9) brightness(1.05); }}
 .photo .dots {{ position:absolute; inset:0; background:radial-gradient(circle, rgba(27,23,18,.35) 1.4px, transparent 1.6px) 0 0/7px 7px; mix-blend-mode:multiply; }}
 .cols {{ display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:24px; font-size:27px; line-height:1.45; }}
-#phone {{ position:absolute; left:70px; top:700px; width:300px; z-index:31; visibility:hidden; }}
-.pscr {{ width:300px; height:580px; border-radius:42px; border:12px solid #0E1117; overflow:hidden; background:#fff; box-shadow:0 30px 70px -20px rgba(0,0,0,.8); }}
+#phone {{ position:absolute; left:34px; top:770px; width:260px; z-index:31; visibility:hidden; }}
+.pscr {{ width:260px; height:480px; border-radius:42px; border:12px solid #0E1117; overflow:hidden; background:#fff; box-shadow:0 30px 70px -20px rgba(0,0,0,.8); }}
 .pscr img {{ width:100%; display:block; }}
 .pl {{ display:block; margin-top:14px; text-align:center; font-weight:700; font-size:28px; color:{GREEN}; }}
 .cbox {{ position:absolute; left:80px; top:980px; width:760px; z-index:32; visibility:hidden; display:flex; align-items:center; gap:16px; background:#fff;
