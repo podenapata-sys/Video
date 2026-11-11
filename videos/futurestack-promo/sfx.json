@@ -1,0 +1,102 @@
+[
+ {
+  "sfx": "click_ui",
+  "t": 0.9,
+  "gain": 0.55
+ },
+ {
+  "sfx": "whoosh_fast",
+  "t": 4.6,
+  "gain": 0.45
+ },
+ {
+  "sfx": "glitch_digital",
+  "t": 6.174,
+  "gain": 0.4
+ },
+ {
+  "sfx": "typing_keys",
+  "t": 6.704,
+  "gain": 0.35
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 8.784,
+  "gain": 0.35
+ },
+ {
+  "sfx": "chime_success",
+  "t": 11.29,
+  "gain": 0.45
+ },
+ {
+  "sfx": "glitch_digital",
+  "t": 13.719,
+  "gain": 0.4
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 14.099,
+  "gain": 0.35
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 18.169,
+  "gain": 0.4
+ },
+ {
+  "sfx": "chime_success",
+  "t": 19.249,
+  "gain": 0.3
+ },
+ {
+  "sfx": "paper_rustle",
+  "t": 20.106,
+  "gain": 0.5
+ },
+ {
+  "sfx": "paper_tear",
+  "t": 22.506,
+  "gain": 0.6
+ },
+ {
+  "sfx": "whoosh_fast",
+  "t": 22.846,
+  "gain": 0.4
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 26.134,
+  "gain": 0.45
+ },
+ {
+  "sfx": "typing_keys",
+  "t": 26.734,
+  "gain": 0.25
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 27.594,
+  "gain": 0.4
+ },
+ {
+  "sfx": "impact_hit",
+  "t": 31.339,
+  "gain": 0.6
+ },
+ {
+  "sfx": "wind_dust",
+  "t": 35.236,
+  "gain": 0.55
+ },
+ {
+  "sfx": "chime_success",
+  "t": 36.536,
+  "gain": 0.4
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 38.036,
+  "gain": 0.3
+ }
+]
