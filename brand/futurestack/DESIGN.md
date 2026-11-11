@@ -404,8 +404,19 @@ Rules for Reels, TikTok, Facebook ads, carousels and video end cards. They use t
 
 ### Logo and end card
 
-- Until the SVG exists, the raster logo sits only on a white `rounded.lg` card with 16px padding. It is never stretched, recolored or placed directly on dark.
-- End card: `bg` #0B0D11, logo card centred, the tagline **"Build. Deploy. Grow."** in 'Sora' 600, then the CTA pill and contact (WhatsApp number) inside the safe zone.
+Files in `brand/futurestack/logo/` (transparent PNG, trimmed with 24px padding):
+
+| File | Use |
+|---|---|
+| `logo-light.png` | Full logo on white / light surfaces (the original artwork) |
+| `logo-dark.png` | Full logo on `bg`, dark footage and dark-mode UI: the gray "S", "STACK", the servers and the navy text become light silver; the blues are unchanged |
+| `mark-fs-light.png` / `mark-fs-dark.png` | "FS" monogram only: avatars, watermarks, small corners |
+| `logo-original.webp` | The untouched source file |
+
+- Use the light or dark variant to match the background. Never stretch the logo, recolor it beyond these variants, or add effects such as shadows or glows.
+- Minimum clear space is 24px around the logo, and minimum width is 240px for the full logo; below that, use the FS mark.
+- The logo's own gradients and bevels are allowed: they belong to the mark. The "no gradients" rule applies to UI and layouts.
+- End card: `bg` #0B0D11, `logo-dark.png` centred, the tagline **"Build. Deploy. Grow."** in 'Sora' 600, then the CTA pill and contact (WhatsApp number) inside the safe zone.
 
 ### Audio
 
@@ -420,7 +431,7 @@ Every video shows at least one concrete number on screen, such as bookings, repl
 ## Known Gaps
 
 - Imagery styles are placeholders until example images are provided. For video, real UI screenshots on `surface` and real clinic footage are the default (see Social & Video).
-- The logo is a raster file with a white background; a vector version (SVG) with a transparent background is needed for dark surfaces. **Highest priority:** it blocks clean end cards and dark-mode use.
+- The logo exists as transparent raster PNGs (light and dark variants, plus the FS mark; see Social & Video). A vector (SVG) master is still recommended for print, signage and very large sizes.
 - Icon set not yet chosen. Recommended: Lucide (1.5px stroke outline) at 20px and 24px.
 - Bangla type scale uses the English sizes on the web; long Bangla headings may need one step smaller. Video sizes are defined in Social & Video.
 - No data-visualization palette beyond primary and data-2; add a third series color before building complex charts.
