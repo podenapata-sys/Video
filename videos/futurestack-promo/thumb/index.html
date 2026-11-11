@@ -1,0 +1,47 @@
+<!doctype html><html lang="bn"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" /><title>thumb</title>
+<style>
+@font-face { font-family:"Hind Siliguri"; src:url(media/fonts/hind-siliguri-bengali-700-normal.woff2) format("woff2"); font-weight:700; unicode-range:U+0980-09FE,U+200C-200D,U+25CC; }
+@font-face { font-family:"Hind Siliguri"; src:url(media/fonts/hind-siliguri-latin-700-normal.woff2) format("woff2"); font-weight:700; unicode-range:U+0000-00FF,U+2000-206F; }
+@font-face { font-family:"Sora"; src:url(media/fonts/sora.woff2) format("woff2"); font-weight:600 800; }
+@font-face { font-family:"Noto Color Emoji"; src:url(media/fonts/NotoColorEmoji.ttf) format("truetype"); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#0B0D11; }
+#root { position:relative; width:1080px; height:1920px; overflow:hidden; font-family:"Hind Siliguri","Noto Color Emoji",sans-serif; color:#F1F3F6; }
+#ph { position:absolute; left:-60px; top:170px; width:1200px; height:2133px; object-fit:cover; filter:brightness(.86) saturate(.9) contrast(1.08); }
+#bgph { position:absolute; left:-80px; top:-200px; width:1240px; height:2200px; object-fit:cover; filter:blur(28px) brightness(.55); }
+#ph { -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 160px); mask-image:linear-gradient(180deg, transparent 0, #000 160px); }
+#vig { position:absolute; inset:0; background:
+  linear-gradient(180deg, rgba(11,13,17,.95) 0%, rgba(11,13,17,.75) 16%, rgba(11,13,17,0) 33%, rgba(11,13,17,0) 60%, rgba(11,13,17,.85) 82%, rgba(11,13,17,.97) 100%),
+  radial-gradient(800px 1100px at 50% 45%, rgba(11,13,17,0) 50%, rgba(11,13,17,.6) 100%); }
+#top { position:absolute; top:300px; left:0; width:100%; text-align:center; }
+#q { font-size:150px; font-weight:700; line-height:1.05; letter-spacing:-.01em; text-shadow:0 8px 30px rgba(0,0,0,.6); }
+#q em { font-style:normal; color:#F26B5E; }
+#pill { display:inline-block; margin-top:22px; background:#5683FF; color:#0B0D11; font-size:64px; font-weight:700; padding:12px 44px 2px; border-radius:24px;
+  box-shadow:0 0 50px rgba(86,131,255,.55); transform:rotate(-2deg); }
+#tiles { position:absolute; top:1280px; left:0; width:100%; display:flex; justify-content:center; gap:26px; }
+.t { width:300px; height:270px; background:#fff; color:#0B0D11; border-radius:28px; border-bottom:10px solid #5683FF; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative;
+  box-shadow:0 24px 50px -14px rgba(0,0,0,.85); }
+.t:nth-child(1){ transform:rotate(-4deg);} .t:nth-child(3){ transform:rotate(4deg);} .t:nth-child(2){ transform:translateY(-18px);}
+.t b { font-size:140px; line-height:1; color:#5683FF; margin-top:16px; }
+.t span { font-size:36px; font-weight:700; }
+.t i { position:absolute; left:18px; top:14px; font-style:normal; font-size:44px; }
+.t .lock { position:absolute; inset:0; border-radius:28px; }
+#brand { position:absolute; top:1630px; left:0; width:100%; display:flex; justify-content:center; align-items:center; gap:18px; }
+#brand img { height:96px; }
+#brand span { font-family:"Sora"; font-weight:800; font-size:40px; letter-spacing:.04em; }
+#brand small { display:block; font-family:"Sora"; font-weight:600; font-size:24px; color:#A9B0BC; letter-spacing:.2em; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="1" data-width="1080" data-height="1920">
+ <img id="bgph" src="media/thumb_face.jpg" alt="" />
+ <img id="ph" src="media/thumb_face.jpg" alt="" />
+ <div id="vig"></div>
+ <div id="top"><div id="q">মেসেজ আসে,<br><em>সেল হয় না?</em></div><div id="pill">এই ৩টা ভুল ঠিক করুন</div></div>
+ <div id="tiles">
+  <div class="t"><i>⏱</i><b>১</b><span>দেরিতে রিপ্লাই</span></div>
+  <div class="t"><i>🔔</i><b>২</b><span>ফলো-আপ নেই</span></div>
+  <div class="t"><i>🌐</i><b>৩</b><span>শুধু ফেসবুক</span></div>
+ </div>
+ <div id="brand"><img src="media/logo/mark-fs-dark.png" alt="" /><div><span>FUTURE STACK</span><small>SOLUTIONS</small></div></div>
+</div>
+<script src="media/gsap.min.js"></script><script>window.__timelines = window.__timelines || {}; window.__timelines["main"] = gsap.timeline({ paused: true });</script>
+</body></html>
