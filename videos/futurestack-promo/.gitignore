@@ -1,0 +1,7 @@
+out/work/
+out/work-*/
+out/snap*/
+out/render_raw.mp4
+out/.*hf-transaction*/
+.hyperframes/
+__pycache__/
