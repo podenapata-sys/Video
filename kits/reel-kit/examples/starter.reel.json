@@ -1,0 +1,159 @@
+{
+ "title": "My Reel",
+ "output": "my_reel",
+ "lang": "bn",
+ "sections": [
+  {
+   "clip": "media/clips/pt1.mp4",
+   "script": "হুক: সমস্যাটা এক লাইনে বলুন। সমস্যা এই ৩টা জায়গায়।"
+  },
+  {
+   "clip": "media/clips/pt2.mp4",
+   "script": "এক নম্বর: প্রথম সমস্যা। সমাধান এক লাইনে।"
+  },
+  {
+   "clip": "media/clips/pt3.mp4",
+   "script": "দুই নম্বর: দ্বিতীয় সমস্যা। সমাধান এক লাইনে।"
+  },
+  {
+   "clip": "media/clips/pt4.mp4",
+   "script": "কমেন্টে GROW লিখুন। আমার টিম ফ্রিতে দেখে দেবে।"
+  },
+  {
+   "clip": "media/clips/pt5.mp4",
+   "script": "শেষ লাইন, যেটা মনে থাকবে।"
+  }
+ ],
+ "effects": [
+  {
+   "fx": "title_pills",
+   "lines": "আপনার হুক টাইটেল",
+   "sub": "by Future Stack",
+   "at": 0.05,
+   "until": "s2-0.05"
+  },
+  {
+   "fx": "cursor_select",
+   "at": 0.1,
+   "click": 0.9,
+   "out": 2.3
+  },
+  {
+   "fx": "number_tiles",
+   "at": "s1:সমস্যা",
+   "until": "s2",
+   "items": [
+    [
+     "⏱",
+     "সমস্যা ১"
+    ],
+    [
+     "🔔",
+     "সমস্যা ২"
+    ],
+    [
+     "🌐",
+     "সমস্যা ৩"
+    ]
+   ]
+  },
+  {
+   "fx": "letter_dive",
+   "at": "s2",
+   "text": "০১"
+  },
+  {
+   "fx": "head_stack",
+   "until": "s3",
+   "chips": [
+    {
+     "at": "s2:সমাধান",
+     "text": "✅ সমাধান"
+    }
+   ]
+  },
+  {
+   "fx": "letter_dive",
+   "at": "s3",
+   "text": "০২"
+  },
+  {
+   "fx": "post_wall",
+   "at": "s3+0.62",
+   "until": "s3:end",
+   "title": "আজ হারালেন:",
+   "unit": "জন",
+   "tag": "হারানো",
+   "count_to": 32
+  },
+  {
+   "fx": "comment_drop",
+   "at": "s4",
+   "until": "s4:end-0.02",
+   "word": "GROW",
+   "type_at": "s4:GROW",
+   "gift": {
+    "at": "s4:আমার",
+    "title": "🎁 ফ্রি অডিট",
+    "sub": "এক লাইনের অফার"
+   }
+  },
+  {
+   "fx": "impact",
+   "at": "s5",
+   "until": "s5+1.0",
+   "word": "GROW"
+  },
+  {
+   "fx": "blow_away"
+  }
+ ],
+ "panel": {
+  "title": "এই ভিডিওতে",
+  "items": [
+   [
+    "০১",
+    "সমস্যা ১"
+   ],
+   [
+    "০২",
+    "সমস্যা ২"
+   ],
+   [
+    "•",
+    "ফ্রি অডিট"
+   ]
+  ],
+  "button": "কমেন্টে <b class=\"en\">GROW</b>",
+  "show_at": "s1:সমস্যা+0.4",
+  "steps": [
+   {
+    "at": "s2",
+    "item": 0
+   },
+   {
+    "at": "s3",
+    "item": 1
+   },
+   {
+    "at": "s4",
+    "item": 2
+   }
+  ],
+  "gold_at": "s4"
+ },
+ "subtitles": {
+  "hide_sections": [
+   4
+  ]
+ },
+ "end_card": {
+  "logo": "media/logo/logo-dark.png",
+  "lines": [
+   "কাজ করুক এআই, বাড়ুক আপনার ব্যবসা।",
+   "স্মার্ট ব্যবসার পেছনে, ফিউচার স্ট্যাক"
+  ],
+  "contact_label": "যোগাযোগ করুন",
+  "phone": "+880 1632-932249"
+ }
+}

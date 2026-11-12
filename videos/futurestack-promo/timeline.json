@@ -2,6 +2,7 @@
  "segments": [
   {
    "clip": 1,
+   "src": "media/clips/pt1.mp4",
    "seg": 0,
    "src_in": 0.26,
    "src_out": 6.464,
@@ -10,6 +11,7 @@
   },
   {
    "clip": 2,
+   "src": "media/clips/pt2.mp4",
    "seg": 0,
    "src_in": 0.469,
    "src_out": 4.13,
@@ -18,6 +20,7 @@
   },
   {
    "clip": 2,
+   "src": "media/clips/pt2.mp4",
    "seg": 1,
    "src_in": 4.407,
    "src_out": 8.291,
@@ -26,6 +29,7 @@
   },
   {
    "clip": 3,
+   "src": "media/clips/pt3.mp4",
    "seg": 0,
    "src_in": 0.347,
    "src_out": 4.823,
@@ -34,6 +38,7 @@
   },
   {
    "clip": 3,
+   "src": "media/clips/pt3.mp4",
    "seg": 1,
    "src_in": 5.035,
    "src_out": 6.917,
@@ -42,6 +47,7 @@
   },
   {
    "clip": 4,
+   "src": "media/clips/pt4.mp4",
    "seg": 0,
    "src_in": 0.383,
    "src_out": 6.41,
@@ -50,6 +56,7 @@
   },
   {
    "clip": 5,
+   "src": "media/clips/pt5.mp4",
    "seg": 0,
    "src_in": 0.98,
    "src_out": 2.328,
@@ -58,6 +65,7 @@
   },
   {
    "clip": 5,
+   "src": "media/clips/pt5.mp4",
    "seg": 1,
    "src_in": 2.577,
    "src_out": 6.433,
@@ -66,6 +74,7 @@
   },
   {
    "clip": 6,
+   "src": "media/clips/pt6.mp4",
    "seg": 0,
    "src_in": 0.302,
    "src_out": 4.029,
@@ -74,6 +83,7 @@
   },
   {
    "clip": 6,
+   "src": "media/clips/pt6.mp4",
    "seg": 1,
    "src_in": 4.555,
    "src_out": 4.775,
