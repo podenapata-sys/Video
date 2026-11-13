@@ -116,11 +116,12 @@ def words():
     import whisper
     tl = json.loads((ROOT / "timeline.json").read_text())
     model = whisper.load_model("medium")
-    v = dec(MD / "voice.wav")
+    v16 = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", str(MD / "voice.wav"), "-ac", "1", "-ar", "16000", "-f", "f32le", "-"],
+                                       capture_output=True, check=True).stdout, np.float32).copy()   # whisper arrays must be 16 kHz
     out = []
     for b, text in zip(tl["beats"], SCRIPT):
         s0, s1 = b["voice"]
-        seg = v[int(s0 * SR):int(s1 * SR) + int(0.1 * SR)]
+        seg = v16[int(s0 * 16000):int(s1 * 16000) + 1600]
         res = model.transcribe(seg, language="bn", word_timestamps=True, fp16=False, initial_prompt=text, condition_on_previous_text=False)
         asr = [w for sg in res["segments"] for w in sg.get("words", [])]
         print(f"  B{b['n']} heard: {res['text'].strip()}")

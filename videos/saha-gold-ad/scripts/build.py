@@ -13,12 +13,27 @@ GOLD, YELLOW, WA_,   RED, WATER = "#F2C14E", "#FFD60A", "#25D366", "#E63946", "#
 html, js = [], []
 
 
-def w(beat, prefix, fallback):
-    """Start of the first word in a beat starting with prefix (whisper); else beat start + fallback offset."""
-    for x in WORDS:
-        if x["beat"] == beat and x["text"].startswith(prefix):
-            return x["start"]
-    return B[beat]["start"] + fallback
+import sys
+sys.path.insert(0, str(ROOT / "scripts"))
+import prep  # noqa: E402
+
+_V = prep.dec(prep.MD / "voice.wav")
+PAUSE_ENDS = {}
+for _b in TL["beats"]:
+    _s0, _s1 = _b["voice"]
+    _seg = _V[int(_s0 * prep.SR):int(_s1 * prep.SR)]
+    PAUSE_ENDS[_b["n"]] = [_s0] + [round(_s0 + e, 3) for s, e in prep.silences(_seg, d=0.1, noise=-40) if 0.05 < s and e < (_s1 - _s0) - 0.05]
+
+
+def w(beat, prefix, fallback, snap=True):
+    """Word start: whisper finds the word (its Bangla timing is loose), then snaps to the nearest phrase start
+    (end of a measured pause in the voice) within 0.55 s. Fallback: beat start + offset."""
+    t = next((x["start"] for x in WORDS if x["beat"] == beat and x["text"].startswith(prefix)), B[beat]["start"] + fallback)
+    if snap:
+        near = min(PAUSE_ENDS[beat], key=lambda p: abs(p - t))
+        if abs(near - t) <= 0.55:
+            t = near
+    return t
 
 
 def T(x):
@@ -105,14 +120,15 @@ js.append(f'tl.fromTo("#f3", {{autoAlpha:0, y:40}}, {{autoAlpha:1, y:0, duration
 js.append(f'tl.set("#f1, #f2, #f3, #arrow", {{autoAlpha:0}}, {T(b3["end"])});')
 
 # ------------------------------------------------------------------ BEAT 4: ৩টি ক্যাপ ফ্রি! + FREE badge
-t_free = w(4, "ফ্রি", 2.2)
+t_free = w(4, "তিনটি", 1.2)                    # offer lands on "তিনটি", badge on the spoken "ফ্রি"
+t_badge = w(4, "ফ্রি", 2.7, snap=False)
 html.append('<div class="ov offer" id="caps">৩টি ক্যাপ ফ্রি!</div><div id="badge"><span>FREE</span></div>')
 js.append(f'tl.fromTo("#caps", {{autoAlpha:0, scale:1.8}}, {{autoAlpha:1, scale:1, duration:0.28, ease:"back.out(2.4)"}}, {T(t_free)});')
-js.append(f'tl.fromTo("#badge", {{autoAlpha:0, x:260, rotation:200}}, {{autoAlpha:1, x:0, rotation:14, duration:0.45, ease:"back.out(1.6)"}}, {T(t_free + 0.5)});')
+js.append(f'tl.fromTo("#badge", {{autoAlpha:0, x:260, rotation:200}}, {{autoAlpha:1, x:0, rotation:14, duration:0.45, ease:"back.out(1.6)"}}, {T(t_badge)});')
 js.append(f'tl.to("#caps, #badge", {{autoAlpha:0, duration:0.15}}, {T(b4["end"] - 0.15)});')
 
 # ------------------------------------------------------------------ BEAT 5: money shot, minimal text
-t_nopower = w(5, "বিদ্যুৎ", 2.4)
+t_nopower = w(5, "সরাসরি", 2.4, snap=False)   # brief: hold ~3 s; the words "বিদ্যুৎ ছাড়াই" close the line
 html.append(f'''<div class="ov water" id="w5"><svg viewBox="0 0 24 32" width="64" height="86"><path d="M12 1C8 9 3 15 3 21a9 9 0 0 0 18 0c0-6-5-12-9-20z" fill="{WATER}"/>
 <path d="M8 22a4 4 0 0 0 4 4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg><span>বিদ্যুৎ ছাড়াই সেচ!</span></div>''')
 js.append(f'tl.fromTo("#w5", {{autoAlpha:0, y:40}}, {{autoAlpha:1, y:0, duration:0.4, ease:"power3.out"}}, {T(t_nopower)});')
