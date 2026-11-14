@@ -1,0 +1,57 @@
+[
+ {
+  "sfx": "pop_notification",
+  "t": 10.489,
+  "gain": 0.3
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 26.372,
+  "gain": 0.3
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 38.869,
+  "gain": 0.3
+ },
+ {
+  "sfx": "click_ui",
+  "t": 39.753,
+  "gain": 0.3
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 40.667,
+  "gain": 0.3
+ },
+ {
+  "sfx": "whoosh_fast",
+  "t": 53.879,
+  "gain": 0.35
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 54.226,
+  "gain": 0.32
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 56.397,
+  "gain": 0.32
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 59.459,
+  "gain": 0.32
+ },
+ {
+  "sfx": "chime_success",
+  "t": 66.946,
+  "gain": 0.35
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 69.229,
+  "gain": 0.3
+ }
+]
