@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<title>মায়ের দুটো থালা</title><style>
+@font-face { font-family:"Noto Sans Bengali"; src:url(fonts/noto-sans-bengali-bengali-700-normal.woff2) format("woff2"); font-weight:700; font-display:block; unicode-range:U+0951-0952,U+0964-0965,U+0980-09FE,U+1CD0,U+1CD2,U+1CD5-1CD6,U+1CD8,U+1CE1,U+1CEA,U+1CED,U+1CF2,U+1CF5-1CF7,U+200C-200D,U+20B9,U+25CC,U+A8F1; }
+@font-face { font-family:"Noto Sans Bengali"; src:url(fonts/noto-sans-bengali-latin-700-normal.woff2) format("woff2"); font-weight:700; font-display:block; unicode-range:U+0000-00FF,U+2000-206F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000; font-family:"Noto Sans Bengali", sans-serif; }
+.shot { position:absolute; inset:0; opacity:0; overflow:hidden; }
+.mv { position:absolute; inset:0; }
+.mv video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:sepia(.12) saturate(1.08) brightness(.98) contrast(1.03); }
+#warm { position:absolute; inset:0; z-index:10; background:rgba(255,170,90,.06); mix-blend-mode:soft-light; pointer-events:none; }
+#vig { position:absolute; inset:0; z-index:11; pointer-events:none; background:radial-gradient(ellipse 75% 62% at 50% 48%, rgba(0,0,0,0) 55%, rgba(0,0,0,.5) 100%); }
+.cap { position:absolute; left:90px; width:900px; bottom:250px; z-index:30; text-align:center; visibility:hidden; }
+.cap span { display:inline-block; color:#fff; font-weight:700; font-size:58px; line-height:1.4;
+  text-shadow:0 2px 6px rgba(0,0,0,.75), 0 4px 22px rgba(0,0,0,.55); }
+.cap .gold { color:#F2C46B; font-size:1.15em; display:inline; }
+#dark { position:absolute; inset:0; z-index:40; background:#000; opacity:0; }
+#endtxt { position:absolute; left:90px; width:900px; top:50%; translate:0 -50%; z-index:41; text-align:center; visibility:hidden;
+  color:#fff; font-weight:700; font-size:76px; line-height:1.35; text-shadow:0 4px 24px rgba(0,0,0,.6); }
+#black { position:absolute; inset:0; z-index:60; background:#000; opacity:1; pointer-events:none; }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="38.603" data-width="1080" data-height="1920">
+<div class="shot" id="sh1" style="z-index:1"><div class="mv" id="mv1" data-layout-allow-overflow><video id="v1" class="clip" src="build/c1.mp4" muted playsinline data-start="0.000" data-duration="9.634" data-media-start="0" data-track-index="1"></video></div></div>
+<div class="shot" id="sh2" style="z-index:2"><div class="mv" id="mv2" data-layout-allow-overflow><video id="v2" class="clip" src="build/c2.mp4" muted playsinline data-start="9.234" data-duration="6.803" data-media-start="0" data-track-index="2"></video></div></div>
+<div class="shot" id="sh3" style="z-index:3"><div class="mv" id="mv3" data-layout-allow-overflow><video id="v3" class="clip" src="build/c3.mp4" muted playsinline data-start="15.637" data-duration="5.088" data-media-start="0" data-track-index="3"></video></div></div>
+<div class="shot" id="sh4" style="z-index:4"><div class="mv" id="mv4" data-layout-allow-overflow><video id="v4" class="clip" src="build/c4.mp4" muted playsinline data-start="20.325" data-duration="4.450" data-media-start="0" data-track-index="4"></video></div></div>
+<div class="shot" id="sh5" style="z-index:5"><div class="mv" id="mv5" data-layout-allow-overflow><video id="v5" class="clip" src="build/c5.mp4" muted playsinline data-start="24.275" data-duration="6.501" data-media-start="0" data-track-index="5"></video></div></div>
+<div class="shot" id="sh6" style="z-index:6"><div class="mv" id="mv6" data-layout-allow-overflow><video id="v6" class="clip" src="build/c6.mp4" muted playsinline data-start="30.376" data-duration="8.227" data-media-start="0" data-track-index="6"></video></div></div>
+<div id="warm"></div><div id="vig"></div>
+<div class="cap" id="cap0"><span>ঢাকার এই শহরে সে সফল হয়েছে...</span></div>
+<div class="cap" id="cap1"><span>কিন্তু ফোনের পর্দায় চৌদ্দটা মিসড কল,</span></div>
+<div class="cap" id="cap2"><span>শুধু একটাই নাম... <span class="gold">আম্মু।</span></span></div>
+<div class="cap" id="cap3"><span>গ্রামের বারান্দায়,</span></div>
+<div class="cap" id="cap4"><span>প্রতি রাতে এক মা দুটো থালা সাজায়...</span></div>
+<div class="cap" id="cap5"><span>আর একটা থালা ঢেকে রাখে।</span></div>
+<div class="cap" id="cap6"><span>সেই রাতে একটা মেসেজ সব থামিয়ে দিল...</span></div>
+<div class="cap" id="cap7"><span>"বাবা, ভাত খাইছো?"</span></div>
+<div class="cap" id="cap8"><span>সব সাফল্য ফেলে সে রওনা দিল... মায়ের কাছে।</span></div>
+<div class="cap" id="cap9"><span>মাঝরাত। ঘরের বাতিটা তখনো জ্বলছে...</span></div>
+<div class="cap" id="cap10"><span>কারণ মা জানত,</span></div>
+<div class="cap" id="cap11"><span>ছেলে একদিন ফিরবেই।</span></div>
+<div class="cap" id="cap12"><span>মা কখনো ক্লান্ত হয় না...</span></div>
+<div class="cap" id="cap13"><span>শুধু অপেক্ষা করে।</span></div>
+<div class="cap" id="cap14"><span>আজ কি আপনি <span class="gold">মাকে ফোন করেছেন?</span></span></div>
+<div id="dark"></div><div id="endtxt">আজই মাকে<br>একটা ফোন করুন</div>
+<div id="black"></div>
+<audio id="mix" src="build/mix.wav" data-start="0" data-duration="38.603" data-track-index="20"></audio>
+</div>
+<script src="media/gsap.min.js"></script>
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#mv1", {scale:1.0}, {scale:1.06, duration:9.634, ease:"none", immediateRender:false}, 0.000);
+tl.set("#sh1", {opacity:1}, 0);
+tl.fromTo("#mv2", {scale:1.0}, {scale:1.06, duration:6.803, ease:"none", immediateRender:false}, 9.234);
+tl.fromTo("#sh2", {opacity:0}, {opacity:1, duration:0.4, ease:"none", immediateRender:false}, 9.234);
+tl.set("#sh1", {opacity:0}, 9.634);
+tl.fromTo("#mv3", {scale:1.0}, {scale:1.06, duration:5.088, ease:"none", immediateRender:false}, 15.637);
+tl.fromTo("#sh3", {opacity:0}, {opacity:1, duration:0.4, ease:"none", immediateRender:false}, 15.637);
+tl.set("#sh2", {opacity:0}, 16.037);
+tl.fromTo("#mv4", {scale:1.0}, {scale:1.06, duration:4.450, ease:"none", immediateRender:false}, 20.325);
+tl.fromTo("#sh4", {opacity:0}, {opacity:1, duration:0.4, ease:"none", immediateRender:false}, 20.325);
+tl.set("#sh3", {opacity:0}, 20.725);
+tl.fromTo("#mv5", {scale:1.0}, {scale:1.06, duration:6.501, ease:"none", immediateRender:false}, 24.275);
+tl.fromTo("#black", {opacity:0}, {opacity:1, duration:0.3, ease:"power1.in", immediateRender:false}, 23.975);
+tl.set("#sh5", {opacity:1}, 24.275); tl.set("#sh4", {opacity:0}, 24.275);
+tl.to("#black", {opacity:0, duration:0.3, ease:"power1.out"}, 24.275);
+tl.fromTo("#mv6", {scale:1.0}, {scale:1.06, duration:8.227, ease:"none", immediateRender:false}, 30.376);
+tl.fromTo("#sh6", {opacity:0}, {opacity:1, duration:0.4, ease:"none", immediateRender:false}, 30.376);
+tl.set("#sh5", {opacity:0}, 30.776);
+tl.fromTo("#black", {opacity:1}, {opacity:0, duration:0.5, ease:"power1.out", immediateRender:false}, 0);
+tl.fromTo("#cap0", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 0.450);
+tl.to("#cap0", {autoAlpha:0, duration:0.2, ease:"none"}, 3.451);
+tl.fromTo("#cap1", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 3.651);
+tl.to("#cap1", {autoAlpha:0, duration:0.2, ease:"none"}, 6.499);
+tl.fromTo("#cap2", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 6.699);
+tl.to("#cap2", {autoAlpha:0, duration:0.2, ease:"none"}, 9.184);
+tl.fromTo("#cap3", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 9.384);
+tl.to("#cap3", {autoAlpha:0, duration:0.2, ease:"none"}, 10.555);
+tl.fromTo("#cap4", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 10.755);
+tl.to("#cap4", {autoAlpha:0, duration:0.2, ease:"none"}, 13.362);
+tl.fromTo("#cap5", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 13.562);
+tl.to("#cap5", {autoAlpha:0, duration:0.2, ease:"none"}, 15.587);
+tl.fromTo("#cap6", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 15.787);
+tl.to("#cap6", {autoAlpha:0, duration:0.2, ease:"none"}, 18.584);
+tl.fromTo("#cap7", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 18.784);
+tl.to("#cap7", {autoAlpha:0, duration:0.2, ease:"none"}, 20.275);
+tl.fromTo("#cap8", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 20.475);
+tl.to("#cap8", {autoAlpha:0, duration:0.2, ease:"none"}, 24.025);
+tl.fromTo("#cap9", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 24.225);
+tl.to("#cap9", {autoAlpha:0, duration:0.2, ease:"none"}, 27.317);
+tl.fromTo("#cap10", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 27.517);
+tl.to("#cap10", {autoAlpha:0, duration:0.2, ease:"none"}, 28.680);
+tl.fromTo("#cap11", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 28.880);
+tl.to("#cap11", {autoAlpha:0, duration:0.2, ease:"none"}, 30.326);
+tl.fromTo("#cap12", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 30.526);
+tl.to("#cap12", {autoAlpha:0, duration:0.2, ease:"none"}, 32.406);
+tl.fromTo("#cap13", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 32.606);
+tl.to("#cap13", {autoAlpha:0, duration:0.2, ease:"none"}, 34.170);
+tl.fromTo("#cap14", {autoAlpha:0}, {autoAlpha:1, duration:0.2, ease:"none"}, 34.370);
+tl.to("#cap14", {autoAlpha:0, duration:0.2, ease:"none"}, 36.903);
+tl.fromTo("#dark", {opacity:0}, {opacity:0.55, duration:0.4, ease:"power1.out", immediateRender:false}, 37.103);
+tl.fromTo("#endtxt", {autoAlpha:0, y:16}, {autoAlpha:1, y:0, duration:0.4, ease:"power2.out"}, 37.203);
+tl.to("#black", {opacity:1, duration:0.5, ease:"power1.in"}, 38.103);
+window.__timelines["main"] = tl;
+</script>
+</body></html>
