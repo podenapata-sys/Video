@@ -17,6 +17,7 @@ GOLD, TEAL = "#F2C46B", "#0F4C5C"
 T = lambda x: f"{x:.3f}"
 html, js, sfx = [], [], []
 st = lambda n: S[n]["start"]
+CUE = TL["cues"]
 
 
 def cue(name, t, gain):
@@ -67,14 +68,15 @@ t0 = st(1)
 html.append('''<div class="ov" id="call"><div class="cav">আ</div><div class="cname">আম্মু</div><div class="csub" id="csub">মোবাইল · কল আসছে…</div>
 <div class="cbtns"><div class="cb dec" id="dec"><svg viewBox="0 0 24 24" width="54" height="54"><path fill="#fff" d="M12 9c-1.6 0-3.2.3-4.6.8v3.1c0 .4-.2.7-.6.9-1 .5-1.9 1.1-2.6 1.8-.2.2-.4.3-.7.3-.3 0-.5-.1-.7-.3L.3 13.1c-.2-.2-.3-.4-.3-.7 0-.3.1-.5.3-.7C3.3 8.8 7.4 7 12 7s8.7 1.8 11.7 4.7c.2.2.3.4.3.7 0 .3-.1.5-.3.7l-2.5 2.5c-.2.2-.4.3-.7.3-.3 0-.5-.1-.7-.3-.8-.7-1.6-1.3-2.6-1.8-.3-.2-.6-.5-.6-.9V9.8C15.2 9.3 13.6 9 12 9z"/></svg></div>
 <div class="cb acc"><svg viewBox="0 0 24 24" width="50" height="50"><path fill="#fff" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></div></div></div>''')
-js.append(f'tl.fromTo("#call", {{autoAlpha:0, y:80, scale:0.94}}, {{autoAlpha:1, y:0, scale:1, duration:0.4, ease:"power3.out"}}, {T(t0 + 0.6)});')
-js.append(f'tl.fromTo(".cav", {{boxShadow:"0 0 0 0px rgba(255,255,255,.35)"}}, {{boxShadow:"0 0 0 26px rgba(255,255,255,0)", duration:0.8, repeat:2, ease:"sine.out"}}, {T(t0 + 0.9)});')
-js.append(f'tl.to("#dec", {{x:520, duration:0.35, ease:"power2.in"}}, {T(t0 + 3.2)});')
-js.append(f'tl.set("#csub", {{textContent:"কল কেটে দেওয়া হয়েছে"}}, {T(t0 + 3.5)});')
-js.append(f'tl.to("#call", {{autoAlpha:0, y:120, duration:0.35, ease:"power2.in"}}, {T(t0 + 3.9)});')
-cue("pop_notification", t0 + 0.6, 0.3)
-cue("click_ui", t0 + 3.2, 0.45)
-cue("whoosh_fast", t0 + 3.25, 0.2)
+js.append(f'tl.fromTo("#call", {{autoAlpha:0, y:80, scale:0.94}}, {{autoAlpha:1, y:0, scale:1, duration:0.4, ease:"power3.out"}}, {T(t0 + 0.3)});')
+js.append(f'tl.fromTo(".cav", {{boxShadow:"0 0 0 0px rgba(255,255,255,.35)"}}, {{boxShadow:"0 0 0 26px rgba(255,255,255,0)", duration:0.8, repeat:1, ease:"sine.out"}}, {T(t0 + 0.5)});')
+tdec = CUE["decline"]                               # on "কেটে দিতাম"
+js.append(f'tl.to("#dec", {{x:520, duration:0.35, ease:"power2.in"}}, {T(tdec)});')
+js.append(f'tl.set("#csub", {{textContent:"কল কেটে দেওয়া হয়েছে"}}, {T(tdec + 0.3)});')
+js.append(f'tl.to("#call", {{autoAlpha:0, y:120, duration:0.35, ease:"power2.in"}}, {T(tdec + 0.9)});')
+cue("pop_notification", t0 + 0.3, 0.3)
+cue("click_ui", tdec, 0.45)
+cue("whoosh_fast", tdec + 0.05, 0.2)
 
 # slot 2: chat bubble + Seen + typing dots that never resolve (top)
 t0 = st(2)
@@ -84,14 +86,17 @@ html.append('''<div class="ov" id="chat2"><div class="chdr"><div class="sav">আ
 <div class="dots" id="dots2"><i id="d0"></i><i id="d1"></i><i id="d2"></i></div></div>''')
 js.append(f'tl.fromTo("#chat2", {{autoAlpha:0, y:-40}}, {{autoAlpha:1, y:0, duration:0.35, ease:"power3.out"}}, {T(t0 + 0.35)});')
 js.append(f'tl.fromTo("#b2", {{autoAlpha:0, scale:0.75, transformOrigin:"0% 100%"}}, {{autoAlpha:1, scale:1, duration:0.25, ease:"back.out(2)"}}, {T(t0 + 0.6)});')
-js.append(f'tl.fromTo("#seen2", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.2}}, {T(t0 + 2.2)});')
-js.append(f'tl.fromTo("#dots2", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.2}}, {T(t0 + 2.9)});')
+tseen = CUE["seen"]                                 # on "Seen হতো"
+tdots, tdots_end = tseen + 0.5, S[2]["end"] - 0.6
+reps = max(1, int((tdots_end - tdots) / 0.3) - 1) | 1   # odd -> ends low
+js.append(f'tl.fromTo("#seen2", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.2}}, {T(tseen)});')
+js.append(f'tl.fromTo("#dots2", {{autoAlpha:0}}, {{autoAlpha:1, duration:0.2}}, {T(tdots)});')
 for k in range(3):
-    js.append(f'tl.fromTo("#d{k}", {{y:0, opacity:0.4}}, {{y:-10, opacity:1, duration:0.3, yoyo:true, repeat:7, ease:"sine.inOut", immediateRender:false}}, {T(t0 + 2.9 + k * 0.15)});')
-js.append(f'tl.to("#dots2", {{autoAlpha:0, duration:0.3}}, {T(t0 + 7.3)});')
+    js.append(f'tl.fromTo("#d{k}", {{y:0, opacity:0.4}}, {{y:-10, opacity:1, duration:0.3, yoyo:true, repeat:{reps}, ease:"sine.inOut", immediateRender:false}}, {T(tdots + k * 0.15)});')
+js.append(f'tl.to("#dots2", {{autoAlpha:0, duration:0.3}}, {T(tdots_end)});')
 js.append(f'tl.to("#chat2", {{autoAlpha:0, duration:0.2}}, {T(S[2]["end"] - 0.25)});')
 cue("pop_notification", t0 + 0.6, 0.3)
-cue("click_ui", t0 + 2.2, 0.25)
+cue("click_ui", tseen, 0.25)
 
 # slot 3: notification stack from the top
 t0 = st(3)
@@ -117,8 +122,8 @@ for k, val in enumerate([3, 9, 17, 26, 34, 41, 45, 47]):
     js.append(f'tl.set("#badge", {{textContent:"{str(val).translate(BN)}"}}, {T(t0 + 0.7 + k * 0.13)});')
 js.append(f'tl.fromTo("#badge", {{scale:1}}, {{scale:1.25, duration:0.12, yoyo:true, repeat:1, immediateRender:false}}, {T(t0 + 1.62)});')
 cue("pop_notification", t0 + 1.62, 0.3)
-VN0, VN1 = t0 + 3.2, t0 + 7.4                     # voice note plays; music dips over the same span (mix.py)
-js.append(f'tl.fromTo("#vn", {{autoAlpha:0, y:30}}, {{autoAlpha:1, y:0, duration:0.3, ease:"power3.out"}}, {T(t0 + 2.6)});')
+VN0, VN1 = CUE["voice_note"]                    # voice note plays; music dips over the same span (mix.py)
+js.append(f'tl.fromTo("#vn", {{autoAlpha:0, y:30}}, {{autoAlpha:1, y:0, duration:0.3, ease:"power3.out"}}, {T(VN0 - 0.5)});')
 js.append(f'tl.set("#play", {{textContent:"❚❚"}}, {T(VN0)}); tl.set("#play", {{textContent:"▶"}}, {T(VN1)});')
 js.append(f'tl.fromTo("#prog", {{scaleX:0}}, {{scaleX:1, duration:{T(VN1 - VN0)}, ease:"none", immediateRender:false}}, {T(VN0)});')
 for k in range(32):
@@ -145,7 +150,7 @@ html.append('''<div class="ov" id="chat6"><div class="chdr"><div class="sav">আ
 <div class="bub out" id="b6">আম্মু, ভাত খেয়েছি<small id="del">Delivered ✓✓</small></div>
 <div class="inp"><span id="typed"></span><i class="caret" id="caret"></i><div class="send" id="send">➤</div></div></div>''')
 js.append(f'tl.fromTo("#chat6", {{autoAlpha:0, y:-40}}, {{autoAlpha:1, y:0, duration:0.35, ease:"power3.out"}}, {T(t0 + 0.5)});')
-tt, acc = t0 + 1.1, ""
+tt, acc = CUE["reply_type"] + 0.2, ""
 for k, c in enumerate(clusters):
     acc += c
     js.append(f'tl.set("#typed", {{textContent:"{acc}"}}, {T(tt + k * 0.17)});')
@@ -161,21 +166,13 @@ cue("pop_notification", tsend + 0.12, 0.3)
 cue("chime_success", tsend + 1.0, 0.3)
 
 # ------------------------------------------------------------------ kinetic captions (one phrase at a time)
-CAPS = {1: ["আম্মুর ফোন…", "আবার কেটে দিলাম। গেমটা আগে শেষ হোক।"],
-        2: ["“বাবা, ভাত খেয়েছো?”", "Seen… কিন্তু কোনো রিপ্লাই নেই।"],
-        3: ["তিনটা মিসড কল…", "ভাবলাম, পরে করব।"],
-        4: ["সেই রাতে বুঝলাম…", "মা সারাদিন একটা রিপ্লাইয়ের অপেক্ষায় ছিল।"],
-        5: ["৪৭টা মেসেজ, একটাও পড়িনি।", "মায়ের একটা ভয়েস নোট…"],
-        6: ["আজ লিখলাম…", "মা, এবার থেকে রোজ রিপ্লাই দেব।"]}
-SPLIT = {1: 3.6, 2: 2.9, 3: 3.4, 4: 3.6, 5: 3.0, 6: 4.4}
 cid = 0
-for n, (a, b) in CAPS.items():
-    t0, t1 = st(n), (S[n]["end"] if n < 6 else END)
-    for k, (txt, s0, s1) in enumerate(((a, t0 + 0.55, t0 + SPLIT[n]), (b, t0 + SPLIT[n] + 0.15, t1 - 0.3))):
-        html.append(f'<div class="cap" id="cp{cid}"><span>{gold(txt)}</span></div>')
-        js.append(f'tl.fromTo("#cp{cid}", {{autoAlpha:0, scale:0.85}}, {{autoAlpha:1, scale:1, duration:0.18, ease:"back.out(2.2)"}}, {T(s0)});')
-        js.append(f'tl.to("#cp{cid}", {{autoAlpha:0, duration:0.15}}, {T(s1 - 0.15)});')
-        cid += 1
+for c in TL["captions"]:                            # phrase chunks timed to the voiceover (prep.py)
+    s0, s1 = c["start"] - 0.05, min(c["end"], END)
+    html.append(f'<div class="cap" id="cp{cid}"><span>{gold(c["text"])}</span></div>')
+    js.append(f'tl.fromTo("#cp{cid}", {{autoAlpha:0, scale:0.85}}, {{autoAlpha:1, scale:1, duration:0.18, ease:"back.out(2.2)"}}, {T(s0)});')
+    js.append(f'tl.to("#cp{cid}", {{autoAlpha:0, duration:0.15}}, {T(s1 - 0.17)});')
+    cid += 1
 
 # ------------------------------------------------------------------ tag (first 3 s), grain, end card
 html.append('<div id="tag">সত্য ঘটনা থেকে অনুপ্রাণিত</div>')

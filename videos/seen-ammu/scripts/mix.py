@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""seen-ammu mix -> build/mix.wav: emotional piano bed (from the মায়ের দুটো থালা upload) looped with a crossfade,
+"""seen-ammu mix -> build/mix.wav: voiceover (master) + emotional piano bed (from the মায়ের দুটো থালা upload) looped with a crossfade,
 fade in 1 s / out 2 s, dipped ~10 dB under the slot-5 voice note (same span as the waveform), soft UI SFX; -14 LUFS."""
 import json
 import subprocess
@@ -45,9 +45,14 @@ for c in json.loads((B / "sfx.json").read_text()):
     n = min(len(x), N - o)
     if n > 0:
         fx[o:o + n] += x[:n]
-bed_rms = float(np.sqrt(np.mean(bed ** 2)) + 1e-9)
+# voiceover is the master; music sits ~15 dB under the voice (RMS), plus the voice-note dip above
+voice = dec(B / "voice.wav")[:N]
+voice = np.vstack([voice, np.zeros((N - len(voice), 2), np.float32)])
+rms = lambda x: float(np.sqrt(np.mean(x ** 2)) + 1e-9)
+speech = voice[np.abs(voice[:, 0]) > 0.01]
+bed = bed / rms(bed) * rms(speech) * 10 ** (-15 / 20)
 raw = B / "mix_raw.wav"
-sf.write(raw, bed / bed_rms * 0.12 + fx * 0.35, SR, subtype="FLOAT")
+sf.write(raw, voice + bed + fx * 0.2, SR, subtype="FLOAT")
 meas = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(raw), "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-"], capture_output=True, text=True).stderr
 mm = json.loads(meas[meas.rindex("{"):meas.rindex("}") + 1])
 norm = (f"loudnorm=I=-14:TP=-1.5:LRA=11:linear=true:measured_I={mm['input_i']}:measured_TP={mm['input_tp']}:"
