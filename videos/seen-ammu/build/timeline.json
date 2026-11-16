@@ -1,0 +1,48 @@
+{
+ "total": 51.0,
+ "end_card": 48.5,
+ "slots": [
+  {
+   "n": 1,
+   "start": 0.0,
+   "end": 8.0,
+   "clip_start": 0.0,
+   "clip_dur": 8.0
+  },
+  {
+   "n": 2,
+   "start": 8.0,
+   "end": 16.0,
+   "clip_start": 8.0,
+   "clip_dur": 8.0
+  },
+  {
+   "n": 3,
+   "start": 16.0,
+   "end": 24.0,
+   "clip_start": 16.0,
+   "clip_dur": 8.0
+  },
+  {
+   "n": 4,
+   "start": 24.5,
+   "end": 32.5,
+   "clip_start": 24.5,
+   "clip_dur": 8.3
+  },
+  {
+   "n": 5,
+   "start": 32.5,
+   "end": 40.5,
+   "clip_start": 32.2,
+   "clip_dur": 8.6
+  },
+  {
+   "n": 6,
+   "start": 40.5,
+   "end": 51.0,
+   "clip_start": 40.2,
+   "clip_dur": 10.8
+  }
+ ]
+}

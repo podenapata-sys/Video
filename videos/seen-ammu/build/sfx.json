@@ -1,0 +1,97 @@
+[
+ {
+  "sfx": "pop_notification",
+  "t": 0.6,
+  "gain": 0.3
+ },
+ {
+  "sfx": "click_ui",
+  "t": 3.2,
+  "gain": 0.45
+ },
+ {
+  "sfx": "whoosh_fast",
+  "t": 3.25,
+  "gain": 0.2
+ },
+ {
+  "sfx": "whoosh_fast",
+  "t": 7.9,
+  "gain": 0.25
+ },
+ {
+  "sfx": "glitch_digital",
+  "t": 7.95,
+  "gain": 0.45
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 8.6,
+  "gain": 0.3
+ },
+ {
+  "sfx": "click_ui",
+  "t": 10.2,
+  "gain": 0.25
+ },
+ {
+  "sfx": "whoosh_fast",
+  "t": 15.9,
+  "gain": 0.25
+ },
+ {
+  "sfx": "glitch_digital",
+  "t": 15.95,
+  "gain": 0.45
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 16.5,
+  "gain": 0.28
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 17.05,
+  "gain": 0.28
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 17.6,
+  "gain": 0.28
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 34.12,
+  "gain": 0.3
+ },
+ {
+  "sfx": "click_ui",
+  "t": 35.7,
+  "gain": 0.3
+ },
+ {
+  "sfx": "typing_keys",
+  "t": 41.6,
+  "gain": 0.3
+ },
+ {
+  "sfx": "click_ui",
+  "t": 43.65,
+  "gain": 0.35
+ },
+ {
+  "sfx": "pop_notification",
+  "t": 43.77,
+  "gain": 0.3
+ },
+ {
+  "sfx": "chime_success",
+  "t": 44.65,
+  "gain": 0.3
+ },
+ {
+  "sfx": "chime_success",
+  "t": 48.7,
+  "gain": 0.25
+ }
+]
