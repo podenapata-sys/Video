@@ -1,0 +1,7 @@
+build/c*.mp4
+build/cs/
+build/*.png
+out/snap*/
+out/render_raw.mp4
+.hyperframes/
+__pycache__/
